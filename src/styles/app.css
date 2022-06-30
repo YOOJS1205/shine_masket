@@ -1,4 +1,5 @@
 :root {
   --color-background: #e5e5e5;
-  --color-muscat: #00ff90;
+  --color-enabled: #B6EB7A;
+  --color-disabled: #888888;
 }

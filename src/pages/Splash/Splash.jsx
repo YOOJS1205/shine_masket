@@ -1,11 +1,26 @@
 import React from 'react';
-import './splash.css';
+import styled from 'styled-components';
 import FullLogo from '../../assets/images/full-logo.png';
 
 export default function Splash() {
   return (
-    <section className="splash-background">
-      <img className="splash-logo" src={FullLogo} alt="스플래시 화면 로고" />
-    </section>
+    <BackGround>
+      <Logo src={FullLogo} />
+    </BackGround>
   );
 }
+
+
+const BackGround = styled.section`
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--color-background);
+  position: relative;
+`
+
+const Logo = styled.img`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`

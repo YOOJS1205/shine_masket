@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import FullLogo from '../../assets/images/full-logo.png';
 
 export default function Splash() {
+  const history = useHistory();
+  useEffect(() => {
+    setTimeout(() => {
+      history.push('/welcome');
+    }, 2000);
+  }, [])
+
   return (
     <BackGround>
       <Logo src={FullLogo} />

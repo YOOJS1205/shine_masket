@@ -9,7 +9,7 @@ export default function Splash() {
     setTimeout(() => {
       history.push('/welcome');
     }, 2000);
-  }, [])
+  }, []);
 
   return (
     <BackGround>
@@ -18,17 +18,16 @@ export default function Splash() {
   );
 }
 
-
 const BackGround = styled.section`
   width: 100vw;
   height: 100vh;
   background-color: var(--color-background);
   position: relative;
-`
+`;
 
 const Logo = styled.img`
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-`
+`;

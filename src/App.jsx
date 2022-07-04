@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import './styles/app.css';
 import './styles/reset.css';
 import Splash from './pages/Splash/Splash';
@@ -11,8 +12,12 @@ import Join from './pages/Join/Join';
 function App() {
   return (
     <BrowserRouter>
-      <Route path="/" exact component={Splash} />
-      <Route path="/welcome" exact component={Welcome} />
+      <AnimatePresence>
+        <Switch location={location} key={location.pathname}>
+          <Route path="/" exact component={Splash} />
+          <Route path="/welcome" exact component={Welcome} />
+        </Switch>
+      </AnimatePresence>
       <Route path="/login" exact component={Login} />
       <Route path="/join" exact component={Join} />
       <Route path="/chat-list" exact component={ChatList} />

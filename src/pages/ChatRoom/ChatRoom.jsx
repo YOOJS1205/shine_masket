@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import ChatModal from './ChatModal';
 
 import BasicProfileImg from '../../assets/images/basic-profile-img.png';
 import PhotoIcon from '../../assets/images/img-button.png';
@@ -10,26 +11,22 @@ import MoreIcon from '../../assets/icon/icon-more-vertical.png';
 
 const Header = styled.header`
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 13px 12px 13px 16px;
   border-bottom: 1px solid #dbdbdb;
 `;
 
 const Img = styled.img`
-  margin-left: auto;
-`;
-
-const BackLink = styled(Link)`
-  float: left;
+  width: 22px;
 `;
 
 const ChatRoomName = styled.h1`
-  display: inline-block;
+  flex-grow: 1;
   margin-left: 10px;
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;
-  text-align: center;
   vertical-align: middle;
 `;
 
@@ -39,6 +36,7 @@ const ChatSection = styled.section`
   font-size: 14px;
   font-weight: 400;
   line-height: 18px;
+  text-align: left;
 `;
 
 const FriendChatBox = styled.div`
@@ -57,17 +55,19 @@ const ProfileImg = styled.img`
 `;
 
 const ChatTxt = styled.p`
+  max-width: 240px;
   padding: 12px;
   border: 1px solid #c4c4c4;
   background-color: white;
   border-radius: 10px;
+  box-sizing: border-box;
   &:nth-child(1) {
     margin-right: 0;
     border: none;
     border-top-right-radius: 0;
     border-top-left-radius: 10px;
     color: white;
-    background-color: #f26e22;
+    background-color: #c1deae;
   }
   &:nth-child(2) {
     border-top-left-radius: 0;
@@ -138,7 +138,6 @@ const PhotoBtn = styled.button`
   border: none;
   background: url(${PhotoIcon});
   background-size: 36px 36px;
-  cursor: pointer;
 `;
 
 const SendBtn = styled.button`
@@ -147,20 +146,47 @@ const SendBtn = styled.button`
   font-size: 14px;
   font-weight: 400;
   line-height: 18px;
-  color: #c4c4c4;
   background-color: transparent;
-  cursor: pointer;
+  color: ${(props) => (props.isEmpty ? 'var(--color-enabled)' : '#c4c4c4')};
+`;
+
+const MoreBtn = styled.button`
+  width: 22px;
+  height: 22px;
+  border: none;
+  background: url(${MoreIcon});
+  background-size: 22px 22px;
 `;
 
 export default function ChatRoom() {
+  const [modalBox, setModalBox] = useState(false);
+  const [chatText, setChatText] = useState('');
+  const [isEmpty, setIsEmpty] = useState(true);
+
+  const onChange = (e) => {
+    setChatText(e.target.value);
+  };
+
+  useEffect(() => {
+    if (chatText) {
+      setIsEmpty(true);
+    } else {
+      setIsEmpty(false);
+    }
+  }, [chatText]);
+
   return (
     <>
       <Header>
-        <BackLink to="/chat-list">
+        <Link to="/chat-list">
           <Img src={LeftArrow} alt="뒤로 가기" />
-        </BackLink>
+        </Link>
         <ChatRoomName>애월읍 위니브 감귤농장</ChatRoomName>
-        <Img src={MoreIcon} alt="더 보기 아이콘" />
+        <MoreBtn
+          onClick={() => {
+            setModalBox(!modalBox);
+          }}
+        ></MoreBtn>
       </Header>
       <ChatSection>
         <FriendChatBox>
@@ -189,9 +215,17 @@ export default function ChatRoom() {
       <CommentSection>
         <PhotoBtn type="button"></PhotoBtn>
         <Label htmlFor="comment-text">메시지 입력창</Label>
-        <Input type="text" id="comment-text" placeholder="메시지 입력하기" />
-        <SendBtn type="button">전송</SendBtn>
+        <Input
+          type="text"
+          id="comment-text"
+          placeholder="메시지 입력하기"
+          onChange={onChange}
+        />
+        <SendBtn type="button" isEmpty={isEmpty}>
+          전송
+        </SendBtn>
       </CommentSection>
+      {modalBox && <ChatModal />}
     </>
   );
 }

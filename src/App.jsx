@@ -10,6 +10,7 @@ import ChatList from './pages/ChatList/ChatList';
 import Join from './pages/Join/Join';
 import ChatRoom from './pages/ChatRoom/ChatRoom';
 import MyProfile from './pages/MyProfile/MyProfile';
+import Post from './pages/Post/Post';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       </AnimatePresence>
       <Route path="/login" exact component={Login} />
       <Route path="/join" exact component={Join} />
+      <Route path="/post" exact component={Post} />
       <Route path="/chat-list" exact component={ChatList} />
       <Route path="/chat-room" exact component={ChatRoom} />
       <Route path="/my-profile" exact component={MyProfile} />

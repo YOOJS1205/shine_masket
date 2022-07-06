@@ -70,7 +70,6 @@ const ChatName = styled.strong`
 `;
 
 const ChatTxt = styled.p`
-  /* float: left; */
   font-size: 12px;
   line-height: 15px;
   text-align: left;
@@ -96,6 +95,7 @@ export default function ChatList() {
         <Img src={MoreIcon} alt="더 보기 아이콘" />
       </Header>
       <Section>
+        <h1 className="ir">채팅 목록</h1>
         <ChatLink to="/chat-room">
           <TextContainer>
             <ChatName>애월읍 위니브 감귤농장</ChatName>

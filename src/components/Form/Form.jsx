@@ -3,7 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import Button from '../Button/Button';
 
-export default function Form() {
+export default function Form({ buttonText }) {
   const url = 'https://mandarin.api.weniv.co.kr';
 
   const [id, setId] = useState('');
@@ -71,7 +71,7 @@ export default function Form() {
       <WarningText isWrong={isWrong}>
         * 이메일 또는 비밀번호가 일치하지 않습니다.
       </WarningText>
-      <Button buttonText='로그인' isEmpty={isEmpty} onClick={onClickLogin}></Button>
+      <Button buttonText={buttonText} isEmpty={isEmpty} onClick={onClickLogin}></Button>
     </Container>
   );
 }

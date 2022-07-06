@@ -8,6 +8,7 @@ import Welcome from './pages/Welcome/Welcome';
 import Login from './pages/Login/Login';
 import ChatList from './pages/ChatList/ChatList';
 import Join from './pages/Join/Join';
+import ProfileSetting from './pages/ProfileSetting/ProfileSetting';
 import ChatRoom from './pages/ChatRoom/ChatRoom';
 import MyProfile from './pages/MyProfile/MyProfile';
 
@@ -22,6 +23,7 @@ function App() {
       </AnimatePresence>
       <Route path="/login" exact component={Login} />
       <Route path="/join" exact component={Join} />
+      <Route path="/join/profile" exact component={ProfileSetting} />
       <Route path="/chat-list" exact component={ChatList} />
       <Route path="/chat-room" exact component={ChatRoom} />
       <Route path="/my-profile" exact component={MyProfile} />

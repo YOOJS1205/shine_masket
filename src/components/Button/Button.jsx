@@ -1,12 +1,16 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 
 export default function Button({ buttonText, isEmpty, onClick }) {
   return (
-    <ButtonComponent isEmpty={isEmpty} onClick={onClick}>
+    <ButtonComponent
+      isEmpty={isEmpty}
+      onClick={onClick}
+      disabled={isEmpty ? 'disabled' : null}
+    >
       {buttonText}
     </ButtonComponent>
-  )
+  );
 }
 
 const ButtonComponent = styled.button`

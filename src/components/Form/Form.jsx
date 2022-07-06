@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import Button from '../Button/Button';
 
 export default function Form({ buttonText }) {
   const url = 'https://mandarin.api.weniv.co.kr';
@@ -36,7 +37,7 @@ export default function Form({ buttonText }) {
     setPassword(e.target.value);
   };
 
-  async function getData(e) {
+  async function onClickLogin(e) {
     if (!isEmpty) {
       e.preventDefault();
       try {
@@ -70,9 +71,7 @@ export default function Form({ buttonText }) {
       <WarningText isWrong={isWrong}>
         * 이메일 또는 비밀번호가 일치하지 않습니다.
       </WarningText>
-      <Button onClick={getData} isEmpty={isEmpty}>
-        {buttonText}
-      </Button>
+      <Button buttonText={buttonText} isEmpty={isEmpty} onClick={onClickLogin}></Button>
     </Container>
   );
 }
@@ -114,18 +113,4 @@ const WarningText = styled.p`
   line-height: 14px;
   margin-top: -8px;
   display: ${(props) => (props.isWrong ? 'block' : 'none')};
-`;
-
-const Button = styled.button`
-  background-color: ${(props) =>
-    props.isEmpty ? 'var(--color-enabled)' : 'var(--color-enabled-dark)'};
-  color: #ffffff;
-  border-radius: 44px;
-  width: 100%;
-  border: none;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 18px;
-  margin-top: 14px;
-  padding: 13px 0;
 `;

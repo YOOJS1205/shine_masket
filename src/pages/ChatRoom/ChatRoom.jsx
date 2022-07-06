@@ -189,6 +189,7 @@ export default function ChatRoom() {
         ></MoreBtn>
       </Header>
       <ChatSection>
+        <p className="ir">채팅창</p>
         <FriendChatBox>
           <ProfileImg src={BasicProfileImg}></ProfileImg>
           <ChatTxt>
@@ -213,6 +214,7 @@ export default function ChatRoom() {
         </MyChatBox>
       </ChatSection>
       <CommentSection>
+        <p className="ir">채팅 입력창</p>
         <PhotoBtn type="button"></PhotoBtn>
         <Label htmlFor="comment-text">메시지 입력창</Label>
         <Input

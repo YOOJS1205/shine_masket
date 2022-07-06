@@ -11,6 +11,7 @@ import Join from './pages/Join/Join';
 import ProfileSetting from './pages/ProfileSetting/ProfileSetting';
 import ChatRoom from './pages/ChatRoom/ChatRoom';
 import MyProfile from './pages/MyProfile/MyProfile';
+import Post from './pages/Post/Post';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
       <Route path="/login" exact component={Login} />
       <Route path="/join" exact component={Join} />
       <Route path="/join/profile" exact component={ProfileSetting} />
+      <Route path="/post" exact component={Post} />
       <Route path="/chat-list" exact component={ChatList} />
       <Route path="/chat-room" exact component={ChatRoom} />
       <Route path="/my-profile" exact component={MyProfile} />

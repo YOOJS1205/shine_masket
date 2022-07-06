@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import Button from '../Button/Button';
 
-export default function Form({ buttonText }) {
-  const url = 'https://mandarin.api.weniv.co.kr';
-
+export default function Form({
+  buttonText,
+  getUserInfo,
+  isEmail,
+  isWrong,
+  onClick,
+}) {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [isEmpty, setIsEmpty] = useState(true);
-  const [isEmail, setIsEmail] = useState(false);
-  const [isWrong, setIsWrong] = useState(false);
+
+  getUserInfo(id, password);
 
   useEffect(() => {
     if (id && password) {
@@ -22,42 +27,11 @@ export default function Form({ buttonText }) {
 
   const onHandleUserId = (e) => {
     setId(e.target.value);
-    const email = id;
-    const regExp =
-      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-
-    if (!regExp.test(email)) {
-      setIsEmail(true);
-    } else {
-      setIsEmail(false);
-    }
   };
 
   const onHandleUserPassword = (e) => {
     setPassword(e.target.value);
   };
-
-  async function onClickLogin(e) {
-    if (!isEmpty) {
-      e.preventDefault();
-      try {
-        const res = await axios.post(url + '/user/login/', {
-          user: {
-            email: id,
-            password: password,
-          },
-        });
-        console.log(res.data);
-        if (res.data.message === '이메일 또는 비밀번호가 일치하지 않습니다.') {
-          setIsWrong(true);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      e.preventDefault();
-    }
-  }
 
   return (
     <Container>
@@ -71,7 +45,13 @@ export default function Form({ buttonText }) {
       <WarningText isWrong={isWrong}>
         * 이메일 또는 비밀번호가 일치하지 않습니다.
       </WarningText>
-      <Button buttonText={buttonText} isEmpty={isEmpty} onClick={onClickLogin}></Button>
+      <Link to={buttonText === '다음' ? '/join/profile' : '/'}>
+        <Button
+          buttonText={buttonText}
+          isEmpty={isEmpty}
+          onClick={onClick}
+        ></Button>
+      </Link>
     </Container>
   );
 }

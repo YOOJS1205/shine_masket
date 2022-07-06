@@ -37,7 +37,9 @@
         // ==, != 대신에 ===, !== 사용
         "eqeqeq": "error",
         // props 타입 검사 X
-        "react/prop-types": 0,
+        "react/prop-types": 0
+        // 선언 후 사용하지 않는 변수 및 함수 있어도 무시
+        "no-unused-vars": 0
         // 이스케이프 문자 사용 허용
         "no-useless-escape": 0
     }

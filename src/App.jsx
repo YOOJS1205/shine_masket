@@ -9,6 +9,7 @@ import Login from './pages/Login/Login';
 import ChatList from './pages/ChatList/ChatList';
 import Join from './pages/Join/Join';
 import ChatRoom from './pages/ChatRoom/ChatRoom';
+import MyProfile from './pages/MyProfile/MyProfile';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <Route path="/join" exact component={Join} />
       <Route path="/chat-list" exact component={ChatList} />
       <Route path="/chat-room" exact component={ChatRoom} />
+      <Route path="/my-profile" exact component={MyProfile} />
     </BrowserRouter>
   );
 }

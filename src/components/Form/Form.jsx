@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import Button from '../Button/Button';
@@ -7,15 +7,20 @@ import Button from '../Button/Button';
 export default function Form({
   buttonText,
   getUserInfo,
+  getJoinInfo,
   isEmail,
   isWrong,
   onClick,
 }) {
+  const location = useLocation();
+
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [isEmpty, setIsEmpty] = useState(true);
 
-  getUserInfo(id, password);
+  location.pathname === '/login'
+    ? getUserInfo(id, password)
+    : getJoinInfo(id, password);
 
   useEffect(() => {
     if (id && password) {

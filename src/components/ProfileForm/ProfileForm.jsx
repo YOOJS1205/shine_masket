@@ -20,7 +20,9 @@ export default function ProfileForm({ isButton }) {
         TitleText="소개"
         placeholder="자신이 판매할 상품에 대해 소개해 주세요!"
       />
-      {isButton ? <Button buttonText="샤인마스켓 시작하기" /> : null}
+      {isButton ? (
+        <Button size="large" buttonText="샤인마스켓 시작하기" />
+      ) : null}
     </FormContainer>
   );
 }

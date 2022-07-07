@@ -20,7 +20,6 @@ const Footer = styled.ul`
   display: flex;
   justify-content: space-between;
   gap: 2%;
-  box-sizing: border-box;
   > li {
     width: 25%;
     padding: 15px 0 10px;
@@ -34,7 +33,6 @@ const Footer = styled.ul`
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    cursor: pointer;
     width: 18px;
     height: 20px;
     margin: 0px auto;

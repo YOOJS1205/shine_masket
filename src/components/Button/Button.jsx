@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function Button({ buttonText, isEmpty, onClick }) {
+export default function Button({ buttonText, isEmpty, onClick, size }) {
   return (
     <ButtonComponent
       isEmpty={isEmpty}
       onClick={onClick}
       disabled={isEmpty ? 'disabled' : null}
+      size={size}
     >
       {buttonText}
     </ButtonComponent>
@@ -19,10 +20,28 @@ const ButtonComponent = styled.button`
   color: #ffffff;
   border-radius: 44px;
   width: 100%;
+  width: ${(props) =>
+    props.size === 'large'
+      ? '100%'
+      : props.size === 'medium'
+      ? '120px'
+      : props.size === 'medium-small'
+      ? '90px'
+      : props.size === 'small'
+      ? '56px'
+      : null};
   border: none;
   font-weight: 500;
-  font-size: 14px;
+  font-size: ${(props) => (props.size === 'small' ? '12px' : '14px')};
   line-height: 18px;
-  margin-top: 14px;
-  padding: 13px 0;
+  padding: ${(props) =>
+    props.size === 'large'
+      ? '13px 0'
+      : props.size === 'medium'
+      ? '8px 0'
+      : props.size === 'medium-small'
+      ? '7px 0'
+      : props.size === 'small'
+      ? '7px 0'
+      : null};
 `;

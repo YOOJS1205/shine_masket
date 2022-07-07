@@ -15,7 +15,7 @@ export default function ImageButton() {
 const Button = styled.button`
   display: block;
   border: none;
-  margin: 0 auto 30px;
+  margin: 30px auto;
   position: relative;
   background-color: #ffffff;
 `;

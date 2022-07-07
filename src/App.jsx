@@ -12,6 +12,7 @@ import ProfileSetting from './pages/ProfileSetting/ProfileSetting';
 import ChatRoom from './pages/ChatRoom/ChatRoom';
 import MyProfile from './pages/MyProfile/MyProfile';
 import Post from './pages/Post/Post';
+import ModifyProfile from './pages/ModifyProfile/ModifyProfile';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
       <Route path="/chat-list" exact component={ChatList} />
       <Route path="/chat-room" exact component={ChatRoom} />
       <Route path="/my-profile" exact component={MyProfile} />
+      <Route path="/profile/modify" exact component={ModifyProfile} />
     </BrowserRouter>
   );
 }

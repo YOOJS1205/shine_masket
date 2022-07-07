@@ -46,7 +46,11 @@ export default function Form({
         * 이메일 형식이 올바르지 않습니다.
       </CheckEmail>
       <Label htmlFor="password">비밀번호</Label>
-      <Input type="password" id="password" onChange={onHandleUserPassword} />
+      <InputBottom
+        type="password"
+        id="password"
+        onChange={onHandleUserPassword}
+      />
       <WarningText isWrong={isWrong}>
         * 이메일 또는 비밀번호가 일치하지 않습니다.
       </WarningText>
@@ -55,6 +59,7 @@ export default function Form({
           buttonText={buttonText}
           isEmpty={isEmpty}
           onClick={onClick}
+          size="large"
         ></Button>
       </Link>
     </Container>
@@ -84,11 +89,16 @@ const Input = styled.input`
   border-bottom: 1px solid #dbdbdb;
 `;
 
+const InputBottom = styled(Input)`
+  margin-bottom: 30px;
+`;
+
 const CheckEmail = styled.p`
   color: #eb5757;
   font-size: 12px;
   line-height: 14px;
   margin-top: -8px;
+  margin-bottom: 6px;
   display: ${(props) => (props.isEmail ? 'block' : 'none')};
 `;
 
@@ -96,6 +106,7 @@ const WarningText = styled.p`
   color: #eb5757;
   font-size: 12px;
   line-height: 14px;
-  margin-top: -8px;
+  margin-top: -24px;
+  margin-bottom: 30px;
   display: ${(props) => (props.isWrong ? 'block' : 'none')};
 `;

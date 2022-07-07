@@ -8,7 +8,7 @@ export default function ProfileSetting() {
     <div>
       <Title title="프로필 설정" />
       <SubTitle>나중에 언제든지 변경할 수 있습니다.</SubTitle>
-      <ProfileForm />
+      <ProfileForm isButton={true} />
     </div>
   );
 }

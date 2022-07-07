@@ -4,7 +4,7 @@ import ImageButton from './ImageButton';
 import UserInfoInput from './UserInfoInput';
 import Button from '../Button/Button';
 
-export default function ProfileForm() {
+export default function ProfileForm({ isButton }) {
   return (
     <FormContainer>
       <ImageButton />
@@ -20,7 +20,7 @@ export default function ProfileForm() {
         TitleText="소개"
         placeholder="자신이 판매할 상품에 대해 소개해 주세요!"
       />
-      <Button buttonText="샤인마스켓 시작하기" />
+      {isButton ? <Button buttonText="샤인마스켓 시작하기" /> : null}
     </FormContainer>
   );
 }

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../Button/Button';
 
@@ -10,7 +9,11 @@ export default function Form({
   getJoinInfo,
   isEmail,
   isWrong,
+  emailAvailable,
+  passwordAvailable,
+  isUser,
   onClick,
+  onBlur,
 }) {
   const location = useLocation();
 
@@ -41,27 +44,44 @@ export default function Form({
   return (
     <Container>
       <Label htmlFor="email">이메일</Label>
-      <Input type="email" id="email" onChange={onHandleUserId} />
-      <CheckEmail isEmail={isEmail}>
-        * 이메일 형식이 올바르지 않습니다.
-      </CheckEmail>
+      <Input
+        type="email"
+        id="email"
+        onChange={onHandleUserId}
+        onBlur={onBlur}
+      />
+      {location.pathname === '/login' ? (
+        <CheckEmail isEmail={isEmail}>
+          * 이메일 형식이 올바르지 않습니다.
+        </CheckEmail>
+      ) : (
+        <CheckEmailAvailable emailAvailable={emailAvailable} isUser={isUser}>
+          {emailAvailable ? null : '* 이메일 형식이 올바르지 않습니다.'}
+          {isUser ? '* 이미 가입된 이메일 주소 입니다.' : null}
+        </CheckEmailAvailable>
+      )}
       <Label htmlFor="password">비밀번호</Label>
       <InputBottom
         type="password"
         id="password"
         onChange={onHandleUserPassword}
+        onBlur={onBlur}
       />
-      <WarningText isWrong={isWrong}>
-        * 이메일 또는 비밀번호가 일치하지 않습니다.
-      </WarningText>
-      <Link to={buttonText === '다음' ? '/join/profile' : '/'}>
-        <Button
-          buttonText={buttonText}
-          isEmpty={isEmpty}
-          onClick={onClick}
-          size="large"
-        ></Button>
-      </Link>
+      {location.pathname === '/login' ? (
+        <WarningText isWrong={isWrong}>
+          {isWrong ? '* 이메일 또는 비밀번호가 일치하지 않습니다.' : null}
+        </WarningText>
+      ) : (
+        <CheckPasswordAvailable passwordAvailable={passwordAvailable}>
+          {passwordAvailable ? null : '* 비밀번호는 6자리 이상이여야 합니다.'}
+        </CheckPasswordAvailable>
+      )}
+      <Button
+        buttonText={buttonText}
+        isEmpty={isEmpty}
+        onClick={onClick}
+        size="large"
+      ></Button>
     </Container>
   );
 }
@@ -102,6 +122,26 @@ const CheckEmail = styled.p`
   display: ${(props) => (props.isEmail ? 'block' : 'none')};
 `;
 
+const CheckEmailAvailable = styled.p`
+  color: #eb5757;
+  font-size: 12px;
+  line-height: 14px;
+  margin-top: -8px;
+  margin-bottom: 6px;
+  display: ${(props) => {
+    if (props.emailAvailable) {
+      ('none');
+    } else {
+      ('block');
+    }
+    if (props.isUser) {
+      ('block');
+    } else {
+      ('none');
+    }
+  }};
+`;
+
 const WarningText = styled.p`
   color: #eb5757;
   font-size: 12px;
@@ -109,4 +149,13 @@ const WarningText = styled.p`
   margin-top: -24px;
   margin-bottom: 30px;
   display: ${(props) => (props.isWrong ? 'block' : 'none')};
+`;
+
+const CheckPasswordAvailable = styled.p`
+  color: #eb5757;
+  font-size: 12px;
+  line-height: 14px;
+  margin-top: -24px;
+  margin-bottom: 30px;
+  display: ${(props) => (props.passwordAvailable ? 'none' : 'block')};
 `;

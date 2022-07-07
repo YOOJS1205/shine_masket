@@ -28,8 +28,6 @@
         "react"
     ],
     "rules": {
-        // 들여쓰기 2칸만 허용
-        "indent": ["error", 2],
         // var 키워드 사용 불가능
         "no-var": "error",
         // asynn 함수 내부에 await 키워드가 없으면 오류 발생

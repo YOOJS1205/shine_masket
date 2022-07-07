@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import TabMenu from '../../components/TabMenu/TabMenu';
 
 import BasicProfileImg from '../../assets/images/basic-profile-img.png';
 import LeftArrow from '../../assets/icon/icon-arrow-left.png';
@@ -47,7 +48,7 @@ const ChatLink = styled(Link)`
     position: absolute;
     top: 0;
     left: 0;
-    background-color: #f26e22;
+    background-color: var(--color-enabled-dark);
     width: 12px;
     height: 12px;
     border-radius: 50px;
@@ -120,6 +121,7 @@ export default function ChatList() {
           </TextContainer>
         </ChatLink>
       </Section>
+      <TabMenu />
     </>
   );
 }

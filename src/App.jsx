@@ -13,6 +13,7 @@ import ChatRoom from './pages/ChatRoom/ChatRoom';
 import MyProfile from './pages/MyProfile/MyProfile';
 import Post from './pages/Post/Post';
 import ModifyProfile from './pages/ModifyProfile/ModifyProfile';
+import Upload from './pages/Upload/Upload';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
       <Route path="/join" exact component={Join} />
       <Route path="/join/profile" exact component={ProfileSetting} />
       <Route path="/post" exact component={Post} />
+      <Route path="/upload" exact component={Upload} />
       <Route path="/chat-list" exact component={ChatList} />
       <Route path="/chat-room" exact component={ChatRoom} />
       <Route path="/my-profile" exact component={MyProfile} />

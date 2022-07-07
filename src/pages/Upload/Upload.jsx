@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import Button from '../../components/Button/Button';
@@ -92,8 +92,22 @@ const FileInput = styled.input`
 `;
 
 export default function Upload() {
+  const [isEmpty, setIsEmpty] = useState(true);
+  const [uploadText, setUploadText] = useState('');
   const history = useHistory();
   const textRef = useRef(null);
+
+  const onChange = (e) => {
+    setUploadText(e.target.value);
+  };
+
+  useEffect(() => {
+    if (uploadText) {
+      setIsEmpty(false);
+    } else {
+      setIsEmpty(true);
+    }
+  }, [uploadText]);
 
   const handleResizeHeight = useCallback(() => {
     if (textRef === null || textRef.current === null) {
@@ -107,7 +121,7 @@ export default function Upload() {
     <>
       <Header>
         <PrevBtn onClick={() => history.goBack()}></PrevBtn>
-        <Button buttonText="업로드" size="medium-small" />
+        <Button buttonText="업로드" size="medium-small" isEmpty={isEmpty} />
       </Header>
       <TextContainer>
         <h1 className="ir">게시글 입력 영역</h1>
@@ -120,6 +134,7 @@ export default function Upload() {
           placeholder="게시글 입력하기..."
           ref={textRef}
           onInput={handleResizeHeight}
+          onChange={onChange}
         ></TextArea>
         <FileLabel htmlFor="ImgUpload">이미지 첨부하기</FileLabel>
         <FileInput id="ImgUpload" type="file" accept=".png, .jpg, .jpeg" />

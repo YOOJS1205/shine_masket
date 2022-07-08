@@ -13,6 +13,10 @@ export default function Join() {
   const [passwordAvailable, setPasswordAvailable] = useState(true);
   const [isUser, setIsUser] = useState(false);
 
+  useEffect(() => {
+    setIsUser(false);
+  }, [joinId]);
+
   const getJoinInfo = (id, password) => {
     useEffect(() => {
       setJoinId(id);
@@ -59,7 +63,6 @@ export default function Join() {
       ) {
         history.push('/join/profile');
       }
-
       console.log(joinId, joinPassword, isUser);
     } catch (error) {
       console.log(error);

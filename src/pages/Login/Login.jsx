@@ -6,11 +6,14 @@ import Form from '../../components/Form/Form';
 import Title from '../../components/Title/Title';
 
 export default function Login() {
+  // 고객이 폼에 입력하는 ID, PW 데이터 변수화
+  // 고객이 입력한 이메일 유효성, 비밀번호 일치 여부에 대한 불리언 값 변수화
   const [loginId, setLoginId] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const [isWrong, setIsWrong] = useState(false);
   const [isEmail, setIsEmail] = useState(false);
 
+  // Form(자식 컴포넌트)로부터 id, password 받아오는 함수
   const getUserInfo = (id, password) => {
     useEffect(() => {
       setLoginId(id);
@@ -18,6 +21,10 @@ export default function Login() {
     }, [id, password]);
   };
 
+  // 로그인 버튼 클릭
+  // 기능 1. 클릭 시 이메일 유효성 검사
+  // 기능 2. 로그인 API 통신 (ID, PW 서버에 보내기)
+  // 기능 3. 비밀번호 일치하지 않으면 경고 문구 출력
   const onClickLogin = async (e) => {
     e.preventDefault();
     const email = loginId;

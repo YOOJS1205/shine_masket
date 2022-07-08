@@ -1,21 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function UserInfoInput({ TitleText, placeholder }) {
+export default function UserInfoInput({ placeholder, onChange }) {
   return (
     <>
-      <Title>{TitleText}</Title>
-      <Input placeholder={placeholder} />
+      <Input placeholder={placeholder} onChange={onChange} />
     </>
   );
 }
-
-const Title = styled.label`
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 15px;
-  color: #767676;
-`;
 
 const Input = styled.input`
   display: block;

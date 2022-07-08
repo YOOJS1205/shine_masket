@@ -27,3 +27,7 @@ button {
   overflow: hidden;
   clip: rect(1px 1px 1px 1px);
 }
+
+body {
+  /* background-color: #f2f2f2; */
+}

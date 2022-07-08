@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../Button/Button';
 
 // 이미지
 import basicProfileImg from '../../assets/images/basic-profile-img.png';
+import messageIcon from '../../assets/icon/icon-message-circle.svg';
+import shareIcon from '../../assets/icon/icon-share.png';
+
+import { type } from '@testing-library/user-event/dist/type';
 
 export default function Profile({
   followersCount,
@@ -13,6 +18,7 @@ export default function Profile({
   userIntroduction,
 }) {
   const [profileImg, setProfileImg] = useState(basicProfileImg);
+  const location = useLocation();
 
   return (
     <>
@@ -35,11 +41,18 @@ export default function Profile({
           <UserId>@ {userId}</UserId>
           <UserIntroduction>{userIntroduction}</UserIntroduction>
         </UserArea>
-
-        <ButtonArea>
-          <Button buttonText="프로필 수정"></Button>
-          <Button buttonText="상품 등록"></Button>
-        </ButtonArea>
+        {location.pathname === '/my-profile' ? (
+          <ButtonArea>
+            <Button buttonText="프로필 수정" size="medium"></Button>
+            <Button buttonText="상품 등록" size="medium"></Button>
+          </ButtonArea>
+        ) : (
+          <ButtonArea>
+            <Button src={messageIcon} size="smallest"></Button>
+            <Button buttonText="프로필 수정" size="medium"></Button>
+            <Button src={shareIcon} size="smallest"></Button>
+          </ButtonArea>
+        )}
       </UserInfo>
     </>
   );
@@ -54,10 +67,10 @@ const UserInfo = styled.article`
 
 // 1
 const FollowArea = styled.div`
-  margin-bottom: 16px;
-  padding: 0 55px;
+  margin: 0 auto 16px;
   display: flex;
   justify-content: space-between;
+  max-width: 300px;
   align-items: center;
 `;
 
@@ -110,11 +123,9 @@ const UserId = styled.strong`
 
 const UserIntroduction = styled.span`
   margin-bottom: 24px;
-
   font-weight: 400;
   font-size: 14px;
   line-height: 18px;
-
   color: #767676;
 `;
 
@@ -122,22 +133,10 @@ const UserIntroduction = styled.span`
 const ButtonArea = styled.div`
   margin: 0 auto;
   padding-bottom: 26px;
+  max-width: 250px;
   display: flex;
-  width: 100%;
-  max-width: 280px;
+  justify-content: space-between;
+  > button:nth-child(2) {
+    width: 100px;
+  }
 `;
-
-// const Button = styled.button`
-//   margin-right: ${(props) => props.marginRight || '0px'};
-//   padding: 8px 0;
-//   width: 100%;
-//   max-width: ${(props) => props.maxWidth || '120px'};
-
-//   font-weight: 500;
-//   font-size: 14px;
-//   line-height: 18px;
-//   color: #767676;
-
-//   border: 1px solid #dbdbdb;
-//   border-radius: 30px;
-// `;

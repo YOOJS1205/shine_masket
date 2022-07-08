@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import LeftArrow from '../../assets/icon/icon-arrow-left.png';
 import Button from '../Button/Button';
 
-export default function TopMenuBar() {
+export default function TopMenuBar({ saveButton }) {
   return (
     <Container>
       <PreviousBtn>
         <PrevioudBtnImg src={LeftArrow} />
       </PreviousBtn>
-      <Button buttonText="저장" size="medium-small" />
+      {saveButton ? <Button buttonText="저장" size="medium-small" /> : null}
     </Container>
   );
 }
@@ -25,4 +25,5 @@ const PreviousBtn = styled.button``;
 
 const PrevioudBtnImg = styled.img`
   vertical-align: -4px;
+  padding: 5px 0;
 `;

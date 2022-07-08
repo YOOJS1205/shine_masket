@@ -5,7 +5,7 @@ import TopMenuBar from '../../components/TopMenuBar/TopMenuBar';
 export default function ModifyProfile() {
   return (
     <div>
-      <TopMenuBar />
+      <TopMenuBar saveButton={true} />
       <ProfileForm isButton={false} />
     </div>
   );

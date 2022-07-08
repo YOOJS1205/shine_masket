@@ -17,14 +17,18 @@ export default function Form({
 }) {
   const location = useLocation();
 
+  // 고객이 폼에 입력하는 ID, PW 데이터 변수화
+  // 고객이 폼에 모두 값을 입력했는지에 대한 불리언 값 변수화
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [isEmpty, setIsEmpty] = useState(true);
 
+  // URL 경로에 따라서 부모의 PROPS 함수를 다르게 받음
   location.pathname === '/login'
     ? getUserInfo(id, password)
     : getJoinInfo(id, password);
 
+  // 고객이 폼에 입력할때마다 모두 값을 입력했는지에 대한 불리언 값 업데이트
   useEffect(() => {
     if (id && password) {
       setIsEmpty(false);
@@ -33,6 +37,7 @@ export default function Form({
     }
   }, [id, password]);
 
+  // ID, PW 동적으로 업데이트
   const onHandleUserId = (e) => {
     setId(e.target.value);
   };

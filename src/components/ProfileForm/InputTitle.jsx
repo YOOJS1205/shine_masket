@@ -1,10 +1,8 @@
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components';
 
 export default function InputTitle({ TitleText }) {
-  return (
-    <Title>{TitleText}</Title>
-  )
+  return <Title>{TitleText}</Title>;
 }
 
 const Title = styled.label`

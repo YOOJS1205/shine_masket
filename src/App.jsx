@@ -14,6 +14,7 @@ import MyProfile from './pages/MyProfile/MyProfile';
 import Post from './pages/Post/Post';
 import ModifyProfile from './pages/ModifyProfile/ModifyProfile';
 import Upload from './pages/Upload/Upload';
+import Follower from './pages/Follower/Follower.jsx';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
       <Route path="/chat-room" exact component={ChatRoom} />
       <Route path="/my-profile" exact component={MyProfile} />
       <Route path="/profile/modify" exact component={ModifyProfile} />
+      <Route path="/follower" exact component={Follower} />
     </BrowserRouter>
   );
 }

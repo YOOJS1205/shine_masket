@@ -11,6 +11,7 @@ export default function TopMenuBar({
   moreButton,
   moreButtonSmall,
   menuText,
+  className,
 }) {
   const history = useHistory();
 
@@ -29,6 +30,7 @@ export default function TopMenuBar({
 
 const Container = styled.article`
   display: flex;
+
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #dbdbdb;

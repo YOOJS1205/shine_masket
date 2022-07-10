@@ -7,6 +7,7 @@ import Button from '../Button/Button';
 import basicProfileImg from '../../assets/images/basic-profile-img.png';
 import messageIcon from '../../assets/icon/icon-message-circle.svg';
 import shareIcon from '../../assets/icon/icon-share.png';
+import { ReactComponent as Cookie } from '../../assets/icon/icon-message-circle.svg';
 
 import { type } from '@testing-library/user-event/dist/type';
 
@@ -44,14 +45,16 @@ export default function Profile({
         {location.pathname === '/my-profile' ? (
           <ButtonArea>
             <Button buttonText="프로필 수정" size="medium"></Button>
-            <Button buttonText="상품 등록" size="medium"></Button>
+            <Button buttonText="상품 등록"></Button>
           </ButtonArea>
         ) : (
-          <ButtonArea>
-            <Button src={messageIcon} size="smallest"></Button>
-            <Button buttonText="프로필 수정" size="medium"></Button>
-            <Button src={shareIcon} size="smallest"></Button>
-          </ButtonArea>
+          <OverrideButtonArea>
+            <Button>
+              <ButtonIconImg src={shareIcon}></ButtonIconImg>
+            </Button>
+            <Button buttonText="팔로우" size="medium"></Button>
+            <Button src={Cookie} />
+          </OverrideButtonArea>
         )}
       </UserInfo>
     </>
@@ -133,10 +136,27 @@ const UserIntroduction = styled.span`
 const ButtonArea = styled.div`
   margin: 0 auto;
   padding-bottom: 26px;
-  max-width: 250px;
+  max-width: 230px;
   display: flex;
   justify-content: space-between;
+
   > button:nth-child(2) {
     width: 100px;
   }
+`;
+
+const OverrideButtonArea = styled(ButtonArea)`
+  max-width: 220px;
+
+  > button:nth-child(2) {
+    width: 120px;
+  }
+
+  > button:nth-child(odd) {
+    width: 34px;
+  }
+`;
+
+const ButtonIconImg = styled.img`
+  /* src: ${(props) => props.src || null}; */
 `;

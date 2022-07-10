@@ -29,8 +29,6 @@ const ButtonComponent = styled.button`
       ? '90px'
       : props.size === 'small'
       ? '56px'
-      : props.size === 'smallest'
-      ? '34px'
       : null};
   border: none;
   font-weight: 500;

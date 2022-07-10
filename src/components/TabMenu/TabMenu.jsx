@@ -9,7 +9,7 @@ import IconUpload from '../../assets/icon/icon-edit.svg';
 import IconMyprofile from '../../assets/icon/icon-user.svg';
 import IconMyprofileHover from '../../assets/icon/icon-user-fill.png';
 
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 const Footer = styled.ul`
   position: absolute;

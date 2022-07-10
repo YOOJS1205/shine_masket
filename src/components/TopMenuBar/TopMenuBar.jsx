@@ -35,7 +35,7 @@ const Container = styled.article`
   padding: 8px 20px;
 `;
 
-const PreviousBtn = styled(Link)`
+const PreviousBtn = styled.button`
   width: 22px;
   border: none;
 `;

@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function UserInfoInput({ placeholder, onChange }) {
+export default function UserInfoInput({ placeholder, onChange, isLast }) {
   return (
     <>
-      <Input placeholder={placeholder} onChange={onChange} />
+      <Input placeholder={placeholder} onChange={onChange} isLast={isLast} />
     </>
   );
 }
@@ -12,7 +12,7 @@ export default function UserInfoInput({ placeholder, onChange }) {
 const Input = styled.input`
   display: block;
   width: calc(100% - 20px);
-  margin-bottom: 16px;
+  margin-bottom: ${(props) => (props.isLast ? '30px' : '14px')};
   padding: 10px;
   background-color: #ffffff;
   border-left: none;
@@ -21,5 +21,5 @@ const Input = styled.input`
   border-bottom: 1px solid #dbdbdb;
   font-size: 14px;
   line-height: 14px;
-  color: #dbdbdb;
+  /* color: #dbdbdb; */
 `;

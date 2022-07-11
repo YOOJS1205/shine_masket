@@ -11,6 +11,7 @@ export default function TopMenuBar({
   moreButton,
   moreButtonSmall,
   menuText,
+  className,
 }) {
   const history = useHistory();
 
@@ -29,13 +30,14 @@ export default function TopMenuBar({
 
 const Container = styled.article`
   display: flex;
+
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #dbdbdb;
   padding: 8px 20px;
 `;
 
-const PreviousBtn = styled(Link)`
+const PreviousBtn = styled.button`
   width: 22px;
   border: none;
 `;
@@ -46,7 +48,8 @@ const PrevioudBtnImg = styled.img`
 `;
 
 const MenuText = styled.h1`
-  margin-left: 10px;
+  margin-right: auto;
+  padding-left: 10px;
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;

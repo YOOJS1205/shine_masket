@@ -7,6 +7,7 @@ export default function Button({
   onClick,
   size,
   buttonImg,
+  className,
 }) {
   return (
     <ButtonComponent
@@ -14,6 +15,7 @@ export default function Button({
       onClick={onClick}
       disabled={isEmpty ? 'disabled' : null}
       size={size}
+      className={className}
     >
       {buttonText}
       <ButtonImg src={buttonImg} />
@@ -44,7 +46,7 @@ const ButtonComponent = styled.button`
   border: none;
   font-weight: 500;
   font-size: ${(props) => (props.size === 'small' ? '12px' : '14px')};
-  line-height: 18px;
+  line-height: ${(props) => (props.size === 'small' ? '15px' : '18px')};
   padding: ${(props) =>
     props.size === 'large'
       ? '13px 0'

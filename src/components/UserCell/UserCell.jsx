@@ -4,24 +4,25 @@ import styled from 'styled-components';
 import basicProfileImg from '../../assets/images/basic-profile-img.png';
 import Button from '../Button/Button';
 
-export default function UserCell() {
+
+export default function UserCell(props) {
   return (
     <>
       <UserCellComponent>
         <UserProfileImg src={basicProfileImg}></UserProfileImg>
         <UserArea>
-          <UserName>userName</UserName>
-          <UserIntroduction>UserIntroduction</UserIntroduction>
+
+          <UserName>{props.userName}</UserName>
+          <UserIntroduction>{props.UserIntroduction}</UserIntroduction>
         </UserArea>
 
-        <Button size="small" buttonText="팔로우"></Button>
+        <FollowButton size="small" buttonText="팔로우"></FollowButton>
       </UserCellComponent>
     </>
   );
 }
 
 const UserCellComponent = styled.article`
-  background-color: lightpink;
 
   margin: 8px 16px;
   align-items: center;
@@ -53,4 +54,8 @@ const UserIntroduction = styled.span`
   font-size: 12px;
   line-height: 15px;
   color: #767676;
+`;
+
+const FollowButton = styled(Button)`
+  margin-left: auto;
 `;

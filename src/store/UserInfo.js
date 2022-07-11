@@ -9,7 +9,6 @@ const initialState = {
 
 const UserInfoReducer = (state = initialState, action) => {
   switch (action.type) {
-
     case 'JOIN':
       return {
         ...state,

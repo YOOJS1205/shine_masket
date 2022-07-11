@@ -5,7 +5,6 @@ import UserCell from '../UserCell/UserCell';
 export default function FollowList() {
   return (
     <>
-
       <FollowListComponent>
         <UserCell userName="애월" UserIntroduction="맛집!!!!!!!!"></UserCell>
         <UserCell userName="배고파" UserIntroduction="밥줘!!!!!!!!"></UserCell>

@@ -48,7 +48,8 @@ const PrevioudBtnImg = styled.img`
 `;
 
 const MenuText = styled.h1`
-  margin-left: 10px;
+  margin-right: auto;
+  padding-left: 10px;
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;

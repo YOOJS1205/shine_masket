@@ -49,6 +49,7 @@ export default function ProfileForm({ isButton }) {
           image: '',
         },
       });
+
       console.log(res.data.user);
       const registerUserName = userName;
       const registerAccountName = userAccount;

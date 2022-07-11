@@ -1,17 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Button from '../Button/Button';
 
 // 이미지
 import basicProfileImg from '../../assets/images/basic-profile-img.png';
 
-export default function Profile({
-  followersCount,
-  followingsCount,
-  userName,
-  userId,
-  userIntroduction,
-}) {
+export default function Profile(props) {
   const [profileImg, setProfileImg] = useState(basicProfileImg);
 
   return (
@@ -20,26 +13,23 @@ export default function Profile({
         <h1 className="ir">사용자 정보</h1>
         <FollowArea>
           <FollowersCount>
-            {followersCount}
+            {props.followersCount}
             <FollowersTxt>followers</FollowersTxt>
           </FollowersCount>
           <MyProfileImg src={profileImg}></MyProfileImg>
           <FollowersCount color="#767676">
-            {followingsCount}
+            {props.followingsCount}
             <FollowersTxt>followings</FollowersTxt>
           </FollowersCount>
         </FollowArea>
 
         <UserArea>
-          <UserName>{userName}</UserName>
-          <UserId>@ {userId}</UserId>
-          <UserIntroduction>{userIntroduction}</UserIntroduction>
+          <UserName>{props.userName}</UserName>
+          <UserId>@ {props.userId}</UserId>
+          <UserIntroduction>{props.userIntroduction}</UserIntroduction>
         </UserArea>
 
-        <ButtonArea>
-          <Button buttonText="프로필 수정"></Button>
-          <Button buttonText="상품 등록"></Button>
-        </ButtonArea>
+        <ButtonArea>{props.children}</ButtonArea>
       </UserInfo>
     </>
   );
@@ -120,24 +110,11 @@ const UserIntroduction = styled.span`
 
 // 3
 const ButtonArea = styled.div`
+  display: flex;
+  justify-content: space-around;
   margin: 0 auto;
   padding-bottom: 26px;
   display: flex;
   width: 100%;
   max-width: 280px;
 `;
-
-// const Button = styled.button`
-//   margin-right: ${(props) => props.marginRight || '0px'};
-//   padding: 8px 0;
-//   width: 100%;
-//   max-width: ${(props) => props.maxWidth || '120px'};
-
-//   font-weight: 500;
-//   font-size: 14px;
-//   line-height: 18px;
-//   color: #767676;
-
-//   border: 1px solid #dbdbdb;
-//   border-radius: 30px;
-// `;

@@ -1,6 +1,7 @@
 const initialState = {
   registerId: '',
   registerPassword: '',
+
   registerUserName: '',
   registerAccountName: '',
   registerIntro: '',
@@ -8,12 +9,14 @@ const initialState = {
 
 const UserInfoReducer = (state = initialState, action) => {
   switch (action.type) {
+
     case 'JOIN':
       return {
         ...state,
         registerId: action.registerId,
         registerPassword: action.registerPassword,
       };
+
     case 'CLICK':
       return {
         ...state,

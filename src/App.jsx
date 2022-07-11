@@ -11,6 +11,7 @@ import Join from './pages/Join/Join';
 import ProfileSetting from './pages/ProfileSetting/ProfileSetting';
 import ChatRoom from './pages/ChatRoom/ChatRoom';
 import MyProfile from './pages/MyProfile/MyProfile';
+import YourProfile from './pages/YourProfile/YourProfile';
 import Post from './pages/Post/Post';
 import ModifyProfile from './pages/ModifyProfile/ModifyProfile';
 import Upload from './pages/Upload/Upload';
@@ -33,6 +34,7 @@ function App() {
       <Route path="/chat-list" exact component={ChatList} />
       <Route path="/chat-room" exact component={ChatRoom} />
       <Route path="/my-profile" exact component={MyProfile} />
+      <Route path="/your-profile" exact component={YourProfile} />
       <Route path="/profile/modify" exact component={ModifyProfile} />
       <Route path="/follower" exact component={Follower} />
     </BrowserRouter>

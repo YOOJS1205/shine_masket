@@ -72,6 +72,7 @@ export default function Join() {
         const registerId = joinId;
         const registerPassword = joinPassword;
 
+
         dispatch({ type: 'JOIN', registerId, registerPassword });
         history.push('/join/profile');
       }

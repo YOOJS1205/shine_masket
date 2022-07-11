@@ -4,12 +4,14 @@ import styled from 'styled-components';
 import basicProfileImg from '../../assets/images/basic-profile-img.png';
 import Button from '../Button/Button';
 
+
 export default function UserCell(props) {
   return (
     <>
       <UserCellComponent>
         <UserProfileImg src={basicProfileImg}></UserProfileImg>
         <UserArea>
+
           <UserName>{props.userName}</UserName>
           <UserIntroduction>{props.UserIntroduction}</UserIntroduction>
         </UserArea>
@@ -21,6 +23,7 @@ export default function UserCell(props) {
 }
 
 const UserCellComponent = styled.article`
+
   margin: 8px 16px;
   align-items: center;
   display: flex;
@@ -46,6 +49,7 @@ const UserName = styled.strong`
 
 const UserIntroduction = styled.span`
   margin-bottom: 6px;
+
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;

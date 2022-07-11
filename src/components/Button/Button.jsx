@@ -6,6 +6,7 @@ export default function Button({
   isEmpty,
   onClick,
   size,
+  buttonImg,
   className,
 }) {
   return (
@@ -17,6 +18,7 @@ export default function Button({
       className={className}
     >
       {buttonText}
+      <ButtonImg src={buttonImg} />
     </ButtonComponent>
   );
 }
@@ -36,6 +38,10 @@ const ButtonComponent = styled.button`
       ? '90px'
       : props.size === 'small'
       ? '56px'
+      : props.size === '100'
+      ? '100px'
+      : props.size === '34'
+      ? '34px'
       : null};
   border: none;
   font-weight: 500;
@@ -50,5 +56,9 @@ const ButtonComponent = styled.button`
       ? '7px 0'
       : props.size === 'small'
       ? '7px 0'
+      : props.size === '100'
+      ? '8px 0'
       : null};
 `;
+
+const ButtonImg = styled.img``;

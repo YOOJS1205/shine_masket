@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import ImageButton from './ImageButton';
 import UserInfoInput from './UserInfoInput';
@@ -8,6 +8,7 @@ import Button from '../Button/Button';
 import InputTitle from './InputTitle';
 
 export default function ProfileForm({ isButton }) {
+  const dispatch = useDispatch();
   // 전역 데이터로 담긴 가입 ID, PW 가져오기
   const { registerId, registerPassword } = useSelector((state) => ({
     registerId: state.UserInfoReducer.registerId,
@@ -34,6 +35,7 @@ export default function ProfileForm({ isButton }) {
 
   // 시작 버튼
   // 기능 1. 회원가입 API 통신 (서버에 유저 정보 보내기)
+  // 기능 2. Redux로 유저 정보 담기
   const onClickStartButton = async (e) => {
     e.preventDefault();
     try {
@@ -47,7 +49,17 @@ export default function ProfileForm({ isButton }) {
           image: '',
         },
       });
-      console.log(res);
+      console.log(res.data.user);
+      const registerUserName = userName;
+      const registerAccountName = userAccount;
+      const registerIntro = userIntro;
+      dispatch({
+        type: 'CLICK',
+        registerUserName,
+        registerAccountName,
+        registerIntro,
+      });
+      console.log(registerIntro);
     } catch (error) {
       console.log(error);
     }

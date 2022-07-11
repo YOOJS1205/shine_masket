@@ -21,5 +21,5 @@ const Input = styled.input`
   border-bottom: 1px solid #dbdbdb;
   font-size: 14px;
   line-height: 14px;
-  color: #dbdbdb;
+  /* color: #dbdbdb; */
 `;

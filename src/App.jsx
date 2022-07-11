@@ -16,6 +16,7 @@ import Post from './pages/Post/Post';
 import ModifyProfile from './pages/ModifyProfile/ModifyProfile';
 import Upload from './pages/Upload/Upload';
 import Follower from './pages/Follower/Follower.jsx';
+import Following from './pages/Following/Following.jsx';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
       <Route path="/your-profile" exact component={YourProfile} />
       <Route path="/profile/modify" exact component={ModifyProfile} />
       <Route path="/follower" exact component={Follower} />
+      <Route path="/following" exact component={Following} />
     </BrowserRouter>
   );
 }

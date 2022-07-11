@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import TabMenu from '../../components/TabMenu/TabMenu';
 import TopMenuBar from '../../components/TopMenuBar/TopMenuBar';
 
-export default function Follower() {
+export default function Following() {
   return (
     <>
-      <TopMenuBar menuText="Followers"></TopMenuBar>
+      <TopMenuBar menuText="Followings"></TopMenuBar>
       <FollowList></FollowList>
       <TabMenu></TabMenu>
     </>

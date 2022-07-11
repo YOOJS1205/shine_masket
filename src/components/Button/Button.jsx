@@ -1,13 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function Button({ buttonText, isEmpty, onClick, size }) {
+export default function Button({
+  buttonText,
+  isEmpty,
+  onClick,
+  size,
+  className,
+}) {
   return (
     <ButtonComponent
       isEmpty={isEmpty}
       onClick={onClick}
       disabled={isEmpty ? 'disabled' : null}
       size={size}
+      className={className}
     >
       {buttonText}
     </ButtonComponent>
@@ -33,7 +40,7 @@ const ButtonComponent = styled.button`
   border: none;
   font-weight: 500;
   font-size: ${(props) => (props.size === 'small' ? '12px' : '14px')};
-  line-height: 18px;
+  line-height: ${(props) => (props.size === 'small' ? '15px' : '18px')};
   padding: ${(props) =>
     props.size === 'large'
       ? '13px 0'

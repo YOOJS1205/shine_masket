@@ -7,7 +7,7 @@ import UserInfoInput from './UserInfoInput';
 import Button from '../Button/Button';
 import InputTitle from './InputTitle';
 
-export default function ProfileForm({ isButton }) {
+export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
   const dispatch = useDispatch();
   // 전역 데이터로 담긴 가입 ID, PW 가져오기
   const { registerId, registerPassword } = useSelector((state) => ({
@@ -31,6 +31,16 @@ export default function ProfileForm({ isButton }) {
     } else {
       setIsEmpty(true);
     }
+  }, [userName, userAccount, userIntro]);
+
+  // 부모 컴포넌트인 ModifyProfile에 isEmpty 정보 전달
+  useEffect(() => {
+    getEmptyInfo(isEmpty);
+  }, [isEmpty]);
+
+  // 부모 컴포넌트인 ModifyProfile에 userName, userAccount, userIntro 정보 전달
+  useEffect(() => {
+    getUserInfo(userName, userAccount, userIntro);
   }, [userName, userAccount, userIntro]);
 
   // 사용자 이름 2~10자 이내 검사
@@ -158,5 +168,5 @@ const WarningText = styled.p`
   font-size: 12px;
   line-height: 14px;
   margin-top: -10px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 `;

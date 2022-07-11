@@ -40,7 +40,7 @@ export default function Join() {
       setEmailAvailable(false);
     }
 
-    if (password.length >= 6) {
+    if (password.length >= 6 || !password) {
       setPasswordAvailable(true);
     } else {
       setPasswordAvailable(false);
@@ -67,7 +67,8 @@ export default function Join() {
         setIsUser(true);
       } else if (
         res.data.message === '사용 가능한 이메일 입니다.' &&
-        emailAvailable
+        emailAvailable &&
+        passwordAvailable
       ) {
         const registerId = joinId;
         const registerPassword = joinPassword;

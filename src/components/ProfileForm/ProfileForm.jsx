@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
@@ -19,6 +19,41 @@ export default function ProfileForm({ isButton }) {
   const [userName, setUserName] = useState('');
   const [userAccount, setUserAccount] = useState('');
   const [userIntro, setUserIntro] = useState('');
+  const [nameLength, setNameLength] = useState(true);
+  const [isId, setIsId] = useState(true);
+  const [isEmpty, setIsEmpty] = useState(false);
+  const [isExist, setIsExist] = useState(false);
+
+  // Input 값이 모두 있어야 버튼 활성화
+  useEffect(() => {
+    if (userName && userAccount && userIntro) {
+      setIsEmpty(false);
+    } else {
+      setIsEmpty(true);
+    }
+  }, [userName, userAccount, userIntro]);
+
+  // 사용자 이름 2~10자 이내 검사
+  useEffect(() => {
+    if (
+      (userName.length > 10 || userName.length < 2) &&
+      userName.length !== 0
+    ) {
+      setNameLength(false);
+    } else {
+      setNameLength(true);
+    }
+  }, [userName]);
+
+  // 계정 ID 유효성 검사
+  useEffect(() => {
+    const regExp = /^[a-z0-9A-Z_.,()]{1,}$/;
+    if (regExp.test(userAccount) || !userAccount) {
+      setIsId(true);
+    } else {
+      setIsId(false);
+    }
+  }, [userAccount]);
 
   // 사용자가 입력하는 데이터 동적으로 변수에 저장
   const onHandleUserName = (e) => {
@@ -36,6 +71,7 @@ export default function ProfileForm({ isButton }) {
   // 시작 버튼
   // 기능 1. 회원가입 API 통신 (서버에 유저 정보 보내기)
   // 기능 2. Redux로 유저 정보 담기
+  // 기능 3. 아이디 중복 시 경고 문구 발생
   const onClickStartButton = async (e) => {
     e.preventDefault();
     try {
@@ -49,6 +85,7 @@ export default function ProfileForm({ isButton }) {
           image: '',
         },
       });
+
       console.log(res.data.user);
       const registerUserName = userName;
       const registerAccountName = userAccount;
@@ -59,9 +96,13 @@ export default function ProfileForm({ isButton }) {
         registerAccountName,
         registerIntro,
       });
-      console.log(registerIntro);
     } catch (error) {
       console.log(error);
+      if (error.response.data.message === '이미 사용중인 계정 ID입니다.') {
+        setIsExist(true);
+      } else {
+        setIsExist(false);
+      }
     }
   };
 
@@ -75,6 +116,7 @@ export default function ProfileForm({ isButton }) {
         placeholder="2~10자 이내여야 합니다."
         isLast={false}
       />
+      {nameLength ? null : <WarningText>* 2~10자 이내여야 합니다.</WarningText>}
       <InputTitle TitleText="계정 ID" />
       <UserInfoInput
         onChange={onHandleUserAccount}
@@ -82,6 +124,12 @@ export default function ProfileForm({ isButton }) {
         placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다."
         isLast={false}
       />
+      {isId ? null : (
+        <WarningText>
+          * 영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.
+        </WarningText>
+      )}
+      {isExist ? <WarningText>* 이미 사용중인 계정입니다.</WarningText> : null}
       <InputTitle TitleText="소개" />
       <UserInfoInput
         onChange={onHandleUserIntro}
@@ -92,6 +140,7 @@ export default function ProfileForm({ isButton }) {
       {isButton ? (
         <Button
           size="large"
+          isEmpty={isEmpty}
           buttonText="샤인마스켓 시작하기"
           onClick={onClickStartButton}
         />
@@ -102,4 +151,12 @@ export default function ProfileForm({ isButton }) {
 
 const FormContainer = styled.form`
   padding: 0 34px;
+`;
+
+const WarningText = styled.p`
+  color: #eb5757;
+  font-size: 12px;
+  line-height: 14px;
+  margin-top: -10px;
+  margin-bottom: 30px;
 `;

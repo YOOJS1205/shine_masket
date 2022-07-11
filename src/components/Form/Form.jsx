@@ -112,6 +112,9 @@ const Input = styled.input`
   border-right: none;
   border-top: none;
   border-bottom: 1px solid #dbdbdb;
+  &:focus {
+    border-bottom-color: var(--color-enabled-dark);
+  }
 `;
 
 const InputBottom = styled(Input)`

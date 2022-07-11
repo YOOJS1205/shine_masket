@@ -155,7 +155,7 @@ const WarningText = styled.p`
   font-size: 12px;
   line-height: 14px;
   margin-top: -24px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   display: ${(props) => (props.isWrong ? 'block' : 'none')};
 `;
 
@@ -164,6 +164,6 @@ const CheckPasswordAvailable = styled.p`
   font-size: 12px;
   line-height: 14px;
   margin-top: -24px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   display: ${(props) => (props.passwordAvailable ? 'none' : 'block')};
 `;

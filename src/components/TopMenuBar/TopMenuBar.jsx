@@ -12,6 +12,8 @@ export default function TopMenuBar({
   moreButtonSmall,
   menuText,
   className,
+  isEmpty,
+  onClick,
 }) {
   const history = useHistory();
 
@@ -21,7 +23,14 @@ export default function TopMenuBar({
         <PrevioudBtnImg src={LeftArrow} />
       </PreviousBtn>
       <MenuText>{menuText}</MenuText>
-      {saveButton ? <Button buttonText="저장" size="medium-small" /> : null}
+      {saveButton ? (
+        <Button
+          buttonText="저장"
+          size="medium-small"
+          isEmpty={isEmpty}
+          onClick={onClick}
+        />
+      ) : null}
       {moreButton ? <MoreButton size="large" /> : null}
       {moreButtonSmall ? <MoreButton size="small" /> : null}
     </Container>

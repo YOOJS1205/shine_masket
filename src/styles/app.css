@@ -19,6 +19,10 @@ button {
   font-family: 'Spoqa Han Sans Neo', 'sans-serif';
 }
 
+input:focus {
+  outline: 0;
+}
+
 .ir {
   width: 1px;
   height: 1px;

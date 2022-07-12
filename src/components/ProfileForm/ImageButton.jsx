@@ -6,8 +6,8 @@ import UploadPic from '../../assets/images/upload-file.png';
 export default function ImageButton() {
   return (
     <Button>
-      <ProfileImg src={ProfilePic} />
-      <UploadImg src={UploadPic} />
+      <ProfileImg src={ProfilePic} alt="프로필 사진 이미지" />
+      <UploadImg src={UploadPic} alt="프로필 사진 업로드 이미지" />
     </Button>
   );
 }

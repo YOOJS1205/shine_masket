@@ -12,10 +12,8 @@ export default function Welcome() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <div>
-        <Top />
-        <Form />
-      </div>
+      <Top />
+      <Form />
     </motion.div>
   );
 }

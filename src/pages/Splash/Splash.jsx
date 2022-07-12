@@ -13,7 +13,8 @@ export default function Splash() {
 
   return (
     <BackGround>
-      <Logo src={FullLogo} />
+      <h1 className="ir">샤인마스켓 처음 화면</h1>
+      <Logo src={FullLogo} alt="샤인마스켓 로고" />
     </BackGround>
   );
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
@@ -9,6 +10,7 @@ import InputTitle from './InputTitle';
 
 export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
   const dispatch = useDispatch();
+  const location = useLocation();
   // 전역 데이터로 담긴 가입 ID, PW 가져오기
   const { registerId, registerPassword } = useSelector((state) => ({
     registerId: state.UserInfoReducer.registerId,
@@ -34,14 +36,16 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
   }, [userName, userAccount, userIntro]);
 
   // 부모 컴포넌트인 ModifyProfile에 isEmpty 정보 전달
-  useEffect(() => {
-    getEmptyInfo(isEmpty);
-  }, [isEmpty]);
-
   // 부모 컴포넌트인 ModifyProfile에 userName, userAccount, userIntro 정보 전달
-  useEffect(() => {
-    getUserInfo(userName, userAccount, userIntro);
-  }, [userName, userAccount, userIntro]);
+  if (location.pathname === '/profile/modify') {
+    useEffect(() => {
+      getEmptyInfo(isEmpty);
+    }, [isEmpty]);
+
+    useEffect(() => {
+      getUserInfo(userName, userAccount, userIntro);
+    }, [userName, userAccount, userIntro]);
+  }
 
   // 사용자 이름 2~10자 이내 검사
   useEffect(() => {

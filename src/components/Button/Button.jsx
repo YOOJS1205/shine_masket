@@ -8,6 +8,7 @@ export default function Button({
   size,
   buttonImg,
   className,
+  ir
 }) {
   return (
     <ButtonComponent
@@ -18,7 +19,10 @@ export default function Button({
       className={className}
     >
       {buttonText}
-      <ButtonImg src={buttonImg} alt="클릭 버튼" />
+      <ButtonImg src={buttonImg} />
+      <ButtonIr>
+        클릭버튼
+      </ButtonIr>
     </ButtonComponent>
   );
 }
@@ -62,3 +66,11 @@ const ButtonComponent = styled.button`
 `;
 
 const ButtonImg = styled.img``;
+const ButtonIr = styled.p`
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  position: absolute;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px);
+`;

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Button from '../Button/Button';
 
 import LeftArrow from '../../assets/icon/icon-arrow-left.png';
+import Search from '../../assets/icon/icon-search.png';
 import MoreButton from '../Button/MoreButton';
 
 export default function TopMenuBar({
@@ -14,6 +15,8 @@ export default function TopMenuBar({
   className,
   isEmpty,
   onClick,
+  homeText,
+  searchBtn,
 }) {
   const history = useHistory();
 
@@ -26,6 +29,7 @@ export default function TopMenuBar({
         />
       </PreviousBtn>
       <MenuText>{menuText}</MenuText>
+      <HomeText>{homeText}</HomeText>
       {saveButton ? (
         <Button
           buttonText="저장"
@@ -36,6 +40,7 @@ export default function TopMenuBar({
       ) : null}
       {moreButton ? <MoreButton size="large" /> : null}
       {moreButtonSmall ? <MoreButton size="small" /> : null}
+      {searchBtn ? <SearchButton src={Search} /> : null}
     </Container>
   );
 }
@@ -65,4 +70,16 @@ const MenuText = styled.h1`
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;
+`;
+
+const HomeText = styled.h1`
+  padding-left: 5px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
+  order: -1;
+`;
+
+const SearchButton = styled.img`
+  margin-left: auto;
 `;

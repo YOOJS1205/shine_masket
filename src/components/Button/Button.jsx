@@ -6,7 +6,6 @@ export default function Button({
   isEmpty,
   onClick,
   size,
-  buttonImg,
   className,
 }) {
   return (
@@ -18,7 +17,6 @@ export default function Button({
       className={className}
     >
       {buttonText}
-      <ButtonImg src={buttonImg} alt="클릭 버튼" />
     </ButtonComponent>
   );
 }
@@ -60,5 +58,3 @@ const ButtonComponent = styled.button`
       ? '8px 0'
       : null};
 `;
-
-const ButtonImg = styled.img``;

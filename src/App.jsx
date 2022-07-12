@@ -17,7 +17,7 @@ import ModifyProfile from './pages/ModifyProfile/ModifyProfile';
 import Upload from './pages/Upload/Upload';
 import Follower from './pages/Follower/Follower.jsx';
 import Following from './pages/Following/Following.jsx';
-import FeedEmpty from './pages/FeedEmpty/FeedEmpty';
+import HomeEmpty from './pages/HomeEmpty/HomeEmpty';
 
 function App() {
   return (
@@ -40,7 +40,7 @@ function App() {
       <Route path="/profile/modify" exact component={ModifyProfile} />
       <Route path="/follower" exact component={Follower} />
       <Route path="/following" exact component={Following} />
-      <Route path="/feed-empty" exact component={FeedEmpty} />
+      <Route path="/home-empty" exact component={HomeEmpty} />
     </BrowserRouter>
   );
 }

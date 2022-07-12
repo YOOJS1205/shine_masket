@@ -3,9 +3,7 @@ import styled from 'styled-components';
 
 export default function UserInfoInput({ placeholder, onChange, isLast }) {
   return (
-    <>
-      <Input placeholder={placeholder} onChange={onChange} isLast={isLast} />
-    </>
+    <Input placeholder={placeholder} onChange={onChange} isLast={isLast} />
   );
 }
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux/es/exports';
 import axios from 'axios';
@@ -83,7 +84,7 @@ export default function Join() {
   };
 
   return (
-    <div>
+    <Container>
       <Title title="이메일로 회원가입" />
       <Form
         buttonText="다음"
@@ -94,6 +95,8 @@ export default function Join() {
         onClick={onClickJoin}
         onBlur={checkIsAvailable}
       />
-    </div>
+    </Container>
   );
 }
+
+const Container = styled.section``;

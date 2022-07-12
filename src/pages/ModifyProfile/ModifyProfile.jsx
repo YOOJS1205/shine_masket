@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import axios from 'axios';
 import ProfileForm from '../../components/ProfileForm/ProfileForm';
 import TopMenuBar from '../../components/TopMenuBar/TopMenuBar';
@@ -45,7 +46,8 @@ export default function ModifyProfile() {
   };
 
   return (
-    <div>
+    <Conatiner>
+      <h1 className="ir">프로필 수정</h1>
       <TopMenuBar
         saveButton={true}
         isEmpty={isEmpty}
@@ -56,6 +58,8 @@ export default function ModifyProfile() {
         getEmptyInfo={getEmptyInfo}
         getUserInfo={getUserInfo}
       />
-    </div>
+    </Conatiner>
   );
 }
+
+const Conatiner = styled.section``;

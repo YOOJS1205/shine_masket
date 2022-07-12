@@ -18,7 +18,7 @@ export default function Button({
       className={className}
     >
       {buttonText}
-      <ButtonImg src={buttonImg} />
+      <ButtonImg src={buttonImg} alt="클릭 버튼" />
     </ButtonComponent>
   );
 }

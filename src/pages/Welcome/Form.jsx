@@ -8,16 +8,17 @@ import FacebookLogo from '../../assets/images/facebook.png';
 export default function Form() {
   return (
     <Container>
+      <h1 className="ir">소셜 로그인 및 로그인 버튼</h1>
       <LoginButton borderColor="#F2C94C">
-        <SocialLogo src={KakaoLogo} />
+        <SocialLogo src={KakaoLogo} alt="카카오톡 로고 이미지" />
         카카오톡 계정으로 로그인
       </LoginButton>
       <LoginButton borderColor="#767676">
-        <SocialLogo src={GoogleLogo} />
+        <SocialLogo src={GoogleLogo} alt="구글 로고 이미지" />
         구글 계정으로 로그인
       </LoginButton>
       <LoginButton borderColor="#2D9CDB">
-        <SocialLogo src={FacebookLogo} />
+        <SocialLogo src={FacebookLogo} alt="페이스북 로고 이미지" />
         페이스북 계정으로 로그인
       </LoginButton>
       <Options>

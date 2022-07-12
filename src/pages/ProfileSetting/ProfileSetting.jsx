@@ -5,13 +5,15 @@ import ProfileForm from '../../components/ProfileForm/ProfileForm';
 
 export default function ProfileSetting() {
   return (
-    <div>
+    <Container>
       <Title title="프로필 설정" />
       <SubTitle>나중에 언제든지 변경할 수 있습니다.</SubTitle>
       <ProfileForm isButton={true} />
-    </div>
+    </Container>
   );
 }
+
+const Container = styled.section``;
 
 const SubTitle = styled.h2`
   font-size: 14px;

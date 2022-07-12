@@ -20,7 +20,10 @@ export default function TopMenuBar({
   return (
     <Container>
       <PreviousBtn onClick={() => history.goBack()}>
-        <PrevioudBtnImg src={LeftArrow} />
+        <PrevioudBtnImg
+          src={LeftArrow}
+          alt="이전 페이지로 돌아가는 버튼 이미지"
+        />
       </PreviousBtn>
       <MenuText>{menuText}</MenuText>
       {saveButton ? (
@@ -37,7 +40,7 @@ export default function TopMenuBar({
   );
 }
 
-const Container = styled.article`
+const Container = styled.section`
   display: flex;
 
   justify-content: space-between;

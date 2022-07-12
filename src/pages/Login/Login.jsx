@@ -55,7 +55,7 @@ export default function Login() {
   };
 
   return (
-    <div>
+    <Container>
       <Title title="로그인" />
       <Form
         buttonText="로그인"
@@ -67,9 +67,11 @@ export default function Login() {
       <Link to="/join">
         <Join>이메일로 회원가입</Join>
       </Link>
-    </div>
+    </Container>
   );
 }
+
+const Container = styled.section``;
 
 const Join = styled.p`
   margin-top: 20px;

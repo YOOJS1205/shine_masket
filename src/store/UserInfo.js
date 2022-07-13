@@ -1,5 +1,5 @@
 const initialState = {
-  reduxLoginId: '',
+  userId: '',
   loginToken: '',
   registerId: '',
   registerPassword: '',
@@ -14,7 +14,7 @@ const UserInfoReducer = (state = initialState, action) => {
     case 'LOGIN':
       return {
         ...state,
-        reduxLoginId: action.reduxLoginId,
+        userId: action.userId,
         loginToken: action.loginToken,
       };
     case 'JOIN':

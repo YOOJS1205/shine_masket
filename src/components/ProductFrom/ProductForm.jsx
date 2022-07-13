@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
-import ImageButton from './ImageButton';
 import UserInfoInput from './ItemInfoInput';
 import Button from '../Button/Button';
 import InputTitle from './InputTitle';

@@ -1,7 +1,9 @@
 const initialState = {
+  reduxLoginId: '',
+  loginToken: '',
   registerId: '',
   registerPassword: '',
-
+  registerToken: '',
   registerUserName: '',
   registerAccountName: '',
   registerIntro: '',
@@ -9,6 +11,12 @@ const initialState = {
 
 const UserInfoReducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'LOGIN':
+      return {
+        ...state,
+        reduxLoginId: action.reduxLoginId,
+        loginToken: action.loginToken,
+      };
     case 'JOIN':
       return {
         ...state,

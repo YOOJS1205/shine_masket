@@ -18,12 +18,14 @@ export default function TopMenuBar({
   onClick,
   homeText,
   searchBtn,
+  display
 }) {
   const history = useHistory();
 
   return (
     <Container>
-      <PreviousBtn onClick={() => history.goBack()}>
+      <PreviousBtn onClick={() => history.goBack()}
+        display={display}>
         <PrevioudBtnImg
           src={LeftArrow}
           alt="이전 페이지로 돌아가는 버튼 이미지"
@@ -65,6 +67,7 @@ const Container = styled.section`
 const PreviousBtn = styled.button`
   width: 22px;
   border: none;
+  display: ${(props) => props.display === 'none' ? 'none' : props.display === 'block' ? 'block' : null};
 `;
 
 const PrevioudBtnImg = styled.img`

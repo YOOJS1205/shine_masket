@@ -26,19 +26,23 @@ export default function ModifyProfile() {
   const onClickSaveButton = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put('https://mandarin/api/weniv/co/kr/user', {
-        user: {
-          username: userName,
-          accountname: userAccount,
-          intro: userIntro,
-          image: '',
+      const accessToken = localStorage.getItem('accessToken');
+      const res = await axios.put(
+        'https://mandarin.api.weniv.co.kr/user/',
+        {
+          user: {
+            username: userName,
+            accountname: userAccount,
+            intro: userIntro,
+            image: '',
+          },
         },
-        header: {
-          Authorization: 'Bearer {token}',
-          'Content-type': 'application/json',
-        },
-      });
-
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
       console.log(res);
     } catch (error) {
       console.log(error);

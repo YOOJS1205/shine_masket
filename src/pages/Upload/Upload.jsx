@@ -1,37 +1,133 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
-import Button from '../../components/Button/Button';
+import TopMenuBar from '../../components/TopMenuBar/TopMenuBar';
 
 import BasicProfileImg from '../../assets/images/basic-profile-img.png';
-import LeftArrow from '../../assets/icon/icon-arrow-left.png';
 import ImageUploadIcon from '../../assets/icon/icon-image.png';
+import RemoveIcon from '../../assets/icon/icon-delete.png';
 
-const Header = styled.header`
-  display: flex;
-  justify-content: space-between;
-  position: fixed;
-  width: 100%;
-  padding: 8px 20px;
-  border-bottom: 1px solid #dbdbdb;
-  box-sizing: border-box;
-  background-color: white;
-`;
+export default function Upload() {
+  const [isEmpty, setIsEmpty] = useState(true);
+  const [uploadText, setUploadText] = useState('');
+  const [fileImage, setFileImage] = useState('');
+  const textRef = useRef(null);
 
-const PrevBtn = styled.button`
-  width: 22px;
-  height: 22px;
-  margin-top: 5px;
-  border: none;
-  background: url(${LeftArrow});
-  background-size: 22px 22px;
-`;
+  const onChange = (e) => {
+    setUploadText(e.target.value);
+  };
+
+  useEffect(() => {
+    if (uploadText || fileImage) {
+      setIsEmpty(false);
+    } else {
+      setIsEmpty(true);
+    }
+  }, [uploadText, fileImage]);
+
+  const handleResizeHeight = useCallback(() => {
+    if (textRef === null || textRef.current === null) {
+      return;
+    }
+    textRef.current.style.height = '5vh';
+    textRef.current.style.height = `${textRef.current.scrollHeight}px`;
+  }, []);
+
+  // 파일 업로드
+  const saveFileImage = (e) => {
+    setFileImage(URL.createObjectURL(e.target.files[0]));
+  };
+
+  // 파일 삭제
+  const deleteFileImage = () => {
+    URL.revokeObjectURL(fileImage);
+    setFileImage('');
+  };
+
+  // 업로드 버튼 클릭 시 동작
+  const onClickUpload = async (e) => {
+    e.preventDefault();
+    try {
+      const token =
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYTRjZDQwNTM2MWFhZWE1NjlhOWNhOSIsImV4cCI6MTY2MjcxNDg3MiwiaWF0IjoxNjU3NTMwODcyfQ.aS9EPJ0HwBOUaFO-kKxI_zmB-9CpWmrv98zG3BnvkYQ';
+
+      const req = {
+        post: {
+          content: uploadText,
+          image: fileImage,
+        },
+      };
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-type': 'application/json',
+        },
+      };
+
+      const res = await axios.post(
+        'https://mandarin.api.weniv.co.kr/post',
+        req,
+        config
+      );
+
+      console.log(uploadText);
+      console.log(fileImage);
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+      console.log('내용 또는 이미지를 입력해 주세요.');
+    }
+  };
+
+  return (
+    <>
+      <TopMenuBar
+        uploadButton="true"
+        isEmpty={isEmpty}
+        onClick={onClickUpload}
+      />
+      <TextContainer>
+        <h1 className="ir">게시글 입력 영역</h1>
+        <label htmlFor="textArea" className="ir">
+          게시글 입력하기
+        </label>
+        <Img src={BasicProfileImg} alt="사용자 프로필 이미지"></Img>
+        <TextArea
+          id="textArea"
+          placeholder="게시글 입력하기..."
+          ref={textRef}
+          onInput={handleResizeHeight}
+          onChange={onChange}
+        ></TextArea>
+        <FileLabel htmlFor="imgUpload">이미지 첨부하기</FileLabel>
+        <FileInput
+          type="file"
+          id="imgUpload"
+          multiple="multiple"
+          accept="image/*"
+          onChange={saveFileImage}
+        />
+      </TextContainer>
+      <ImgContainer>
+        {fileImage && (
+          <ImgItem>
+            <img src={fileImage} alt="첨부 이미지" />
+            <RemoveBtn type="button" onClick={() => deleteFileImage()}>
+              <span className="ir">이미지 삭제하기</span>
+            </RemoveBtn>
+          </ImgItem>
+        )}
+      </ImgContainer>
+    </>
+  );
+}
 
 const TextContainer = styled.section`
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  padding: 68px 16px 0;
+  padding: 20px 16px 0;
 `;
 
 const Img = styled.img`
@@ -61,10 +157,30 @@ const TextArea = styled.textarea`
   }
 `;
 
-const ImgContainer = styled.div`
+const ImgContainer = styled.ul`
   display: flex;
-  height: 10px;
+  min-height: 100px;
   margin: 16px 16px 16px 72px;
+`;
+
+const ImgItem = styled.li`
+  position: relative;
+  border: 0.5px solid #dbdbdb;
+  border-radius: 10px;
+  max-width: 304px;
+  max-height: 228px;
+  overflow: hidden;
+  margin-right: 5px;
+  box-sizing: border-box;
+`;
+
+const RemoveBtn = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  height: 22px;
+  width: 22px;
+  background: url(${RemoveIcon}) no-repeat center / contain;
 `;
 
 const FileLabel = styled.label`
@@ -90,58 +206,3 @@ const FileLabel = styled.label`
 const FileInput = styled.input`
   display: none;
 `;
-
-export default function Upload() {
-  const [isEmpty, setIsEmpty] = useState(true);
-  const [uploadText, setUploadText] = useState('');
-  const history = useHistory();
-  const textRef = useRef(null);
-
-  const onChange = (e) => {
-    setUploadText(e.target.value);
-  };
-
-  useEffect(() => {
-    if (uploadText) {
-      setIsEmpty(false);
-    } else {
-      setIsEmpty(true);
-    }
-  }, [uploadText]);
-
-  const handleResizeHeight = useCallback(() => {
-    if (textRef === null || textRef.current === null) {
-      return;
-    }
-    textRef.current.style.height = '5vh';
-    textRef.current.style.height = `${textRef.current.scrollHeight}px`;
-  }, []);
-
-  return (
-    <>
-      <Header>
-        <PrevBtn onClick={() => history.goBack()}></PrevBtn>
-        <Button buttonText="업로드" size="medium-small" isEmpty={isEmpty} />
-      </Header>
-      <TextContainer>
-        <h1 className="ir">게시글 입력 영역</h1>
-        <label htmlFor="textArea" className="ir">
-          게시글 입력하기
-        </label>
-        <Img src={BasicProfileImg} alt="사용자 프로필 이미지"></Img>
-        <TextArea
-          id="textArea"
-          placeholder="게시글 입력하기..."
-          ref={textRef}
-          onInput={handleResizeHeight}
-          onChange={onChange}
-        ></TextArea>
-        <FileLabel htmlFor="ImgUpload">이미지 첨부하기</FileLabel>
-        <FileInput id="ImgUpload" type="file" accept=".png, .jpg, .jpeg" />
-      </TextContainer>
-      <ImgContainer>
-        <ul></ul>
-      </ImgContainer>
-    </>
-  );
-}

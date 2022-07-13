@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../Button/Button';
@@ -9,6 +9,7 @@ import MoreButton from '../Button/MoreButton';
 
 export default function TopMenuBar({
   saveButton,
+  uploadButton,
   moreButton,
   moreButtonSmall,
   menuText,
@@ -38,6 +39,14 @@ export default function TopMenuBar({
           onClick={onClick}
         />
       ) : null}
+      {uploadButton ? (
+        <Button
+          buttonText="업로드"
+          size="medium-small"
+          isEmpty={isEmpty}
+          onClick={onClick}
+        />
+      ) : null}
       {moreButton ? <MoreButton size="large" /> : null}
       {moreButtonSmall ? <MoreButton size="small" /> : null}
       {searchBtn ? <SearchButton src={Search} /> : null}
@@ -47,7 +56,6 @@ export default function TopMenuBar({
 
 const Container = styled.section`
   display: flex;
-
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #dbdbdb;

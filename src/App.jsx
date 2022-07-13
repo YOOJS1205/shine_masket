@@ -17,6 +17,7 @@ import ModifyProfile from './pages/ModifyProfile/ModifyProfile';
 import Upload from './pages/Upload/Upload';
 import Follower from './pages/Follower/Follower.jsx';
 import Following from './pages/Following/Following.jsx';
+import AddProduct from './pages/AddProduct/AddProduct.jsx';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
       <Route path="/chat-list" exact component={ChatList} />
       <Route path="/chat-room" exact component={ChatRoom} />
       <Route path="/my-profile" exact component={MyProfile} />
+      <Route path="/my-profile/add-product" exact component={AddProduct} />
       <Route path="/your-profile" exact component={YourProfile} />
       <Route path="/profile/modify" exact component={ModifyProfile} />
       <Route path="/follower" exact component={Follower} />

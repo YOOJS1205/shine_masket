@@ -73,12 +73,12 @@ export default function Form({
         onBlur={onBlur}
       />
       {location.pathname === '/login' ? (
-        <WarningText isWrong={isWrong}>
-          {isWrong ? '* 이메일 또는 비밀번호가 일치하지 않습니다.' : null}
+        <WarningText isWrong={isWrong} isEmail={isEmail}>
+          * 이메일 또는 비밀번호가 일치하지 않습니다.
         </WarningText>
       ) : (
         <CheckPasswordAvailable passwordAvailable={passwordAvailable}>
-          {passwordAvailable ? null : '* 비밀번호는 6자리 이상이여야 합니다.'}
+          * 비밀번호는 6자리 이상이여야 합니다.
         </CheckPasswordAvailable>
       )}
       <Button
@@ -156,7 +156,7 @@ const WarningText = styled.p`
   line-height: 14px;
   margin-top: -24px;
   margin-bottom: 20px;
-  display: ${(props) => (props.isWrong ? 'block' : 'none')};
+  display: ${(props) => (props.isWrong && !props.isEmail ? 'block' : 'none')};
 `;
 
 const CheckPasswordAvailable = styled.p`

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
@@ -11,6 +11,7 @@ import InputTitle from './InputTitle';
 export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
   const dispatch = useDispatch();
   const location = useLocation();
+  const photoInput = useRef();
   // 전역 데이터로 담긴 가입 ID, PW 가져오기
   const { registerId, registerPassword } = useSelector((state) => ({
     registerId: state.UserInfoReducer.registerId,
@@ -25,15 +26,21 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
   const [isId, setIsId] = useState(true);
   const [isEmpty, setIsEmpty] = useState(false);
   const [isExist, setIsExist] = useState(false);
+  const [imageSrc, setImageSrc] = useState('');
+
+  // 자식 컴포넌트에서 이미지 src 받아오기
+  const getImageSrc = (imgSrc) => {
+    setImageSrc(imgSrc);
+  };
 
   // Input 값이 모두 있어야 버튼 활성화
   useEffect(() => {
-    if (userName && userAccount && userIntro) {
+    if (userName && userAccount && userIntro && nameLength && isId) {
       setIsEmpty(false);
     } else {
       setIsEmpty(true);
     }
-  }, [userName, userAccount, userIntro]);
+  }, [userName, userAccount, userIntro, nameLength, isId]);
 
   // 부모 컴포넌트인 ModifyProfile에 isEmpty 정보 전달
   // 부모 컴포넌트인 ModifyProfile에 userName, userAccount, userIntro 정보 전달
@@ -88,6 +95,8 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
   // 기능 3. 아이디 중복 시 경고 문구 발생
   const onClickStartButton = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append('uploadImage', imageSrc);
     try {
       const res = await axios.post('https://mandarin.api.weniv.co.kr/user', {
         user: {
@@ -100,7 +109,7 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
         },
       });
 
-      console.log(res.data.user);
+      console.log(res);
       const registerUserName = userName;
       const registerAccountName = userAccount;
       const registerIntro = userIntro;
@@ -122,7 +131,13 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
 
   return (
     <FormContainer>
-      <ImageButton />
+      <ImageButton getImageSrc={getImageSrc} />
+      <HiddenInput
+        type="file"
+        accept="image/jpg, image/jpeg, image/png"
+        multiple
+        ref={photoInput}
+      />
       <InputTitle TitleText="사용자 이름" />
       <UserInfoInput
         onChange={onHandleUserName}
@@ -173,4 +188,8 @@ const WarningText = styled.p`
   line-height: 14px;
   margin-top: -10px;
   margin-bottom: 20px;
+`;
+
+const HiddenInput = styled.input`
+  display: none;
 `;

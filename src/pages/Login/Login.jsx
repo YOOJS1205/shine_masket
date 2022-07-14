@@ -29,10 +29,9 @@ export default function Login() {
   // 기능 3. 비밀번호 일치하지 않으면 경고 문구 출력
   const onClickLogin = async (e) => {
     e.preventDefault();
-    const email = loginId;
     const regExp =
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-    if (!regExp.test(email)) {
+    if (!regExp.test(loginId)) {
       setIsEmail(true);
     } else {
       setIsEmail(false);
@@ -47,15 +46,18 @@ export default function Login() {
           },
         }
       );
-      console.log(res);
-      const userId = res.data.user.email;
-      const loginToken = res.data.user.token;
-      const refreshToken = res.data.user.refreshToken;
-      dispatch({ type: 'LOGIN', userId, loginToken });
-      localStorage.setItem('accessToken', loginToken);
-      localStorage.setItem('refreshToken', refreshToken);
+      if (!res.data.message) {
+        const userId = res.data.user.email;
+        const loginToken = res.data.user.token;
+        const refreshToken = res.data.user.refreshToken;
+        dispatch({ type: 'LOGIN', userId, loginToken });
+        localStorage.setItem('accessToken', loginToken);
+        localStorage.setItem('refreshToken', refreshToken);
+      }
       if (res.data.message === '이메일 또는 비밀번호가 일치하지 않습니다.') {
         setIsWrong(true);
+      } else {
+        setIsWrong(false);
       }
     } catch (error) {
       console.log(error);

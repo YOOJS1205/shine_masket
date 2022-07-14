@@ -15,8 +15,12 @@ export default function Post() {
     <>
       <TopMenuBar moreButton="true" />
       <Container>
-        <h1 className="ir">게시글</h1>
+        <h1 className="ir">게시글 댓글 페이지</h1>
         <Profile>
+          <ProfileImg
+            src={BasicProfileImg}
+            alt="사용자 프로필 이미지"
+          ></ProfileImg>
           <TextContainer>
             <UserName>애월읍 위니브 감귤농장</UserName>
             <UserId>@ weniv_Mandarin</UserId>
@@ -29,7 +33,7 @@ export default function Post() {
             이상의 청춘의 뼈 따뜻한 그들의 그와 약동하다. 대고, 못할 넣는
             풍부하게 뛰노는 인생의 힘있다.
           </PostText>
-          <Img src={PostImg} />
+          <Img src={PostImg} alt="본문 이미지" />
         </PostContainer>
         <ButtonContainer>
           <LikeBtn>
@@ -53,6 +57,7 @@ export default function Post() {
 
 const Container = styled.section`
   padding: 20px 16px;
+  box-sizing: border-box;
   border-bottom: 1px solid #dbdbdb;
 `;
 
@@ -61,18 +66,13 @@ const Profile = styled.div`
   font-weight: 400;
   background-color: white;
   border: none;
-  &::before {
-    content: '';
-    display: inline-block;
-    background-image: url(${BasicProfileImg});
-    background-size: 42px 42px;
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 42px;
-    height: 42px;
-    border: 0.5px solid #dbdbdb;
-    border-radius: 50%;
-  }
+`;
+
+const ProfileImg = styled.img`
+  width: 42px;
+  height: 42px;
+  border: 0.5px solid #dbdbdb;
+  border-radius: 50%;
 `;
 
 const TextContainer = styled.div`
@@ -114,6 +114,9 @@ const Img = styled.img`
   display: block;
   width: 304px;
   margin-bottom: 14.7px;
+  border: 0.5px solid #dbdbdb;
+  border-radius: 10px;
+  box-sizing: border-box;
 `;
 
 const ButtonContainer = styled.div`

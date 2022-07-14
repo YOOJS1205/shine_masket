@@ -8,7 +8,7 @@ export default function PostComment() {
     <CommentList>
       <CommentItem>
         <CommentProfile>
-          <ProfileImg src={BasicProfileImg} />
+          <ProfileImg src={BasicProfileImg} alt="댓글 프로필 이미지" />
           <CommentName>서귀포시 무슨 농장</CommentName>
           <CommentDate>· 5분 전</CommentDate>
           <MoreButton size="large" />

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
@@ -11,10 +11,12 @@ import InputTitle from './InputTitle';
 export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
   const dispatch = useDispatch();
   const location = useLocation();
+  const history = useHistory();
+
   const photoInput = useRef();
   // 전역 데이터로 담긴 가입 ID, PW 가져오기
-  const { registerId, registerPassword } = useSelector((state) => ({
-    registerId: state.UserInfoReducer.registerId,
+  const { UserId, registerPassword } = useSelector((state) => ({
+    UserId: state.UserInfoReducer.UserId,
     registerPassword: state.UserInfoReducer.registerPassword,
   }));
 
@@ -26,11 +28,11 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
   const [isId, setIsId] = useState(true);
   const [isEmpty, setIsEmpty] = useState(false);
   const [isExist, setIsExist] = useState(false);
-  const [imageSrc, setImageSrc] = useState('');
+  const [imgSrc, setImgSrc] = useState('');
 
   // 자식 컴포넌트에서 이미지 src 받아오기
   const getImageSrc = (imgSrc) => {
-    setImageSrc(imgSrc);
+    setImgSrc(imgSrc);
   };
 
   // Input 값이 모두 있어야 버튼 활성화
@@ -96,29 +98,35 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
   const onClickStartButton = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('uploadImage', imageSrc);
+    formData.append('uploadImage', imgSrc);
     try {
       const res = await axios.post('https://mandarin.api.weniv.co.kr/user', {
         user: {
           username: userName,
-          email: registerId,
+          email: UserId,
           password: registerPassword,
           accountname: userAccount,
           intro: userIntro,
-          image: '',
+          image: imgSrc,
         },
       });
 
       console.log(res);
-      const registerUserName = userName;
-      const registerAccountName = userAccount;
-      const registerIntro = userIntro;
+      const UserName = userName;
+      const UserAccount = userAccount;
+      const UserIntro = userIntro;
+      const UserImage = imgSrc;
       dispatch({
         type: 'CLICK',
-        registerUserName,
-        registerAccountName,
-        registerIntro,
+        UserName,
+        UserAccount,
+        UserIntro,
+        UserImage,
       });
+
+      if (res.data.message === '회원가입 성공') {
+        history.push('/login');
+      }
     } catch (error) {
       console.log(error);
       if (error.response.data.message === '이미 사용중인 계정 ID입니다.') {

@@ -71,10 +71,10 @@ export default function Join() {
         emailAvailable &&
         passwordAvailable
       ) {
-        const registerId = joinId;
+        const UserId = joinId;
         const registerPassword = joinPassword;
 
-        dispatch({ type: 'JOIN', registerId, registerPassword });
+        dispatch({ type: 'JOIN', UserId, registerPassword });
         history.push('/join/profile');
       }
       console.log(joinId, joinPassword, isUser);

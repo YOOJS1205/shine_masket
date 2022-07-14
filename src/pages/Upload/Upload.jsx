@@ -92,7 +92,10 @@ export default function Upload() {
         <label htmlFor="textArea" className="ir">
           게시글 입력하기
         </label>
-        <Img src={BasicProfileImg} alt="사용자 프로필 이미지"></Img>
+        <ProfileImg
+          src={BasicProfileImg}
+          alt="사용자 프로필 이미지"
+        ></ProfileImg>
         <TextArea
           id="textArea"
           placeholder="게시글 입력하기..."
@@ -130,7 +133,7 @@ const TextContainer = styled.section`
   padding: 20px 16px 0;
 `;
 
-const Img = styled.img`
+const ProfileImg = styled.img`
   width: 42px;
   border: 1px solid #dbdbdb;
   border-radius: 50%;

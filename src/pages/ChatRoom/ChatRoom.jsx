@@ -11,9 +11,12 @@ export default function ChatRoom() {
     <>
       <TopMenuBar menuText="애월읍 위니브 샤인머스캣 농장" moreButton="true" />
       <ChatSection>
-        <p className="ir">채팅창</p>
+        <h2 className="ir">채팅창</h2>
         <FriendChatBox>
-          <ProfileImg src={BasicProfileImg}></ProfileImg>
+          <ProfileImg
+            src={BasicProfileImg}
+            alt="상대 프로필 이미지"
+          ></ProfileImg>
           <ChatTxt>
             옷을 인생을 그러므로 없으면 것은 이상은 것은 우리의 위하여, 뿐이다.
             이상의 청춘의 뼈 따뜻한 그들의 그와 약동하다. 대고, 못할 넣는
@@ -22,7 +25,10 @@ export default function ChatRoom() {
           <TimeTxt>12:39</TimeTxt>
         </FriendChatBox>
         <FriendChatBox>
-          <ProfileImg src={BasicProfileImg}></ProfileImg>
+          <ProfileImg
+            src={BasicProfileImg}
+            alt="상대 프로필 이미지"
+          ></ProfileImg>
           <ChatTxt>샤인머스캣 사고싶어요요요요요요요</ChatTxt>
           <TimeTxt>12:41</TimeTxt>
         </FriendChatBox>

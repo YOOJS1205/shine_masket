@@ -31,6 +31,10 @@ export default function TopMenuBar({
           alt="이전 페이지로 돌아가는 버튼 이미지"
         />
       </PreviousBtn>
+      <SearchModal>
+        <label htmlFor="search_tit" className="ir">검색창입니다</label>
+        <input id="search_tit" type="text" required placeholder='계정 검색' />
+      </SearchModal>
       <MenuText>{menuText}</MenuText>
       <HomeText>{homeText}</HomeText>
       {saveButton ? (
@@ -94,3 +98,19 @@ const HomeText = styled.h1`
 const SearchButton = styled.img`
   margin-left: auto;
 `;
+
+const SearchModal = styled.fieldset`
+  margin-left:25px;
+  width:100%;
+  >input {
+    background-color:#F2F2F2;
+    border:none;
+    border-radius:32px;
+    width:100%;
+    padding:8px 16px;
+    box-sizing: border-box;
+    font:14px/14px "Spoqa Han Sans Neo"; 
+    color:#C4C4C4;
+    letter-spacing: 0em;   
+  }
+`

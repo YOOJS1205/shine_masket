@@ -77,7 +77,6 @@ export default function Join() {
         dispatch({ type: 'JOIN', UserId, registerPassword });
         history.push('/join/profile');
       }
-      console.log(joinId, joinPassword, isUser);
     } catch (error) {
       console.log(error);
     }

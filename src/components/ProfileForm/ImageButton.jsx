@@ -6,11 +6,12 @@ import UploadPic from '../../assets/images/upload-file.png';
 export default function ImageButton({ getImageSrc }) {
   const photoInput = useRef();
   const [imgSrc, setImgSrc] = useState('');
+  const [fileName, setFileName] = useState('');
 
   // 부모 컴포넌트인 ProfileForm으로 이미지 src 데이터 전달
   useEffect(() => {
-    getImageSrc(imgSrc);
-  }, [imgSrc]);
+    getImageSrc(fileName);
+  }, [fileName]);
 
   // 이미지 미리 보기 함수
   const encodeFileToBase64 = (fileBlob) => {
@@ -18,6 +19,8 @@ export default function ImageButton({ getImageSrc }) {
     reader.readAsDataURL(fileBlob);
     return new Promise((resolve) => {
       reader.onload = (e) => {
+        console.log(fileBlob.name);
+        setFileName(fileBlob.name);
         setImgSrc(e.target.result);
         resolve();
       };

@@ -6,19 +6,22 @@ import UploadPic from '../../assets/images/upload-file.png';
 export default function ImageButton({ getImageSrc }) {
   const photoInput = useRef();
   const [imgSrc, setImgSrc] = useState('');
+  const [fileName, setFileName] = useState('');
 
   // 부모 컴포넌트인 ProfileForm으로 이미지 src 데이터 전달
   useEffect(() => {
-    getImageSrc(imgSrc);
-  }, [imgSrc]);
+    getImageSrc(fileName);
+  }, [fileName]);
 
   // 이미지 미리 보기 함수
   const encodeFileToBase64 = (fileBlob) => {
     const reader = new FileReader();
     reader.readAsDataURL(fileBlob);
     return new Promise((resolve) => {
-      reader.onload = () => {
-        setImgSrc(reader.result);
+      reader.onload = (e) => {
+        console.log(fileBlob.name);
+        setFileName(fileBlob.name);
+        setImgSrc(e.target.result);
         resolve();
       };
     });
@@ -37,22 +40,18 @@ export default function ImageButton({ getImageSrc }) {
       <HiddenInput
         type="file"
         id="image"
-        accept="img/*"
+        accept="image/jpg, image/png, image/jpeg"
         ref={photoInput}
         onChange={(e) => {
           encodeFileToBase64(e.target.files[0]);
         }}
       />
-      <ProfileImg
-        style={
-          imgSrc
-            ? { backgroundImage: `url(${imgSrc})` }
-            : { backgroundImage: `url(${ProfilePic})` }
-        }
-      />
-      <UploadImgButton onClick={onHandleImageButton}>
-        <UploadImg src={UploadPic} alt="프로필 사진 업로드 이미지" />
-      </UploadImgButton>
+      <ProfileImgContainer>
+        <ProfileImg src={imgSrc ? imgSrc : ProfilePic} />
+        <UploadImgButton onClick={onHandleImageButton}>
+          <UploadImg src={UploadPic} alt="프로필 사진 업로드 이미지" />
+        </UploadImgButton>
+      </ProfileImgContainer>
     </ButtonContainer>
   );
 }
@@ -69,22 +68,24 @@ const HiddenInput = styled.input`
   display: none;
 `;
 
-const ProfileImg = styled.div`
+const ProfileImgContainer = styled.div`
   width: 110px;
   height: 110px;
   border-radius: 50%;
-  overflow: hidden;
   margin: 0 auto;
   position: relative;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+`;
+
+const ProfileImg = styled.img`
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
 `;
 
 const UploadImgButton = styled.button`
   position: absolute;
-  top: 23%;
-  right: 40%;
+  bottom: -12%;
+  right: -15%;
   border-radius: 50%;
   overflow: hidden;
 `;

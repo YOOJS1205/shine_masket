@@ -1,12 +1,11 @@
 const initialState = {
-  userId: '',
-  loginToken: '',
-  registerId: '',
+  UserId: '',
   registerPassword: '',
-  registerToken: '',
-  registerUserName: '',
-  registerAccountName: '',
-  registerIntro: '',
+  loginToken: '',
+  UserName: '',
+  UserAccount: '',
+  UserIntro: '',
+  UserImage: '',
 };
 
 const UserInfoReducer = (state = initialState, action) => {
@@ -14,22 +13,23 @@ const UserInfoReducer = (state = initialState, action) => {
     case 'LOGIN':
       return {
         ...state,
-        userId: action.userId,
+        UserId: action.UserId,
         loginToken: action.loginToken,
       };
     case 'JOIN':
       return {
         ...state,
-        registerId: action.registerId,
+        UserId: action.UserId,
         registerPassword: action.registerPassword,
       };
 
     case 'CLICK':
       return {
         ...state,
-        registerUserName: action.registerUserName,
-        registerAccountName: action.registerAccountName,
-        registerIntro: action.registerIntro,
+        UserName: action.UserName,
+        UserAccount: action.UserAccount,
+        UserIntro: action.UserIntro,
+        UserImage: action.UserImage,
       };
     default:
       return state;

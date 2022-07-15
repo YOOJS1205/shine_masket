@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
@@ -8,6 +9,7 @@ import Title from '../../components/Title/Title';
 
 export default function Login() {
   const dispatch = useDispatch();
+  const history = useHistory();
   // 고객이 폼에 입력하는 ID, PW 데이터 변수화
   // 고객이 입력한 이메일 유효성, 비밀번호 일치 여부에 대한 불리언 값 변수화
   const [loginId, setLoginId] = useState('');
@@ -47,12 +49,13 @@ export default function Login() {
         }
       );
       if (!res.data.message) {
-        const userId = res.data.user.email;
+        const UserId = res.data.user.email;
         const loginToken = res.data.user.token;
         const refreshToken = res.data.user.refreshToken;
-        dispatch({ type: 'LOGIN', userId, loginToken });
+        dispatch({ type: 'LOGIN', UserId, loginToken });
         localStorage.setItem('accessToken', loginToken);
         localStorage.setItem('refreshToken', refreshToken);
+        history.push('/home-empty');
       }
       if (res.data.message === '이메일 또는 비밀번호가 일치하지 않습니다.') {
         setIsWrong(true);

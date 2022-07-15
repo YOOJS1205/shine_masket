@@ -10,7 +10,7 @@ import RemoveIcon from '../../assets/icon/icon-delete.png';
 export default function Upload() {
   const [isEmpty, setIsEmpty] = useState(true);
   const [uploadText, setUploadText] = useState('');
-  const [fileImage, setFileImage] = useState('');
+  const [fileImage, setFileImage] = useState([]);
   const textRef = useRef(null);
 
   const onChange = (e) => {
@@ -18,7 +18,7 @@ export default function Upload() {
   };
 
   useEffect(() => {
-    if (uploadText || fileImage) {
+    if (uploadText || fileImage.length > 0) {
       setIsEmpty(false);
     } else {
       setIsEmpty(true);
@@ -34,41 +34,50 @@ export default function Upload() {
   }, []);
 
   // 파일 업로드
-  const saveFileImage = (e) => {
-    setFileImage(URL.createObjectURL(e.target.files[0]));
+  const uploadFileImage = (e) => {
+    const imageLists = e.target.files;
+    let imageURLLists = [...fileImage];
+
+    for (let i = 0; i < imageLists.length; i++) {
+      const currentImageURL = URL.createObjectURL(imageLists[i]);
+      imageURLLists.push(currentImageURL);
+    }
+
+    if (imageURLLists.length > 3) {
+      imageURLLists = imageURLLists.slice(0, 3);
+      alert('3개까지만 업로드 가능합니다.');
+    }
+
+    setFileImage(imageURLLists);
+    console.log(...fileImage);
   };
 
   // 파일 삭제
-  const deleteFileImage = () => {
+  const deleteFileImage = (id) => {
+    setFileImage(fileImage.filter((_, index) => index !== id));
     URL.revokeObjectURL(fileImage);
-    setFileImage('');
   };
 
   // 업로드 버튼 클릭 시 동작
   const onClickUpload = async (e) => {
     e.preventDefault();
     try {
-      const token =
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYTRjZDQwNTM2MWFhZWE1NjlhOWNhOSIsImV4cCI6MTY2MjcxNDg3MiwiaWF0IjoxNjU3NTMwODcyfQ.aS9EPJ0HwBOUaFO-kKxI_zmB-9CpWmrv98zG3BnvkYQ';
-
-      const req = {
-        post: {
-          content: uploadText,
-          image: fileImage,
-        },
-      };
-
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-type': 'application/json',
-        },
-      };
-
+      const sendFileName = fileImage.join();
+      const token = localStorage.getItem('accessToken');
       const res = await axios.post(
         'https://mandarin.api.weniv.co.kr/post',
-        req,
-        config
+        {
+          post: {
+            content: uploadText,
+            image: sendFileName,
+          },
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-type': 'application/json',
+          },
+        }
       );
 
       console.log(uploadText);
@@ -109,18 +118,25 @@ export default function Upload() {
           id="imgUpload"
           multiple="multiple"
           accept="image/*"
-          onChange={saveFileImage}
+          onChange={uploadFileImage}
         />
       </TextContainer>
       <ImgContainer>
-        {fileImage && (
-          <ImgItem>
-            <img src={fileImage} alt="첨부 이미지" />
-            <RemoveBtn type="button" onClick={() => deleteFileImage()}>
+        {fileImage.map((image, id) => (
+          <ImgItem
+            key={id}
+            style={{
+              backgroundImage: `url(${image})`,
+              backgroundPosition: 'center',
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+            }}
+          >
+            <RemoveBtn type="button" onClick={() => deleteFileImage(id)}>
               <span className="ir">이미지 삭제하기</span>
             </RemoveBtn>
           </ImgItem>
-        )}
+        ))}
       </ImgContainer>
     </>
   );
@@ -164,16 +180,16 @@ const ImgContainer = styled.ul`
   display: flex;
   min-height: 100px;
   margin: 16px 16px 16px 72px;
+  overflow: scroll;
 `;
 
 const ImgItem = styled.li`
   position: relative;
+  min-width: 304px;
+  min-height: 228px;
+  margin-right: 5px;
   border: 0.5px solid #dbdbdb;
   border-radius: 10px;
-  max-width: 304px;
-  max-height: 228px;
-  overflow: hidden;
-  margin-right: 5px;
   box-sizing: border-box;
 `;
 
@@ -184,6 +200,7 @@ const RemoveBtn = styled.button`
   height: 22px;
   width: 22px;
   background: url(${RemoveIcon}) no-repeat center / contain;
+  filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 1));
 `;
 
 const FileLabel = styled.label`

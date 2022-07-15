@@ -19,6 +19,7 @@ import Follower from './pages/Follower/Follower.jsx';
 import Following from './pages/Following/Following.jsx';
 import AddProduct from './pages/AddProduct/AddProduct.jsx';
 import HomeEmpty from './pages/HomeEmpty/HomeEmpty';
+import Search from './pages/Search/Search';
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
       <Route path="/follower" exact component={Follower} />
       <Route path="/following" exact component={Following} />
       <Route path="/home-empty" exact component={HomeEmpty} />
+      <Route path="/search" exact component={Search} />
     </BrowserRouter>
   );
 }

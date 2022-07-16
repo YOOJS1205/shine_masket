@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import ProfilePic from '../../assets/images/basic-profile-img.png';
@@ -17,14 +18,35 @@ export default function ImageButton({ getImageSrc }) {
   const encodeFileToBase64 = (fileBlob) => {
     const reader = new FileReader();
     reader.readAsDataURL(fileBlob);
+
     return new Promise((resolve) => {
-      reader.onload = (e) => {
-        console.log(fileBlob.name);
-        setFileName(fileBlob.name);
+      reader.onload = async (e) => {
+        let formData = new FormData();
+        formData.append('image', fileBlob);
+        const res = await axios.post(
+          'https://mandarin.api.weniv.co.kr/image/uploadfile',
+          formData
+        );
+        console.log(res);
+        setFileName(`https://mandarin.api.weniv.co.kr/${res.data.filename}`);
         setImgSrc(e.target.result);
         resolve();
       };
     });
+  };
+
+  const onSubmitImage = async (e) => {
+    let files = e.target.result;
+
+    for (let i = 0; i < files.length; i++) {
+      let formData = new FormData();
+      formData.append('image', files[i]);
+      const res = await axios.post(
+        'https://mandarin.api.weniv.co.kr/image/uploadfile',
+        formData
+      );
+      console.log(res);
+    }
   };
 
   // 숨겨진 Input과 이미지 버튼 연결

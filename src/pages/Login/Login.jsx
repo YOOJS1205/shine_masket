@@ -53,6 +53,7 @@ export default function Login() {
         const loginToken = res.data.user.token;
         const refreshToken = res.data.user.refreshToken;
         dispatch({ type: 'LOGIN', UserId, loginToken });
+        localStorage.setItem('image', res.data.user.image);
         localStorage.setItem('accessToken', loginToken);
         localStorage.setItem('refreshToken', refreshToken);
         history.push('/home-empty');

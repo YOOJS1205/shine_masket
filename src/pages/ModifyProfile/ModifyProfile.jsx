@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux/es/exports';
 import styled from 'styled-components';
 import axios from 'axios';
 import ProfileForm from '../../components/ProfileForm/ProfileForm';
@@ -10,12 +9,6 @@ export default function ModifyProfile() {
   const [userName, setUserName] = useState('');
   const [userAccount, setUserAccount] = useState('');
   const [userIntro, setUserIntro] = useState('');
-
-  const { UserImage } = useSelector((state) => ({
-    UserImage: state.UserInfoReducer.UserImage,
-  }));
-
-  console.log(UserImage);
 
   // 자식 컴포넌트에서 전달받은 isEmpty를 useState로 관리
   const getEmptyInfo = (isEmpty) => {

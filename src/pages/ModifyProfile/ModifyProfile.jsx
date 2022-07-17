@@ -25,6 +25,7 @@ export default function ModifyProfile() {
   // 저장 받은 클릭 시 프로필 수정 적용
   const onClickSaveButton = async (e) => {
     e.preventDefault();
+    const imageSrc = localStorage.getItem('image');
     try {
       const accessToken = localStorage.getItem('accessToken');
       const res = await axios.put(
@@ -34,7 +35,7 @@ export default function ModifyProfile() {
             username: userName,
             accountname: userAccount,
             intro: userIntro,
-            image: '',
+            image: imageSrc,
           },
         },
         {

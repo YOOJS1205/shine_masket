@@ -112,19 +112,19 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
       });
 
       console.log(res);
-      const UserName = userName;
-      const UserAccount = userAccount;
-      const UserIntro = userIntro;
-      const UserImage = imgSrc;
-      dispatch({
-        type: 'CLICK',
-        UserName,
-        UserAccount,
-        UserIntro,
-        UserImage,
-      });
 
       if (res.data.message === '회원가입 성공') {
+        const UserName = res.data.user.username;
+        const UserAccount = res.data.user.accountname;
+        const UserIntro = res.data.user.intro;
+        const UserImage = res.data.user.image;
+        dispatch({
+          type: 'CLICK',
+          UserName,
+          UserAccount,
+          UserIntro,
+          UserImage,
+        });
         history.push('/login');
       }
     } catch (error) {

@@ -9,11 +9,7 @@ import MainImg from '../../assets/images/symbol-logo-gray.png';
 export default function Test() {
   return (
     <>
-      <TopMenuBar 
-      homeText="샤인마스켓 피드" 
-      searchBtn="true"
-      display="none"
-      />
+      <TopMenuBar homeText="샤인마스켓 피드" searchBtn="true" display="none" />
       <Main>
         <MainWrap>
           <Img src={MainImg} />

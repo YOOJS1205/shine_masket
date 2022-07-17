@@ -49,10 +49,12 @@ export default function Login() {
         }
       );
       if (!res.data.message) {
+        console.log(res);
         const UserId = res.data.user.email;
         const loginToken = res.data.user.token;
         const refreshToken = res.data.user.refreshToken;
         dispatch({ type: 'LOGIN', UserId, loginToken });
+        localStorage.setItem('image', res.data.user.image);
         localStorage.setItem('accessToken', loginToken);
         localStorage.setItem('refreshToken', refreshToken);
         history.push('/home-empty');

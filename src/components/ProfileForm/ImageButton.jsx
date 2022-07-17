@@ -29,25 +29,29 @@ export default function ImageButton({ getImageSrc }) {
         );
         console.log(res);
         setFileName(`https://mandarin.api.weniv.co.kr/${res.data.filename}`);
+        localStorage.setItem(
+          'image',
+          `https://mandarin.api.weniv.co.kr/${res.data.filename}`
+        );
         setImgSrc(e.target.result);
         resolve();
       };
     });
   };
 
-  const onSubmitImage = async (e) => {
-    let files = e.target.result;
+  // const onSubmitImage = async (e) => {
+  //   let files = e.target.result;
 
-    for (let i = 0; i < files.length; i++) {
-      let formData = new FormData();
-      formData.append('image', files[i]);
-      const res = await axios.post(
-        'https://mandarin.api.weniv.co.kr/image/uploadfile',
-        formData
-      );
-      console.log(res);
-    }
-  };
+  //   for (let i = 0; i < files.length; i++) {
+  //     let formData = new FormData();
+  //     formData.append('image', files[i]);
+  //     const res = await axios.post(
+  //       'https://mandarin.api.weniv.co.kr/image/uploadfile',
+  //       formData
+  //     );
+  //     console.log(res);
+  //   }
+  // };
 
   // 숨겨진 Input과 이미지 버튼 연결
   const onHandleImageButton = (e) => {

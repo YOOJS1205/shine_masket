@@ -3,7 +3,6 @@ import axios from 'axios';
 import styled from 'styled-components';
 import TopMenuBar from '../../components/TopMenuBar/TopMenuBar';
 
-import BasicProfileImg from '../../assets/images/basic-profile-img.png';
 import ImageUploadIcon from '../../assets/icon/icon-image.png';
 import RemoveIcon from '../../assets/icon/icon-delete.png';
 
@@ -12,6 +11,8 @@ export default function Upload() {
   const [uploadText, setUploadText] = useState('');
   const [fileImage, setFileImage] = useState([]);
   const textRef = useRef(null);
+
+  const UserImage = localStorage.getItem('image');
 
   const onChange = (e) => {
     setUploadText(e.target.value);
@@ -25,6 +26,7 @@ export default function Upload() {
     }
   }, [uploadText, fileImage]);
 
+  // textarea 크기 조절
   const handleResizeHeight = useCallback(() => {
     if (textRef === null || textRef.current === null) {
       return;
@@ -34,22 +36,29 @@ export default function Upload() {
   }, []);
 
   // 파일 업로드
-  const uploadFileImage = (e) => {
-    const imageLists = e.target.files;
-    let imageURLLists = [...fileImage];
+  const uploadFileImage = async (e) => {
+    let files = e.target.files;
 
-    for (let i = 0; i < imageLists.length; i++) {
-      const currentImageURL = URL.createObjectURL(imageLists[i]);
-      imageURLLists.push(currentImageURL);
+    for (let i = 0; i < files.length; i++) {
+      let formData = new FormData();
+      formData.append('image', files[i]);
+      const res = await axios.post(
+        'https://mandarin.api.weniv.co.kr/image/uploadfile',
+        formData
+      );
+      fileImage.push(`https://mandarin.api.weniv.co.kr/${res.data.filename}`);
+      console.log(res.data);
     }
 
-    if (imageURLLists.length > 3) {
-      imageURLLists = imageURLLists.slice(0, 3);
-      alert('3개까지만 업로드 가능합니다.');
+    let imageURLlist = [...fileImage];
+
+    if (imageURLlist.length > 3) {
+      imageURLlist.push(files[0]);
+      imageURLlist = imageURLlist.slice(0, 3);
+      alert('첨부 가능 이미지 수는 최대 3장입니다.');
     }
 
-    setFileImage(imageURLLists);
-    console.log(...fileImage);
+    setFileImage(imageURLlist);
   };
 
   // 파일 삭제
@@ -58,7 +67,6 @@ export default function Upload() {
     URL.revokeObjectURL(fileImage);
   };
 
-  // 업로드 버튼 클릭 시 동작
   const onClickUpload = async (e) => {
     e.preventDefault();
     try {
@@ -79,13 +87,12 @@ export default function Upload() {
           },
         }
       );
-
-      console.log(uploadText);
-      console.log(fileImage);
       console.log(res.data);
     } catch (error) {
       console.log(error);
-      console.log('내용 또는 이미지를 입력해 주세요.');
+      if (error.response.data.message === '내용 또는 이미지를 입력해주세요.') {
+        alert('내용 또는 이미지를 입력해 주세요.');
+      }
     }
   };
 
@@ -101,10 +108,7 @@ export default function Upload() {
         <label htmlFor="textArea" className="ir">
           게시글 입력하기
         </label>
-        <ProfileImg
-          src={BasicProfileImg}
-          alt="사용자 프로필 이미지"
-        ></ProfileImg>
+        <ProfileImg src={UserImage} alt="사용자 프로필 이미지"></ProfileImg>
         <TextArea
           id="textArea"
           placeholder="게시글 입력하기..."
@@ -125,12 +129,19 @@ export default function Upload() {
         {fileImage.map((image, id) => (
           <ImgItem
             key={id}
-            style={{
-              backgroundImage: `url(${image})`,
-              backgroundPosition: 'center',
-              backgroundSize: 'cover',
-              backgroundRepeat: 'no-repeat',
-            }}
+            style={
+              fileImage.length === 1
+                ? {
+                    minWidth: '304px',
+                    minHeight: '228px',
+                    backgroundImage: `url(${image})`,
+                  }
+                : {
+                    minWidth: '168px',
+                    minHeight: '126px',
+                    backgroundImage: `url(${image})`,
+                  }
+            }
           >
             <RemoveBtn type="button" onClick={() => deleteFileImage(id)}>
               <span className="ir">이미지 삭제하기</span>
@@ -151,12 +162,14 @@ const TextContainer = styled.section`
 
 const ProfileImg = styled.img`
   width: 42px;
+  height: 42px;
   border: 1px solid #dbdbdb;
   border-radius: 50%;
+  box-sizing: border-box;
 `;
 
 const TextArea = styled.textarea`
-  width: 100%;
+  flex-grow: 1;
   margin-top: 10px;
   border: none;
   resize: none;
@@ -181,16 +194,20 @@ const ImgContainer = styled.ul`
   min-height: 100px;
   margin: 16px 16px 16px 72px;
   overflow: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const ImgItem = styled.li`
   position: relative;
-  min-width: 304px;
-  min-height: 228px;
-  margin-right: 5px;
+  margin-right: 8px;
   border: 0.5px solid #dbdbdb;
   border-radius: 10px;
   box-sizing: border-box;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 `;
 
 const RemoveBtn = styled.button`
@@ -210,6 +227,7 @@ const FileLabel = styled.label`
   border-radius: 50%;
   background-color: var(--color-enabled-dark);
   font-size: 0;
+  z-index: 100;
   cursor: pointer;
   &::before {
     content: '';

@@ -20,7 +20,7 @@ import Following from './pages/Following/Following.jsx';
 import AddProduct from './pages/AddProduct/AddProduct.jsx';
 import HomeEmpty from './pages/HomeEmpty/HomeEmpty';
 import Search from './pages/Search/Search';
-import NotFound from './pages/NotFound/NotFound';
+// import NotFound from './pages/NotFound/NotFound';
 
 function App() {
   return (
@@ -46,7 +46,7 @@ function App() {
       <Route path="/following" exact component={Following} />
       <Route path="/home-empty" exact component={HomeEmpty} />
       <Route path="/search" exact component={Search} />
-      <Route path="*" exact component={NotFound} />
+      {/* <Route path={'*'} exact component={NotFound} /> */}
     </BrowserRouter>
   );
 }

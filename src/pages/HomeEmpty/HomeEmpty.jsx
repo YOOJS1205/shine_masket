@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import TopMenuBar from '../../components/TopMenuBar/TopMenuBar';
 import TabMenu from '../../components/TabMenu/TabMenu';
 import Button from '../../components/Button/Button';
-
 import MainImg from '../../assets/images/symbol-logo-gray.png';
 
 export default function Test() {

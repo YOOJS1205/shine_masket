@@ -20,33 +20,35 @@ import Following from './pages/Following/Following.jsx';
 import AddProduct from './pages/AddProduct/AddProduct.jsx';
 import HomeEmpty from './pages/HomeEmpty/HomeEmpty';
 import Search from './pages/Search/Search';
-// import NotFound from './pages/NotFound/NotFound';
+import NotFound from './pages/NotFound/NotFound';
 
 function App() {
   return (
     <BrowserRouter>
-      <AnimatePresence>
-        <Switch location={location} key={location.pathname}>
-          <Route path="/" exact component={Splash} />
-          <Route path="/welcome" exact component={Welcome} />
-        </Switch>
-      </AnimatePresence>
-      <Route path="/login" exact component={Login} />
-      <Route path="/join" exact component={Join} />
-      <Route path="/join/profile" exact component={ProfileSetting} />
-      <Route path="/post" exact component={Post} />
-      <Route path="/upload" exact component={Upload} />
-      <Route path="/chat-list" exact component={ChatList} />
-      <Route path="/chat-room" exact component={ChatRoom} />
-      <Route path="/my-profile" exact component={MyProfile} />
-      <Route path="/my-profile/add-product" exact component={AddProduct} />
-      <Route path="/your-profile" exact component={YourProfile} />
-      <Route path="/profile/modify" exact component={ModifyProfile} />
-      <Route path="/follower" exact component={Follower} />
-      <Route path="/following" exact component={Following} />
-      <Route path="/home-empty" exact component={HomeEmpty} />
-      <Route path="/search" exact component={Search} />
-      {/* <Route path={'*'} exact component={NotFound} /> */}
+      <Switch>
+        <AnimatePresence>
+          <Switch location={location} key={location.pathname}>
+            <Route path="/" exact component={Splash} />
+            <Route path="/welcome" exact component={Welcome} />
+            <Route path="/login" exact component={Login} />
+            <Route path="/join" exact component={Join} />
+            <Route path="/join/profile" exact component={ProfileSetting} />
+            <Route path="/post" exact component={Post} />
+            <Route path="/upload" exact component={Upload} />
+            <Route path="/chat-list" exact component={ChatList} />
+            <Route path="/chat-room" exact component={ChatRoom} />
+            <Route path="/my-profile" exact component={MyProfile} />
+            <Route path="/my-profile/add-product" exact component={AddProduct} />
+            <Route path="/your-profile" exact component={YourProfile} />
+            <Route path="/profile/modify" exact component={ModifyProfile} />
+            <Route path="/follower" exact component={Follower} />
+            <Route path="/following" exact component={Following} />
+            <Route path="/home-empty" exact component={HomeEmpty} />
+            <Route path="/search" exact component={Search} />
+            <Route component={NotFound} />
+          </Switch>
+        </AnimatePresence>
+      </Switch>
     </BrowserRouter>
   );
 }

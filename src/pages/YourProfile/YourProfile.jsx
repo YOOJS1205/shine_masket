@@ -31,9 +31,9 @@ export default function YourProfile() {
 const YourProfileButton = () => {
   return (
     <>
-      <Button buttonImg={ChatButtonImg} size="34"></Button>
-      <Button buttonText="팔로우" size="medium"></Button>
-      <Button buttonImg={ShareButtonImg} size="34"></Button>
+      <ChatButton active size="34"></ChatButton>
+      <Button active buttonText="팔로우" size="medium"></Button>
+      <ShareButton active size="34"></ShareButton>
     </>
   );
 };
@@ -42,4 +42,16 @@ const ProfileContainer = styled.section`
   margin: 0 auto;
   width: 100%;
   background-color: #f2f2f2;
+`;
+
+const ChatButton = styled(Button)`
+  background-image: url(${ChatButtonImg});
+  background-repeat: no-repeat;
+  background-position: center;
+`;
+
+const ShareButton = styled(Button)`
+  background-image: url(${ShareButtonImg});
+  background-repeat: no-repeat;
+  background-position: center;
 `;

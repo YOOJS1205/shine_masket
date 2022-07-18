@@ -18,40 +18,28 @@ export default function TopMenuBar({
   onClick,
   homeText,
   searchBtn,
-  display
+  display,
 }) {
   const history = useHistory();
 
   return (
     <Container>
-      <PreviousBtn onClick={() => history.goBack()}
-        display={display}>
-        <PrevioudBtnImg
-          src={LeftArrow}
-          alt="이전 페이지로 돌아가는 버튼 이미지"
-        />
+      <PreviousBtn onClick={() => history.goBack()} display={display}>
+        <PrevioudBtnImg src={LeftArrow} alt="이전 페이지로 돌아가는 버튼 이미지" />
       </PreviousBtn>
       <SearchModal>
-        <label htmlFor="search_tit" className="ir">검색창입니다</label>
-        <input id="search_tit" type="text" required placeholder='계정 검색' />
+        <label htmlFor="search_tit" className="ir">
+          검색창입니다
+        </label>
+        <input id="search_tit" type="text" required placeholder="계정 검색" />
       </SearchModal>
       <MenuText>{menuText}</MenuText>
       <HomeText>{homeText}</HomeText>
       {saveButton ? (
-        <Button
-          buttonText="저장"
-          size="medium-small"
-          isEmpty={isEmpty}
-          onClick={onClick}
-        />
+        <Button buttonText="저장" size="medium-small" isEmpty={isEmpty} onClick={onClick} />
       ) : null}
       {uploadButton ? (
-        <Button
-          buttonText="업로드"
-          size="medium-small"
-          isEmpty={isEmpty}
-          onClick={onClick}
-        />
+        <Button buttonText="업로드" size="medium-small" isEmpty={isEmpty} onClick={onClick} />
       ) : null}
       {moreButton ? <MoreButton size="large" /> : null}
       {moreButtonSmall ? <MoreButton size="small" /> : null}
@@ -71,7 +59,8 @@ const Container = styled.section`
 const PreviousBtn = styled.button`
   width: 22px;
   border: none;
-  display: ${(props) => props.display === 'none' ? 'none' : props.display === 'block' ? 'block' : null};
+  display: ${(props) =>
+    props.display === 'none' ? 'none' : props.display === 'block' ? 'block' : null};
 `;
 
 const PrevioudBtnImg = styled.img`
@@ -100,17 +89,17 @@ const SearchButton = styled.img`
 `;
 
 const SearchModal = styled.fieldset`
-  margin-left:25px;
-  width:100%;
-  >input {
-    background-color:#F2F2F2;
-    border:none;
-    border-radius:32px;
-    width:100%;
-    padding:8px 16px;
+  margin-left: 25px;
+  width: 100%;
+  > input {
+    background-color: #f2f2f2;
+    border: none;
+    border-radius: 32px;
+    width: 100%;
+    padding: 8px 16px;
     box-sizing: border-box;
-    font:14px/14px "Spoqa Han Sans Neo"; 
-    color:#C4C4C4;
-    letter-spacing: 0em;   
+    font: 14px/14px 'Spoqa Han Sans Neo';
+    color: #c4c4c4;
+    letter-spacing: 0em;
   }
-`
+`;

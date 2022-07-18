@@ -7,8 +7,8 @@ import Button from '../../components/Button/Button';
 export default function Search() {
   return (
     <>
-      <TopMenuBar/>
-      <TabMenu/>
+      <TopMenuBar />
+      <TabMenu />
     </>
   );
 }

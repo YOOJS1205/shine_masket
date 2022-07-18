@@ -4,6 +4,7 @@ import Profile from '../../components/Profile/Profile';
 import TopMenuBar from '../../components/TopMenuBar/TopMenuBar';
 import TabMenu from '../../components/TabMenu/TabMenu';
 import Button from '../../components/Button/Button';
+import { Link } from 'react-router-dom';
 
 export default function MyProfile() {
   return (
@@ -28,8 +29,8 @@ export default function MyProfile() {
 const MyProfileButton = () => {
   return (
     <>
-      <Button buttonText="프로필 수정" size="medium"></Button>
-      <Button buttonText="상품 등록" size="100"></Button>
+      <Button active buttonText="프로필 수정" size="medium" />
+      <Button active buttonText="상품 등록" size="100"></Button>
     </>
   );
 };

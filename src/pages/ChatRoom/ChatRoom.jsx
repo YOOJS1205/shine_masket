@@ -13,22 +13,15 @@ export default function ChatRoom() {
       <ChatSection>
         <h2 className="ir">채팅창</h2>
         <FriendChatBox>
-          <ProfileImg
-            src={BasicProfileImg}
-            alt="상대 프로필 이미지"
-          ></ProfileImg>
+          <ProfileImg src={BasicProfileImg} alt="상대 프로필 이미지"></ProfileImg>
           <ChatTxt>
-            옷을 인생을 그러므로 없으면 것은 이상은 것은 우리의 위하여, 뿐이다.
-            이상의 청춘의 뼈 따뜻한 그들의 그와 약동하다. 대고, 못할 넣는
-            풍부하게 뛰노는 인생의 힘있다.
+            옷을 인생을 그러므로 없으면 것은 이상은 것은 우리의 위하여, 뿐이다. 이상의 청춘의 뼈
+            따뜻한 그들의 그와 약동하다. 대고, 못할 넣는 풍부하게 뛰노는 인생의 힘있다.
           </ChatTxt>
           <TimeTxt>12:39</TimeTxt>
         </FriendChatBox>
         <FriendChatBox>
-          <ProfileImg
-            src={BasicProfileImg}
-            alt="상대 프로필 이미지"
-          ></ProfileImg>
+          <ProfileImg src={BasicProfileImg} alt="상대 프로필 이미지"></ProfileImg>
           <ChatTxt>샤인머스캣 사고싶어요요요요요요요</ChatTxt>
           <TimeTxt>12:41</TimeTxt>
         </FriendChatBox>
@@ -41,11 +34,7 @@ export default function ChatRoom() {
           <TimeTxt>12:51</TimeTxt>
         </MyChatBox>
       </ChatSection>
-      <PostTextBar
-        name="chat"
-        placeholder="메시지 입력하기"
-        buttonText="전송"
-      />
+      <PostTextBar name="chat" placeholder="메시지 입력하기" buttonText="전송" />
     </>
   );
 }

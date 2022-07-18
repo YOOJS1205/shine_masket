@@ -53,16 +53,8 @@ export default function ModifyProfile() {
   return (
     <Conatiner>
       <h1 className="ir">프로필 수정</h1>
-      <TopMenuBar
-        saveButton={true}
-        isEmpty={isEmpty}
-        onClick={onClickSaveButton}
-      />
-      <ProfileForm
-        isButton={false}
-        getEmptyInfo={getEmptyInfo}
-        getUserInfo={getUserInfo}
-      />
+      <TopMenuBar saveButton={true} isEmpty={isEmpty} onClick={onClickSaveButton} />
+      <ProfileForm isButton={false} getEmptyInfo={getEmptyInfo} getUserInfo={getUserInfo} />
     </Conatiner>
   );
 }

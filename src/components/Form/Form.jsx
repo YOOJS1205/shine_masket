@@ -24,9 +24,7 @@ export default function Form({
   const [isEmpty, setIsEmpty] = useState(true);
 
   // URL 경로에 따라서 부모의 PROPS 함수를 다르게 받음
-  location.pathname === '/login'
-    ? getUserInfo(id, password)
-    : getJoinInfo(id, password);
+  location.pathname === '/login' ? getUserInfo(id, password) : getJoinInfo(id, password);
 
   // 고객이 폼에 입력할때마다 모두 값을 입력했는지에 대한 불리언 값 업데이트
   useEffect(() => {
@@ -49,16 +47,9 @@ export default function Form({
   return (
     <Container>
       <Label htmlFor="email">이메일</Label>
-      <Input
-        type="email"
-        id="email"
-        onChange={onHandleUserId}
-        onBlur={onBlur}
-      />
+      <Input type="email" id="email" onChange={onHandleUserId} onBlur={onBlur} />
       {location.pathname === '/login' ? (
-        <CheckEmail isEmail={isEmail}>
-          * 이메일 형식이 올바르지 않습니다.
-        </CheckEmail>
+        <CheckEmail isEmail={isEmail}>* 이메일 형식이 올바르지 않습니다.</CheckEmail>
       ) : (
         <CheckEmailAvailable emailAvailable={emailAvailable} isUser={isUser}>
           {emailAvailable ? null : '* 이메일 형식이 올바르지 않습니다.'}
@@ -66,12 +57,7 @@ export default function Form({
         </CheckEmailAvailable>
       )}
       <Label htmlFor="password">비밀번호</Label>
-      <InputBottom
-        type="password"
-        id="password"
-        onChange={onHandleUserPassword}
-        onBlur={onBlur}
-      />
+      <InputBottom type="password" id="password" onChange={onHandleUserPassword} onBlur={onBlur} />
       {location.pathname === '/login' ? (
         <WarningText isWrong={isWrong} isEmail={isEmail}>
           * 이메일 또는 비밀번호가 일치하지 않습니다.
@@ -81,12 +67,7 @@ export default function Form({
           * 비밀번호는 6자리 이상이여야 합니다.
         </CheckPasswordAvailable>
       )}
-      <Button
-        buttonText={buttonText}
-        isEmpty={isEmpty}
-        onClick={onClick}
-        size="large"
-      ></Button>
+      <Button buttonText={buttonText} isEmpty={isEmpty} onClick={onClick} size="large"></Button>
     </Container>
   );
 }

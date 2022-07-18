@@ -17,10 +17,7 @@ export default function Post() {
       <Container>
         <h1 className="ir">게시글 댓글 페이지</h1>
         <Profile>
-          <ProfileImg
-            src={BasicProfileImg}
-            alt="사용자 프로필 이미지"
-          ></ProfileImg>
+          <ProfileImg src={BasicProfileImg} alt="사용자 프로필 이미지"></ProfileImg>
           <TextContainer>
             <UserName>애월읍 위니브 감귤농장</UserName>
             <UserId>@ weniv_Mandarin</UserId>
@@ -29,9 +26,8 @@ export default function Post() {
         </Profile>
         <PostContainer>
           <PostText>
-            옷을 인생을 그러므로 없으면 것은 이상은 것은 우리의 위하여, 뿐이다.
-            이상의 청춘의 뼈 따뜻한 그들의 그와 약동하다. 대고, 못할 넣는
-            풍부하게 뛰노는 인생의 힘있다.
+            옷을 인생을 그러므로 없으면 것은 이상은 것은 우리의 위하여, 뿐이다. 이상의 청춘의 뼈
+            따뜻한 그들의 그와 약동하다. 대고, 못할 넣는 풍부하게 뛰노는 인생의 힘있다.
           </PostText>
           <Img src={PostImg} alt="본문 이미지" />
         </PostContainer>
@@ -46,11 +42,7 @@ export default function Post() {
         <Date>2020년 10월 21일</Date>
       </Container>
       <Comment />
-      <PostTextBar
-        name="post"
-        placeholder="댓글 입력하기..."
-        buttonText="게시"
-      />
+      <PostTextBar name="post" placeholder="댓글 입력하기..." buttonText="게시" />
     </>
   );
 }

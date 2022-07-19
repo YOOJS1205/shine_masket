@@ -28,7 +28,7 @@ const ButtonComponent = styled.button`
         css`
           color: #767676;
           background-color: var(--color-active);
-          border: 1px solid #dbdbdb;
+          outline: 1px solid #dbdbdb;
         `
       : css`
           background-color: var(--color-enabled-dark);

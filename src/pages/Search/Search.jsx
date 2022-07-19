@@ -7,7 +7,7 @@ import Button from '../../components/Button/Button';
 export default function Search() {
   return (
     <>
-      <TopMenuBar/>
+      <TopMenuBar searchDisplay={true} />
       <TabMenu/>
     </>
   );

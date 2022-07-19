@@ -18,20 +18,21 @@ export default function TopMenuBar({
   onClick,
   homeText,
   searchBtn,
-  display
+  preDisplay,
+  searchDisplay
 }) {
   const history = useHistory();
 
   return (
     <Container>
       <PreviousBtn onClick={() => history.goBack()}
-        display={display}>
+        display={preDisplay}>
         <PrevioudBtnImg
           src={LeftArrow}
           alt="이전 페이지로 돌아가는 버튼 이미지"
         />
       </PreviousBtn>
-      <SearchModal>
+      <SearchModal display={searchDisplay}>
         <label htmlFor="search_tit" className="ir">검색창입니다</label>
         <input id="search_tit" type="text" required placeholder='계정 검색' />
       </SearchModal>
@@ -102,6 +103,7 @@ const SearchButton = styled.img`
 const SearchModal = styled.fieldset`
   margin-left:25px;
   width:100%;
+  display: ${(props) => props.display ? 'block' : 'none'};
   >input {
     background-color:#F2F2F2;
     border:none;

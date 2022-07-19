@@ -11,25 +11,17 @@ import HeartIcon from '../../assets/icon/icon-heart.png';
 import CommentIcon from '../../assets/icon/icon-message-circle.png';
 
 export default function Post() {
-  const {
-    userName,
-    userAccount,
-    content,
-    postId,
-    date,
-    postImages,
-    heartCount,
-    commentCount,
-  } = useSelector((state) => ({
-    userName: state.PostInfoReducer.userName,
-    userAccount: state.PostInfoReducer.userAccount,
-    content: state.PostInfoReducer.content,
-    postId: state.PostInfoReducer.postId,
-    date: state.PostInfoReducer.date,
-    postImages: state.PostInfoReducer.postImages,
-    heartCount: state.PostInfoReducer.heartCount,
-    commentCount: state.PostInfoReducer.commentCount,
-  }));
+  const { userName, userAccount, content, postId, date, postImages, heartCount, commentCount } =
+    useSelector((state) => ({
+      userName: state.PostInfoReducer.userName,
+      userAccount: state.PostInfoReducer.userAccount,
+      content: state.PostInfoReducer.content,
+      postId: state.PostInfoReducer.postId,
+      date: state.PostInfoReducer.date,
+      postImages: state.PostInfoReducer.postImages,
+      heartCount: state.PostInfoReducer.heartCount,
+      commentCount: state.PostInfoReducer.commentCount,
+    }));
 
   const UserImage = localStorage.getItem('image');
   const PostImage = postImages.split(',');
@@ -41,15 +33,12 @@ export default function Post() {
   const getPost = async () => {
     try {
       const token = localStorage.getItem('accessToken');
-      const res = await axios.get(
-        `https://mandarin.api.weniv.co.kr/post/${postId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-type': 'application/json',
-          },
-        }
-      );
+      const res = await axios.get(`https://mandarin.api.weniv.co.kr/post/${postId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-type': 'application/json',
+        },
+      });
       console.log(res.data);
     } catch (error) {
       console.log(error);
@@ -94,8 +83,7 @@ export default function Post() {
           </CommentBtn>
         </ButtonContainer>
         <Date>
-          {date.split('-')[0]}년 {date.split('-')[1]}월
-          {date.split('-')[2].split('T')[0]}일
+          {date.split('-')[0]}년 {date.split('-')[1]}월{date.split('-')[2].split('T')[0]}일
         </Date>
       </Container>
       <Comment />

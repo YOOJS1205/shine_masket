@@ -30,11 +30,11 @@ export default function YourProfile() {
 
 const YourProfileButton = () => {
   const [isActive, setIsActive] = useState(false);
-  const [buttonText, setButtonText] = useState('팔로우');
+  // const [buttonText, setButtonText] = useState('팔로우');
 
   function followBtnClick() {
-    setIsActive(true);
-    setButtonText('언팔로우');
+    setIsActive(!isActive);
+    // setButtonText('언팔로우');
   }
 
   return (
@@ -43,7 +43,7 @@ const YourProfileButton = () => {
       <Button
         onClick={followBtnClick}
         isActive={isActive}
-        buttonText={buttonText}
+        buttonText={!isActive ? '팔로우' : '언팔로우'}
         size="medium"
       ></Button>
       <ShareButton isActive size="34"></ShareButton>

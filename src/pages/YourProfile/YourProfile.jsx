@@ -33,7 +33,6 @@ const YourProfileButton = () => {
   const [buttonText, setButtonText] = useState('팔로우');
 
   function followBtnClick() {
-    console.log('dddd');
     setIsActive(true);
     setButtonText('언팔로우');
   }

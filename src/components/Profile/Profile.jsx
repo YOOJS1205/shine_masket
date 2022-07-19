@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 // 이미지
@@ -12,15 +13,19 @@ export default function Profile(props) {
       <UserInfo>
         <h1 className="ir">사용자 정보</h1>
         <FollowArea>
-          <FollowersCount>
-            {props.followersCount}
-            <FollowersTxt>followers</FollowersTxt>
-          </FollowersCount>
+          <Link to="/follower">
+            <FollowersCount>
+              {props.followersCount}
+              <FollowersTxt>followers</FollowersTxt>
+            </FollowersCount>
+          </Link>
           <MyProfileImg src={profileImg}></MyProfileImg>
-          <FollowersCount color="#767676">
-            {props.followingsCount}
-            <FollowersTxt>followings</FollowersTxt>
-          </FollowersCount>
+          <Link to="/following">
+            <FollowersCount color="#767676">
+              {props.followingsCount}
+              <FollowersTxt>followings</FollowersTxt>
+            </FollowersCount>
+          </Link>
         </FollowArea>
 
         <UserArea>

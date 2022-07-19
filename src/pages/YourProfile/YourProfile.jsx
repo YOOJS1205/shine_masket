@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Profile from '../../components/Profile/Profile';
 import TopMenuBar from '../../components/TopMenuBar/TopMenuBar';
@@ -29,11 +29,24 @@ export default function YourProfile() {
 }
 
 const YourProfileButton = () => {
+  const [isActive, setIsActive] = useState(false);
+  const [buttonText, setButtonText] = useState('팔로우');
+
+  function followBtnClick() {
+    setIsActive(true);
+    setButtonText('언팔로우');
+  }
+
   return (
     <>
-      <Button buttonImg={ChatButtonImg} size="34"></Button>
-      <Button buttonText="팔로우" size="medium"></Button>
-      <Button buttonImg={ShareButtonImg} size="34"></Button>
+      <ChatButton isActive size="34"></ChatButton>
+      <Button
+        onClick={followBtnClick}
+        isActive={isActive}
+        buttonText={buttonText}
+        size="medium"
+      ></Button>
+      <ShareButton isActive size="34"></ShareButton>
     </>
   );
 };
@@ -42,4 +55,16 @@ const ProfileContainer = styled.section`
   margin: 0 auto;
   width: 100%;
   background-color: #f2f2f2;
+`;
+
+const ChatButton = styled(Button)`
+  background-image: url(${ChatButtonImg});
+  background-repeat: no-repeat;
+  background-position: center;
+`;
+
+const ShareButton = styled(Button)`
+  background-image: url(${ShareButtonImg});
+  background-repeat: no-repeat;
+  background-position: center;
 `;

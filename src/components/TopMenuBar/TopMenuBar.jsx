@@ -39,20 +39,10 @@ export default function TopMenuBar({
       <MenuText>{menuText}</MenuText>
       <HomeText>{homeText}</HomeText>
       {saveButton ? (
-        <Button
-          buttonText="저장"
-          size="medium-small"
-          isEmpty={isEmpty}
-          onClick={onClick}
-        />
+        <Button buttonText="저장" size="medium-small" isEmpty={isEmpty} onClick={onClick} />
       ) : null}
       {uploadButton ? (
-        <Button
-          buttonText="업로드"
-          size="medium-small"
-          isEmpty={isEmpty}
-          onClick={onClick}
-        />
+        <Button buttonText="업로드" size="medium-small" isEmpty={isEmpty} onClick={onClick} />
       ) : null}
       {moreButton ? <MoreButton size="large" /> : null}
       {moreButtonSmall ? <MoreButton size="small" /> : null}
@@ -72,7 +62,8 @@ const Container = styled.section`
 const PreviousBtn = styled.button`
   width: 22px;
   border: none;
-  display: ${(props) => props.display === 'none' ? 'none' : props.display === 'block' ? 'block' : null};
+  display: ${(props) =>
+    props.display === 'none' ? 'none' : props.display === 'block' ? 'block' : null};
 `;
 
 const PrevioudBtnImg = styled.img`
@@ -111,8 +102,8 @@ const SearchModal = styled.fieldset`
     width:100%;
     padding:8px 16px;
     box-sizing: border-box;
-    font:14px/14px "Spoqa Han Sans Neo"; 
-    color:#C4C4C4;
-    letter-spacing: 0em;   
+    font: 14px/14px 'Spoqa Han Sans Neo';
+    color: #c4c4c4;
+    letter-spacing: 0em;
   }
-`
+`;

@@ -99,11 +99,7 @@ export default function Post() {
         </Date>
       </Container>
       <Comment />
-      <PostTextBar
-        name="post"
-        placeholder="댓글 입력하기..."
-        buttonText="게시"
-      />
+      <PostTextBar name="post" placeholder="댓글 입력하기..." buttonText="게시" />
     </>
   );
 }

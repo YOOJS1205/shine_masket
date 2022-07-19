@@ -16,14 +16,12 @@ export default function Button({ onClick, size }) {
 }
 
 const ButtonComponent = styled.button`
-  width: ${(props) =>
-    props.size === 'large' ? '22px' : props.size === 'small' ? '18px' : null};
+  width: ${(props) => (props.size === 'large' ? '22px' : props.size === 'small' ? '18px' : null)};
   margin-top: 5px;
   border: none;
   margin-left: auto;
 `;
 
 const Img = styled.img`
-  width: ${(props) =>
-    props.size === 'large' ? '22px' : props.size === 'small' ? '18px' : null};
+  width: ${(props) => (props.size === 'large' ? '22px' : props.size === 'small' ? '18px' : null)};
 `;

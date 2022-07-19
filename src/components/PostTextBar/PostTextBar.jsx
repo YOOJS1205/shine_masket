@@ -29,12 +29,7 @@ export default function PostComment({ name, placeholder, buttonText }) {
       <label htmlFor="comment-text" className="ir">
         메시지 입력창
       </label>
-      <Input
-        type="text"
-        id="comment-text"
-        placeholder={placeholder}
-        onChange={onChange}
-      />
+      <Input type="text" id="comment-text" placeholder={placeholder} onChange={onChange} />
       <SendBtn type="button" isEmpty={isEmpty}>
         {buttonText}
       </SendBtn>

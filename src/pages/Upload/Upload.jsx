@@ -44,10 +44,7 @@ export default function Upload() {
     for (let i = 0; i < files.length; i++) {
       let formData = new FormData();
       formData.append('image', files[i]);
-      const res = await axios.post(
-        'https://mandarin.api.weniv.co.kr/image/uploadfile',
-        formData
-      );
+      const res = await axios.post('https://mandarin.api.weniv.co.kr/image/uploadfile', formData);
       fileImage.push(`https://mandarin.api.weniv.co.kr/${res.data.filename}`);
       console.log(res.data);
     }
@@ -123,11 +120,7 @@ export default function Upload() {
 
   return (
     <>
-      <TopMenuBar
-        uploadButton="true"
-        isEmpty={isEmpty}
-        onClick={onClickUpload}
-      />
+      <TopMenuBar uploadButton="true" isEmpty={isEmpty} onClick={onClickUpload} />
       <TextContainer>
         <h1 className="ir">게시글 입력 영역</h1>
         <label htmlFor="textArea" className="ir">

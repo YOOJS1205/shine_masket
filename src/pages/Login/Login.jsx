@@ -39,15 +39,12 @@ export default function Login() {
       setIsEmail(false);
     }
     try {
-      const res = await axios.post(
-        'https://mandarin.api.weniv.co.kr/user/login/',
-        {
-          user: {
-            email: loginId,
-            password: loginPassword,
-          },
-        }
-      );
+      const res = await axios.post('https://mandarin.api.weniv.co.kr/user/login/', {
+        user: {
+          email: loginId,
+          password: loginPassword,
+        },
+      });
       if (!res.data.message) {
         console.log(res);
         const UserId = res.data.user.email;

@@ -58,10 +58,7 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
 
   // 사용자 이름 2~10자 이내 검사
   useEffect(() => {
-    if (
-      (userName.length > 10 || userName.length < 2) &&
-      userName.length !== 0
-    ) {
+    if ((userName.length > 10 || userName.length < 2) && userName.length !== 0) {
       setNameLength(false);
     } else {
       setNameLength(true);
@@ -161,11 +158,7 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
         placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다."
         isLast={false}
       />
-      {isId ? null : (
-        <WarningText>
-          * 영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.
-        </WarningText>
-      )}
+      {isId ? null : <WarningText>* 영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.</WarningText>}
       {isExist ? <WarningText>* 이미 사용중인 계정입니다.</WarningText> : null}
       <InputTitle TitleText="소개" />
       <UserInfoInput

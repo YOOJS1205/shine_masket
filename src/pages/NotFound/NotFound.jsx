@@ -12,11 +12,7 @@ export default function NotFound() {
       <Container>
         <Logo src={Icon404} alt="404 로고" />
         <Text>페이지를 찾을 수 없습니다. :(</Text>
-        <Button
-          size="medium"
-          buttonText="이전 페이지"
-          onClick={() => history.goBack()}
-        />
+        <Button size="medium" buttonText="이전 페이지" onClick={() => history.goBack()} />
       </Container>
     </BackGround>
   );

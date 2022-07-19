@@ -54,14 +54,11 @@ export default function Join() {
   const onClickJoin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        'https://mandarin.api.weniv.co.kr/user/emailvalid',
-        {
-          user: {
-            email: joinId,
-          },
-        }
-      );
+      const res = await axios.post('https://mandarin.api.weniv.co.kr/user/emailvalid', {
+        user: {
+          email: joinId,
+        },
+      });
       console.log(res.data.message);
 
       if (res.data.message === '이미 가입된 이메일 주소 입니다.') {

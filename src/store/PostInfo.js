@@ -20,8 +20,14 @@ const PostInfoReducer = (state = initialState, action) => {
         userImage: action.userImage,
         content: action.content,
         postId: action.postId,
-        date: action.date,
-        postImages: action.postImages,
+        date:
+          action.date.split('-')[0] +
+          '년 ' +
+          action.date.split('-')[1] +
+          '월 ' +
+          action.date.split('-')[2].split('T')[0] +
+          '일',
+        postImages: action.postImages.split(','),
         heartCount: action.heartCount,
         commentCount: action.commentCount,
       };

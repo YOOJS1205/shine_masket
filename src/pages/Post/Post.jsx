@@ -6,29 +6,30 @@ import PostTextBar from '../../components/PostTextBar/PostTextBar';
 import Comment from '../../components/Comment/Comment';
 import TopMenuBar from '../../components/TopMenuBar/TopMenuBar';
 import MoreButton from '../../components/Button/MoreButton';
-
 import HeartIcon from '../../assets/icon/icon-heart.png';
 import CommentIcon from '../../assets/icon/icon-message-circle.png';
 
 export default function Post() {
-  const { userName, userAccount, content, postId, date, postImages, heartCount, commentCount } =
-    useSelector((state) => ({
-      userName: state.PostInfoReducer.userName,
-      userAccount: state.PostInfoReducer.userAccount,
-      content: state.PostInfoReducer.content,
-      postId: state.PostInfoReducer.postId,
-      date: state.PostInfoReducer.date,
-      postImages: state.PostInfoReducer.postImages,
-      heartCount: state.PostInfoReducer.heartCount,
-      commentCount: state.PostInfoReducer.commentCount,
-    }));
-
-  const UserImage = localStorage.getItem('image');
-  const PostImage = postImages.split(',');
+  const {
+    userName,
+    userAccount,
+    userImage,
+    content,
+    postId,
+    date,
+    postImages,
+    heartCount,
+    commentCount,
+  } = useSelector((state) => state.PostInfoReducer);
 
   useEffect(() => {
     getPost();
   }, [postId]);
+
+  const imgErrorHandler = (e) => {
+    const target = e.target.parentNode.parentNode;
+    target.style.display = 'none';
+  };
 
   const getPost = async () => {
     try {
@@ -54,7 +55,7 @@ export default function Post() {
       <Container>
         <h1 className="ir">게시글 댓글 페이지</h1>
         <Profile>
-          <ProfileImg src={UserImage} alt="사용자 프로필 이미지"></ProfileImg>
+          <ProfileImg src={userImage} alt="사용자 프로필 이미지"></ProfileImg>
           <TextContainer>
             <UserName>{userName}</UserName>
             <UserId>@ {userAccount}</UserId>
@@ -64,14 +65,28 @@ export default function Post() {
         <PostContainer>
           <PostText>{content}</PostText>
           <ImageContainer>
-            {PostImage &&
-              PostImage.map((image) => {
-                return (
-                  <ImageItem key={image}>
-                    <Img src={image} alt="본문 이미지" />
-                  </ImageItem>
-                );
-              })}
+            {postImages.map((image) => {
+              return (
+                <ul key={image}>
+                  <Img
+                    style={
+                      postImages.length > 1
+                        ? {
+                            minWidth: '168px',
+                            minHeight: '126px',
+                            backgroundImage: `url(${image})`,
+                          }
+                        : {
+                            minWidth: '304px',
+                            minHeight: '228px',
+                            backgroundImage: `url(${image})`,
+                          }
+                    }
+                    onError={imgErrorHandler}
+                  />
+                </ul>
+              );
+            })}
           </ImageContainer>
         </PostContainer>
         <ButtonContainer>
@@ -82,9 +97,7 @@ export default function Post() {
             <CommentCount>{commentCount}</CommentCount>
           </CommentBtn>
         </ButtonContainer>
-        <Date>
-          {date.split('-')[0]}년 {date.split('-')[1]}월{date.split('-')[2].split('T')[0]}일
-        </Date>
+        <Date>{date}</Date>
       </Container>
       <Comment />
       <PostTextBar name="post" placeholder="댓글 입력하기..." buttonText="게시" />
@@ -148,28 +161,25 @@ const PostText = styled.p`
   line-height: 18px;
 `;
 
-const Img = styled.img`
-  display: block;
-  width: 304px;
-  min-height: 228px;
-  border: 0.5px solid #dbdbdb;
-  border-radius: 10px;
-  box-sizing: border-box;
-`;
-
-const ImageContainer = styled.ul`
+const ImageContainer = styled.div`
+  position: relative;
   display: flex;
-  width: 304px;
-  overflow-x: scroll;
+  gap: 8px;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  @media (max-width: 500px) {
+    overflow: scroll;
+  }
 `;
 
-const ImageItem = styled.li`
-  min-width: 304px;
-  width: 100%;
-  max-height: 228px;
+const Img = styled.li`
   border: 0.5px solid #dbdbdb;
   border-radius: 10px;
-  overflow: hidden;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
 `;
 
 const ButtonContainer = styled.div`

@@ -14,6 +14,7 @@ const UserInfoReducer = (state = initialState, action) => {
       return {
         ...state,
         UserId: action.UserId,
+        UserImage: action.UserImage,
         loginToken: action.loginToken,
       };
     case 'JOIN':

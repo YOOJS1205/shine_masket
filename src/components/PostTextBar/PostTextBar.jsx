@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import BasicProfileImg from '../../assets/images/basic-profile-img.png';
 import PhotoIcon from '../../assets/images/img-button.png';
 
 export default function PostComment({ name, placeholder, buttonText }) {
   const [chatText, setChatText] = useState('');
   const [isEmpty, setIsEmpty] = useState(true);
+
+  const UserImage = localStorage.getItem('image');
 
   const onChange = (e) => {
     setChatText(e.target.value);
@@ -21,7 +22,7 @@ export default function PostComment({ name, placeholder, buttonText }) {
   return (
     <UploadComment>
       {name === 'post' ? (
-        <ProfileImg src={BasicProfileImg} />
+        <ProfileImg src={UserImage} alt="사용자 프로필 이미지" />
       ) : name === 'chat' ? (
         <PhotoBtn type="button">이미지 첨부</PhotoBtn>
       ) : null}

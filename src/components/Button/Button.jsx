@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-export default function Button({ buttonText, isEmpty, onClick, size, className, active }) {
+export default function Button({ buttonText, isEmpty, onClick, size, className, isActive }) {
   return (
     <ButtonComponent
       isEmpty={isEmpty}
@@ -9,7 +9,7 @@ export default function Button({ buttonText, isEmpty, onClick, size, className, 
       disabled={isEmpty ? 'disabled' : null}
       size={size}
       className={className}
-      active={active}
+      isActive={isActive}
     >
       {buttonText}
     </ButtonComponent>
@@ -23,12 +23,16 @@ const ButtonComponent = styled.button`
   border: none;
 
   ${(props) =>
-    props.active &&
-    css`
-      color: #767676;
-      background-color: var(--color-active);
-      border: 1px solid #dbdbdb;
-    `}
+    props.isActive
+      ? // props.isActive &&
+        css`
+          color: #767676;
+          background-color: var(--color-active);
+          border: 1px solid #dbdbdb;
+        `
+      : css`
+          background-color: var(--color-enabled-dark);
+        `}
 
   border-radius: 44px;
   width: 100%;

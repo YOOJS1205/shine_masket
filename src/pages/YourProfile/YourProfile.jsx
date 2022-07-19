@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Profile from '../../components/Profile/Profile';
 import TopMenuBar from '../../components/TopMenuBar/TopMenuBar';
@@ -29,11 +29,25 @@ export default function YourProfile() {
 }
 
 const YourProfileButton = () => {
+  const [isActive, setIsActive] = useState(false);
+  const [buttonText, setButtonText] = useState('팔로우');
+
+  function followBtnClick() {
+    console.log('dddd');
+    setIsActive(true);
+    setButtonText('언팔로우');
+  }
+
   return (
     <>
-      <ChatButton active size="34"></ChatButton>
-      <Button active buttonText="팔로우" size="medium"></Button>
-      <ShareButton active size="34"></ShareButton>
+      <ChatButton isActive size="34"></ChatButton>
+      <Button
+        onClick={followBtnClick}
+        isActive={isActive}
+        buttonText={buttonText}
+        size="medium"
+      ></Button>
+      <ShareButton isActive size="34"></ShareButton>
     </>
   );
 };

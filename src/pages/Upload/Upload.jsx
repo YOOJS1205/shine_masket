@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import styled from 'styled-components';
 import TopMenuBar from '../../components/TopMenuBar/TopMenuBar';
@@ -7,6 +8,7 @@ import ImageUploadIcon from '../../assets/icon/icon-image.png';
 import RemoveIcon from '../../assets/icon/icon-delete.png';
 
 export default function Upload() {
+  const dispatch = useDispatch();
   const [isEmpty, setIsEmpty] = useState(true);
   const [uploadText, setUploadText] = useState('');
   const [fileImage, setFileImage] = useState([]);
@@ -88,6 +90,29 @@ export default function Upload() {
         }
       );
       console.log(res.data);
+
+      const userName = res.data.post.author.username;
+      const userAccount = res.data.post.author.accountname;
+      const userImage = res.data.post.image;
+      const content = res.data.post.content;
+      const date = res.data.post.createdAt;
+      const postId = res.data.post.id;
+      const postImages = res.data.post.image;
+      const heartCount = res.data.post.heartCount;
+      const commentCount = res.data.post.commentCount;
+
+      dispatch({
+        type: 'UPLOAD',
+        userName,
+        userAccount,
+        userImage,
+        content,
+        date,
+        postId,
+        postImages,
+        heartCount,
+        commentCount,
+      });
     } catch (error) {
       console.log(error);
       if (error.response.data.message === '내용 또는 이미지를 입력해주세요.') {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import PhotoIcon from '../../assets/images/img-button.png';
 
@@ -6,8 +7,7 @@ export default function PostComment({ name, placeholder, buttonText }) {
   const [chatText, setChatText] = useState('');
   const [isEmpty, setIsEmpty] = useState(true);
 
-  const UserImage = localStorage.getItem('image');
-
+  const { UserImage } = useSelector((state) => state.UserInfoReducer);
   const onChange = (e) => {
     setChatText(e.target.value);
   };

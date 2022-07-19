@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import styled from 'styled-components';
 import TopMenuBar from '../../components/TopMenuBar/TopMenuBar';
-
 import ImageUploadIcon from '../../assets/icon/icon-image.png';
 import RemoveIcon from '../../assets/icon/icon-delete.png';
 
@@ -14,7 +13,7 @@ export default function Upload() {
   const [fileImage, setFileImage] = useState([]);
   const textRef = useRef(null);
 
-  const UserImage = localStorage.getItem('image');
+  const { UserImage } = useSelector((state) => state.UserInfoReducer);
 
   const onChange = (e) => {
     setUploadText(e.target.value);
@@ -90,7 +89,7 @@ export default function Upload() {
 
       const userName = res.data.post.author.username;
       const userAccount = res.data.post.author.accountname;
-      const userImage = res.data.post.image;
+      const userImage = res.data.post.author.image;
       const content = res.data.post.content;
       const date = res.data.post.createdAt;
       const postId = res.data.post.id;

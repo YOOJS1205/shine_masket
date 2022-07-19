@@ -29,8 +29,12 @@ export default function MyProfile() {
 const MyProfileButton = () => {
   return (
     <>
-      <Button isActive buttonText="프로필 수정" size="medium" />
-      <Button isActive buttonText="상품 등록" size="100"></Button>
+      <Link to="/profile/modify">
+        <Button isActive buttonText="프로필 수정" size="medium" />
+      </Link>
+      <Link to="/my-profile/add-product">
+        <Button isActive buttonText="상품 등록" size="100" />
+      </Link>
     </>
   );
 };

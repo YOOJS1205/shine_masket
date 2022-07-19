@@ -8,7 +8,7 @@ export default function Search() {
   return (
     <>
       <TopMenuBar searchDisplay={true} />
-      <TabMenu/>
+      <TabMenu />
     </>
   );
 }

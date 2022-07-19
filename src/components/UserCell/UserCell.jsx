@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import basicProfileImg from '../../assets/images/basic-profile-img.png';
 import Button from '../Button/Button';
 
 export default function UserCell(props) {
+  const [isFollowed, setIsFollowed] = useState(false);
+
+  function followBtnClick() {
+    setIsFollowed(!isFollowed);
+    console.log('ddd');
+  }
+
   return (
     <>
       <UserCellComponent>
@@ -14,7 +21,12 @@ export default function UserCell(props) {
           <UserIntroduction>{props.UserIntroduction}</UserIntroduction>
         </UserArea>
 
-        <FollowButton size="small" buttonText="팔로우"></FollowButton>
+        <FollowButton
+          onClick={followBtnClick}
+          isActive={isFollowed}
+          size="small"
+          buttonText={!isFollowed ? '팔로우' : '취소'}
+        ></FollowButton>
       </UserCellComponent>
     </>
   );

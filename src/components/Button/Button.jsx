@@ -17,22 +17,35 @@ export default function Button({ buttonText, isEmpty, onClick, size, className, 
 }
 
 const ButtonComponent = styled.button`
-  background-color: ${(props) =>
-    props.isEmpty ? 'var(--color-enabled)' : 'var(--color-enabled-dark)'};
-  color: #ffffff;
-  border: none;
+  ${(props) => {
+    if (props.isEmpty === true) {
+      return `
+      background-color: var(--color-enabled);
+      color: #ffffff;
+      border: none;
+    `;
+    } else if (props.isEmpty === false) {
+      return `
+      background-color: var(--color-enabled-dark);
+      color: #ffffff;
+      border: none;
 
-  ${(props) =>
-    props.isActive
-      ? // props.isActive &&
-        css`
-          color: #767676;
-          background-color: var(--color-active);
-          outline: 1px solid #dbdbdb;
-        `
-      : css`
-          background-color: var(--color-enabled-dark);
-        `}
+    `;
+    } else if (props.isActive === true) {
+      return `
+      color: #767676;
+        background-color: var(--color-active);
+        outline: 1px solid #dbdbdb;
+
+    `;
+    } else if (props.isActive === false) {
+      return `
+      color: #ffffff;
+        background-color: var(--color-enabled-dark);
+
+    `;
+    }
+  }}
 
   border-radius: 44px;
   width: 100%;

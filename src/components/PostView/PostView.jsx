@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import PostProfile from './PostProfile/PostProfile';
@@ -7,6 +8,7 @@ import HeartIcon from '../../assets/icon/icon-heart.png';
 import CommentIcon from '../../assets/icon/icon-message-circle.png';
 
 export default function PostView() {
+  const history = useHistory();
   const { content, postId, date, postImages, heartCount, commentCount } = useSelector(
     (state) => state.PostInfoReducer
   );
@@ -73,7 +75,7 @@ export default function PostView() {
         <LikeBtn>
           <LikeCount>{heartCount}</LikeCount>
         </LikeBtn>
-        <CommentBtn>
+        <CommentBtn onClick={() => history.push(`/post/${postId}`)}>
           <CommentCount>{commentCount}</CommentCount>
         </CommentBtn>
       </ButtonContainer>

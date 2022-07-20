@@ -33,7 +33,7 @@ function App() {
             <Route path="/login" exact component={Login} />
             <Route path="/join" exact component={Join} />
             <Route path="/join/profile" exact component={ProfileSetting} />
-            <Route path="/post" exact component={Post} />
+            <Route path="/post/:postId" exact component={Post} />
             <Route path="/upload" exact component={Upload} />
             <Route path="/chat-list" exact component={ChatList} />
             <Route path="/chat-room" exact component={ChatRoom} />

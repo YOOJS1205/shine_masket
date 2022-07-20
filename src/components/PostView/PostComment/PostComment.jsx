@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import MoreButton from '../Button/MoreButton';
-import BasicProfileImg from '../../assets/images/basic-profile-img.png';
+import MoreButton from '../../Button/MoreButton';
+import BasicProfileImg from '../../../assets/images/basic-profile-img.png';
 
 export default function PostComment() {
   return (

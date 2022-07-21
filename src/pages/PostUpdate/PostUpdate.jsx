@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -7,27 +7,42 @@ import TopMenuBar from '../../components/TopMenuBar/TopMenuBar';
 import ImageUploadIcon from '../../assets/icon/icon-image.png';
 import RemoveIcon from '../../assets/icon/icon-delete.png';
 
-export default function Upload() {
-  const history = useHistory();
-  const dispatch = useDispatch();
-  const [isEmpty, setIsEmpty] = useState(true);
-  const [uploadText, setUploadText] = useState('');
-  const [fileImage, setFileImage] = useState([]);
-  const textRef = useRef(null);
-
+export default function PostUpdate() {
+  const { content, postImages } = useSelector((state) => state.PostInfoReducer);
+  const { postId } = useParams();
   const { UserImage } = useSelector((state) => state.UserInfoReducer);
 
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [isEmpty, setIsEmpty] = useState(true);
+  const [updateText, setUpdateText] = useState('');
+  const [updateImage, setUpdateImage] = useState([]);
+  const textRef = useRef(null);
+
   const onChange = (e) => {
-    setUploadText(e.target.value);
+    setUpdateText(e.target.value);
   };
 
   useEffect(() => {
-    if (uploadText || fileImage.length > 0) {
+    setUpdateImage(
+      postImages &&
+        postImages.map((image) => {
+          return image;
+        })
+    );
+  }, [postImages]);
+
+  useEffect(() => {
+    setUpdateText(content);
+  }, [content]);
+
+  useEffect(() => {
+    if (updateText || updateImage.length > 0) {
       setIsEmpty(false);
     } else {
       setIsEmpty(true);
     }
-  }, [uploadText, fileImage]);
+  }, [updateText, updateImage]);
 
   // textarea 크기 조절
   const handleResizeHeight = useCallback(() => {
@@ -38,19 +53,17 @@ export default function Upload() {
     textRef.current.style.height = `${textRef.current.scrollHeight}px`;
   }, []);
 
-  // 파일 업로드
   const uploadFileImage = async (e) => {
     let files = e.target.files;
-
     for (let i = 0; i < files.length; i++) {
       let formData = new FormData();
       formData.append('image', files[i]);
       const res = await axios.post('https://mandarin.api.weniv.co.kr/image/uploadfile', formData);
-      fileImage.push(`https://mandarin.api.weniv.co.kr/${res.data.filename}`);
+      updateImage.push(`https://mandarin.api.weniv.co.kr/${res.data.filename}`);
       console.log(res.data);
     }
 
-    let imageURLlist = [...fileImage];
+    let imageURLlist = [...updateImage];
 
     if (imageURLlist.length > 3) {
       imageURLlist.push(files[0]);
@@ -58,25 +71,24 @@ export default function Upload() {
       alert('첨부 가능 이미지 수는 최대 3장입니다.');
     }
 
-    setFileImage(imageURLlist);
+    setUpdateImage(imageURLlist);
   };
 
-  // 파일 삭제
   const deleteFileImage = (id) => {
-    setFileImage(fileImage.filter((_, index) => index !== id));
-    URL.revokeObjectURL(fileImage);
+    setUpdateImage(updateImage.filter((_, index) => index !== id));
+    URL.revokeObjectURL(updateImage);
   };
 
   const onClickUpload = async (e) => {
     e.preventDefault();
     try {
-      const sendFileName = fileImage.join();
+      const sendFileName = updateImage.join();
       const token = localStorage.getItem('accessToken');
-      const res = await axios.post(
-        'https://mandarin.api.weniv.co.kr/post',
+      const res = await axios.put(
+        `https://mandarin.api.weniv.co.kr/post/${postId}`,
         {
           post: {
-            content: uploadText,
+            content: updateText,
             image: sendFileName,
           },
         },
@@ -91,19 +103,13 @@ export default function Upload() {
 
       const content = res.data.post.content;
       const date = res.data.post.createdAt;
-      const postId = res.data.post.id;
       const postImages = res.data.post.image;
-      const heartCount = res.data.post.heartCount;
-      const commentCount = res.data.post.commentCount;
-
       dispatch({
-        type: 'UPLOAD',
+        type: 'UPDATE',
         content,
         date,
         postId,
         postImages,
-        heartCount,
-        commentCount,
       });
       history.push(`/post/${postId}`);
     } catch (error) {
@@ -129,6 +135,7 @@ export default function Upload() {
           ref={textRef}
           onInput={handleResizeHeight}
           onChange={onChange}
+          value={updateText}
         ></TextArea>
         <FileLabel htmlFor="imgUpload">이미지 첨부하기</FileLabel>
         <FileInput
@@ -140,11 +147,11 @@ export default function Upload() {
         />
       </TextContainer>
       <ImgContainer>
-        {fileImage.map((image, id) => (
+        {updateImage.map((image, id) => (
           <ImgItem
             key={id}
             style={
-              fileImage.length === 1
+              updateImage.length === 1
                 ? {
                     minWidth: '304px',
                     minHeight: '228px',

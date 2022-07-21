@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
@@ -46,7 +46,17 @@ export default function PostView() {
       <PostProfile />
       <PostContainer>
         <PostText>{content}</PostText>
-        <ImageContainer>
+        <ImageContainer
+          style={
+            postImages < 1
+              ? {
+                  display: 'none',
+                }
+              : {
+                  display: 'flex',
+                }
+          }
+        >
           {postImages.map((image) => {
             return (
               <ul key={image}>

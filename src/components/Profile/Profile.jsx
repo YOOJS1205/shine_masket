@@ -19,7 +19,7 @@ export default function Profile(props) {
               <FollowersTxt>followers</FollowersTxt>
             </FollowersCount>
           </Link>
-          <MyProfileImg src={profileImg}></MyProfileImg>
+          <MyProfileImg src={props.userImage}></MyProfileImg>
           <Link to="/following">
             <FollowersCount color="#767676">
               {props.followingsCount}

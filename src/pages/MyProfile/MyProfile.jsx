@@ -4,9 +4,18 @@ import Profile from '../../components/Profile/Profile';
 import TopMenuBar from '../../components/TopMenuBar/TopMenuBar';
 import TabMenu from '../../components/TabMenu/TabMenu';
 import Button from '../../components/Button/Button';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export default function MyProfile() {
+  const history = useHistory();
+  const { UserId, UserName, UserAccount, UserIntro, UserImage } = useSelector((state) => ({
+    UserName: state.UserInfoReducer.UserName,
+    UserId: state.UserInfoReducer.UserId,
+    UserAccount: state.UserInfoReducer.UserAccount,
+    UserIntro: state.UserInfoReducer.UserIntro,
+    UserImage: state.UserInfoReducer.UserImage,
+  }));
   return (
     <>
       <TopMenuBar />
@@ -14,9 +23,10 @@ export default function MyProfile() {
         <Profile
           followersCount="2950"
           followingsCount="128"
-          userName="애월읍 위니브 감귤농장"
-          userId="weniv_Mandarin"
-          userIntroduction="애월읍 감귤 전국 배송, 귤따기 체험, 감귤 농장"
+          userImage={UserImage}
+          userName={UserName}
+          userId={UserAccount}
+          userIntroduction={UserIntro}
         >
           <MyProfileButton />
         </Profile>

@@ -30,11 +30,9 @@ export default function YourProfile() {
 
 const YourProfileButton = () => {
   const [isActive, setIsActive] = useState(false);
-  // const [buttonText, setButtonText] = useState('팔로우');
 
   function followBtnClick() {
     setIsActive(!isActive);
-    // setButtonText('언팔로우');
   }
 
   return (

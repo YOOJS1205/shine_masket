@@ -10,7 +10,7 @@ import ChatList from './pages/ChatList/ChatList';
 import Join from './pages/Join/Join';
 import ProfileSetting from './pages/ProfileSetting/ProfileSetting';
 import ChatRoom from './pages/ChatRoom/ChatRoom';
-import MyProfile from './pages/MyProfile/MyProfile';
+import ToProfile from './pages/ToProfile/ToProfile';
 import YourProfile from './pages/YourProfile/YourProfile';
 import Post from './pages/Post/Post';
 import ModifyProfile from './pages/ModifyProfile/ModifyProfile';
@@ -37,7 +37,8 @@ function App() {
             <Route path="/upload" exact component={Upload} />
             <Route path="/chat-list" exact component={ChatList} />
             <Route path="/chat-room" exact component={ChatRoom} />
-            <Route path="/my-profile" exact component={MyProfile} />
+            <Route path="/profile/:accountname" exact component={ToProfile} />
+            <Route path="/profile" exact component={ToProfile} />
             <Route path="/my-profile/add-product" exact component={AddProduct} />
             <Route path="/your-profile" exact component={YourProfile} />
             <Route path="/profile/modify" exact component={ModifyProfile} />

@@ -6,6 +6,10 @@ const initialState = {
   UserAccount: '',
   UserIntro: '',
   UserImage: '',
+  UserFollowing: '',
+  UserFollower: '',
+  UserFollowerCount: 0,
+  UserFollowingCount: 0,
 };
 
 const UserInfoReducer = (state = initialState, action) => {
@@ -15,6 +19,9 @@ const UserInfoReducer = (state = initialState, action) => {
         ...state,
         UserId: action.UserId,
         UserImage: action.UserImage,
+        UserAccount: action.UserAccount,
+        UserName: action.UserName,
+        UserIntro: action.UserIntro,
         loginToken: action.loginToken,
       };
     case 'JOIN':
@@ -31,6 +38,14 @@ const UserInfoReducer = (state = initialState, action) => {
         UserAccount: action.UserAccount,
         UserIntro: action.UserIntro,
         UserImage: action.UserImage,
+      };
+    case 'FOLLOW':
+      return {
+        ...state,
+        UserFollowing: action.UserFollowing,
+        UserFollower: action.UserFollower,
+        UserFollowerCount: action.UserFollowerCount,
+        UserFollowingCount: action.UserFollowingCount,
       };
     default:
       return state;

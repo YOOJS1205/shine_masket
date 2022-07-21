@@ -45,13 +45,23 @@ export default function Login() {
           password: loginPassword,
         },
       });
+
       if (!res.data.message) {
         console.log(res);
         const UserId = res.data.user.email;
+        const UserAccount = res.data.user.accountname;
+        const UserIntro = res.data.user.intro;
         const UserImage = res.data.user.image;
         const loginToken = res.data.user.token;
         const refreshToken = res.data.user.refreshToken;
-        dispatch({ type: 'LOGIN', UserId, UserImage, loginToken });
+        dispatch({
+          type: 'LOGIN',
+          UserId,
+          UserImage,
+          loginToken,
+          UserAccount,
+          UserIntro,
+        });
         localStorage.setItem('accessToken', loginToken);
         localStorage.setItem('refreshToken', refreshToken);
         history.push('/home-empty');

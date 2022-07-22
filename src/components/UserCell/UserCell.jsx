@@ -8,16 +8,25 @@ import { useSelector, useDispatch } from 'react-redux';
 
 export default function UserCell(props) {
   const [isFollowed, setIsFollowed] = useState(false);
-  const { OtherUserImage } = useSelector((state) => state.OtherUserInfoReducer);
+  const { OtherUserInfo } = useSelector((state) => ({
+    OtherUserInfo: state.OtherUserInfoReducer.OtherUserInfo,
+  }));
 
   function followBtnClick() {
     setIsFollowed(!isFollowed);
   }
 
+  // console.log('성공??');
+  console.log(OtherUserInfo);
+  // console.log('성공??');
+
   return (
     <>
       <UserCellComponent>
-        <UserProfileImg src={OtherUserImage}></UserProfileImg>
+        {/* {OtherUserInfo.map((users) => (
+          <UserProfileImg key={users._id} src={users.image} />
+        ))} */}
+
         <UserArea>
           <UserName>{props.userName}</UserName>
           <UserIntroduction>{props.UserIntroduction}</UserIntroduction>

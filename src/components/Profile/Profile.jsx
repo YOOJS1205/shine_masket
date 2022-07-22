@@ -30,20 +30,23 @@ export default function Profile(props) {
         }
       );
 
-      console.log(res.data);
+      const OtherUserInfo = res.data;
+      dispatch({ type: 'FOLLWER', OtherUserInfo });
+      console.log(OtherUserInfo);
 
-      res.data.map((e) => {
-        const OtherUserName = e.username;
-        const OtherUserImage = e.image;
-        const OtherUserIntro = e.intro;
-        console.log(OtherUserName);
-        dispatch({
-          type: 'FOLLWER',
-          OtherUserName,
-          OtherUserImage,
-          OtherUserIntro,
-        });
-      });
+      // res.data.map((e) => {
+      //   const OtherUserName = e.username;
+      //   const OtherUserImage = e.image;
+      //   const OtherUserIntro = e.intro;
+      //   console.log(OtherUserName);
+      //   dispatch({
+      //     type: 'FOLLWER',
+      //     OtherUserInfo
+      //     // OtherUserName,
+      //     // OtherUserImage,
+      //     // OtherUserIntro,
+      //   });
+      // });
 
       history.push(`/profile/${UserAccount}/follow`);
     } catch (error) {

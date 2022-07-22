@@ -5,21 +5,27 @@ import UserCell from '../UserCell/UserCell';
 import { useSelector, useDispatch } from 'react-redux';
 
 export default function FollowList() {
-  const { OtherUserName, OtherUserImage, OtherUserIntro } = useSelector((state) => ({
-    OtherUserName: state.OtherUserInfoReducer.OtherUserName,
-    OtherUserImage: state.OtherUserInfoReducer.OtherUserImage,
-    OtherUserIntro: state.OtherUserInfoReducer.OtherUserIntro,
+  const { OtherUserInfo } = useSelector((state) => ({
+    OtherUserInfo: state.OtherUserInfoReducer.OtherUserInfo,
   }));
 
-  console.log(OtherUserName);
-  console.log(OtherUserImage);
-  console.log(OtherUserIntro);
+  // console.log('성공??');
+  // console.log(OtherUserInfo);
+  // console.log('성공??');
+  // console.log(OtherUserImage);
+  // console.log(OtherUserIntro);
 
   return (
     <>
       <FollowListComponent>
-        {/* {state.map()} */}
-        <UserCell userName={OtherUserName} UserIntroduction={OtherUserIntro}></UserCell>
+        {OtherUserInfo.map((users) => (
+          <UserCell
+            key={users._id}
+            userName={users.username}
+            UserIntroduction={users.intro}
+          ></UserCell>
+        ))}
+        {/* <UserCell userName={OtherUserName} UserIntroduction={OtherUserIntro}></UserCell> */}
       </FollowListComponent>
     </>
   );

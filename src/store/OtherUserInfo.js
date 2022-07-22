@@ -1,7 +1,8 @@
 const initialState = {
-  OtherUserName: {},
-  OtherUserIntro: {},
-  OtherUserImage: {},
+  OtherUserInfo: [],
+  // OtherUserName: [],
+  // OtherUserIntro: [],
+  // OtherUserImage: [],
 };
 
 const OtherUserInfoReducer = (state = initialState, action) => {
@@ -9,9 +10,10 @@ const OtherUserInfoReducer = (state = initialState, action) => {
     case 'FOLLWER':
       return {
         ...state,
-        OtherUserName: action.OtherUserName,
-        OtherUserImage: action.OtherUserImage,
-        OtherUserIntro: action.OtherUserIntro,
+        OtherUserInfo: action.OtherUserInfo,
+        // OtherUserName: action.OtherUserName,
+        // OtherUserImage: action.OtherUserImage,
+        // OtherUserIntro: action.OtherUserIntro,
       };
     default:
       return state;

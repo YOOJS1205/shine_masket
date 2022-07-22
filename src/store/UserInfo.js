@@ -21,8 +21,6 @@ const UserInfoReducer = (state = initialState, action) => {
         UserName: action.UserName,
         UserAccount: action.UserAccount,
         UserImage: action.UserImage,
-        UserAccount: action.UserAccount,
-        UserName: action.UserName,
         UserIntro: action.UserIntro,
         loginToken: action.loginToken,
       };

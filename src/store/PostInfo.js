@@ -15,6 +15,9 @@ const PostInfoReducer = (state = initialState, action) => {
     case 'UPLOAD':
       return {
         ...state,
+        userName: action.userName,
+        userAccount: action.userAccount,
+        userImage: action.userImage,
         content: action.content,
         postId: action.postId,
         date:
@@ -31,6 +34,9 @@ const PostInfoReducer = (state = initialState, action) => {
     case 'UPDATE':
       return {
         ...state,
+        userName: action.userName,
+        userAccount: action.userAccount,
+        userImage: action.userImage,
         content: action.content,
         postId: action.postId,
         date:

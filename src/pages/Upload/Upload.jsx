@@ -89,6 +89,9 @@ export default function Upload() {
       );
       console.log(res.data);
 
+      const userName = res.data.post.author.username;
+      const userAccount = res.data.post.author.accountname;
+      const userImage = res.data.post.author.image;
       const content = res.data.post.content;
       const date = res.data.post.createdAt;
       const postId = res.data.post.id;
@@ -98,6 +101,9 @@ export default function Upload() {
 
       dispatch({
         type: 'UPLOAD',
+        userName,
+        userAccount,
+        userImage,
         content,
         date,
         postId,

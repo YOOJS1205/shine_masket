@@ -42,7 +42,7 @@ export default function ToProfile() {
 const MyProfileButton = () => {
   return (
     <>
-      <Link to="/profile/modify">
+      <Link to="/modify-profile">
         <Button isActive buttonText="프로필 수정" size="medium" />
       </Link>
       <Link to="/my-profile/add-product">

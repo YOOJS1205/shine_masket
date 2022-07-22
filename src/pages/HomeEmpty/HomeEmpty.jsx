@@ -18,7 +18,7 @@ export default function Test() {
         <MainWrap>
           <Img src={MainImg} />
           <p>유저를 검색해 팔로우 해보세요!</p>
-          <Button size="medium" buttonText="검색하기" />
+          <Button size="medium" buttonText="검색하기" isActive={false} />
         </MainWrap>
       </Main>
       <TabMenu />

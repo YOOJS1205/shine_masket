@@ -13,7 +13,7 @@ export default function UserCell(props) {
   }, [props.isFollow]);
 
   function followBtnClick() {
-    setIsFollowed(!isFollowed);
+    setFollowState((followState) => !followState);
   }
 
   return (
@@ -30,7 +30,7 @@ export default function UserCell(props) {
           isActive={isFollowed}
           isFollow={followState}
           size="small"
-          buttonText={props.isFollow ? '취소' : '팔로우'}
+          buttonText={followState ? '취소' : '팔로우'}
         ></FollowButton>
       </UserCellComponent>
     </>

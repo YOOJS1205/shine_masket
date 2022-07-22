@@ -13,6 +13,7 @@ import ChatRoom from './pages/ChatRoom/ChatRoom';
 import ToProfile from './pages/ToProfile/ToProfile';
 import YourProfile from './pages/YourProfile/YourProfile';
 import Post from './pages/Post/Post';
+import PostUpdate from './pages/PostUpdate/PostUpdate';
 import ModifyProfile from './pages/ModifyProfile/ModifyProfile';
 import Upload from './pages/Upload/Upload';
 import Follower from './pages/Follower/Follower.jsx';
@@ -34,6 +35,7 @@ function App() {
             <Route path="/join" exact component={Join} />
             <Route path="/join/profile" exact component={ProfileSetting} />
             <Route path="/post/:postId" exact component={Post} />
+            <Route path="/post/:postId/update" component={PostUpdate} exact />
             <Route path="/upload" exact component={Upload} />
             <Route path="/chat-list" exact component={ChatList} />
             <Route path="/chat-room" exact component={ChatRoom} />

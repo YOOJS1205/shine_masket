@@ -18,6 +18,8 @@ const UserInfoReducer = (state = initialState, action) => {
       return {
         ...state,
         UserId: action.UserId,
+        UserName: action.UserName,
+        UserAccount: action.UserAccount,
         UserImage: action.UserImage,
         UserAccount: action.UserAccount,
         UserName: action.UserName,

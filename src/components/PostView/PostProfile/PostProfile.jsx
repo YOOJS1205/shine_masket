@@ -4,14 +4,14 @@ import styled from 'styled-components';
 import MoreButton from '../../Button/MoreButton';
 
 export default function PostProfile() {
-  const { userName, userAccount, userImage } = useSelector((state) => state.PostInfoReducer);
+  const { UserName, UserAccount, UserImage } = useSelector((state) => state.UserInfoReducer);
 
   return (
     <Profile>
-      <ProfileImg src={userImage} alt="사용자 프로필 이미지"></ProfileImg>
+      <ProfileImg src={UserImage} alt="사용자 프로필 이미지"></ProfileImg>
       <TextContainer>
-        <UserName>{userName}</UserName>
-        <UserId>@ {userAccount}</UserId>
+        <ProfileName>{UserName}</ProfileName>
+        <ProfileId>@ {UserAccount}</ProfileId>
       </TextContainer>
       <MoreButton size="small" />
     </Profile>
@@ -37,7 +37,7 @@ const TextContainer = styled.div`
   margin-left: 12px;
 `;
 
-const UserName = styled.strong`
+const ProfileName = styled.strong`
   display: block;
   margin-bottom: 2px;
   font-size: 14px;
@@ -47,7 +47,7 @@ const UserName = styled.strong`
   color: black;
 `;
 
-const UserId = styled.p`
+const ProfileId = styled.p`
   font-size: 12px;
   line-height: 15px;
   text-align: left;

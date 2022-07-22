@@ -49,6 +49,8 @@ export default function Login() {
       if (!res.data.message) {
         console.log(res);
         const UserId = res.data.user.email;
+
+        const UserName = res.data.user.username;
         const UserAccount = res.data.user.accountname;
         const UserIntro = res.data.user.intro;
         const UserImage = res.data.user.image;
@@ -56,12 +58,14 @@ export default function Login() {
         const refreshToken = res.data.user.refreshToken;
         dispatch({
           type: 'LOGIN',
+          UserName,
           UserId,
           UserImage,
           loginToken,
           UserAccount,
           UserIntro,
         });
+
         localStorage.setItem('accessToken', loginToken);
         localStorage.setItem('refreshToken', refreshToken);
         history.push('/home-empty');

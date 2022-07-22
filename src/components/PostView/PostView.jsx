@@ -9,13 +9,14 @@ import CommentIcon from '../../assets/icon/icon-message-circle.png';
 
 export default function PostView() {
   const history = useHistory();
-  const { content, postId, date, postImages, heartCount, commentCount } = useSelector(
-    (state) => state.PostInfoReducer
-  );
+  const { postList, userAccount } = useSelector((state) => ({
+    postList: state.PostInfoReducer.postList,
+    userAccount: state.PostInfoReducer.userAccount,
+  }));
 
   useEffect(() => {
     getPost();
-  }, [postId]);
+  }, []);
 
   const imgErrorHandler = (e) => {
     const target = e.target.parentNode.parentNode;
@@ -25,13 +26,12 @@ export default function PostView() {
   const getPost = async () => {
     try {
       const token = localStorage.getItem('accessToken');
-      const res = await axios.get(`https://mandarin.api.weniv.co.kr/post/${postId}`, {
+      const res = await axios.get(`https://mandarin.api.weniv.co.kr/post/${userAccount}/userpost`, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-type': 'application/json',
         },
       });
-      console.log(res.data);
     } catch (error) {
       console.log(error);
       if (error.response.data.message === '존재하지 않는 게시글입니다.') {
@@ -41,56 +41,56 @@ export default function PostView() {
   };
 
   return (
-    <Container>
-      <h1 className="ir">게시글 댓글 페이지</h1>
-      <PostProfile />
-      <PostContainer>
-        <PostText>{content}</PostText>
-        <ImageContainer
-          style={
-            postImages < 1
-              ? {
-                  display: 'none',
-                }
-              : {
-                  display: 'flex',
-                }
-          }
-        >
-          {postImages.map((image) => {
-            return (
-              <ul key={image}>
+    <>
+      {postList.post.map((post) => (
+        <Container key={post.id}>
+          <h1 className="ir">게시글 댓글 페이지</h1>
+          <PostProfile />
+          <PostContainer>
+            <PostText>{post.content}</PostText>
+            <ImageContainer
+              style={
+                post.image < 1
+                  ? {
+                      display: 'none',
+                    }
+                  : {
+                      display: 'flex',
+                    }
+              }
+            >
+              <ul key={post.id}>
                 <Img
                   style={
-                    postImages.length > 1
+                    post.image.length > 1
                       ? {
                           minWidth: '168px',
                           minHeight: '126px',
-                          backgroundImage: `url(${image})`,
+                          backgroundImage: `url(${post.image})`,
                         }
                       : {
                           minWidth: '304px',
                           minHeight: '228px',
-                          backgroundImage: `url(${image})`,
+                          backgroundImage: `url(${post.image})`,
                         }
                   }
                   onError={imgErrorHandler}
                 />
               </ul>
-            );
-          })}
-        </ImageContainer>
-      </PostContainer>
-      <ButtonContainer>
-        <LikeBtn>
-          <LikeCount>{heartCount}</LikeCount>
-        </LikeBtn>
-        <CommentBtn onClick={() => history.push(`/post/${postId}`)}>
-          <CommentCount>{commentCount}</CommentCount>
-        </CommentBtn>
-      </ButtonContainer>
-      <Date>{date}</Date>
-    </Container>
+            </ImageContainer>
+          </PostContainer>
+          <ButtonContainer>
+            <LikeBtn>
+              <LikeCount>{post.heartCount}</LikeCount>
+            </LikeBtn>
+            <CommentBtn onClick={() => history.push(`/post/${post.id}`)}>
+              <CommentCount>{post.commentCount}</CommentCount>
+            </CommentBtn>
+          </ButtonContainer>
+          <Date>{post.date}</Date>
+        </Container>
+      ))}
+    </>
   );
 }
 

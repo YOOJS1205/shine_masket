@@ -14,7 +14,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
 const Footer = styled.ul`
-  position: absolute;
+  background-color: #fff;
+  position: fixed;
   bottom: 0px;
   left: 0px;
   right: 0px;
@@ -102,12 +103,10 @@ export default function TabMenu() {
         },
       });
 
-      // console.log(res);
       const UserFollowing = res.data.profile.following;
       const UserFollower = res.data.profile.follower;
       const UserFollowerCount = res.data.profile.followerCount;
       const UserFollowingCount = res.data.profile.followingCount;
-      // console.log(UserFollowingCount);
 
       dispatch({
         type: 'FOLLOW',
@@ -116,6 +115,25 @@ export default function TabMenu() {
         UserFollowerCount,
         UserFollowingCount,
       });
+
+      history.push(`/profile/${UserAccount}`);
+    } catch (error) {
+      console.log(error);
+    }
+
+    // 포스트 저장
+    try {
+      const accessToken = localStorage.getItem('accessToken');
+      const res = await axios.get(`https://mandarin.api.weniv.co.kr/post/${UserAccount}/userpost`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-type': 'application/json',
+        },
+      });
+      console.log('포스트');
+      console.log(res);
+      const postList = res.data;
+      dispatch({ type: 'GET_POST', postList });
 
       history.push(`/profile/${UserAccount}`);
     } catch (error) {

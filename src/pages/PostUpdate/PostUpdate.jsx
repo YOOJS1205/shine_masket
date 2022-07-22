@@ -44,7 +44,6 @@ export default function PostUpdate() {
     }
   }, [updateText, updateImage]);
 
-  // textarea 크기 조절
   const handleResizeHeight = useCallback(() => {
     if (textRef === null || textRef.current === null) {
       return;
@@ -101,21 +100,32 @@ export default function PostUpdate() {
       );
       console.log(res.data);
 
+      const userName = res.data.post.author.username;
+      const userAccount = res.data.post.author.accountname;
+      const userImage = res.data.post.author.image;
       const content = res.data.post.content;
       const date = res.data.post.createdAt;
       const postImages = res.data.post.image;
+
       dispatch({
         type: 'UPDATE',
+        userName,
+        userAccount,
+        userImage,
         content,
         date,
         postId,
         postImages,
       });
+
       history.push(`/post/${postId}`);
     } catch (error) {
       console.log(error);
       if (error.response.data.message === '내용 또는 이미지를 입력해주세요.') {
         alert('내용 또는 이미지를 입력해 주세요.');
+      }
+      if (error.response.data.message === '잘못된 요청입니다. 로그인 정보를 확인하세요') {
+        alert('본인이 작성한 게시글만 수정할 수 있습니다.');
       }
     }
   };
@@ -146,7 +156,17 @@ export default function PostUpdate() {
           onChange={uploadFileImage}
         />
       </TextContainer>
-      <ImgContainer>
+      <ImgContainer
+        style={
+          postImages < 1
+            ? {
+                display: 'none',
+              }
+            : {
+                display: 'flex',
+              }
+        }
+      >
         {updateImage.map((image, id) => (
           <ImgItem
             key={id}

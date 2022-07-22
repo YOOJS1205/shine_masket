@@ -4,14 +4,14 @@ import styled from 'styled-components';
 import MoreButton from '../../Button/MoreButton';
 
 export default function PostProfile() {
-  const { UserName, UserAccount, UserImage } = useSelector((state) => state.UserInfoReducer);
+  const { userName, userAccount, userImage } = useSelector((state) => state.PostInfoReducer);
 
   return (
     <Profile>
-      <ProfileImg src={UserImage} alt="사용자 프로필 이미지"></ProfileImg>
+      <ProfileImg src={userImage} alt="사용자 프로필 이미지"></ProfileImg>
       <TextContainer>
-        <ProfileName>{UserName}</ProfileName>
-        <ProfileId>@ {UserAccount}</ProfileId>
+        <ProfileName>{userName}</ProfileName>
+        <ProfileId>@ {userAccount}</ProfileId>
       </TextContainer>
       <MoreButton size="small" />
     </Profile>

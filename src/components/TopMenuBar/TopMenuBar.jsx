@@ -6,7 +6,6 @@ import Button from '../Button/Button';
 import LeftArrow from '../../assets/icon/icon-arrow-left.png';
 import Search from '../../assets/icon/icon-search.png';
 import MoreButton from '../Button/MoreButton';
-import Modal from '../Modal/Modal';
 
 export default function TopMenuBar({
   saveButton,

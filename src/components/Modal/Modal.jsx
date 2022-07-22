@@ -1,11 +1,16 @@
 import React from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export default function Modal(display) {
+
+export default function Modal(props) {
+  const onClickMoreBtn = () => {
+    props.closeModal(false)
+  }
   return (
     <>
-      <ChatModal display={display}>
+      <ChatModal onClick={onClickMoreBtn}>
         <ChatModal_Ul>
           <li>
             <Link to="/my-profile">설정 및 개인정보</Link>
@@ -20,14 +25,15 @@ export default function Modal(display) {
 }
 
 const ChatModal = styled.aside`
-  display: none;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-  background: rgba(0, 0, 0, 0.3);
-`;
+
+  position:absolute;
+  top:0px;
+  left:0px;
+  right:0px;
+  bottom:0px;
+  background:rgba(0,0,0,0.3);
+  z-index:10;
+`
 
 const ChatModal_Ul = styled.ul`
   position: fixed;
@@ -57,6 +63,9 @@ const ChatModal_Ul = styled.ul`
     font-weight: 400;
     font-size: 14px;
     line-height: 18px;
-    margin-top: 28px;
+    margin-top:28px;
+    >a {
+      display:block
+    }
   }
 `;

@@ -9,7 +9,6 @@ import IconUpload from '../../assets/icon/icon-edit.svg';
 import IconMyprofile from '../../assets/icon/icon-user.svg';
 import IconMyprofileHover from '../../assets/icon/icon-user-fill.png';
 
-// import { Link } from 'react-router-dom';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
@@ -27,6 +26,7 @@ const Footer = styled.ul`
   > li {
     width: 25%;
     padding: 15px 0 10px;
+    cursor: pointer;
     &:hover > p {
       color: var(--color-enabled);
     }
@@ -48,6 +48,7 @@ const Footer = styled.ul`
     text-align: center;
   }
 `;
+
 const GoHome = styled.li`
   &:hover > a {
     background-image: url(${IconHomeHover});
@@ -124,17 +125,25 @@ export default function TabMenu() {
     }
   };
 
+  const upload = () => {
+    history.push('/upload');
+  };
+
+  const chatList = () => {
+    history.push('/chat-list');
+  };
+
   return (
     <Footer>
       <GoHome>
         <GoHomeIcon />
         <p>홈</p>
       </GoHome>
-      <GoChat>
+      <GoChat onClick={chatList}>
         <GoChatIcon />
         <p>채팅</p>
       </GoChat>
-      <GoUpload>
+      <GoUpload onClick={upload}>
         <GoUploadIcon />
         <p>게시물 작성</p>
       </GoUpload>

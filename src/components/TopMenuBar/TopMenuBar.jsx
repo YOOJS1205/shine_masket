@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../Button/Button';
 
@@ -14,7 +14,6 @@ export default function TopMenuBar({
   moreButton,
   moreButtonSmall,
   menuText,
-  className,
   isEmpty,
   onClick,
   homeText,
@@ -23,10 +22,18 @@ export default function TopMenuBar({
   searchDisplay,
 }) {
   const history = useHistory();
+  const { postId } = useParams();
 
   return (
     <Container>
-      <PreviousBtn onClick={() => history.goBack()} display={preDisplay}>
+      <PreviousBtn
+        onClick={
+          location.pathname === `/post/${postId}`
+            ? () => history.push('/home-empty')
+            : () => history.goBack()
+        }
+        display={preDisplay}
+      >
         <PrevioudBtnImg src={LeftArrow} alt="이전 페이지로 돌아가는 버튼 이미지" />
       </PreviousBtn>
       <SearchModal display={searchDisplay}>

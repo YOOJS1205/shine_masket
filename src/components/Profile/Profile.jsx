@@ -1,28 +1,67 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
 
 // 이미지
 import basicProfileImg from '../../assets/images/basic-profile-img.png';
 
 export default function Profile(props) {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   // const [profileImg, setProfileImg] = useState(basicProfileImg);
   const { UserAccount } = useSelector((state) => ({
     UserAccount: state.UserInfoReducer.UserAccount,
   }));
+
+  const goToFollowList = async () => {
+    try {
+      const accessToken = localStorage.getItem('accessToken');
+
+      const res = await axios.get(
+        `https://mandarin.api.weniv.co.kr/profile/${UserAccount}/follower`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-type': 'application/json',
+          },
+        }
+      );
+
+      console.log(res.data);
+
+      res.data.map((e) => {
+        const OtherUserName = e.username;
+        const OtherUserImage = e.image;
+        const OtherUserIntro = e.intro;
+        console.log(OtherUserName);
+        dispatch({
+          type: 'FOLLWER',
+          OtherUserName,
+          OtherUserImage,
+          OtherUserIntro,
+        });
+      });
+
+      history.push(`/profile/${UserAccount}/follow`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
       <UserInfo>
         <h1 className="ir">사용자 정보</h1>
         <FollowArea>
-          <Link to="/profile/aAa/follow">
-            <FollowersCount>
-              {props.followersCount}
-              <FollowersTxt>followers</FollowersTxt>
-            </FollowersCount>
-          </Link>
+          {/* <Link to="/profile/aAa/follow"> */}
+          <FollowersCount onClick={goToFollowList}>
+            {props.followersCount}
+            <FollowersTxt>followers</FollowersTxt>
+          </FollowersCount>
+          {/* </Link> */}
           <MyProfileImg src={props.userImage}></MyProfileImg>
           <Link to="/following">
             <FollowersCount color="#767676">

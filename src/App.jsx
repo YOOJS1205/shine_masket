@@ -18,6 +18,7 @@ import ModifyProfile from './pages/ModifyProfile/ModifyProfile';
 import Upload from './pages/Upload/Upload';
 import Follower from './pages/Follower/Follower.jsx';
 import Following from './pages/Following/Following.jsx';
+import FollowPage from './pages/FollowPage/FollowPage.jsx';
 import AddProduct from './pages/AddProduct/AddProduct.jsx';
 import HomeEmpty from './pages/HomeEmpty/HomeEmpty';
 import Search from './pages/Search/Search';
@@ -46,6 +47,7 @@ function App() {
             <Route path="/profile/modify" exact component={ModifyProfile} />
             <Route path="/follower" exact component={Follower} />
             <Route path="/following" exact component={Following} />
+            <Route path="/profile/:accountname/follow" exact component={FollowPage} />
             <Route path="/home-empty" exact component={HomeEmpty} />
             <Route path="/search" exact component={Search} />
             <Route component={NotFound} />

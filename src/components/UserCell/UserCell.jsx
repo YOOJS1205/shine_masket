@@ -4,18 +4,20 @@ import styled from 'styled-components';
 import basicProfileImg from '../../assets/images/basic-profile-img.png';
 import Button from '../Button/Button';
 
+import { useSelector, useDispatch } from 'react-redux';
+
 export default function UserCell(props) {
   const [isFollowed, setIsFollowed] = useState(false);
+  const { OtherUserImage } = useSelector((state) => state.OtherUserInfoReducer);
 
   function followBtnClick() {
     setIsFollowed(!isFollowed);
-    console.log('ddd');
   }
 
   return (
     <>
       <UserCellComponent>
-        <UserProfileImg src={basicProfileImg}></UserProfileImg>
+        <UserProfileImg src={OtherUserImage}></UserProfileImg>
         <UserArea>
           <UserName>{props.userName}</UserName>
           <UserIntroduction>{props.UserIntroduction}</UserIntroduction>
@@ -41,6 +43,7 @@ const UserCellComponent = styled.article`
 const UserProfileImg = styled.img`
   margin-right: 12px;
   width: 50px;
+  border-radius: 50%;
 `;
 
 const UserArea = styled.div`

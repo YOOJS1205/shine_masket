@@ -12,7 +12,6 @@ import IconMyprofileHover from '../../assets/icon/icon-user-fill.png';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
-import { useLocation } from 'react-router';
 
 const Footer = styled.ul`
   position: absolute;
@@ -92,7 +91,6 @@ export default function TabMenu() {
 
   const history = useHistory();
   const dispatch = useDispatch();
-  const location = useLocation();
 
   const goToProfile = async () => {
     try {
@@ -104,12 +102,12 @@ export default function TabMenu() {
         },
       });
 
-      console.log(res);
+      // console.log(res);
       const UserFollowing = res.data.profile.following;
       const UserFollower = res.data.profile.follower;
       const UserFollowerCount = res.data.profile.followerCount;
       const UserFollowingCount = res.data.profile.followingCount;
-      console.log(UserFollowingCount);
+      // console.log(UserFollowingCount);
 
       dispatch({
         type: 'FOLLOW',

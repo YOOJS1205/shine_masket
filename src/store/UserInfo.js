@@ -6,8 +6,8 @@ const initialState = {
   UserAccount: '',
   UserIntro: '',
   UserImage: '',
-  UserFollowing: '',
-  UserFollower: '',
+  UserFollowing: [],
+  UserFollower: [],
   UserFollowerCount: 0,
   UserFollowingCount: 0,
 };
@@ -21,8 +21,6 @@ const UserInfoReducer = (state = initialState, action) => {
         UserName: action.UserName,
         UserAccount: action.UserAccount,
         UserImage: action.UserImage,
-        UserAccount: action.UserAccount,
-        UserName: action.UserName,
         UserIntro: action.UserIntro,
         loginToken: action.loginToken,
       };

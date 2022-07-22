@@ -18,7 +18,7 @@ import ModifyProfile from './pages/ModifyProfile/ModifyProfile';
 import Upload from './pages/Upload/Upload';
 import Follower from './pages/Follower/Follower.jsx';
 import Following from './pages/Following/Following.jsx';
-import FollowPage from './pages/FollowPage/FollowPage.jsx';
+import FollowListPage from './pages/FollowListPage/FollowListPage.jsx';
 import AddProduct from './pages/AddProduct/AddProduct.jsx';
 import HomeEmpty from './pages/HomeEmpty/HomeEmpty';
 import Search from './pages/Search/Search';
@@ -42,12 +42,13 @@ function App() {
             <Route path="/chat-room" exact component={ChatRoom} />
             <Route path="/profile/:accountname" exact component={ToProfile} />
             <Route path="/profile" exact component={ToProfile} />
+            <Route path="/profile/:accountname/follower" exact component={FollowListPage} />
+            <Route path="/profile/:accountname/following" exact component={FollowListPage} />
             <Route path="/my-profile/add-product" exact component={AddProduct} />
             <Route path="/your-profile" exact component={YourProfile} />
             <Route path="/profile/modify" exact component={ModifyProfile} />
             <Route path="/follower" exact component={Follower} />
             <Route path="/following" exact component={Following} />
-            <Route path="/profile/:accountname/follow" exact component={FollowPage} />
             <Route path="/home-empty" exact component={HomeEmpty} />
             <Route path="/search" exact component={Search} />
             <Route component={NotFound} />

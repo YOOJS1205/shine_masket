@@ -9,6 +9,11 @@ const OtherUserInfoReducer = (state = initialState, action) => {
         ...state,
         OtherUserInfo: action.OtherUserInfo,
       };
+    case 'FOLLWING':
+      return {
+        ...state,
+        OtherUserInfo: action.OtherUserInfo,
+      };
     default:
       return state;
   }

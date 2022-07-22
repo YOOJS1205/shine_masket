@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
@@ -12,7 +12,7 @@ export default function Profile(props) {
     UserAccount: state.UserInfoReducer.UserAccount,
   }));
 
-  const goToFollowList = async () => {
+  const goToFollowerList = async () => {
     try {
       const accessToken = localStorage.getItem('accessToken');
 
@@ -29,7 +29,32 @@ export default function Profile(props) {
       const OtherUserInfo = res.data;
       dispatch({ type: 'FOLLWER', OtherUserInfo });
 
-      history.push(`/profile/${UserAccount}/follow`);
+      history.push(`/profile/${UserAccount}/follower`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const goToFollowingList = async () => {
+    try {
+      const accessToken = localStorage.getItem('accessToken');
+
+      const res = await axios.get(
+        `https://mandarin.api.weniv.co.kr/profile/${UserAccount}/following`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-type': 'application/json',
+          },
+        }
+      );
+
+      console.log('goToFollowingList');
+      console.log(res);
+      const OtherUserInfo = res.data;
+      dispatch({ type: 'FOLLWING', OtherUserInfo });
+
+      history.push(`/profile/${UserAccount}/following`);
     } catch (error) {
       console.log(error);
     }
@@ -40,17 +65,17 @@ export default function Profile(props) {
       <UserInfo>
         <h1 className="ir">사용자 정보</h1>
         <FollowArea>
-          <FollowersCount onClick={goToFollowList}>
+          <FollowersCount onClick={goToFollowerList}>
             {props.followersCount}
             <FollowersTxt>followers</FollowersTxt>
           </FollowersCount>
-          <MyProfileImg src={props.userImage}></MyProfileImg>
-          <Link to="/following">
-            <FollowersCount color="#767676">
-              {props.followingsCount}
-              <FollowersTxt>followings</FollowersTxt>
-            </FollowersCount>
-          </Link>
+
+          <MyProfileImg src={props.userImage} />
+
+          <FollowersCount onClick={goToFollowingList} color="#767676">
+            {props.followingsCount}
+            <FollowersTxt>followings</FollowersTxt>
+          </FollowersCount>
         </FollowArea>
 
         <UserArea>

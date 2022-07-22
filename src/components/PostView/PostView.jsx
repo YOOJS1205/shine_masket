@@ -87,7 +87,14 @@ export default function PostView() {
               <CommentCount>{post.commentCount}</CommentCount>
             </CommentBtn>
           </ButtonContainer>
-          <Date>{post.date}</Date>
+          <Date>
+            {post.createdAt.split('-')[0] +
+              '년 ' +
+              post.createdAt.split('-')[1] +
+              '월 ' +
+              post.createdAt.split('-')[2].split('T')[0] +
+              '일'}
+          </Date>
         </Container>
       ))}
     </>

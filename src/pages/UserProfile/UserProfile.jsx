@@ -40,9 +40,7 @@ export default function UserProfile() {
         </Profile>
         <PostView></PostView>
       </ProfileContainer>
-      {/* <PostProfile /> */}
-      {/* <PostUpdate /> */}
-      {/* <Post /> */}
+
       <TabMenu />
     </>
   );

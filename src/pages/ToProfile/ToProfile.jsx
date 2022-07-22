@@ -4,25 +4,28 @@ import Profile from '../../components/Profile/Profile';
 import TopMenuBar from '../../components/TopMenuBar/TopMenuBar';
 import TabMenu from '../../components/TabMenu/TabMenu';
 import Button from '../../components/Button/Button';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-export default function MyProfile() {
-  const history = useHistory();
-  const { UserId, UserName, UserAccount, UserIntro, UserImage } = useSelector((state) => ({
-    UserName: state.UserInfoReducer.UserName,
-    UserId: state.UserInfoReducer.UserId,
-    UserAccount: state.UserInfoReducer.UserAccount,
-    UserIntro: state.UserInfoReducer.UserIntro,
-    UserImage: state.UserInfoReducer.UserImage,
-  }));
+export default function ToProfile() {
+  const { UserName, UserAccount, UserIntro, UserImage, UserFollowerCount, UserFollowingCount } =
+    useSelector((state) => ({
+      UserName: state.UserInfoReducer.UserName,
+      UserId: state.UserInfoReducer.UserId,
+      UserAccount: state.UserInfoReducer.UserAccount,
+      UserIntro: state.UserInfoReducer.UserIntro,
+      UserImage: state.UserInfoReducer.UserImage,
+      UserFollowerCount: state.UserInfoReducer.UserFollowerCount,
+      UserFollowingCount: state.UserInfoReducer.UserFollowingCount,
+    }));
+
   return (
     <>
       <TopMenuBar />
       <ProfileContainer>
         <Profile
-          followersCount="2950"
-          followingsCount="128"
+          followersCount={UserFollowerCount}
+          followingsCount={UserFollowingCount}
           userImage={UserImage}
           userName={UserName}
           userId={UserAccount}

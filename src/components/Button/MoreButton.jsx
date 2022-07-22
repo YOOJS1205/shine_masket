@@ -6,7 +6,6 @@ import MoreIconSmall from '../../assets/icon/s-icon-more-vertical.png';
 import Modal from '../../components/Modal/Modal';
 
 export default function Button({ onClick, size }) {
-
   const [modal, setModal] = useState(false);
   return (
     <ButtonComponent onClick={onClick} size={size}>

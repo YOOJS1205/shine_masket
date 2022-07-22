@@ -10,6 +10,10 @@ import IconMyprofile from '../../assets/icon/icon-user.svg';
 import IconMyprofileHover from '../../assets/icon/icon-user-fill.png';
 
 // import { Link } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
+import { useLocation } from 'react-router';
 
 const Footer = styled.ul`
   position: absolute;
@@ -81,6 +85,45 @@ const GoMyprofileIcon = styled.a`
 `;
 
 export default function TabMenu() {
+  const { UserAccount } = useSelector((state) => ({
+    UserAccount: state.UserInfoReducer.UserAccount,
+  }));
+
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const location = useLocation();
+
+  const goToProfile = async () => {
+    try {
+      const accessToken = localStorage.getItem('accessToken');
+      const res = await axios.get(`https://mandarin.api.weniv.co.kr/profile/${UserAccount}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-type': 'application/json',
+        },
+      });
+
+      console.log(res);
+      const UserFollowing = res.data.profile.following;
+      const UserFollower = res.data.profile.follower;
+      const UserFollowerCount = res.data.profile.followerCount;
+      const UserFollowingCount = res.data.profile.followingCount;
+      console.log(UserFollowingCount);
+
+      dispatch({
+        type: 'FOLLOW',
+        UserFollowing,
+        UserFollower,
+        UserFollowerCount,
+        UserFollowingCount,
+      });
+
+      history.push(`/profile/${UserAccount}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Footer>
       <GoHome>
@@ -95,7 +138,7 @@ export default function TabMenu() {
         <GoUploadIcon />
         <p>게시물 작성</p>
       </GoUpload>
-      <GoMyprofile>
+      <GoMyprofile onClick={goToProfile}>
         <GoMyprofileIcon />
         <p>프로필</p>
       </GoMyprofile>

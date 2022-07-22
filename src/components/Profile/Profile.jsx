@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 
 // 이미지
 import basicProfileImg from '../../assets/images/basic-profile-img.png';
 
 export default function Profile(props) {
-  const [profileImg, setProfileImg] = useState(basicProfileImg);
+  // const [profileImg, setProfileImg] = useState(basicProfileImg);
+  const { UserAccount } = useSelector((state) => ({
+    UserAccount: state.UserInfoReducer.UserAccount,
+  }));
 
   return (
     <>
       <UserInfo>
         <h1 className="ir">사용자 정보</h1>
         <FollowArea>
-          <Link to="/follower">
+          <Link to="/profile/aAa/follow">
             <FollowersCount>
               {props.followersCount}
               <FollowersTxt>followers</FollowersTxt>
@@ -77,8 +81,9 @@ const FollowersTxt = styled.strong`
 
 const MyProfileImg = styled.img`
   padding: 0 41px;
-  width: 100%;
-  max-width: 110px;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
 `;
 
 // 2

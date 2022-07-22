@@ -46,7 +46,7 @@ function App() {
             <Route path="/profile/:accountname/following" exact component={FollowListPage} />
             <Route path="/my-profile/add-product" exact component={AddProduct} />
             <Route path="/your-profile" exact component={YourProfile} />
-            <Route path="/profile/modify" exact component={ModifyProfile} />
+            <Route path="/modify-profile" exact component={ModifyProfile} />
             <Route path="/follower" exact component={Follower} />
             <Route path="/following" exact component={Following} />
             <Route path="/home-empty" exact component={HomeEmpty} />

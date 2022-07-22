@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import Button from '../Button/Button';
 
 export default function UserCell(props) {
   const [isFollowed, setIsFollowed] = useState(false);
+  const [followState, setFollowState] = useState(false);
+
+  useEffect(() => {
+    setFollowState(props.isFollow);
+  }, [props.isFollow]);
 
   function followBtnClick() {
-    setIsFollowed(!isFollowed);
+    setFollowState((followState) => !followState);
   }
 
   return (
@@ -22,8 +28,9 @@ export default function UserCell(props) {
         <FollowButton
           onClick={followBtnClick}
           isActive={isFollowed}
+          isFollow={followState}
           size="small"
-          buttonText={!isFollowed ? '팔로우' : '취소'}
+          buttonText={followState ? '취소' : '팔로우'}
         ></FollowButton>
       </UserCellComponent>
     </>
@@ -66,4 +73,8 @@ const UserIntroduction = styled.span`
 
 const FollowButton = styled(Button)`
   margin-left: auto;
+  background-color: ${(props) =>
+    props.isFollow ? 'var(--color-active)' : 'var(--color-enabled-dark)'};
+  border: ${(props) => (props.isFollow ? '1px solid #DBDBDB' : null)};
+  color: ${(props) => (props.isFollow ? '#767676' : '#fff')};
 `;

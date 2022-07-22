@@ -11,7 +11,6 @@ export default function FollowListPage({ match }) {
       ) : (
         <TopMenuBar menuText="Followings" />
       )}
-
       <FollowList />
       <TabMenu />
     </>

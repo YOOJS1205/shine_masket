@@ -6,8 +6,8 @@ const initialState = {
   UserAccount: '',
   UserIntro: '',
   UserImage: '',
-  UserFollowing: '',
-  UserFollower: '',
+  UserFollowing: [],
+  UserFollower: [],
   UserFollowerCount: 0,
   UserFollowingCount: 0,
 };

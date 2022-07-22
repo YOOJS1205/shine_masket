@@ -1,35 +1,81 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-
-// 이미지
-import basicProfileImg from '../../assets/images/basic-profile-img.png';
+import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
 
 export default function Profile(props) {
-  // const [profileImg, setProfileImg] = useState(basicProfileImg);
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const { UserAccount } = useSelector((state) => ({
     UserAccount: state.UserInfoReducer.UserAccount,
   }));
+
+  const goToFollowerList = async () => {
+    try {
+      const accessToken = localStorage.getItem('accessToken');
+
+      const res = await axios.get(
+        `https://mandarin.api.weniv.co.kr/profile/${UserAccount}/follower`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-type': 'application/json',
+          },
+        }
+      );
+
+      const OtherUserInfo = res.data;
+      dispatch({ type: 'FOLLWER', OtherUserInfo });
+
+      history.push(`/profile/${UserAccount}/follower`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const goToFollowingList = async () => {
+    try {
+      const accessToken = localStorage.getItem('accessToken');
+
+      const res = await axios.get(
+        `https://mandarin.api.weniv.co.kr/profile/${UserAccount}/following`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-type': 'application/json',
+          },
+        }
+      );
+
+      console.log('goToFollowingList');
+      console.log(res);
+      const OtherUserInfo = res.data;
+      dispatch({ type: 'FOLLWING', OtherUserInfo });
+
+      history.push(`/profile/${UserAccount}/following`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
       <UserInfo>
         <h1 className="ir">사용자 정보</h1>
         <FollowArea>
-          <Link to="/profile/aAa/follow">
-            <FollowersCount>
-              {props.followersCount}
-              <FollowersTxt>followers</FollowersTxt>
-            </FollowersCount>
-          </Link>
-          <MyProfileImg src={props.userImage}></MyProfileImg>
-          <Link to="/following">
-            <FollowersCount color="#767676">
-              {props.followingsCount}
-              <FollowersTxt>followings</FollowersTxt>
-            </FollowersCount>
-          </Link>
+          <FollowersCount onClick={goToFollowerList}>
+            {props.followersCount}
+            <FollowersTxt>followers</FollowersTxt>
+          </FollowersCount>
+
+          <MyProfileImg src={props.userImage} />
+
+          <FollowersCount onClick={goToFollowingList} color="#767676">
+            {props.followingsCount}
+            <FollowersTxt>followings</FollowersTxt>
+          </FollowersCount>
         </FollowArea>
 
         <UserArea>

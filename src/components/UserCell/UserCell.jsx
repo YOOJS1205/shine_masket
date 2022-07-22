@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import basicProfileImg from '../../assets/images/basic-profile-img.png';
 import Button from '../Button/Button';
 
 export default function UserCell(props) {
@@ -9,13 +8,12 @@ export default function UserCell(props) {
 
   function followBtnClick() {
     setIsFollowed(!isFollowed);
-    console.log('ddd');
   }
 
   return (
     <>
       <UserCellComponent>
-        <UserProfileImg src={basicProfileImg}></UserProfileImg>
+        <UserProfileImg src={props.image} />
         <UserArea>
           <UserName>{props.userName}</UserName>
           <UserIntroduction>{props.UserIntroduction}</UserIntroduction>
@@ -41,6 +39,7 @@ const UserCellComponent = styled.article`
 const UserProfileImg = styled.img`
   margin-right: 12px;
   width: 50px;
+  border-radius: 50%;
 `;
 
 const UserArea = styled.div`

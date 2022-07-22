@@ -1,17 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
-// 이미지
-import basicProfileImg from '../../assets/images/basic-profile-img.png';
-
 export default function Profile(props) {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  // const [profileImg, setProfileImg] = useState(basicProfileImg);
   const { UserAccount } = useSelector((state) => ({
     UserAccount: state.UserInfoReducer.UserAccount,
   }));
@@ -32,21 +28,6 @@ export default function Profile(props) {
 
       const OtherUserInfo = res.data;
       dispatch({ type: 'FOLLWER', OtherUserInfo });
-      console.log(OtherUserInfo);
-
-      // res.data.map((e) => {
-      //   const OtherUserName = e.username;
-      //   const OtherUserImage = e.image;
-      //   const OtherUserIntro = e.intro;
-      //   console.log(OtherUserName);
-      //   dispatch({
-      //     type: 'FOLLWER',
-      //     OtherUserInfo
-      //     // OtherUserName,
-      //     // OtherUserImage,
-      //     // OtherUserIntro,
-      //   });
-      // });
 
       history.push(`/profile/${UserAccount}/follow`);
     } catch (error) {
@@ -59,12 +40,10 @@ export default function Profile(props) {
       <UserInfo>
         <h1 className="ir">사용자 정보</h1>
         <FollowArea>
-          {/* <Link to="/profile/aAa/follow"> */}
           <FollowersCount onClick={goToFollowList}>
             {props.followersCount}
             <FollowersTxt>followers</FollowersTxt>
           </FollowersCount>
-          {/* </Link> */}
           <MyProfileImg src={props.userImage}></MyProfileImg>
           <Link to="/following">
             <FollowersCount color="#767676">

@@ -1,32 +1,19 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import basicProfileImg from '../../assets/images/basic-profile-img.png';
 import Button from '../Button/Button';
-
-import { useSelector, useDispatch } from 'react-redux';
 
 export default function UserCell(props) {
   const [isFollowed, setIsFollowed] = useState(false);
-  const { OtherUserInfo } = useSelector((state) => ({
-    OtherUserInfo: state.OtherUserInfoReducer.OtherUserInfo,
-  }));
 
   function followBtnClick() {
     setIsFollowed(!isFollowed);
   }
 
-  // console.log('성공??');
-  console.log(OtherUserInfo);
-  // console.log('성공??');
-
   return (
     <>
       <UserCellComponent>
-        {/* {OtherUserInfo.map((users) => (
-          <UserProfileImg key={users._id} src={users.image} />
-        ))} */}
-
+        <UserProfileImg src={props.image} />
         <UserArea>
           <UserName>{props.userName}</UserName>
           <UserIntroduction>{props.UserIntroduction}</UserIntroduction>

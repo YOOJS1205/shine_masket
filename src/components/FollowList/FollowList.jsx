@@ -2,18 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import UserCell from '../UserCell/UserCell';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 export default function FollowList() {
   const { OtherUserInfo } = useSelector((state) => ({
     OtherUserInfo: state.OtherUserInfoReducer.OtherUserInfo,
   }));
-
-  // console.log('성공??');
-  // console.log(OtherUserInfo);
-  // console.log('성공??');
-  // console.log(OtherUserImage);
-  // console.log(OtherUserIntro);
 
   return (
     <>
@@ -23,9 +17,9 @@ export default function FollowList() {
             key={users._id}
             userName={users.username}
             UserIntroduction={users.intro}
+            image={users.image}
           ></UserCell>
         ))}
-        {/* <UserCell userName={OtherUserName} UserIntroduction={OtherUserIntro}></UserCell> */}
       </FollowListComponent>
     </>
   );

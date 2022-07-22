@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import UserCell from '../UserCell/UserCell';
 
 import { useSelector } from 'react-redux';
 
 export default function FollowList() {
-  const { OtherUserInfo } = useSelector((state) => ({
+  const { OtherUserInfo, UserFollowing } = useSelector((state) => ({
     OtherUserInfo: state.OtherUserInfoReducer.OtherUserInfo,
+    UserFollowing: state.UserInfoReducer.UserFollowing,
   }));
+
+  OtherUserInfo.map((item) => {
+    if (UserFollowing.includes(item._id)) {
+      item.isFollow = true;
+    } else {
+      item.isFollow = false;
+    }
+  });
 
   return (
     <>
@@ -18,6 +27,7 @@ export default function FollowList() {
             userName={users.username}
             UserIntroduction={users.intro}
             image={users.image}
+            isFollow={users.isFollow}
           ></UserCell>
         ))}
       </FollowListComponent>

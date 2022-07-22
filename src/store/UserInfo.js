@@ -1,5 +1,6 @@
 const initialState = {
   UserId: '',
+  User_Id: '',
   registerPassword: '',
   loginToken: '',
   UserName: '',
@@ -18,6 +19,7 @@ const UserInfoReducer = (state = initialState, action) => {
       return {
         ...state,
         UserId: action.UserId,
+        User_Id: action.User_Id,
         UserName: action.UserName,
         UserAccount: action.UserAccount,
         UserImage: action.UserImage,

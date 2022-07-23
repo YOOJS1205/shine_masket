@@ -7,7 +7,12 @@ import Button from '../../components/Button/Button';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-export default function ToProfile() {
+import PostView from '../../components/PostView/PostView';
+import PostProfile from '../../components/PostView/PostProfile/PostProfile';
+import PostUpdate from '../PostUpdate/PostUpdate';
+import Post from '../Post/Post';
+
+export default function UserProfile() {
   const { UserName, UserAccount, UserIntro, UserImage, UserFollowerCount, UserFollowingCount } =
     useSelector((state) => ({
       UserName: state.UserInfoReducer.UserName,
@@ -33,7 +38,9 @@ export default function ToProfile() {
         >
           <MyProfileButton />
         </Profile>
+        <PostView></PostView>
       </ProfileContainer>
+
       <TabMenu />
     </>
   );
@@ -42,9 +49,9 @@ export default function ToProfile() {
 const MyProfileButton = () => {
   return (
     <>
-      <Link to="/modify-profile">
-        <Button isActive buttonText="프로필 수정" size="medium" />
-      </Link>
+      {/* <Link to=`/profile/${props.}/modify`> */}
+      <Button isActive buttonText="프로필 수정" size="medium" />
+      {/* </Link> */}
       <Link to="/my-profile/add-product">
         <Button isActive buttonText="상품 등록" size="100" />
       </Link>
@@ -55,5 +62,5 @@ const MyProfileButton = () => {
 const ProfileContainer = styled.section`
   margin: 0 auto;
   width: 100%;
-  background-color: #f2f2f2;
+  /* background-color: #f2f2f2; */
 `;

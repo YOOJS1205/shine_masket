@@ -10,7 +10,7 @@ import ChatList from './pages/ChatList/ChatList';
 import Join from './pages/Join/Join';
 import ProfileSetting from './pages/ProfileSetting/ProfileSetting';
 import ChatRoom from './pages/ChatRoom/ChatRoom';
-import ToProfile from './pages/ToProfile/ToProfile';
+import UserProfile from './pages/UserProfile/UserProfile';
 import YourProfile from './pages/YourProfile/YourProfile';
 import Post from './pages/Post/Post';
 import PostUpdate from './pages/PostUpdate/PostUpdate';
@@ -40,13 +40,13 @@ function App() {
             <Route path="/upload" exact component={Upload} />
             <Route path="/chat-list" exact component={ChatList} />
             <Route path="/chat-room" exact component={ChatRoom} />
-            <Route path="/profile/:accountname" exact component={ToProfile} />
-            <Route path="/profile" exact component={ToProfile} />
+            <Route path="/profile/:accountname" exact component={UserProfile} />
+            <Route path="/profile" exact component={UserProfile} />
             <Route path="/profile/:accountname/follower" exact component={FollowListPage} />
             <Route path="/profile/:accountname/following" exact component={FollowListPage} />
             <Route path="/my-profile/add-product" exact component={AddProduct} />
             <Route path="/your-profile" exact component={YourProfile} />
-            <Route path="/modify-profile" exact component={ModifyProfile} />
+            <Route path="/profile/:accountname/modify" exact component={ModifyProfile} />
             <Route path="/follower" exact component={Follower} />
             <Route path="/following" exact component={Following} />
             <Route path="/home-empty" exact component={HomeEmpty} />

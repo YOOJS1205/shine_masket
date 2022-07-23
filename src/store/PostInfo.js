@@ -8,6 +8,7 @@ const initialState = {
   heartCount: '',
   commentCount: '',
   updateImages: '',
+  postList: [],
 };
 
 const PostInfoReducer = (state = initialState, action) => {
@@ -47,6 +48,15 @@ const PostInfoReducer = (state = initialState, action) => {
           action.date.split('-')[2].split('T')[0] +
           '일',
         postImages: action.postImages.split(','),
+      };
+    case 'GET_POST':
+      return {
+        ...state,
+        postList: action.postList,
+        // userAccount: action.userAccount,
+        // userImage: action.userImage,
+        // content: action.content,
+        // postImages: action.postImages.split(','),
       };
     default:
       return state;

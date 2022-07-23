@@ -7,15 +7,25 @@ import Modal from '../../components/Modal/Modal';
 
 export default function Button({ onClick, size }) {
   const [modal, setModal] = useState(false);
+  const onClickMoreBtn = () => {
+    setModal(true)
+  }
+
+  const handlecloseModal = (state) => {
+    setModal(state)
+  }
+
   return (
-    <ButtonComponent onClick={onClick} size={size}>
-      {onClick}
-      {size === 'large' ? (
-        <Img src={MoreIcon} />
-      ) : size === 'small' ? (
-        <Img src={MoreIconSmall} />
-      ) : null}
-    </ButtonComponent>
+    <>
+      <ButtonComponent onClick={onClickMoreBtn} size={size}>
+        {size === 'large' ? (
+          <Img src={MoreIcon} />
+          ) : size === 'small' ? (
+            <Img src={MoreIconSmall} />
+            ) : null}
+      </ButtonComponent>
+      {modal ? <Modal closeModal={handlecloseModal} isOpened={modal} /> : null}
+    </>
   );
 }
 

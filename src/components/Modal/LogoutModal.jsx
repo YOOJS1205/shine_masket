@@ -1,10 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
-export default function LogoutModal() {
+export default function LogoutModal({ text, buttonText }) {
   const history = useHistory();
+  const location = useLocation();
 
   function onClickLogoutButton() {
     localStorage.clear();
@@ -14,9 +15,11 @@ export default function LogoutModal() {
   return (
     <>
       <LogoutWrap>
-        <LogoutText>로그아웃 하시겠어요?</LogoutText>
+        <LogoutText>{text}</LogoutText>
         <FuncButton>취소</FuncButton>
-        <LogoutButton onClick={onClickLogoutButton}>로그아웃</LogoutButton>
+        <LogoutButton onClick={location.pathname === '/chat-list' ? onClickLogoutButton : null}>
+          {buttonText}
+        </LogoutButton>
       </LogoutWrap>
     </>
   );

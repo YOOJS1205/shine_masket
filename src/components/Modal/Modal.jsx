@@ -1,10 +1,11 @@
 import React from 'react';
 import { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import LogoutModal from './LogoutModal';
 
-export default function Modal({ onClick, getRef }) {
+export default function Modal({ onClick, getRef, text }) {
+  const location = useLocation();
   const NotModal = useRef();
   const Modal = useRef();
   const [logout, setLogout] = useState(false);
@@ -20,11 +21,17 @@ export default function Modal({ onClick, getRef }) {
       <ChatModal ref={NotModal} onClick={onClick}>
         <ChatModal_Ul ref={Modal}>
           <li>
-            <Link to="/my-profile">설정 및 개인정보</Link>
+            <Link to="/my-profile">{text[0]}</Link>
           </li>
-          <li onClick={onClickLogoutBtn}>로그아웃</li>
+          <li onClick={onClickLogoutBtn}>{text[1]}</li>
         </ChatModal_Ul>
-        {logout ? <LogoutModal /> : null}
+        {logout ? (
+          location.pathname === '/chat-list' ? (
+            <LogoutModal buttonText="로그아웃" text="로그아웃 하시겠어요?" />
+          ) : (
+            <LogoutModal buttonText="삭제" text="게시글을 삭제할까요?" />
+          )
+        ) : null}
       </ChatModal>
     </>
   );
@@ -76,4 +83,3 @@ const ChatModal_Ul = styled.ul`
     }
   }
 `;
-const LogoutBtn = styled.li``;

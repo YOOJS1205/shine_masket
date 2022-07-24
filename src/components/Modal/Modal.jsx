@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import LogoutModal from './LogoutModal';
 
@@ -9,19 +9,23 @@ export default function Modal({ onClick, getRef, text }) {
   const NotModal = useRef();
   const Modal = useRef();
   const [logout, setLogout] = useState(false);
+  const { postId } = useParams();
 
   const onClickLogoutBtn = () => {
     setLogout(true);
   };
 
   getRef(Modal);
+  console.log(postId);
 
   return (
     <>
       <ChatModal ref={NotModal} onClick={onClick}>
         <ChatModal_Ul ref={Modal}>
           <li>
-            <Link to={location.pathname === '/chat-list' ? null : '/my-profile'}>{text[0]}</Link>
+            <Link to={location.pathname === '/chat-list' ? null : `/post/${postId}/update`}>
+              {text[0]}
+            </Link>
           </li>
           <li onClick={onClickLogoutBtn}>{text[1]}</li>
         </ChatModal_Ul>

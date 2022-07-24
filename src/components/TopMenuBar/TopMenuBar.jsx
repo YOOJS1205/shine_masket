@@ -6,6 +6,7 @@ import Button from '../Button/Button';
 import LeftArrow from '../../assets/icon/icon-arrow-left.png';
 import Search from '../../assets/icon/icon-search.png';
 import MoreButton from '../Button/MoreButton';
+import { useSelector } from 'react-redux';
 
 export default function TopMenuBar({
   saveButton,
@@ -22,13 +23,14 @@ export default function TopMenuBar({
 }) {
   const history = useHistory();
   const { postId } = useParams();
+  const { UserAccount } = useSelector((state) => state.UserInfoReducer);
 
   return (
     <Container>
       <PreviousBtn
         onClick={
           location.pathname === `/post/${postId}`
-            ? () => history.push('/home-empty')
+            ? () => history.push(`/profile/${UserAccount}`)
             : () => history.goBack()
         }
         display={preDisplay}

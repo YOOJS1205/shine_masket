@@ -21,7 +21,7 @@ export default function Modal({ onClick, getRef, text }) {
       <ChatModal ref={NotModal} onClick={onClick}>
         <ChatModal_Ul ref={Modal}>
           <li>
-            <Link to="/my-profile">{text[0]}</Link>
+            <Link to={location.pathname === '/chat-list' ? null : '/my-profile'}>{text[0]}</Link>
           </li>
           <li onClick={onClickLogoutBtn}>{text[1]}</li>
         </ChatModal_Ul>

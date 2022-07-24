@@ -1,30 +1,41 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
 import MoreIcon from '../../assets/icon/icon-more-vertical.png';
 import MoreIconSmall from '../../assets/icon/s-icon-more-vertical.png';
 import Modal from '../../components/Modal/Modal';
 
-export default function Button({ onClick, size }) {
+export default function Button({ size }) {
   const [modal, setModal] = useState(false);
+  const [ref, setRef] = useState('');
   const onClickMoreBtn = () => {
-    setModal(true)
-  }
+    setModal(true);
+  };
 
-  const handlecloseModal = (state) => {
-    setModal(state)
-  }
+  const handlecloseModal = (e) => {
+    if (e.target !== ref.current && e.target !== ref.current.childNodes[1]) {
+      console.log(e.target, ref.current.childNodes[1]);
+      setModal(false);
+    }
+  };
+
+  const getRef = (data) => {
+    useEffect(() => {
+      setRef(data);
+    }, [data]);
+  };
 
   return (
     <>
       <ButtonComponent onClick={onClickMoreBtn} size={size}>
         {size === 'large' ? (
           <Img src={MoreIcon} />
-          ) : size === 'small' ? (
-            <Img src={MoreIconSmall} />
-            ) : null}
+        ) : size === 'small' ? (
+          <Img src={MoreIconSmall} />
+        ) : null}
       </ButtonComponent>
-      {modal ? <Modal closeModal={handlecloseModal} /> : null}
+      {modal ? <Modal getRef={getRef} modal={modal} onClick={handlecloseModal} /> : null}
     </>
   );
 }

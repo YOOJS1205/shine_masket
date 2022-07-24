@@ -2,11 +2,16 @@ import React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import LogoutModal from './LogoutModal';
 
 
 export default function Modal(props) {
   const onClickMoreBtn = () => {
     props.closeModal(false)
+  }
+  const [logout, setLogout] = useState(false);
+  const onClickLogoutBtn = () => {
+    setLogout(true)
   }
   return (
     <>
@@ -15,8 +20,13 @@ export default function Modal(props) {
           <li>
             <Link to="/my-profile">설정 및 개인정보</Link>
           </li>
-          <li>
-            <Link to="/">로그아웃</Link>
+          <li onClick={(e) => {
+            e.preventDefault();
+            <LogoutModal onClick={onClickLogoutBtn} />
+          }
+            
+            }>
+            로그아웃
           </li>
         </ChatModal_Ul>
       </ChatModal>
@@ -64,8 +74,11 @@ const ChatModal_Ul = styled.ul`
     font-size: 14px;
     line-height: 18px;
     margin-top:28px;
+    color: #767676;
+    cursor: pointer;
     >a {
       display:block
     }
   }
-`;
+`
+const LogoutBtn = styled.li``

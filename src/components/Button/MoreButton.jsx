@@ -24,7 +24,7 @@ export default function Button({ onClick, size }) {
             <Img src={MoreIconSmall} />
             ) : null}
       </ButtonComponent>
-      {modal ? <Modal closeModal={handlecloseModal} isOpened={modal} /> : null}
+      {modal ? <Modal closeModal={handlecloseModal} /> : null}
     </>
   );
 }

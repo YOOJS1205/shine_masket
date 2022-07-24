@@ -1,0 +1,21 @@
+.transition-group {
+  position: relative;
+}
+
+.fade-entering {
+  opacity: 0;
+}
+
+.fade-entered {
+  opacity: 1;
+  transition: opacity 1000ms;
+}
+
+.fade-exiting {
+  opacity: 1;
+}
+
+.fade-exited {
+  opacity: 0;
+  transition: opacity 1000ms;
+}

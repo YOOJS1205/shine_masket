@@ -1,49 +1,44 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import LogoutModal from './LogoutModal';
 
-
-export default function Modal(props) {
-  const onClickMoreBtn = () => {
-    props.closeModal(false)
-  }
+export default function Modal({ onClick, getRef }) {
+  const NotModal = useRef();
+  const Modal = useRef();
   const [logout, setLogout] = useState(false);
+
   const onClickLogoutBtn = () => {
-    setLogout(true)
-  }
+    setLogout(true);
+  };
+
+  getRef(Modal);
+
   return (
     <>
-      <ChatModal onClick={onClickMoreBtn}>
-        <ChatModal_Ul>
+      <ChatModal ref={NotModal} onClick={onClick}>
+        <ChatModal_Ul ref={Modal}>
           <li>
             <Link to="/my-profile">설정 및 개인정보</Link>
           </li>
-          <li onClick={(e) => {
-            e.preventDefault();
-            <LogoutModal onClick={onClickLogoutBtn} />
-          }
-            
-            }>
-            로그아웃
-          </li>
+          <li onClick={onClickLogoutBtn}>로그아웃</li>
         </ChatModal_Ul>
+        {logout ? <LogoutModal /> : null}
       </ChatModal>
     </>
   );
 }
 
 const ChatModal = styled.aside`
-
-  position:absolute;
-  top:0px;
-  left:0px;
-  right:0px;
-  bottom:0px;
-  background:rgba(0,0,0,0.3);
-  z-index:10;
-`
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 10;
+`;
 
 const ChatModal_Ul = styled.ul`
   position: fixed;
@@ -73,12 +68,12 @@ const ChatModal_Ul = styled.ul`
     font-weight: 400;
     font-size: 14px;
     line-height: 18px;
-    margin-top:28px;
+    margin-top: 28px;
     color: #767676;
     cursor: pointer;
-    >a {
-      display:block
+    > a {
+      display: block;
     }
   }
-`
-const LogoutBtn = styled.li``
+`;
+const LogoutBtn = styled.li``;

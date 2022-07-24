@@ -1,12 +1,14 @@
 import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import MoreIcon from '../../assets/icon/icon-more-vertical.png';
 import MoreIconSmall from '../../assets/icon/s-icon-more-vertical.png';
 import Modal from '../../components/Modal/Modal';
 
 export default function Button({ size }) {
+  const location = useLocation();
+
   const [modal, setModal] = useState(false);
   const [ref, setRef] = useState('');
   const onClickMoreBtn = () => {
@@ -35,7 +37,16 @@ export default function Button({ size }) {
           <Img src={MoreIconSmall} />
         ) : null}
       </ButtonComponent>
-      {modal ? <Modal getRef={getRef} modal={modal} onClick={handlecloseModal} /> : null}
+      {modal ? (
+        <Modal
+          getRef={getRef}
+          modal={modal}
+          onClick={handlecloseModal}
+          text={
+            location.pathname === '/chat-list' ? ['설정 및 개인정보', '로그아웃'] : ['수정', '삭제']
+          }
+        />
+      ) : null}
     </>
   );
 }

@@ -16,7 +16,7 @@ export default function PostView() {
 
   useEffect(() => {
     getPost();
-  }, []);
+  });
 
   const imgErrorHandler = (e) => {
     const target = e.target.parentNode.parentNode;
@@ -45,7 +45,7 @@ export default function PostView() {
       {postList.post.map((post) => (
         <Container key={post.id}>
           <h1 className="ir">게시글 댓글 페이지</h1>
-          <PostProfile />
+          <PostProfile postId={post.id} />
           <PostContainer>
             <PostText>{post.content}</PostText>
             <ImageContainer

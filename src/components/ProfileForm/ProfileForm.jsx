@@ -67,7 +67,7 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
 
   // 계정 ID 유효성 검사
   useEffect(() => {
-    const regExp = /^[a-z0-9A-Z_.,()]{1,}$/;
+    const regExp = /^[a-z0-9A-Z_.]{1,}$/;
     if (regExp.test(userAccount) || !userAccount) {
       setIsId(true);
     } else {
@@ -125,7 +125,6 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
         history.push('/login');
       }
     } catch (error) {
-      console.log(error);
       if (error.response.data.message === '이미 사용중인 계정 ID입니다.') {
         setIsExist(true);
       } else {
@@ -155,10 +154,10 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
       <UserInfoInput
         onChange={onHandleUserAccount}
         TitleText="계정 ID"
-        placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다."
+        placeholder="영문, 숫자, 특수문자(.) , (_)만 사용 가능합니다."
         isLast={false}
       />
-      {isId ? null : <WarningText>* 영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.</WarningText>}
+      {isId ? null : <WarningText>* 영문, 숫자, 특수문자(.) , (_)만 사용 가능합니다.</WarningText>}
       {isExist ? <WarningText>* 이미 사용중인 계정입니다.</WarningText> : null}
       <InputTitle TitleText="소개" />
       <UserInfoInput

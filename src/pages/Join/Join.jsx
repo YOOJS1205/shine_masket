@@ -35,7 +35,7 @@ export default function Join() {
     const password = joinPassword;
     const regExp =
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-    if (regExp.test(email)) {
+    if (regExp.test(email) || !email) {
       setEmailAvailable(true);
     } else {
       setEmailAvailable(false);
@@ -59,7 +59,6 @@ export default function Join() {
           email: joinId,
         },
       });
-      console.log(res.data.message);
 
       if (res.data.message === '이미 가입된 이메일 주소 입니다.') {
         setIsUser(true);
@@ -75,7 +74,9 @@ export default function Join() {
         history.push('/join/profile');
       }
     } catch (error) {
-      console.log(error);
+      if (error.response.data.message === '잘못된 이메일 형식입니다.') {
+        setEmailAvailable(false);
+      }
     }
   };
 

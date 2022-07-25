@@ -166,9 +166,13 @@ export default function TabMenu() {
     history.push('/chat-list');
   };
 
+  const home = () => {
+    history.push('/home');
+  }
+
   return (
     <Footer>
-      <GoHome>
+      <GoHome onClick={home}>
         <GoHomeIcon />
         <p>홈</p>
       </GoHome>

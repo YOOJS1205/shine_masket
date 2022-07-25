@@ -1,6 +1,7 @@
 const initialState = {
   userName: '',
   userAccount: '',
+  userImage: '',
   content: '',
   date: '',
   postId: '',

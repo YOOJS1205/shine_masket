@@ -1,9 +1,10 @@
 import React from 'react';
-import { useState } from 'react';
+import axios from 'axios';
 import { useHistory, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 
-export default function LogoutModal({ text, buttonText }) {
+export default function LogoutModal({ text, buttonText, postId }) {
   const history = useHistory();
   const location = useLocation();
 
@@ -12,12 +13,38 @@ export default function LogoutModal({ text, buttonText }) {
     history.push('/welcome');
   }
 
+  async function onClickDeleteButton(e) {
+    e.preventDefault();
+    try {
+      const token = localStorage.getItem('accessToken');
+      const res = await axios.delete(`https://mandarin.api.weniv.co.kr/post/${postId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-type': 'application/json',
+        },
+      });
+      if (res.response.data.message === '삭제되었습니다.') {
+        alert('삭제되었습니다.');
+      }
+    } catch (error) {
+      console.log(error);
+      if (error.response.data.message === '존재하지 않는 게시글입니다.') {
+        alert('존재하지 않는 게시글입니다.');
+      }
+      if (error.response.data.message === '잘못된 요청입니다. 로그인 정보를 확인하세요') {
+        alert('잘못된 요청입니다. 로그인 정보를 확인하세요.');
+      }
+    }
+  }
+
   return (
     <>
       <LogoutWrap>
         <LogoutText>{text}</LogoutText>
         <FuncButton>취소</FuncButton>
-        <LogoutButton onClick={location.pathname === '/chat-list' ? onClickLogoutButton : null}>
+        <LogoutButton
+          onClick={location.pathname === '/chat-list' ? onClickLogoutButton : onClickDeleteButton}
+        >
           {buttonText}
         </LogoutButton>
       </LogoutWrap>

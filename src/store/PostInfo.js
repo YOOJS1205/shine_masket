@@ -53,10 +53,6 @@ const PostInfoReducer = (state = initialState, action) => {
       return {
         ...state,
         postList: action.postList,
-        // userAccount: action.userAccount,
-        // userImage: action.userImage,
-        // content: action.content,
-        // postImages: action.postImages.split(','),
       };
     default:
       return state;

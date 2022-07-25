@@ -16,7 +16,7 @@ export default function PostView() {
 
   useEffect(() => {
     getPost();
-  }, []);
+  });
 
   const imgErrorHandler = (e) => {
     const target = e.target.parentNode.parentNode;
@@ -32,6 +32,7 @@ export default function PostView() {
           'Content-type': 'application/json',
         },
       });
+      console.log(res.data);
     } catch (error) {
       console.log(error);
       if (error.response.data.message === '존재하지 않는 게시글입니다.') {
@@ -45,7 +46,12 @@ export default function PostView() {
       {postList.post.map((post) => (
         <Container key={post.id}>
           <h1 className="ir">게시글 댓글 페이지</h1>
-          <PostProfile />
+          <PostProfile
+            postId={post.id}
+            userName={post.author.username}
+            userAccount={post.author.accountname}
+            userImage={post.author.image}
+          />
           <PostContainer>
             <PostText>{post.content}</PostText>
             <ImageContainer
@@ -105,6 +111,8 @@ const Container = styled.section`
   padding: 20px 16px;
   box-sizing: border-box;
   border-bottom: 1px solid #dbdbdb;
+
+  background-color: #fff;
 `;
 
 const PostContainer = styled.div`

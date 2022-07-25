@@ -1,15 +1,14 @@
 import React from 'react';
 import { useState, useRef } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import LogoutModal from './LogoutModal';
 
-export default function Modal({ onClick, getRef, text }) {
+export default function Modal({ onClick, getRef, text, postId }) {
   const location = useLocation();
   const NotModal = useRef();
   const Modal = useRef();
   const [logout, setLogout] = useState(false);
-  const { postId } = useParams();
 
   const onClickLogoutBtn = () => {
     setLogout(true);
@@ -33,7 +32,7 @@ export default function Modal({ onClick, getRef, text }) {
           location.pathname === '/chat-list' ? (
             <LogoutModal buttonText="로그아웃" text="로그아웃 하시겠어요?" />
           ) : (
-            <LogoutModal buttonText="삭제" text="게시글을 삭제할까요?" />
+            <LogoutModal buttonText="삭제" text="게시글을 삭제할까요?" postId={postId} />
           )
         ) : null}
       </ChatModal>

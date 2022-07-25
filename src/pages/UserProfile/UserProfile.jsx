@@ -4,13 +4,11 @@ import Profile from '../../components/Profile/Profile';
 import TopMenuBar from '../../components/TopMenuBar/TopMenuBar';
 import TabMenu from '../../components/TabMenu/TabMenu';
 import Button from '../../components/Button/Button';
-import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import PostView from '../../components/PostView/PostView';
-import PostProfile from '../../components/PostView/PostProfile/PostProfile';
-import PostUpdate from '../PostUpdate/PostUpdate';
-import Post from '../Post/Post';
+import SaleProduct from '../../components/SaleProduct/SaleProduct';
 
 export default function UserProfile() {
   const { UserName, UserAccount, UserIntro, UserImage, UserFollowerCount, UserFollowingCount } =
@@ -38,23 +36,33 @@ export default function UserProfile() {
         >
           <MyProfileButton />
         </Profile>
+        <SaleProduct />
         <PostView></PostView>
       </ProfileContainer>
-
       <TabMenu />
     </>
   );
 }
 
 const MyProfileButton = () => {
+  const history = useHistory();
+
+  const { UserAccount } = useSelector((state) => ({
+    UserAccount: state.UserInfoReducer.UserAccount,
+  }));
+
+  function goToAddProduct() {
+    history.push(`/${UserAccount}/add-product`);
+  }
+
+  function goToProfileModify() {
+    history.push(`/profile/${UserAccount}/modify`);
+  }
+
   return (
     <>
-      {/* <Link to=`/profile/${props.}/modify`> */}
-      <Button isActive buttonText="프로필 수정" size="medium" />
-      {/* </Link> */}
-      <Link to="/my-profile/add-product">
-        <Button isActive buttonText="상품 등록" size="100" />
-      </Link>
+      <Button onClick={goToProfileModify} isActive buttonText="프로필 수정" size="medium" />
+      <Button onClick={goToAddProduct} isActive buttonText="상품 등록" size="100" />
     </>
   );
 };
@@ -62,5 +70,5 @@ const MyProfileButton = () => {
 const ProfileContainer = styled.section`
   margin: 0 auto;
   width: 100%;
-  /* background-color: #f2f2f2; */
+  background-color: #f2f2f2;
 `;

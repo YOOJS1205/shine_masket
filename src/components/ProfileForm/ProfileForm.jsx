@@ -15,9 +15,10 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
 
   const photoInput = useRef();
   // 전역 데이터로 담긴 가입 ID, PW 가져오기
-  const { UserId, registerPassword } = useSelector((state) => ({
+  const { UserId, registerPassword, UserAccount } = useSelector((state) => ({
     UserId: state.UserInfoReducer.UserId,
     registerPassword: state.UserInfoReducer.registerPassword,
+    UserAccount: state.UserInfoReducer.UserAccount,
   }));
 
   // 사용자가 설정한 이름, 계정 ID, 소개 변수에 담기
@@ -30,11 +31,6 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
   const [isExist, setIsExist] = useState(false);
   const [imgSrc, setImgSrc] = useState('');
 
-  // 자식 컴포넌트에서 이미지 src 받아오기
-  const getImageSrc = (imgSrc) => {
-    setImgSrc(imgSrc);
-  };
-
   // Input 값이 모두 있어야 버튼 활성화
   useEffect(() => {
     if (userName && userAccount && userIntro && nameLength && isId) {
@@ -46,15 +42,12 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
 
   // 부모 컴포넌트인 ModifyProfile에 isEmpty 정보 전달
   // 부모 컴포넌트인 ModifyProfile에 userName, userAccount, userIntro 정보 전달
-  if (location.pathname === '/profile/modify') {
-    useEffect(() => {
+  useEffect(() => {
+    if (location.pathname === `/profile/${UserAccount}/modify`) {
       getEmptyInfo(isEmpty);
-    }, [isEmpty]);
-
-    useEffect(() => {
       getUserInfo(userName, userAccount, userIntro);
-    }, [userName, userAccount, userIntro]);
-  }
+    }
+  }, [isEmpty, userIntro]);
 
   // 사용자 이름 2~10자 이내 검사
   useEffect(() => {
@@ -67,13 +60,18 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
 
   // 계정 ID 유효성 검사
   useEffect(() => {
-    const regExp = /^[a-z0-9A-Z_.,()]{1,}$/;
+    const regExp = /^[a-z0-9A-Z_.]{1,}$/;
     if (regExp.test(userAccount) || !userAccount) {
       setIsId(true);
     } else {
       setIsId(false);
     }
   }, [userAccount]);
+
+  // 자식 컴포넌트에서 이미지 src 받아오기
+  const getImageSrc = (imgSrc) => {
+    setImgSrc(imgSrc);
+  };
 
   // 사용자가 입력하는 데이터 동적으로 변수에 저장
   const onHandleUserName = (e) => {
@@ -125,7 +123,6 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
         history.push('/login');
       }
     } catch (error) {
-      console.log(error);
       if (error.response.data.message === '이미 사용중인 계정 ID입니다.') {
         setIsExist(true);
       } else {
@@ -155,10 +152,10 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
       <UserInfoInput
         onChange={onHandleUserAccount}
         TitleText="계정 ID"
-        placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다."
+        placeholder="영문, 숫자, 특수문자(.) , (_)만 사용 가능합니다."
         isLast={false}
       />
-      {isId ? null : <WarningText>* 영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.</WarningText>}
+      {isId ? null : <WarningText>* 영문, 숫자, 특수문자(.) , (_)만 사용 가능합니다.</WarningText>}
       {isExist ? <WarningText>* 이미 사용중인 계정입니다.</WarningText> : null}
       <InputTitle TitleText="소개" />
       <UserInfoInput

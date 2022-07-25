@@ -1,23 +1,16 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import MoreButton from '../../Button/MoreButton';
 
-export default function PostProfile() {
-  const { UserImage, UserName, UserAccount } = useSelector((state) => ({
-    UserImage: state.UserInfoReducer.UserImage,
-    UserName: state.UserInfoReducer.UserName,
-    UserAccount: state.UserInfoReducer.UserAccount,
-  }));
-
+export default function PostProfile({ postId, userImage, userName, userAccount }) {
   return (
     <Profile>
-      <ProfileImg src={UserImage} alt="사용자 프로필 이미지"></ProfileImg>
+      <ProfileImg src={userImage} alt="사용자 프로필 이미지"></ProfileImg>
       <TextContainer>
-        <ProfileName>{UserName}</ProfileName>
-        <ProfileId>@ {UserAccount}</ProfileId>
+        <ProfileName>{userName}</ProfileName>
+        <ProfileId>@ {userAccount}</ProfileId>
       </TextContainer>
-      <MoreButton size="small" />
+      <MoreButton postId={postId} size="small" />
     </Profile>
   );
 }

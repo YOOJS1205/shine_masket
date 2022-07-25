@@ -1,14 +1,14 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import MoreIcon from '../../assets/icon/icon-more-vertical.png';
 import MoreIconSmall from '../../assets/icon/s-icon-more-vertical.png';
 import Modal from '../../components/Modal/Modal';
 
-export default function Button({ size }) {
+export default function MoreButton({ size, postId }) {
   const location = useLocation();
-
   const [modal, setModal] = useState(false);
   const [ref, setRef] = useState('');
   const onClickMoreBtn = () => {
@@ -39,6 +39,7 @@ export default function Button({ size }) {
       </ButtonComponent>
       {modal ? (
         <Modal
+          postId={postId}
           getRef={getRef}
           modal={modal}
           onClick={handlecloseModal}

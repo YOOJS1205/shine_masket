@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import MoreButton from '../../Button/MoreButton';
 
-export default function PostProfile() {
+export default function PostProfile({ postId }) {
   const { UserImage, UserName, UserAccount } = useSelector((state) => ({
     UserImage: state.UserInfoReducer.UserImage,
     UserName: state.UserInfoReducer.UserName,
@@ -17,7 +17,7 @@ export default function PostProfile() {
         <ProfileName>{UserName}</ProfileName>
         <ProfileId>@ {UserAccount}</ProfileId>
       </TextContainer>
-      <MoreButton size="small" />
+      <MoreButton postId={postId} size="small" />
     </Profile>
   );
 }

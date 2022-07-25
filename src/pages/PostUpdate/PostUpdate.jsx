@@ -8,7 +8,7 @@ import ImageUploadIcon from '../../assets/icon/icon-image.png';
 import RemoveIcon from '../../assets/icon/icon-delete.png';
 
 export default function PostUpdate() {
-  const { content, postImages } = useSelector((state) => state.PostInfoReducer);
+  const { postImages } = useSelector((state) => state.PostInfoReducer);
   const { postId } = useParams();
   const { UserImage } = useSelector((state) => state.UserInfoReducer);
 
@@ -24,19 +24,6 @@ export default function PostUpdate() {
   };
 
   useEffect(() => {
-    setUpdateImage(
-      postImages &&
-        postImages.map((image) => {
-          return image;
-        })
-    );
-  }, [postImages]);
-
-  useEffect(() => {
-    setUpdateText(content);
-  }, [content]);
-
-  useEffect(() => {
     if (updateText || updateImage.length > 0) {
       setIsEmpty(false);
     } else {
@@ -44,6 +31,11 @@ export default function PostUpdate() {
     }
   }, [updateText, updateImage]);
 
+  useEffect(() => {
+    getPost(postId);
+  }, [postId]);
+
+  // textarea 높이 조절
   const handleResizeHeight = useCallback(() => {
     if (textRef === null || textRef.current === null) {
       return;
@@ -52,6 +44,32 @@ export default function PostUpdate() {
     textRef.current.style.height = `${textRef.current.scrollHeight}px`;
   }, []);
 
+  // 수정 게시물 가지고 오기
+  const getPost = async () => {
+    try {
+      const token = localStorage.getItem('accessToken');
+      const res = await axios.get(`https://mandarin.api.weniv.co.kr/post/${postId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-type': 'application/json',
+        },
+      });
+
+      setUpdateText(res.data.post.content);
+      setUpdateImage(res.data.post.image.split(','));
+
+      console.log(res.data);
+      console.log(updateImage);
+      console.log(postId);
+    } catch (error) {
+      console.log(error);
+      if (error.response.data.message === '존재하지 않는 게시글입니다.') {
+        alert('존재하지 않는 게시글입니다.');
+      }
+    }
+  };
+
+  // 이미지 업로드
   const uploadFileImage = async (e) => {
     let files = e.target.files;
     for (let i = 0; i < files.length; i++) {
@@ -73,11 +91,13 @@ export default function PostUpdate() {
     setUpdateImage(imageURLlist);
   };
 
+  // 이미지 삭제
   const deleteFileImage = (id) => {
     setUpdateImage(updateImage.filter((_, index) => index !== id));
     URL.revokeObjectURL(updateImage);
   };
 
+  // 업로드 버튼 동작
   const onClickUpload = async (e) => {
     e.preventDefault();
     try {
@@ -158,7 +178,7 @@ export default function PostUpdate() {
       </TextContainer>
       <ImgContainer
         style={
-          postImages < 1
+          updateImage < 1 || postImages < 1
             ? {
                 display: 'none',
               }

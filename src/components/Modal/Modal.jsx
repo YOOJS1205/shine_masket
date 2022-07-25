@@ -4,12 +4,11 @@ import { Link, useLocation, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import LogoutModal from './LogoutModal';
 
-export default function Modal({ onClick, getRef, text }) {
+export default function Modal({ onClick, getRef, text, postId }) {
   const location = useLocation();
   const NotModal = useRef();
   const Modal = useRef();
   const [logout, setLogout] = useState(false);
-  const { postId } = useParams();
 
   const onClickLogoutBtn = () => {
     setLogout(true);

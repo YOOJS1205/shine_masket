@@ -130,12 +130,29 @@ export default function TabMenu() {
           'Content-type': 'application/json',
         },
       });
-      console.log('포스트');
       console.log(res);
       const postList = res.data;
       dispatch({ type: 'GET_POST', postList });
 
       history.push(`/profile/${UserAccount}`);
+    } catch (error) {
+      console.log(error);
+    }
+
+    // 상품 저장
+    try {
+      const accessToken = localStorage.getItem('accessToken');
+      const res = await axios.get(`https://mandarin.api.weniv.co.kr/product/${UserAccount}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-type': 'application/json',
+        },
+      });
+      const productList = res.data.product;
+      console.log(productList);
+      dispatch({ type: 'PRODUCT', productList });
+
+      // history.push(`/product/${UserAccount}`);
     } catch (error) {
       console.log(error);
     }

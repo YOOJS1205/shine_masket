@@ -1,11 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 import TopMenuBar from '../../components/TopMenuBar/TopMenuBar';
 import TabMenu from '../../components/TabMenu/TabMenu';
 import Button from '../../components/Button/Button';
 import MainImg from '../../assets/images/symbol-logo-gray.png';
+import Home from '../Home/Home';
 
 export default function Test() {
+  const [postList, setPostList] = useState([]);
+
+  console.log(postList);
+
+  useEffect(() => {
+    (async function getPost() {
+      try {
+        const accessToken = localStorage.getItem('accessToken');
+        const res = await axios.get(`https://mandarin.api.weniv.co.kr/post/feed`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-type': 'application/json',
+          },
+        });
+        setPostList(res.data.posts);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
   return (
     <>
       <TopMenuBar
@@ -14,13 +36,17 @@ export default function Test() {
         preDisplay="none"
         modalDisplay="none"
       />
-      <Main>
-        <MainWrap>
-          <Img src={MainImg} />
-          <p>유저를 검색해 팔로우 해보세요!</p>
-          <Button size="medium" buttonText="검색하기" isActive={false} />
-        </MainWrap>
-      </Main>
+      {postList ? (
+        <Home postList={postList} />
+      ) : (
+        <Main>
+          <MainWrap>
+            <Img src={MainImg} />
+            <p>유저를 검색해 팔로우 해보세요!</p>
+            <Button size="medium" buttonText="검색하기" isActive={false} />
+          </MainWrap>
+        </Main>
+      )}
       <TabMenu />
     </>
   );

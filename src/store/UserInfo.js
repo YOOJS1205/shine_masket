@@ -49,6 +49,14 @@ const UserInfoReducer = (state = initialState, action) => {
         UserFollowerCount: action.UserFollowerCount,
         UserFollowingCount: action.UserFollowingCount,
       };
+    case 'MODIFY_PROFILE':
+      return {
+        ...state,
+        UserImage: action.UserImage,
+        UserName: action.UserName,
+        UserAccount: action.UserAccount,
+        UserIntro: action.UserIntro,
+      };
     default:
       return state;
   }

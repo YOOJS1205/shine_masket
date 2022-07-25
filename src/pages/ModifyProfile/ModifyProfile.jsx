@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import axios from 'axios';
 import ProfileForm from '../../components/ProfileForm/ProfileForm';
 import TopMenuBar from '../../components/TopMenuBar/TopMenuBar';
 
 export default function ModifyProfile() {
+  const history = useHistory();
+  const dispatch = useDispatch();
+
   const [isEmpty, setIsEmpty] = useState(true);
   const [userName, setUserName] = useState('');
   const [userAccount, setUserAccount] = useState('');
@@ -45,6 +50,14 @@ export default function ModifyProfile() {
         }
       );
       console.log(res);
+      dispatch({
+        type: 'MODIFY_PROFILE',
+        UserImage: res.data.user.image,
+        UserName: res.data.user.username,
+        UserAccount: res.data.user.accountname,
+        UserIntro: res.data.user.intro,
+      });
+      history.push(`/profile/${userAccount}`);
     } catch (error) {
       console.log(error);
     }

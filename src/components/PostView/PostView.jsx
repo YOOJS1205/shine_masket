@@ -41,6 +41,7 @@ export default function PostView() {
     }
   };
 
+
   return (
     <>
       {postList.post.map((post) => (

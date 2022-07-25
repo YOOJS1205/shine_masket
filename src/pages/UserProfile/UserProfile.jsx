@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import PostView from '../../components/PostView/PostView';
+import SaleProduct from '../../components/SaleProduct/SaleProduct';
 
 export default function UserProfile() {
   const { UserName, UserAccount, UserIntro, UserImage, UserFollowerCount, UserFollowingCount } =
@@ -35,9 +36,9 @@ export default function UserProfile() {
         >
           <MyProfileButton />
         </Profile>
+        <SaleProduct />
         <PostView></PostView>
       </ProfileContainer>
-
       <TabMenu />
     </>
   );
@@ -69,4 +70,5 @@ const MyProfileButton = () => {
 const ProfileContainer = styled.section`
   margin: 0 auto;
   width: 100%;
+  background-color: #f2f2f2;
 `;

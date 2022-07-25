@@ -105,6 +105,8 @@ const Container = styled.section`
   padding: 20px 16px;
   box-sizing: border-box;
   border-bottom: 1px solid #dbdbdb;
+
+  background-color: #fff;
 `;
 
 const PostContainer = styled.div`

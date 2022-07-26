@@ -23,13 +23,13 @@ export default function ImageButton({ getImageSrc }) {
       reader.onload = async (e) => {
         let formData = new FormData();
         formData.append('image', fileBlob);
-        // console.log(formData.values());
-        // console.log(formData.getAll('image'));
+
         const res = await axios.post('https://mandarin.api.weniv.co.kr/image/uploadfile', formData);
+        console.log(res.data.filename);
         setFileName(`https://mandarin.api.weniv.co.kr/${res.data.filename}`);
-        localStorage.setItem('image', `https://mandarin.api.weniv.co.kr/${res.data.filename}`);
+
         setImgSrc(e.target.result);
-        // console.log(e.target.result);
+
         resolve();
       };
     });

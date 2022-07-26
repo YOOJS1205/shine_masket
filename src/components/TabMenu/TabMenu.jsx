@@ -10,8 +10,7 @@ import IconMyprofile from '../../assets/icon/icon-user.svg';
 import IconMyprofileHover from '../../assets/icon/icon-user-fill.png';
 
 import { useHistory } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const Footer = styled.ul`
   background-color: #fff;
@@ -91,73 +90,10 @@ export default function TabMenu() {
   }));
 
   const history = useHistory();
-  const dispatch = useDispatch();
 
-  const goToProfile = async () => {
-    try {
-      const accessToken = localStorage.getItem('accessToken');
-      const res = await axios.get(`https://mandarin.api.weniv.co.kr/profile/${UserAccount}`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          'Content-type': 'application/json',
-        },
-      });
-
-      const UserFollowing = res.data.profile.following;
-      const UserFollower = res.data.profile.follower;
-      const UserFollowerCount = res.data.profile.followerCount;
-      const UserFollowingCount = res.data.profile.followingCount;
-
-      dispatch({
-        type: 'FOLLOW',
-        UserFollowing,
-        UserFollower,
-        UserFollowerCount,
-        UserFollowingCount,
-      });
-
-      history.push(`/profile/${UserAccount}`);
-    } catch (error) {
-      console.log(error);
-    }
-
-    // 포스트 저장
-    try {
-      const accessToken = localStorage.getItem('accessToken');
-      const res = await axios.get(`https://mandarin.api.weniv.co.kr/post/${UserAccount}/userpost`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          'Content-type': 'application/json',
-        },
-      });
-      console.log(res);
-      const postList = res.data;
-      dispatch({ type: 'GET_POST', postList });
-
-      history.push(`/profile/${UserAccount}`);
-    } catch (error) {
-      console.log(error);
-    }
-
-    // 상품 저장
-    try {
-      const accessToken = localStorage.getItem('accessToken');
-      const res = await axios.get(`https://mandarin.api.weniv.co.kr/product/${UserAccount}`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          'Content-type': 'application/json',
-        },
-      });
-      const productList = res.data.product;
-      console.log(productList);
-      dispatch({ type: 'PRODUCT', productList });
-
-      // history.push(`/product/${UserAccount}`);
-    } catch (error) {
-      console.log(error);
-    }
+  const goToProfile = () => {
+    history.push(`/profile/${UserAccount}`);
   };
-
   const upload = () => {
     history.push('/upload');
   };
@@ -169,6 +105,7 @@ export default function TabMenu() {
   const home = () => {
     history.push('/home-empty');
   }
+
 
   return (
     <Footer>

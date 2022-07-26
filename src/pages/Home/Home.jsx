@@ -1,23 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import TabMenu from '../../components/TabMenu/TabMenu';
 import MoreButton from '../../components/Button/MoreButton';
 import { Link } from 'react-router-dom';
 import IconHeart from '../../assets/icon/icon-heart.png';
 import IconMessage from '../../assets/icon/icon-message-circle.png';
+// import { useState } from 'react';
 
 export default function Home({ postList }) {
+
+// const [ imgArr, setImgArr ] = useState([]);
+// const imagesArr = (props) => {
+//   postList.posts.images
+// }
+
   return (
     <>
       <FeedWrap>
         <h1 className="ir">메인화면 피드페이지입니다</h1>
         {postList.map((post) => (
+          // setImgArr(post.image.split(','));
           <MainWrap key={post.author._id}>
             <Aside>
               <Img src={post.author.image} />
             </Aside>
             <Article>
-              <h2></h2>
+              <h2>{post.author.username}</h2>
               <h3>@ {post.author.accountname}</h3>
               <article>{post.content}</article>
               <Link to="/post/${post.id}">
@@ -46,7 +54,7 @@ export default function Home({ postList }) {
 }
 
 const FeedWrap = styled.main`
-  width: 358px;
+  width: 80%;
   margin: 20px auto;
   margin-bottom: 80px;
   padding-bottom: 20px;
@@ -54,17 +62,30 @@ const FeedWrap = styled.main`
 
 const MainWrap = styled.div`
   width: 100%;
-  /* border: 1px solid red; */
   position: relative;
+  margin-bottom: 40px;
+  &::before {
+    display: block;
+    content:'';
+    height:1px;
+    position: absolute;
+    top: -20px;
+    left: 0px;
+    right: 0px;
+    background: #ddd;
+  }
   &::after {
     clear: both;
     content: '';
     display: block;
   }
+  &:nth-of-type(1)::before {
+    display:none;
+  }
 `;
 const Aside = styled.aside`
   float: left;
-  width: 10%;
+  max-width: 10%;
 `;
 const Img = styled.img`
   width: 100%;
@@ -86,7 +107,11 @@ const Article = styled.article`
   }
   > article {
   }
-  > img {
+  > a {
+    > img {
+      width: 100%;
+      border-radius: 20px;
+    }
   }
   > ul {
     display: flex;

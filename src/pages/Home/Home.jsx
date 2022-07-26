@@ -8,12 +8,6 @@ import IconMessage from '../../assets/icon/icon-message-circle.png';
 // import { useState } from 'react';
 
 export default function Home({ postList }) {
-
-const history = useHistory;
-const goProfile = () => {
-  history.push(`/profile/${post.author.accountname}`)
-}
-
   return (
     <>
       <FeedWrap>

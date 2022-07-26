@@ -145,6 +145,26 @@
 - 게시글 댓글, 작성, 채팅 목록, 채팅방 페이지
   <br><br>
 
-## 6. 개발 기간
+## 6. 개발 기간 및 이슈 관리
 
-2022.07.01 ~ 2022.07.31
+### 6.1 개발기간
+
+- 2022.07.01 ~ 2022.07.31
+
+### 6.2 이슈 관리
+
+- 다음과 같이 Github Issue와 주간회의를 통해서 서로의 진행상황 및 이슈를 공유하였습니다.<br><br>
+  <img width="600" alt="image" src="https://user-images.githubusercontent.com/89122773/180936637-3276e43f-9594-461f-8fb9-17482eaca514.png"><br><br>
+
+## 7. UI
+
+<div>
+<img width="251" height="450" alt="splash" src="https://user-images.githubusercontent.com/89122773/180934943-37b80e0f-8f0d-474b-ba9e-966bc4b775fb.png">
+<img width="251" height="450" alt="welcome" src="https://user-images.githubusercontent.com/89122773/180935031-a8851140-1849-43c2-8e3c-f2111dc7afa1.png">
+<img width="251" height="450" alt="login" src="https://user-images.githubusercontent.com/89122773/180935128-1a72c040-7b78-4532-bacf-27f179e57f5d.png">
+<img width="251" height="450" alt="home" src="https://user-images.githubusercontent.com/89122773/180935764-deb09958-c44c-4a4f-bcc5-b79946bee447.png">
+<img width="251" height="450" alt="chatroom" src="https://user-images.githubusercontent.com/89122773/180935887-2c11808d-5734-4727-9ec0-c30b9bd643b2.png">
+<img width="251" height="450" alt="myprofile" src="https://user-images.githubusercontent.com/89122773/180935975-29c2bfb4-2768-404a-934a-e25cef4495f5.png">
+<img width="251" height="450" alt="followers" src="https://user-images.githubusercontent.com/89122773/180936081-c431fbb3-8810-4d33-ae04-43b06b38b35e.png">
+<img width="251" height="450" alt="modifyprofile" src="https://user-images.githubusercontent.com/89122773/180936220-fbfe0dc8-91c5-4abe-aa36-45970499651e.png">
+<img width="251" height="450" alt="upload" src="https://user-images.githubusercontent.com/89122773/180936321-c83d5e87-b767-42a4-888d-3667818e349d.png">

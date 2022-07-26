@@ -86,8 +86,17 @@ const MyProfileButton = () => {
 const ProfileContainer = styled.section`
   margin: 0 auto;
   width: 100%;
-  min-height: 1000px;
-  overflow: hidden;
-
+  /* min-height: 1000px; */
+  /* overflow: hidden; */
   background-color: #f2f2f2;
+
+  &::after {
+    position: relative;
+    display: block;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: '';
+  }
 `;

@@ -8,15 +8,23 @@ import HeartIcon from '../../assets/icon/icon-heart.png';
 import CommentIcon from '../../assets/icon/icon-message-circle.png';
 
 export default function PostView() {
+  const {
+    content,
+    postId,
+    date,
+    postImages,
+    heartCount,
+    commentCount,
+    userName,
+    userImage,
+    userAccount,
+  } = useSelector((state) => state.PostInfoReducer);
+
   const history = useHistory();
-  const { postList, userAccount } = useSelector((state) => ({
-    postList: state.PostInfoReducer.postList,
-    userAccount: state.PostInfoReducer.userAccount,
-  }));
 
   useEffect(() => {
     getPost();
-  });
+  }, [postId]);
 
   const imgErrorHandler = (e) => {
     const target = e.target.parentNode.parentNode;
@@ -26,7 +34,7 @@ export default function PostView() {
   const getPost = async () => {
     try {
       const token = localStorage.getItem('accessToken');
-      const res = await axios.get(`https://mandarin.api.weniv.co.kr/post/${userAccount}/userpost`, {
+      const res = await axios.get(`https://mandarin.api.weniv.co.kr/post/${postId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-type': 'application/json',
@@ -41,70 +49,63 @@ export default function PostView() {
     }
   };
 
-
   return (
-    <>
-      {postList.post.map((post) => (
-        <Container key={post.id}>
-          <h1 className="ir">게시글 댓글 페이지</h1>
-          <PostProfile
-            postId={post.id}
-            userName={post.author.username}
-            userAccount={post.author.accountname}
-            userImage={post.author.image}
-          />
-          <PostContainer>
-            <PostText>{post.content}</PostText>
-            <ImageContainer
-              style={
-                post.image < 1
-                  ? {
-                      display: 'none',
+    <Container>
+      <h1 className="ir">게시글 댓글 페이지</h1>
+      <PostProfile
+        postId={postId}
+        userName={userName}
+        userAccount={userAccount}
+        userImage={userImage}
+      />
+      <PostContainer>
+        <PostText>{content}</PostText>
+        <ImageContainer
+          style={
+            postImages < 1
+              ? {
+                  display: 'none',
+                }
+              : {
+                  display: 'flex',
+                }
+          }
+        >
+          {postImages &&
+            postImages.map((image) => {
+              return (
+                <ul key={image}>
+                  <Img
+                    style={
+                      postImages.length > 1
+                        ? {
+                            minWidth: '168px',
+                            minHeight: '126px',
+                            backgroundImage: `url(${image})`,
+                          }
+                        : {
+                            minWidth: '304px',
+                            minHeight: '228px',
+                            backgroundImage: `url(${image})`,
+                          }
                     }
-                  : {
-                      display: 'flex',
-                    }
-              }
-            >
-              <ul key={post.id}>
-                <Img
-                  style={
-                    post.image.length > 1
-                      ? {
-                          minWidth: '168px',
-                          minHeight: '126px',
-                          backgroundImage: `url(${post.image})`,
-                        }
-                      : {
-                          minWidth: '304px',
-                          minHeight: '228px',
-                          backgroundImage: `url(${post.image})`,
-                        }
-                  }
-                  onError={imgErrorHandler}
-                />
-              </ul>
-            </ImageContainer>
-          </PostContainer>
-          <ButtonContainer>
-            <LikeBtn>
-              <LikeCount>{post.heartCount}</LikeCount>
-            </LikeBtn>
-            <CommentBtn onClick={() => history.push(`/post/${post.id}`)}>
-              <CommentCount>{post.commentCount}</CommentCount>
-            </CommentBtn>
-          </ButtonContainer>
-          <Date>
-            {post.createdAt.split('-')[0] +
-              '년 ' +
-              post.createdAt.split('-')[1] +
-              '월 ' +
-              post.createdAt.split('-')[2].split('T')[0] +
-              '일'}
-          </Date>
-        </Container>
-      ))}
-    </>
+                    onError={imgErrorHandler}
+                  />
+                </ul>
+              );
+            })}
+        </ImageContainer>
+      </PostContainer>
+      <ButtonContainer>
+        <LikeBtn>
+          <LikeCount>{heartCount}</LikeCount>
+        </LikeBtn>
+        <CommentBtn onClick={() => history.push(`/post/${postId}`)}>
+          <CommentCount>{commentCount}</CommentCount>
+        </CommentBtn>
+      </ButtonContainer>
+      <Date>{date}</Date>
+    </Container>
   );
 }
 
@@ -112,8 +113,6 @@ const Container = styled.section`
   padding: 20px 16px;
   box-sizing: border-box;
   border-bottom: 1px solid #dbdbdb;
-
-  background-color: #fff;
 `;
 
 const PostContainer = styled.div`

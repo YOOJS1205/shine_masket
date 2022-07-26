@@ -7,20 +7,12 @@ import Button from '../../components/Button/Button';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import PostView from '../../components/PostView/PostView';
+import PostCard from '../../components/PostCard/PostCard';
 import SaleProduct from '../../components/SaleProduct/SaleProduct';
 
 export default function UserProfile() {
   const { UserName, UserAccount, UserIntro, UserImage, UserFollowerCount, UserFollowingCount } =
-    useSelector((state) => ({
-      UserName: state.UserInfoReducer.UserName,
-      UserId: state.UserInfoReducer.UserId,
-      UserAccount: state.UserInfoReducer.UserAccount,
-      UserIntro: state.UserInfoReducer.UserIntro,
-      UserImage: state.UserInfoReducer.UserImage,
-      UserFollowerCount: state.UserInfoReducer.UserFollowerCount,
-      UserFollowingCount: state.UserInfoReducer.UserFollowingCount,
-    }));
+    useSelector((state) => state.UserInfoReducer);
 
   return (
     <>
@@ -37,7 +29,7 @@ export default function UserProfile() {
           <MyProfileButton />
         </Profile>
         <SaleProduct />
-        <PostView></PostView>
+        <PostCard />
       </ProfileContainer>
       <TabMenu />
     </>

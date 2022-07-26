@@ -25,6 +25,9 @@ const CommentList = styled.ul`
 
 const CommentItem = styled.li`
   margin-bottom: 16px;
+  &:last-child {
+    padding-bottom: 43px;
+  }
 `;
 
 const CommentProfile = styled.div`

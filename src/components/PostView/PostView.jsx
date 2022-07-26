@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import PostProfile from './PostProfile/PostProfile';
@@ -8,31 +8,62 @@ import HeartIcon from '../../assets/icon/icon-heart.png';
 import CommentIcon from '../../assets/icon/icon-message-circle.png';
 
 export default function PostView() {
+  const { content, date, postImages, heartCount, commentCount, userName, userImage, userAccount } =
+    useSelector((state) => state.PostInfoReducer);
+
   const history = useHistory();
-  const { postList, userAccount } = useSelector((state) => ({
-    postList: state.PostInfoReducer.postList,
-    userAccount: state.PostInfoReducer.userAccount,
-  }));
+  const dispatch = useDispatch();
+  const { postId } = useParams();
 
   useEffect(() => {
     getPost();
-  });
+  }, [postId]);
 
   const imgErrorHandler = (e) => {
     const target = e.target.parentNode.parentNode;
     target.style.display = 'none';
   };
 
-  const getPost = async () => {
+  const getPost = async (
+    userName,
+    userAccount,
+    userImage,
+    content,
+    date,
+    postImages,
+    heartCount,
+    commentCount
+  ) => {
     try {
       const token = localStorage.getItem('accessToken');
-      const res = await axios.get(`https://mandarin.api.weniv.co.kr/post/${userAccount}/userpost`, {
+      const res = await axios.get(`https://mandarin.api.weniv.co.kr/post/${postId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-type': 'application/json',
         },
       });
       console.log(res.data);
+
+      userName = res.data.post.author.username;
+      userAccount = res.data.post.author.accountname;
+      userImage = res.data.post.author.image;
+      content = res.data.post.content;
+      date = res.data.post.createdAt;
+      postImages = res.data.post.image;
+      heartCount = res.data.post.heartCount;
+      commentCount = res.data.post.commentCount;
+
+      dispatch({
+        type: 'READ_POST',
+        userName,
+        userAccount,
+        userImage,
+        content,
+        date,
+        postImages,
+        heartCount,
+        commentCount,
+      });
     } catch (error) {
       console.log(error);
       if (error.response.data.message === '존재하지 않는 게시글입니다.') {
@@ -42,68 +73,62 @@ export default function PostView() {
   };
 
   return (
-    <>
-      {postList.post.map((post) => (
-        <Container key={post.id}>
-          <h1 className="ir">게시글 댓글 페이지</h1>
-          <PostProfile
-            postId={post.id}
-            userName={post.author.username}
-            userAccount={post.author.accountname}
-            userImage={post.author.image}
-          />
-          <PostContainer>
-            <PostText>{post.content}</PostText>
-            <ImageContainer
-              style={
-                post.image < 1
-                  ? {
-                      display: 'none',
+    <Container>
+      <h1 className="ir">게시글 댓글 페이지</h1>
+      <PostProfile
+        postId={postId}
+        userName={userName}
+        userAccount={userAccount}
+        userImage={userImage}
+      />
+      <PostContainer>
+        <PostText>{content}</PostText>
+        <ImageContainer
+          style={
+            postImages < 1
+              ? {
+                  display: 'none',
+                }
+              : {
+                  display: 'flex',
+                }
+          }
+        >
+          {postImages &&
+            postImages.map((image) => {
+              return (
+                <ul key={image}>
+                  <Img
+                    style={
+                      postImages.length > 1
+                        ? {
+                            minWidth: '168px',
+                            minHeight: '126px',
+                            backgroundImage: `url(${image})`,
+                          }
+                        : {
+                            minWidth: '304px',
+                            minHeight: '228px',
+                            backgroundImage: `url(${image})`,
+                          }
                     }
-                  : {
-                      display: 'flex',
-                    }
-              }
-            >
-              <ul key={post.id}>
-                <Img
-                  style={
-                    post.image.length > 1
-                      ? {
-                          minWidth: '168px',
-                          minHeight: '126px',
-                          backgroundImage: `url(${post.image})`,
-                        }
-                      : {
-                          minWidth: '304px',
-                          minHeight: '228px',
-                          backgroundImage: `url(${post.image})`,
-                        }
-                  }
-                  onError={imgErrorHandler}
-                />
-              </ul>
-            </ImageContainer>
-          </PostContainer>
-          <ButtonContainer>
-            <LikeBtn>
-              <LikeCount>{post.heartCount}</LikeCount>
-            </LikeBtn>
-            <CommentBtn onClick={() => history.push(`/post/${post.id}`)}>
-              <CommentCount>{post.commentCount}</CommentCount>
-            </CommentBtn>
-          </ButtonContainer>
-          <Date>
-            {post.createdAt.split('-')[0] +
-              '년 ' +
-              post.createdAt.split('-')[1] +
-              '월 ' +
-              post.createdAt.split('-')[2].split('T')[0] +
-              '일'}
-          </Date>
-        </Container>
-      ))}
-    </>
+                    onError={imgErrorHandler}
+                  />
+                </ul>
+              );
+            })}
+        </ImageContainer>
+      </PostContainer>
+      <ButtonContainer>
+        <LikeBtn>
+          <LikeCount>{heartCount}</LikeCount>
+        </LikeBtn>
+        <CommentBtn onClick={() => history.push(`/post/${postId}`)}>
+          <CommentCount>{commentCount}</CommentCount>
+        </CommentBtn>
+      </ButtonContainer>
+      <Date>{date}</Date>
+    </Container>
   );
 }
 
@@ -111,8 +136,6 @@ const Container = styled.section`
   padding: 20px 16px;
   box-sizing: border-box;
   border-bottom: 1px solid #dbdbdb;
-
-  background-color: #fff;
 `;
 
 const PostContainer = styled.div`

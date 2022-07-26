@@ -23,6 +23,7 @@ import AddProduct from './pages/AddProduct/AddProduct.jsx';
 import HomeEmpty from './pages/HomeEmpty/HomeEmpty';
 import Search from './pages/Search/Search';
 import NotFound from './pages/NotFound/NotFound';
+import Home from './pages/Home/Home';
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
             <Route path="/following" exact component={Following} />
             <Route path="/home-empty" exact component={HomeEmpty} />
             <Route path="/search" exact component={Search} />
+            <Route path="/home" exact component={Home} />
             <Route component={NotFound} />
           </Switch>
         </AnimatePresence>

@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import Picture from '../../assets/images/basic-profile-img.png';
 
 export default function SaleProductItem(props) {
-  // console.log('SaleProductItem!!!!!!!!!!');
-  // console.log(props);
+  console.log('SaleProductItem!!!!!!!!!!');
+  console.log(props);
+
   return (
     <>
       <SaleProductItemContainer>

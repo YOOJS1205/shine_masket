@@ -56,6 +56,7 @@ export default function PostCard() {
           'Content-type': 'application/json',
         },
       });
+
       const postList = res.data;
       dispatch({ type: 'GET_POST', postList });
     } catch (error) {
@@ -71,6 +72,7 @@ export default function PostCard() {
           'Content-type': 'application/json',
         },
       });
+      
       const productList = res.data.product;
       dispatch({ type: 'PRODUCT', productList });
     } catch (error) {

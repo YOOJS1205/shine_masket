@@ -41,7 +41,7 @@ export default function Modal({ onClick, getRef, text, postId }) {
 }
 
 const ChatModal = styled.aside`
-  position: absolute;
+  position: fixed;
   top: 0px;
   left: 0px;
   right: 0px;

@@ -1,8 +1,7 @@
 import React from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../Button/Button';
-
 import LeftArrow from '../../assets/icon/icon-arrow-left.png';
 import Search from '../../assets/icon/icon-search.png';
 import MoreButton from '../Button/MoreButton';
@@ -53,7 +52,10 @@ export default function TopMenuBar({
       ) : null}
       {moreButton ? <MoreButton size="large" /> : null}
       {moreButtonSmall ? <MoreButton size="small" /> : null}
-      {searchBtn ? <SearchButton src={Search} /> : null}
+      {searchBtn ? 
+      <SearchButton> 
+        <Link to="/search" />
+      </SearchButton> : null}
     </Container>
   );
 }
@@ -94,8 +96,17 @@ const HomeText = styled.h1`
   order: -1;
 `;
 
-const SearchButton = styled.img`
+const SearchButton = styled.p`
   margin-left: auto;
+  background-image: url(${Search});
+  width: 24px; 
+  height: 24px;
+  cursor: pointer;
+  > a {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const SearchModal = styled.fieldset`

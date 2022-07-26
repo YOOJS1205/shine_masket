@@ -7,7 +7,7 @@ import PostProfile from '../PostView/PostProfile/PostProfile';
 import HeartIcon from '../../assets/icon/icon-heart.png';
 import CommentIcon from '../../assets/icon/icon-message-circle.png';
 
-export default function PostCard() {
+export default function PostCard({ getPostList }) {
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -19,6 +19,8 @@ export default function PostCard() {
   useEffect(() => {
     getPost();
   }, []);
+
+  getPostList(postList);
 
   const getPost = async () => {
     // 프로필 가져오기
@@ -87,74 +89,72 @@ export default function PostCard() {
 
   return (
     <>
-      {postList
-        ? postList.post.map((post) => (
-            <Container key={post.id}>
-              <h1 className="ir">게시글 댓글 페이지</h1>
-              <PostProfile
-                postId={post.id}
-                userName={post.author.username}
-                userAccount={post.author.accountname}
-                userImage={post.author.image}
-              />
-              <PostContainer>
-                <PostText>{post.content}</PostText>
-                <ImageContainer
-                  style={
-                    post.image < 1
-                      ? {
-                          display: 'none',
+      {postList.post.map((post) => (
+        <Container key={post.id}>
+          <h1 className="ir">게시글 댓글 페이지</h1>
+          <PostProfile
+            postId={post.id}
+            userName={post.author.username}
+            userAccount={post.author.accountname}
+            userImage={post.author.image}
+          />
+          <PostContainer>
+            <PostText>{post.content}</PostText>
+            <ImageContainer
+              style={
+                post.image < 1
+                  ? {
+                      display: 'none',
+                    }
+                  : {
+                      display: 'flex',
+                    }
+              }
+            >
+              {post.image.split(',') &&
+                post.image.split(',').map((image) => {
+                  const postImage = post.image.split(',');
+                  return (
+                    <ul key={image}>
+                      <Img
+                        style={
+                          postImage.length > 1
+                            ? {
+                                minWidth: '168px',
+                                minHeight: '126px',
+                                backgroundImage: `url(${image})`,
+                              }
+                            : {
+                                minWidth: '304px',
+                                minHeight: '228px',
+                                backgroundImage: `url(${image})`,
+                              }
                         }
-                      : {
-                          display: 'flex',
-                        }
-                  }
-                >
-                  {post.image.split(',') &&
-                    post.image.split(',').map((image) => {
-                      const postImage = post.image.split(',');
-                      return (
-                        <ul key={image}>
-                          <Img
-                            style={
-                              postImage.length > 1
-                                ? {
-                                    minWidth: '168px',
-                                    minHeight: '126px',
-                                    backgroundImage: `url(${image})`,
-                                  }
-                                : {
-                                    minWidth: '304px',
-                                    minHeight: '228px',
-                                    backgroundImage: `url(${image})`,
-                                  }
-                            }
-                            onError={imgErrorHandler}
-                          />
-                        </ul>
-                      );
-                    })}
-                </ImageContainer>
-              </PostContainer>
-              <ButtonContainer>
-                <LikeBtn>
-                  <LikeCount>{post.heartCount}</LikeCount>
-                </LikeBtn>
-                <CommentBtn onClick={() => history.push(`/post/${post.id}`)}>
-                  <CommentCount>{post.commentCount}</CommentCount>
-                </CommentBtn>
-              </ButtonContainer>
-              <Date>
-                {post.createdAt.split('-')[0] +
-                  '년 ' +
-                  post.createdAt.split('-')[1] +
-                  '월 ' +
-                  post.createdAt.split('-')[2].split('T')[0] +
-                  '일'}
-              </Date>
-            </Container>
-          ))
-        : null}
+                        onError={imgErrorHandler}
+                      />
+                    </ul>
+                  );
+                })}
+            </ImageContainer>
+          </PostContainer>
+          <ButtonContainer>
+            <LikeBtn>
+              <LikeCount>{post.heartCount}</LikeCount>
+            </LikeBtn>
+            <CommentBtn onClick={() => history.push(`/post/${post.id}`)}>
+              <CommentCount>{post.commentCount}</CommentCount>
+            </CommentBtn>
+          </ButtonContainer>
+          <Date>
+            {post.createdAt.split('-')[0] +
+              '년 ' +
+              post.createdAt.split('-')[1] +
+              '월 ' +
+              post.createdAt.split('-')[2].split('T')[0] +
+              '일'}
+          </Date>
+        </Container>
+      ))}
     </>
   );
 }

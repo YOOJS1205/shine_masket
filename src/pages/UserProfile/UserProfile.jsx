@@ -15,9 +15,14 @@ import { useState } from 'react';
 
 export default function UserProfile() {
   const [productList, setProductList] = useState([]);
+  const [postList, setPostList] = useState([]);
 
   const { UserName, UserAccount, UserIntro, UserImage, UserFollowerCount, UserFollowingCount } =
     useSelector((state) => state.UserInfoReducer);
+
+  function getPostList(list) {
+    setPostList(list);
+  }
 
   useEffect(() => {
     (async function getProduct() {
@@ -53,7 +58,7 @@ export default function UserProfile() {
           <MyProfileButton />
         </Profile>
         {productList.length !== 0 ? <SaleProduct productList={productList} /> : null}
-        <PostCard />
+        {postList ? <PostCard getPostList={getPostList} /> : null}
       </ProfileContainer>
       <TabMenu />
     </>

@@ -25,7 +25,6 @@ import Search from './pages/Search/Search';
 import NotFound from './pages/NotFound/NotFound';
 import Home from './pages/Home/Home';
 
-
 function App() {
   return (
     <BrowserRouter>

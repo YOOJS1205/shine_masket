@@ -28,20 +28,27 @@ export default function Home({ postList }) {
               <h2>{post.author.username}</h2>
               <h3>@ {post.author.accountname}</h3>
               <article>{post.content}</article>
-              <Link to="/post/${post.id}">
-                <img src={post.image} />
-              </Link>
+              <ContImg src={post.image} />
               <ul>
                 <li>
                   <img src={IconHeart} />
                 </li>
                 <li>{post.heartCount}</li>
                 <li>
-                  <img src={IconMessage} />
+                  <Link to="/post/{post.id}">
+                    <img src={IconMessage} />
+                  </Link>
                 </li>
                 <li>{post.commentCount}</li>
               </ul>
-              <time>{post.updatedAt}</time>
+              <time>
+                {post.createdAt.split('-')[0] +
+                '년 ' +
+                post.createdAt.split('-')[1] +
+                '월 ' +
+                post.createdAt.split('-')[2].split('T')[0] +
+                '일'}
+                </time>
               <MoreButton size={'small'} />
             </Article>
           </MainWrap>
@@ -54,10 +61,10 @@ export default function Home({ postList }) {
 }
 
 const FeedWrap = styled.main`
-  width: 80%;
-  margin: 20px auto;
-  margin-bottom: 80px;
-  padding-bottom: 20px;
+  max-width: 720px;
+  margin: 0px auto;
+  margin-bottom: 20px;
+  padding: 20px;
 `;
 
 const MainWrap = styled.div`
@@ -85,10 +92,20 @@ const MainWrap = styled.div`
 `;
 const Aside = styled.aside`
   float: left;
-  max-width: 10%;
+  width: 10%;
+  padding-top: 10%;
+  position:relative;
+  overflow: hidden;
+  border-radius: 50%;
 `;
 const Img = styled.img`
+  position:absolute;
+  top: 50%; 
+  left: 50%;
   width: 100%;
+  height: auto;
+  background-size: contain;
+  transform: translate(-50%, -50%);
 `;
 const Article = styled.article`
   float: right;
@@ -121,7 +138,7 @@ const Article = styled.article`
       &:nth-child(2) {
         margin-right: 10px;
       }
-      > img {
+      > a > img {
         width: 100%;
       }
     }
@@ -136,3 +153,5 @@ const Article = styled.article`
     right: 0px;
   }
 `;
+
+const ContImg = styled.ul``;

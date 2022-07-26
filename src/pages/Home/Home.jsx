@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import TabMenu from '../../components/TabMenu/TabMenu';
 import MoreButton from '../../components/Button/MoreButton';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import IconHeart from '../../assets/icon/icon-heart.png';
 import IconMessage from '../../assets/icon/icon-message-circle.png';
 // import { useState } from 'react';
 
 export default function Home({ postList }) {
 
-// const [ imgArr, setImgArr ] = useState([]);
-// const imagesArr = (props) => {
-//   postList.posts.images
-// }
+const history = useHistory;
+const goProfile = () => {
+  history.push(`/profile/${post.author.accountname}`)
+}
 
   return (
     <>
@@ -22,25 +22,25 @@ export default function Home({ postList }) {
           // setImgArr(post.image.split(','));
           <MainWrap key={post.author._id}>
             <Aside>
-              <Img src={post.author.image} />
+              <Link to={"/profile/" + post.author.accountname}>
+                <Img src={post.author.image} />
+              </Link >
             </Aside>
             <Article>
               <h2>{post.author.username}</h2>
               <h3>@ {post.author.accountname}</h3>
               <article>{post.content}</article>
-              <ContImg src={post.image} />
-              <ul>
+              <ContImg src={post.image}/>
+              <ReactionBtn>
                 <li>
                   <img src={IconHeart} />
                 </li>
                 <li>{post.heartCount}</li>
                 <li>
-                  <Link to="/post/{post.id}">
-                    <img src={IconMessage} />
-                  </Link>
+                  <img src={IconMessage} />
                 </li>
                 <li>{post.commentCount}</li>
-              </ul>
+              </ReactionBtn>
               <time>
                 {post.createdAt.split('-')[0] +
                 '년 ' +
@@ -52,6 +52,8 @@ export default function Home({ postList }) {
               <MoreButton size={'small'} />
             </Article>
           </MainWrap>
+
+
         ))}
       </FeedWrap>
 
@@ -130,19 +132,6 @@ const Article = styled.article`
       border-radius: 20px;
     }
   }
-  > ul {
-    display: flex;
-    gap: 6px;
-    > li {
-      width: 15px;
-      &:nth-child(2) {
-        margin-right: 10px;
-      }
-      > a > img {
-        width: 100%;
-      }
-    }
-  }
   > time {
     font-size: 10px;
     color: #767676;
@@ -154,4 +143,23 @@ const Article = styled.article`
   }
 `;
 
-const ContImg = styled.ul``;
+const ContImg = styled.img`
+  border-radius: 20px;
+`;
+
+
+const ReactionBtn = styled.ul`
+    display: flex;
+    gap: 6px;
+    color: #767676;
+    > li {
+      width: 15px;
+      &:nth-child(2) {
+        margin-right: 10px;
+      }
+      img {
+        width: 100%;
+      }
+    }
+  
+`

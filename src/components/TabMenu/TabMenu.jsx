@@ -167,7 +167,7 @@ export default function TabMenu() {
   };
 
   const home = () => {
-    history.push('/home');
+    history.push('/home-empty');
   }
 
   return (

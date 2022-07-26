@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function UserInfoInput({ placeholder, onChange, isLast }) {
+export default function ProductInfoInput({ placeholder, onChange, isLast }) {
   return <Input placeholder={placeholder} onChange={onChange} isLast={isLast} />;
 }
 

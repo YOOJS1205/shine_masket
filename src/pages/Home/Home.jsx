@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import TabMenu from '../../components/TabMenu/TabMenu';
 import MoreButton from '../../components/Button/MoreButton';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import IconHeart from '../../assets/icon/icon-heart.png';
 import IconMessage from '../../assets/icon/icon-message-circle.png';
+// import { useState } from 'react';
 
 export default function Home({ postList }) {
   return (
@@ -12,18 +13,19 @@ export default function Home({ postList }) {
       <FeedWrap>
         <h1 className="ir">메인화면 피드페이지입니다</h1>
         {postList.map((post) => (
+          // setImgArr(post.image.split(','));
           <MainWrap key={post.author._id}>
             <Aside>
-              <Img src={post.author.image} />
+              <Link to={'/profile/' + post.author.accountname}>
+                <Img src={post.author.image} />
+              </Link>
             </Aside>
             <Article>
-              <h2></h2>
+              <h2>{post.author.username}</h2>
               <h3>@ {post.author.accountname}</h3>
               <article>{post.content}</article>
-              <Link to="/post/${post.id}">
-                <img src={post.image} />
-              </Link>
-              <ul>
+              <ContImg src={post.image} />
+              <ReactionBtn>
                 <li>
                   <img src={IconHeart} />
                 </li>
@@ -32,8 +34,15 @@ export default function Home({ postList }) {
                   <img src={IconMessage} />
                 </li>
                 <li>{post.commentCount}</li>
-              </ul>
-              <time>{post.updatedAt}</time>
+              </ReactionBtn>
+              <time>
+                {post.createdAt.split('-')[0] +
+                  '년 ' +
+                  post.createdAt.split('-')[1] +
+                  '월 ' +
+                  post.createdAt.split('-')[2].split('T')[0] +
+                  '일'}
+              </time>
               <MoreButton size={'small'} />
             </Article>
           </MainWrap>
@@ -46,28 +55,51 @@ export default function Home({ postList }) {
 }
 
 const FeedWrap = styled.main`
-  width: 358px;
-  margin: 20px auto;
-  margin-bottom: 80px;
-  padding-bottom: 20px;
+  max-width: 720px;
+  margin: 0px auto;
+  margin-bottom: 20px;
+  padding: 20px;
 `;
 
 const MainWrap = styled.div`
   width: 100%;
-  /* border: 1px solid red; */
   position: relative;
+  margin-bottom: 40px;
+  &::before {
+    display: block;
+    content: '';
+    height: 1px;
+    position: absolute;
+    top: -20px;
+    left: 0px;
+    right: 0px;
+    background: #ddd;
+  }
   &::after {
     clear: both;
     content: '';
     display: block;
   }
+  &:nth-of-type(1)::before {
+    display: none;
+  }
 `;
 const Aside = styled.aside`
   float: left;
   width: 10%;
+  padding-top: 10%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
 `;
 const Img = styled.img`
+  position: absolute;
+  top: 50%;
+  left: 50%;
   width: 100%;
+  height: auto;
+  background-size: contain;
+  transform: translate(-50%, -50%);
 `;
 const Article = styled.article`
   float: right;
@@ -86,19 +118,10 @@ const Article = styled.article`
   }
   > article {
   }
-  > img {
-  }
-  > ul {
-    display: flex;
-    gap: 6px;
-    > li {
-      width: 15px;
-      &:nth-child(2) {
-        margin-right: 10px;
-      }
-      > img {
-        width: 100%;
-      }
+  > a {
+    > img {
+      width: 100%;
+      border-radius: 20px;
     }
   }
   > time {
@@ -109,5 +132,24 @@ const Article = styled.article`
     position: absolute;
     top: 0px;
     right: 0px;
+  }
+`;
+
+const ContImg = styled.img`
+  border-radius: 20px;
+`;
+
+const ReactionBtn = styled.ul`
+  display: flex;
+  gap: 6px;
+  color: #767676;
+  > li {
+    width: 15px;
+    &:nth-child(2) {
+      margin-right: 10px;
+    }
+    img {
+      width: 100%;
+    }
   }
 `;

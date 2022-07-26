@@ -23,9 +23,10 @@ export default function LogoutModal({ text, buttonText, postId }) {
           'Content-type': 'application/json',
         },
       });
-      if (res.response.data.message === '삭제되었습니다.') {
+      if (res.data.message === '삭제되었습니다.') {
         alert('삭제되었습니다.');
       }
+      location.reload();
     } catch (error) {
       console.log(error);
       if (error.response.data.message === '존재하지 않는 게시글입니다.') {

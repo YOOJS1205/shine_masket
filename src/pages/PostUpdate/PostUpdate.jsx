@@ -57,10 +57,6 @@ export default function PostUpdate() {
 
       setUpdateText(res.data.post.content);
       setUpdateImage(res.data.post.image.split(','));
-
-      console.log(res.data);
-      console.log(updateImage);
-      console.log(postId);
     } catch (error) {
       console.log(error);
       if (error.response.data.message === '존재하지 않는 게시글입니다.') {

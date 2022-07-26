@@ -56,7 +56,7 @@ export default function PostCard() {
           'Content-type': 'application/json',
         },
       });
-      // console.log(res);
+
       const postList = res.data;
       dispatch({ type: 'GET_POST', postList });
     } catch (error) {
@@ -72,8 +72,8 @@ export default function PostCard() {
           'Content-type': 'application/json',
         },
       });
+      
       const productList = res.data.product;
-      // console.log(productList);
       dispatch({ type: 'PRODUCT', productList });
     } catch (error) {
       console.log(error);
@@ -110,24 +110,30 @@ export default function PostCard() {
                       }
                 }
               >
-                <ul key={post.id}>
-                  <Img
-                    style={
-                      post.image.length > 1
-                        ? {
-                            minWidth: '168px',
-                            minHeight: '126px',
-                            backgroundImage: `url(${post.image})`,
+                {post.image.split(',') &&
+                  post.image.split(',').map((image) => {
+                    const postImage = post.image.split(',');
+                    return (
+                      <ul key={image}>
+                        <Img
+                          style={
+                            postImage.length > 1
+                              ? {
+                                  minWidth: '168px',
+                                  minHeight: '126px',
+                                  backgroundImage: `url(${image})`,
+                                }
+                              : {
+                                  minWidth: '304px',
+                                  minHeight: '228px',
+                                  backgroundImage: `url(${image})`,
+                                }
                           }
-                        : {
-                            minWidth: '304px',
-                            minHeight: '228px',
-                            backgroundImage: `url(${post.image})`,
-                          }
-                    }
-                    onError={imgErrorHandler}
-                  />
-                </ul>
+                          onError={imgErrorHandler}
+                        />
+                      </ul>
+                    );
+                  })}
               </ImageContainer>
             </PostContainer>
             <ButtonContainer>

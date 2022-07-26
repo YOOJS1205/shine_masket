@@ -33,6 +33,7 @@ const PostInfoReducer = (state = initialState, action) => {
         heartCount: action.heartCount,
         commentCount: action.commentCount,
       };
+
     case 'UPDATE':
       return {
         ...state,
@@ -50,10 +51,31 @@ const PostInfoReducer = (state = initialState, action) => {
           '일',
         postImages: action.postImages.split(','),
       };
+
     case 'GET_POST':
       return {
         ...state,
         postList: action.postList,
+      };
+
+    case 'READ_POST':
+      return {
+        ...state,
+        userName: action.userName,
+        userAccount: action.userAccount,
+        userImage: action.userImage,
+        content: action.content,
+        postId: action.postId,
+        date:
+          action.date.split('-')[0] +
+          '년 ' +
+          action.date.split('-')[1] +
+          '월 ' +
+          action.date.split('-')[2].split('T')[0] +
+          '일',
+        postImages: action.postImages.split(','),
+        heartCount: action.heartCount,
+        commentCount: action.commentCount,
       };
     default:
       return state;

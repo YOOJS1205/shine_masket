@@ -16,7 +16,7 @@ export default function UserProfile() {
 
   return (
     <>
-      <TopMenuBar />
+      <TopMenuBar moreButton={true} />
       <ProfileContainer>
         <Profile
           followersCount={UserFollowerCount}

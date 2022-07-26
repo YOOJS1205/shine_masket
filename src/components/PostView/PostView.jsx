@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import PostProfile from './PostProfile/PostProfile';
@@ -8,19 +8,12 @@ import HeartIcon from '../../assets/icon/icon-heart.png';
 import CommentIcon from '../../assets/icon/icon-message-circle.png';
 
 export default function PostView() {
-  const {
-    content,
-    postId,
-    date,
-    postImages,
-    heartCount,
-    commentCount,
-    userName,
-    userImage,
-    userAccount,
-  } = useSelector((state) => state.PostInfoReducer);
+  const { content, date, postImages, heartCount, commentCount, userName, userImage, userAccount } =
+    useSelector((state) => state.PostInfoReducer);
 
   const history = useHistory();
+  const dispatch = useDispatch();
+  const { postId } = useParams();
 
   useEffect(() => {
     getPost();
@@ -31,7 +24,16 @@ export default function PostView() {
     target.style.display = 'none';
   };
 
-  const getPost = async () => {
+  const getPost = async (
+    userName,
+    userAccount,
+    userImage,
+    content,
+    date,
+    postImages,
+    heartCount,
+    commentCount
+  ) => {
     try {
       const token = localStorage.getItem('accessToken');
       const res = await axios.get(`https://mandarin.api.weniv.co.kr/post/${postId}`, {
@@ -41,6 +43,27 @@ export default function PostView() {
         },
       });
       console.log(res.data);
+
+      userName = res.data.post.author.username;
+      userAccount = res.data.post.author.accountname;
+      userImage = res.data.post.author.image;
+      content = res.data.post.content;
+      date = res.data.post.createdAt;
+      postImages = res.data.post.image;
+      heartCount = res.data.post.heartCount;
+      commentCount = res.data.post.commentCount;
+
+      dispatch({
+        type: 'READ_POST',
+        userName,
+        userAccount,
+        userImage,
+        content,
+        date,
+        postImages,
+        heartCount,
+        commentCount,
+      });
     } catch (error) {
       console.log(error);
       if (error.response.data.message === '존재하지 않는 게시글입니다.') {

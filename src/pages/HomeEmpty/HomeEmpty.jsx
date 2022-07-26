@@ -10,7 +10,7 @@ import Home from '../Home/Home';
 export default function Test() {
   const [postList, setPostList] = useState([]);
 
-  console.log(postList);
+  // console.log(postList);
 
   useEffect(() => {
     (async function getPost() {

@@ -8,7 +8,7 @@ const initialState = {
 
 const ProductInfoReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'PRODUCT':
+    case 'GET_PRODUCT':
       return {
         ...state,
         productList: action.productList,

@@ -10,6 +10,7 @@ const initialState = {
   commentCount: '',
   updateImages: '',
   postList: [],
+  commentList: [],
 };
 
 const PostInfoReducer = (state = initialState, action) => {
@@ -77,6 +78,13 @@ const PostInfoReducer = (state = initialState, action) => {
         heartCount: action.heartCount,
         commentCount: action.commentCount,
       };
+
+    case 'GET_COMMENT':
+      return {
+        ...state,
+        commentList: action.commentList,
+      };
+
     default:
       return state;
   }

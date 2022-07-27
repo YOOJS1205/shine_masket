@@ -6,7 +6,7 @@ const initialState = {
   UserName: '',
   UserAccount: '',
   UserIntro: '',
-  UserImage: '',
+  UserImage: 'https://mandarin.api.weniv.co.kr/Ellipse.png',
   UserFollowing: [],
   UserFollower: [],
   UserFollowerCount: 0,
@@ -26,13 +26,6 @@ const UserInfoReducer = (state = initialState, action) => {
         UserIntro: action.UserIntro,
         loginToken: action.loginToken,
       };
-    case 'JOIN':
-      return {
-        ...state,
-        UserId: action.UserId,
-        registerPassword: action.registerPassword,
-      };
-
     case 'CLICK':
       return {
         ...state,

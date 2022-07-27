@@ -20,6 +20,8 @@ export default function UserProfile() {
   const { UserName, UserAccount, UserIntro, UserImage, UserFollowerCount, UserFollowingCount } =
     useSelector((state) => state.UserInfoReducer);
 
+  console.log(UserImage);
+
   useEffect(() => {
     (async function getProductAndPost() {
       try {

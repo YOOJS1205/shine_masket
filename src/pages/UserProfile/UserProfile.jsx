@@ -4,7 +4,7 @@ import Profile from '../../components/Profile/Profile';
 import TopMenuBar from '../../components/TopMenuBar/TopMenuBar';
 import TabMenu from '../../components/TabMenu/TabMenu';
 import Button from '../../components/Button/Button';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import PostCard from '../../components/PostCard/PostCard';
@@ -14,13 +14,14 @@ import axios from 'axios';
 import { useState } from 'react';
 
 export default function UserProfile() {
+  const dispatch = useDispatch();
   const [productList, setProductList] = useState([]);
 
   const { UserName, UserAccount, UserIntro, UserImage, UserFollowerCount, UserFollowingCount } =
     useSelector((state) => state.UserInfoReducer);
 
   useEffect(() => {
-    (async function getProduct() {
+    (async function getProductAndPost() {
       try {
         const accessToken = localStorage.getItem('accessToken');
         const res = await axios.get(`https://mandarin.api.weniv.co.kr/product/${UserAccount}`, {
@@ -34,6 +35,25 @@ export default function UserProfile() {
         setProductList(res.data.product);
       } catch (error) {
         console.error(error);
+      }
+
+      // 포스트 가져오기
+      try {
+        const accessToken = localStorage.getItem('accessToken');
+        const res = await axios.get(
+          `https://mandarin.api.weniv.co.kr/post/${UserAccount}/userpost`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              'Content-type': 'application/json',
+            },
+          }
+        );
+
+        const postList = res.data.post;
+        dispatch({ type: 'GET_POST', postList });
+      } catch (error) {
+        console.log(error);
       }
     })();
   }, []);

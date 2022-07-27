@@ -8,6 +8,7 @@ import IconMessage from '../../assets/icon/icon-message-circle.png';
 // import { useState } from 'react';
 
 export default function Home({ postList }) {
+  const history = useHistory();
   return (
     <>
       <FeedWrap>
@@ -24,13 +25,47 @@ export default function Home({ postList }) {
               <h2>{post.author.username}</h2>
               <h3>@ {post.author.accountname}</h3>
               <article>{post.content}</article>
-              <ContImg src={post.image} />
+              <Content
+                style={
+                  post.image < 1
+                    ? {
+                        display: 'none',
+                      }
+                    : {
+                        display: 'flex',
+                      }
+                }
+              >
+                {post.image.split(',') &&
+                  post.image.split(',').map((image) => {
+                    const postImage = post.image.split(',');
+                    return (
+                      <li key={image}>
+                        <ContImg
+                          style={
+                            postImage.length > 1
+                              ? {
+                                  minWidth: '168px',
+                                  minHeight: '126px',
+                                  backgroundImage: `url(${image})`,
+                                }
+                              : {
+                                  minWidth: '300px',
+                                  paddingTop: '100%',
+                                  backgroundImage: `url(${image})`,
+                                }
+                          }
+                        />
+                      </li>
+                    );
+                  })}
+              </Content>
               <ReactionBtn>
                 <li>
                   <img src={IconHeart} />
                 </li>
                 <li>{post.heartCount}</li>
-                <li>
+                <li onClick={() => history.push(`/post/${post.id}`)}>
                   <img src={IconMessage} />
                 </li>
                 <li>{post.commentCount}</li>
@@ -135,8 +170,19 @@ const Article = styled.article`
   }
 `;
 
-const ContImg = styled.img`
+const Content = styled.ul`
   border-radius: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  > li {
+    border-radius: 20px;
+    overflow: hidden;
+  }
+`;
+const ContImg = styled.div`
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
 `;
 
 const ReactionBtn = styled.ul`

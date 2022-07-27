@@ -1,20 +1,78 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 import styled from 'styled-components';
 import MoreButton from '../../Button/MoreButton';
-import BasicProfileImg from '../../../assets/images/basic-profile-img.png';
 
 export default function PostComment() {
+  const dispatch = useDispatch();
+  const { postId } = useParams();
+  const { commentList } = useSelector((state) => state.PostInfoReducer);
+
+  useEffect(() => {
+    getComment();
+  }, []);
+
+  const getComment = async () => {
+    try {
+      const token = localStorage.getItem('accessToken');
+      const res = await axios.get(`https://mandarin.api.weniv.co.kr/post/${postId}/comments`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-type': 'application/json',
+        },
+      });
+      const commentList = res.data.comments;
+      dispatch({
+        type: 'GET_COMMENT',
+        commentList,
+      });
+    } catch (error) {
+      console.log(error);
+      if (error.response.data.message === '존재하지 않는 게시글입니다.') {
+        alert('존재하지 않는 게시글입니다.');
+      }
+    }
+  };
+
+  function timeCalc(date) {
+    const start = new Date(date);
+    const end = new Date();
+    const diff = end - start;
+    const times = [
+      { time: '분', milliSeconds: 1000 * 60 },
+      { time: '시간', milliSeconds: 1000 * 60 * 60 },
+      { time: '일', milliSeconds: 1000 * 60 * 60 * 24 },
+      { time: '개월', milliSeconds: 1000 * 60 * 60 * 24 * 30 },
+      { time: '년', milliSeconds: 1000 * 60 * 60 * 24 * 365 },
+    ].reverse();
+
+    for (const value of times) {
+      const betweenTime = Math.floor(diff / value.milliSeconds);
+
+      if (betweenTime > 0) {
+        return `${betweenTime}${value.time} 전`;
+      }
+    }
+
+    return '방금 전';
+  }
+
   return (
     <CommentList>
-      <CommentItem>
-        <CommentProfile>
-          <ProfileImg src={BasicProfileImg} alt="댓글 프로필 이미지" />
-          <CommentName>서귀포시 무슨 농장</CommentName>
-          <CommentDate>· 5분 전</CommentDate>
-          <MoreButton size="large" />
-        </CommentProfile>
-        <CommentText>게시글 답글 ~~ !! 최고최고</CommentText>
-      </CommentItem>
+      {commentList &&
+        commentList.map((comment) => (
+          <CommentItem key={comment.id}>
+            <CommentProfile>
+              <ProfileImg src={comment.author.image} alt="댓글 프로필 이미지" />
+              <CommentName>{comment.author.username}</CommentName>
+              <CommentDate>· {timeCalc(comment.createdAt)}</CommentDate>
+              <MoreButton size="large" />
+            </CommentProfile>
+            <CommentText>{comment.content}</CommentText>
+          </CommentItem>
+        ))}
     </CommentList>
   );
 }

@@ -13,9 +13,9 @@ export default function ChatList() {
         <h1 className="ir">채팅 목록</h1>
         <ChatLink to="/chat-room">
           <TextContainer>
-            <ChatName>애월읍 위니브 샤인머스캣 농장</ChatName>
+            <ChatName>애월읍 샤인머스캣 농장</ChatName>
             <ChatTxt>이번에 정정 언제하맨마씸?</ChatTxt>
-            <ChatDate>2020.10.25</ChatDate>
+            <ChatDate>2022.07.27</ChatDate>
           </TextContainer>
         </ChatLink>
 
@@ -23,7 +23,7 @@ export default function ChatList() {
           <TextContainer>
             <ChatName>제주샤인머스캣마을</ChatName>
             <ChatTxt>깊은 어둠의 존재감, 롤스로이스 뉴 블랙 배지...</ChatTxt>
-            <ChatDate>2020.10.25</ChatDate>
+            <ChatDate>2022.07.27</ChatDate>
           </TextContainer>
         </ChatLink>
 
@@ -31,7 +31,7 @@ export default function ChatList() {
           <TextContainer>
             <ChatName>누구네 농장 친환경 샤인머스캣</ChatName>
             <ChatTxt>내 차는 내가 평가한다. 오픈 이벤트에 참여 하...</ChatTxt>
-            <ChatDate>2020.10.25</ChatDate>
+            <ChatDate>2022.07.25</ChatDate>
           </TextContainer>
         </ChatLink>
       </Section>

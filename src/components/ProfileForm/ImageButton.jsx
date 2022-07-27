@@ -1,13 +1,18 @@
 import axios from 'axios';
 import React, { useState, useRef, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import ProfilePic from '../../assets/images/basic-profile-img.png';
+// import ProfilePic from '../../assets/images/basic-profile-img.png';
 import UploadPic from '../../assets/icon/icon-image.png';
 
 export default function ImageButton({ getImageSrc }) {
+  const { UserImage } = useSelector((state) => ({
+    UserImage: state.UserInfoReducer.UserImage,
+  }));
+
   const photoInput = useRef();
   const [imgSrc, setImgSrc] = useState('');
-  const [fileName, setFileName] = useState('');
+  const [fileName, setFileName] = useState(UserImage);
 
   // 부모 컴포넌트인 ProfileForm으로 이미지 src 데이터 전달
   useEffect(() => {
@@ -67,7 +72,7 @@ export default function ImageButton({ getImageSrc }) {
         }}
       />
       <ProfileImgContainer>
-        <ProfileImg src={imgSrc ? imgSrc : ProfilePic} />
+        <ProfileImg src={fileName ? fileName : 'https://mandarin.api.weniv.co.kr/Ellipse.png'} />
         <UploadImgButton onClick={onHandleImageButton}>
           <UploadImg src={UploadPic} alt="프로필 사진 업로드 이미지" />
         </UploadImgButton>

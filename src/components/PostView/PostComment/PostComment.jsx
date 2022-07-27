@@ -23,6 +23,7 @@ export default function PostComment() {
           'Content-type': 'application/json',
         },
       });
+      console.log(res);
       const commentList = res.data.comments;
       dispatch({
         type: 'GET_COMMENT',
@@ -68,7 +69,7 @@ export default function PostComment() {
               <ProfileImg src={comment.author.image} alt="댓글 프로필 이미지" />
               <CommentName>{comment.author.username}</CommentName>
               <CommentDate>· {timeCalc(comment.createdAt)}</CommentDate>
-              <MoreButton size="large" />
+              <MoreButton size="large" commentAccount={comment.author.accountname} />
             </CommentProfile>
             <CommentText>{comment.content}</CommentText>
           </CommentItem>
@@ -120,4 +121,7 @@ const ProfileImg = styled.img`
   height: 36px;
   border: 0.5px solid #dbdbdb;
   border-radius: 50%;
+  overflow: hidden;
+  object-fit: cover;
+  box-sizing: border-box;
 `;

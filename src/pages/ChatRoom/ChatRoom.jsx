@@ -2,14 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import TopMenuBar from '../../components/TopMenuBar/TopMenuBar';
 import PostTextBar from '../../components/PostTextBar/PostTextBar';
-
 import BasicProfileImg from '../../assets/images/basic-profile-img.png';
 import SendImg from '../../assets/images/chat-exapmle.png';
 
 export default function ChatRoom() {
   return (
     <>
-      <TopMenuBar menuText="애월읍 위니브 샤인머스캣 농장" moreButton="true" />
+      <TopMenuBar menuText="애월읍 샤인머스캣 농장" moreButton="true" />
       <ChatSection>
         <h2 className="ir">채팅창</h2>
         <FriendChatBox>
@@ -22,7 +21,7 @@ export default function ChatRoom() {
         </FriendChatBox>
         <FriendChatBox>
           <ProfileImg src={BasicProfileImg} alt="상대 프로필 이미지"></ProfileImg>
-          <ChatTxt>샤인머스캣 사고싶어요요요요요요요</ChatTxt>
+          <ChatTxt>샤인머스캣 사고싶어요요요요요요</ChatTxt>
           <TimeTxt>12:41</TimeTxt>
         </FriendChatBox>
         <MyChatBox>
@@ -40,7 +39,7 @@ export default function ChatRoom() {
 }
 
 const ChatSection = styled.section`
-  padding: 160px 16px 82px 16px;
+  padding: 30px 16px 230px 16px;
   background-color: #f2f2f2;
   font-size: 14px;
   font-weight: 400;

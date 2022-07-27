@@ -19,6 +19,7 @@ export default function ProductForm() {
   const [productPrice, setProductPrice] = useState(0);
   const [productLink, setProductLink] = useState('');
   const [nameLength, setNameLength] = useState(true);
+  const [numberLength, setNumberLength] = useState(true);
   const [isNumber, setIsNumber] = useState(true);
   const [isEmpty, setIsEmpty] = useState(false);
   const [imgSrc, setImgSrc] = useState('');
@@ -30,12 +31,12 @@ export default function ProductForm() {
 
   // Input 값이 모두 있어야 버튼 활성화
   useEffect(() => {
-    if (productName && productPrice && productLink && nameLength && isNumber) {
+    if (productName && productPrice && productLink && nameLength && isNumber && numberLength) {
       setIsEmpty(false);
     } else {
       setIsEmpty(true);
     }
-  }, [productName, productPrice, productLink, nameLength, isNumber]);
+  }, [productName, productPrice, productLink, nameLength, isNumber, numberLength]);
 
   // 상품 이름 2~15자 이내 검사
   useEffect(() => {
@@ -44,17 +45,30 @@ export default function ProductForm() {
     } else {
       setNameLength(true);
     }
-  }, [productName]);
+  }, [productName, nameLength]);
 
   // 가격 유효성 검사
   useEffect(() => {
     const regExp = /^[0-9]+$/;
     if (regExp.test(productPrice) || !productPrice) {
       setIsNumber(true);
+      if (productPrice.length < 10) {
+        setNumberLength(true);
+      } else {
+        setNumberLength(false);
+      }
     } else {
       setIsNumber(false);
     }
   }, [productPrice]);
+
+  useEffect(() => {
+    if (!productPrice.length || productPrice.length < 10) {
+      setNumberLength(true);
+    } else {
+      setNumberLength(false);
+    }
+  }, [numberLength]);
 
   // 사용자가 입력하는 데이터 동적으로 변수에 저장
   const onHandleProductName = (e) => {
@@ -71,10 +85,8 @@ export default function ProductForm() {
 
   const onClickStartButton = async (e) => {
     e.preventDefault();
-    // const imageSrc = localStorage.getItem('productImage');
     const formData = new FormData();
     formData.append('uploadImage', imgSrc);
-    // console.log(formData.getAll('uploadImage'));
 
     try {
       const accessToken = localStorage.getItem('accessToken');
@@ -127,6 +139,7 @@ export default function ProductForm() {
         />
 
         {isNumber ? null : <WarningText>* 숫자만 입력 가능합니다.</WarningText>}
+        {numberLength ? null : <WarningText>* 입력할 수 있는 금액을 초과했습니다.</WarningText>}
         <InputTitle TitleText="판매 링크" />
         <ProductInfoInput
           onChange={onHandleProductLink}

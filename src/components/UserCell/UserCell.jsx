@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import Button from '../Button/Button';
@@ -44,9 +43,13 @@ const UserCellComponent = styled.article`
 `;
 
 const UserProfileImg = styled.img`
-  margin-right: 12px;
   width: 50px;
+  height: 50px;
+  margin-right: 12px;
   border-radius: 50%;
+  overflow: hidden;
+  object-fit: cover;
+  border: 0.5px solid #dbdbdb;
 `;
 
 const UserArea = styled.div`
@@ -64,7 +67,6 @@ const UserName = styled.strong`
 
 const UserIntroduction = styled.span`
   margin-bottom: 6px;
-
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;

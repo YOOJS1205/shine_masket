@@ -15,11 +15,13 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
 
   const photoInput = useRef();
   // 전역 데이터로 담긴 가입 ID, PW 가져오기
-  const { UserId, registerPassword, UserAccount } = useSelector((state) => ({
-    UserId: state.UserInfoReducer.UserId,
-    registerPassword: state.UserInfoReducer.registerPassword,
+  const { UserAccount, UserName, UserIntro } = useSelector((state) => ({
     UserAccount: state.UserInfoReducer.UserAccount,
+    UserName: state.UserInfoReducer.UserName,
+    UserIntro: state.UserInfoReducer.UserIntro,
   }));
+
+  console.log(history.location.data);
 
   // 사용자가 설정한 이름, 계정 ID, 소개 변수에 담기
   const [userName, setUserName] = useState('');
@@ -98,8 +100,8 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
       const res = await axios.post('https://mandarin.api.weniv.co.kr/user', {
         user: {
           username: userName,
-          email: UserId,
-          password: registerPassword,
+          email: history.location.data.UserId,
+          password: history.location.data.registerPassword,
           accountname: userAccount,
           intro: userIntro,
           image: imgSrc,
@@ -146,6 +148,7 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
         TitleText="사용자 이름"
         placeholder="2~10자 이내여야 합니다."
         isLast={false}
+        defaultValue={location.pathname === `/profile/${UserAccount}/modify` ? UserName : null}
       />
       {nameLength ? null : <WarningText>* 2~10자 이내여야 합니다.</WarningText>}
       <InputTitle TitleText="계정 ID" />
@@ -154,6 +157,7 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
         TitleText="계정 ID"
         placeholder="영문, 숫자, 특수문자(.) , (_)만 사용 가능합니다."
         isLast={false}
+        defaultValue={location.pathname === `/profile/${UserAccount}/modify` ? UserAccount : null}
       />
       {isId ? null : <WarningText>* 영문, 숫자, 특수문자(.) , (_)만 사용 가능합니다.</WarningText>}
       {isExist ? <WarningText>* 이미 사용중인 계정입니다.</WarningText> : null}
@@ -163,6 +167,7 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
         TitleText="소개"
         placeholder="자신이 판매할 상품에 대해 소개해 주세요!"
         isLast={true}
+        defaultValue={location.pathname === `/profile/${UserAccount}/modify` ? UserIntro : null}
       />
       {isButton ? (
         <Button

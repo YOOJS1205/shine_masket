@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Picture from '../../assets/images/basic-profile-img.png';
 
 export default function SaleProductItem(props) {
   return (
@@ -26,6 +25,8 @@ const SaleProductImg = styled.img`
   height: 90px;
   border-radius: 8px;
   object-fit: cover;
+  border: 0.5px solid #dbdbdb;
+  box-sizing: border-box;
 `;
 
 const SaleProductName = styled.strong`

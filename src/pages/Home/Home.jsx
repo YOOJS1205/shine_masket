@@ -16,9 +16,9 @@ export default function Home({ postList }) {
           // setImgArr(post.image.split(','));
           <MainWrap key={post.author._id}>
             <Aside>
-              <Link to={"/profile/" + post.author.accountname}>
+              <Link to={'/profile/' + post.author.accountname}>
                 <Img src={post.author.image} />
-              </Link >
+              </Link>
             </Aside>
             <Article>
               <h2>{post.author.username}</h2>
@@ -56,9 +56,6 @@ export default function Home({ postList }) {
                 })}
 
                 </Content>
-
-
-
               <ReactionBtn>
                 <li>
                   <img src={IconHeart} />
@@ -71,17 +68,15 @@ export default function Home({ postList }) {
               </ReactionBtn>
               <time>
                 {post.createdAt.split('-')[0] +
-                '년 ' +
-                post.createdAt.split('-')[1] +
-                '월 ' +
-                post.createdAt.split('-')[2].split('T')[0] +
-                '일'}
-                </time>
+                  '년 ' +
+                  post.createdAt.split('-')[1] +
+                  '월 ' +
+                  post.createdAt.split('-')[2].split('T')[0] +
+                  '일'}
+              </time>
               <MoreButton size={'small'} />
             </Article>
           </MainWrap>
-
-
         ))}
       </FeedWrap>
 
@@ -103,8 +98,8 @@ const MainWrap = styled.div`
   margin-bottom: 40px;
   &::before {
     display: block;
-    content:'';
-    height:1px;
+    content: '';
+    height: 1px;
     position: absolute;
     top: -20px;
     left: 0px;
@@ -117,20 +112,20 @@ const MainWrap = styled.div`
     display: block;
   }
   &:nth-of-type(1)::before {
-    display:none;
+    display: none;
   }
 `;
 const Aside = styled.aside`
   float: left;
   width: 10%;
   padding-top: 10%;
-  position:relative;
+  position: relative;
   overflow: hidden;
   border-radius: 50%;
 `;
 const Img = styled.img`
-  position:absolute;
-  top: 50%; 
+  position: absolute;
+  top: 50%;
   left: 50%;
   width: 100%;
   height: auto;
@@ -184,21 +179,19 @@ const ContImg = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-
-`
+`;
 
 const ReactionBtn = styled.ul`
-    display: flex;
-    gap: 6px;
-    color: #767676;
-    > li {
-      width: 15px;
-      &:nth-child(2) {
-        margin-right: 10px;
-      }
-      img {
-        width: 100%;
-      }
+  display: flex;
+  gap: 6px;
+  color: #767676;
+  > li {
+    width: 15px;
+    &:nth-child(2) {
+      margin-right: 10px;
     }
-  
-`
+    img {
+      width: 100%;
+    }
+  }
+`;

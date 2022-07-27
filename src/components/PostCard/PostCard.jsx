@@ -99,6 +99,9 @@ export default function PostCard() {
             />
             <PostContainer>
               <PostText>{post.content}</PostText>
+
+
+
               <ImageContainer
                 style={
                   post.image < 1
@@ -135,6 +138,7 @@ export default function PostCard() {
                     );
                   })}
               </ImageContainer>
+              
             </PostContainer>
             <ButtonContainer>
               <LikeBtn>

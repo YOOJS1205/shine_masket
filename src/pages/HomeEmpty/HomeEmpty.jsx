@@ -6,11 +6,15 @@ import TabMenu from '../../components/TabMenu/TabMenu';
 import Button from '../../components/Button/Button';
 import MainImg from '../../assets/images/symbol-logo-gray.png';
 import Home from '../Home/Home';
-
+import { Link } from 'react-router-dom';
 export default function Test() {
   const [postList, setPostList] = useState([]);
 
-  // console.log(postList);
+
+  // const goSearch = () => {
+  //   window.location.href('/')
+  // }
+  // console.log(goSearch);
 
   useEffect(() => {
     (async function getPost() {
@@ -36,14 +40,16 @@ export default function Test() {
         preDisplay="none"
         modalDisplay="none"
       />
-      {postList ? (
+      {postList.length > 0 ? (
         <Home postList={postList} />
       ) : (
         <Main>
           <MainWrap>
             <Img src={MainImg} />
             <p>유저를 검색해 팔로우 해보세요!</p>
-            <Button size="medium" buttonText="검색하기" isActive={false} />
+            <Link to="/search">
+              <Button size="medium" buttonText="검색하기" isActive={false} />
+            </Link>
           </MainWrap>
         </Main>
       )}

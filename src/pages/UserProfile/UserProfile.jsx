@@ -18,12 +18,6 @@ export default function UserProfile() {
     useSelector((state) => state.UserInfoReducer);
 
   useEffect(() => {
-    window.onbeforeunload = function pushRefresh() {
-      window.scrollTo(0, 0);
-    };
-  }, []);
-
-  useEffect(() => {
     (async function getProductAndPost() {
       try {
         const accessToken = localStorage.getItem('accessToken');

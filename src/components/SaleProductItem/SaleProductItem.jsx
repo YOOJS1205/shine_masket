@@ -25,6 +25,8 @@ const SaleProductImg = styled.img`
   height: 90px;
   border-radius: 8px;
   object-fit: cover;
+  border: 0.5px solid #dbdbdb;
+  box-sizing: border-box;
 `;
 
 const SaleProductName = styled.strong`

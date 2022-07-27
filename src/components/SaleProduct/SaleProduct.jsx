@@ -30,12 +30,11 @@ const SaleProductContainer = styled.article`
   margin-bottom: 6px;
   display: flex;
   flex-direction: column;
-
   overflow-x: scroll;
-
   padding: 20px 0 20px 21px;
   border: 0.5px solid #dbdbdb;
-
+  border-left: 0;
+  border-right: 0;
   background-color: #fff;
 
   &::-webkit-scrollbar {

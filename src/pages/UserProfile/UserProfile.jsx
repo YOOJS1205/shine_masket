@@ -30,7 +30,6 @@ export default function UserProfile() {
           },
         });
 
-        // console.log(res.data.product);
         setProductList(res.data.product);
       } catch (error) {
         console.error(error);

@@ -17,6 +17,7 @@ export default function PostCard() {
   }));
 
   useEffect(() => {
+    console.log(postList);
     getPost();
   }, []);
 
@@ -47,22 +48,6 @@ export default function PostCard() {
       console.log(error);
     }
 
-    // 포스트 가져오기
-    try {
-      const accessToken = localStorage.getItem('accessToken');
-      const res = await axios.get(`https://mandarin.api.weniv.co.kr/post/${UserAccount}/userpost`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          'Content-type': 'application/json',
-        },
-      });
-
-      const postList = res.data;
-      dispatch({ type: 'GET_POST', postList });
-    } catch (error) {
-      console.log(error);
-    }
-
     // 상품 가져오기
     try {
       const accessToken = localStorage.getItem('accessToken');
@@ -85,12 +70,10 @@ export default function PostCard() {
     target.style.display = 'none';
   };
 
-  console.log(postList);
-
   return (
     <>
       {postList &&
-        postList.post.map((post) => (
+        postList.map((post) => (
           <Container key={post.id}>
             <h1 className="ir">게시글 댓글 페이지</h1>
             <PostProfile

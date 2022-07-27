@@ -70,11 +70,14 @@ export default function Join() {
         const UserId = joinId;
         const registerPassword = joinPassword;
 
-        dispatch({ type: 'JOIN', UserId, registerPassword });
-        history.push('/join/profile');
+        history.push({
+          pathname: '/join/profile',
+          data: { UserId: UserId, registerPassword: registerPassword },
+        });
       }
     } catch (error) {
       if (error.response.data.message === '잘못된 이메일 형식입니다.') {
+        console.log(error);
         setEmailAvailable(false);
       }
     }

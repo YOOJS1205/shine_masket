@@ -15,7 +15,6 @@ export default function Modal({ onClick, getRef, text, postId }) {
   };
 
   getRef(Modal);
-  console.log(postId);
 
   return (
     <>

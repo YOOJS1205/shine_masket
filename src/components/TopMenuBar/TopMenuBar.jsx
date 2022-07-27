@@ -21,19 +21,12 @@ export default function TopMenuBar({
   searchDisplay,
 }) {
   const history = useHistory();
-  const { postId } = useParams();
-  const { UserAccount } = useSelector((state) => state.UserInfoReducer);
+  // const { postId } = useParams();
+  // const { UserAccount } = useSelector((state) => state.UserInfoReducer);
 
   return (
     <Container>
-      <PreviousBtn
-        onClick={
-          location.pathname === `/post/${postId}`
-            ? () => history.push(`/profile/${UserAccount}`)
-            : () => history.goBack()
-        }
-        display={preDisplay}
-      >
+      <PreviousBtn onClick={() => history.goBack()} display={preDisplay}>
         <PrevioudBtnImg src={LeftArrow} alt="이전 페이지로 돌아가는 버튼 이미지" />
       </PreviousBtn>
       <SearchModal display={searchDisplay}>
@@ -52,10 +45,11 @@ export default function TopMenuBar({
       ) : null}
       {moreButton ? <MoreButton size="large" /> : null}
       {moreButtonSmall ? <MoreButton size="small" /> : null}
-      {searchBtn ? 
-      <SearchButton> 
-        <Link to="/search" />
-      </SearchButton> : null}
+      {searchBtn ? (
+        <SearchButton>
+          <Link to="/search" />
+        </SearchButton>
+      ) : null}
     </Container>
   );
 }
@@ -99,7 +93,7 @@ const HomeText = styled.h1`
 const SearchButton = styled.p`
   margin-left: auto;
   background-image: url(${Search});
-  width: 24px; 
+  width: 24px;
   height: 24px;
   cursor: pointer;
   > a {

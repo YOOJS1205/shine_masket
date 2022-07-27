@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import styled from 'styled-components';
 import SaleProductItem from '../SaleProductItem/SaleProductItem';
-import { useSelector } from 'react-redux';
 
 export default function SaleProduct(props) {
   return (
@@ -16,7 +15,7 @@ export default function SaleProduct(props) {
                 key={product.id}
                 productImg={product.itemImage}
                 productName={product.itemName}
-                productPrice={product.price}
+                productPrice={product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                 productLink={product.link}
               />
             ))}

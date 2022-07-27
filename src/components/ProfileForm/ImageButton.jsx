@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import ProfilePic from '../../assets/images/basic-profile-img.png';
-import UploadPic from '../../assets/images/upload-file.png';
+import UploadPic from '../../assets/icon/icon-image.png';
 
 export default function ImageButton({ getImageSrc }) {
   const photoInput = useRef();
@@ -104,9 +104,16 @@ const ProfileImg = styled.img`
 
 const UploadImgButton = styled.button`
   position: absolute;
-  bottom: -12%;
+  width: 50px;
+  height: 50px;
+  bottom: -8%;
   right: -15%;
   border-radius: 50%;
   overflow: hidden;
+  background-color: var(--color-enabled-dark);
 `;
-const UploadImg = styled.img``;
+
+const UploadImg = styled.img`
+  width: 28px;
+  margin-top: 3px;
+`;

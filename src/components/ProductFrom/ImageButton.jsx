@@ -1,8 +1,7 @@
 import axios from 'axios';
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import ProfilePic from '../../assets/images/basic-profile-img.png';
-import UploadPic from '../../assets/images/upload-file.png';
+import UploadPic from '../../assets/icon/icon-upload.png';
 
 export default function ImageButton({ getImageSrc }) {
   const photoInput = useRef();
@@ -54,19 +53,18 @@ export default function ImageButton({ getImageSrc }) {
           encodeFileToBase64(e.target.files[0]);
         }}
       />
-      <ProfileImgContainer>
-        <ProfileImg src={imgSrc ? imgSrc : ProfilePic} />
+      <ProductImgContainer>
+        <ProductButton src={imgSrc ? imgSrc : ''} alt="" />
         <UploadImgButton onClick={onHandleImageButton}>
-          <UploadImg src={UploadPic} alt="프로필 사진 업로드 이미지" />
+          <UploadImg src={UploadPic} alt="상품 이미지 업로드" />
         </UploadImgButton>
-      </ProfileImgContainer>
+      </ProductImgContainer>
     </ButtonContainer>
   );
 }
 
 const ButtonContainer = styled.section`
   display: block;
-  border: none;
   margin: 30px auto;
   background-color: #ffffff;
 `;
@@ -76,25 +74,38 @@ const HiddenInput = styled.input`
   display: none;
 `;
 
-const ProfileImgContainer = styled.div`
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
+const ProductImgContainer = styled.div`
   margin: 0 auto;
   position: relative;
+  width: 322px;
+  height: 204px;
+
+  border-radius: 10px;
+  border: 0.5px solid #dbdbdb;
+  background-color: #f2f2f2;
 `;
 
-const ProfileImg = styled.img`
+const ProductButton = styled.img`
   width: 100%;
   height: 100%;
-  border-radius: 50%;
+  object-fit: cover;
+  border-radius: 10px;
+
+  &[src=''] {
+    display: none;
+  }
 `;
 
 const UploadImgButton = styled.button`
   position: absolute;
-  bottom: -12%;
-  right: -15%;
+  bottom: 7%;
+  right: 4%;
+  width: 36px;
+  height: 36px;
+  background-color: #c4c4c4;
   border-radius: 50%;
-  overflow: hidden;
 `;
-const UploadImg = styled.img``;
+
+const UploadImg = styled.img`
+  vertical-align: middle;
+`;

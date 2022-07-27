@@ -52,10 +52,11 @@ export default function TopMenuBar({
       ) : null}
       {moreButton ? <MoreButton size="large" /> : null}
       {moreButtonSmall ? <MoreButton size="small" /> : null}
-      {searchBtn ? 
-      <SearchButton> 
-        <Link to="/search" />
-      </SearchButton> : null}
+      {searchBtn ? (
+        <SearchButton>
+          <Link to="/search" />
+        </SearchButton>
+      ) : null}
     </Container>
   );
 }
@@ -99,7 +100,7 @@ const HomeText = styled.h1`
 const SearchButton = styled.p`
   margin-left: auto;
   background-image: url(${Search});
-  width: 24px; 
+  width: 24px;
   height: 24px;
   cursor: pointer;
   > a {

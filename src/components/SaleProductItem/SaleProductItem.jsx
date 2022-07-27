@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Picture from '../../assets/images/basic-profile-img.png';
 
 export default function SaleProductItem(props) {
   return (

@@ -85,6 +85,8 @@ export default function PostCard() {
     target.style.display = 'none';
   };
 
+  console.log(postList);
+
   return (
     <>
       {postList &&

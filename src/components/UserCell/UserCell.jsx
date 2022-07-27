@@ -19,7 +19,9 @@ export default function UserCell(props) {
   return (
     <>
       <UserCellComponent>
-        <UserProfileImg src={props.image} />
+        <UserImageContainer>
+          <UserProfileImg src={props.image} />
+        </UserImageContainer>
         <UserArea>
           <UserName>{props.userName}</UserName>
           <UserIntroduction>{props.UserIntroduction}</UserIntroduction>
@@ -43,10 +45,23 @@ const UserCellComponent = styled.article`
   display: flex;
 `;
 
-const UserProfileImg = styled.img`
-  margin-right: 12px;
+const UserImageContainer = styled.div`
+  position: relative;
   width: 50px;
+  height: 50px;
+  margin-right: 12px;
   border-radius: 50%;
+  overflow: hidden;
+`;
+
+const UserProfileImg = styled.img`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: auto;
+  background-size: contain;
+  transform: translate(-50%, -50%);
 `;
 
 const UserArea = styled.div`
@@ -64,7 +79,6 @@ const UserName = styled.strong`
 
 const UserIntroduction = styled.span`
   margin-bottom: 6px;
-
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;

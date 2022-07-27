@@ -22,7 +22,7 @@ export default function Modal({ onClick, getRef, text, postId }) {
       <ChatModal ref={NotModal} onClick={onClick}>
         <ChatModal_Ul ref={Modal}>
           <li>
-            <Link to={location.pathname === '/chat-list' ? null : `/post/${postId}/update`}>
+            <Link to={location.pathname === '/chat-list' ? '#/' : `/post/${postId}/update`}>
               {text[0]}
             </Link>
           </li>

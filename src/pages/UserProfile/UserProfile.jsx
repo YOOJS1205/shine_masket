@@ -1,17 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import Profile from '../../components/Profile/Profile';
 import TopMenuBar from '../../components/TopMenuBar/TopMenuBar';
 import TabMenu from '../../components/TabMenu/TabMenu';
 import Button from '../../components/Button/Button';
-import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-
 import PostCard from '../../components/PostCard/PostCard';
 import SaleProduct from '../../components/SaleProduct/SaleProduct';
-import { useEffect } from 'react';
-import axios from 'axios';
-import { useState } from 'react';
 
 export default function UserProfile() {
   const dispatch = useDispatch();

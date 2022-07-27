@@ -62,6 +62,9 @@ export default function PostUpdate() {
       if (error.response.data.message === '존재하지 않는 게시글입니다.') {
         alert('존재하지 않는 게시글입니다.');
       }
+      if (error.response.data.message === '잘못된 요청입니다. 로그인 정보를 확인하세요.') {
+        alert('잘못된 요청입니다. 로그인 정보를 확인하세요.');
+      }
     }
   };
 

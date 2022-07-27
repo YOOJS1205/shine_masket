@@ -27,6 +27,7 @@ const ProfileImg = styled.img`
   height: 42px;
   border: 0.5px solid #dbdbdb;
   border-radius: 50%;
+  object-fit: cover;
 `;
 
 const TextContainer = styled.div`

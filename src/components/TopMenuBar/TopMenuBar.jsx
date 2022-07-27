@@ -21,12 +21,19 @@ export default function TopMenuBar({
   searchDisplay,
 }) {
   const history = useHistory();
-  // const { postId } = useParams();
-  // const { UserAccount } = useSelector((state) => state.UserInfoReducer);
+  const { postId } = useParams();
+  const { UserAccount } = useSelector((state) => state.UserInfoReducer);
 
   return (
     <Container>
-      <PreviousBtn onClick={() => history.goBack()} display={preDisplay}>
+      <PreviousBtn
+        onClick={
+          location.pathname === `/post/${postId}`
+            ? () => history.push(`/profile/${UserAccount}`)
+            : () => history.goBack()
+        }
+        display={preDisplay}
+      >
         <PrevioudBtnImg src={LeftArrow} alt="이전 페이지로 돌아가는 버튼 이미지" />
       </PreviousBtn>
       <SearchModal display={searchDisplay}>

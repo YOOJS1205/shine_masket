@@ -120,4 +120,6 @@ const ProfileImg = styled.img`
   height: 36px;
   border: 0.5px solid #dbdbdb;
   border-radius: 50%;
+  overflow: hidden;
+  object-fit: cover;
 `;

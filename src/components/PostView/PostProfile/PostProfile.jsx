@@ -28,6 +28,7 @@ const ProfileImg = styled.img`
   border: 0.5px solid #dbdbdb;
   border-radius: 50%;
   object-fit: cover;
+  box-sizing: border-box;
 `;
 
 const TextContainer = styled.div`

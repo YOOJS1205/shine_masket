@@ -123,4 +123,5 @@ const ProfileImg = styled.img`
   border-radius: 50%;
   overflow: hidden;
   object-fit: cover;
+  box-sizing: border-box;
 `;

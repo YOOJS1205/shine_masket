@@ -109,7 +109,6 @@ const FollowArea = styled.div`
 const FollowersCount = styled.strong`
   display: flex;
   flex-direction: column;
-
   font-weight: 700;
   font-size: 18px;
   line-height: 23px;
@@ -126,10 +125,12 @@ const FollowersTxt = styled.strong`
 `;
 
 const MyProfileImg = styled.img`
-  padding: 0 41px;
+  margin: 0 41px;
   width: 110px;
   height: 110px;
   border-radius: 50%;
+  border: 0.5px solid #dbdbdb;
+  box-sizing: border-box;
 `;
 
 // 2

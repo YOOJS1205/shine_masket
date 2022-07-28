@@ -127,6 +127,7 @@ const Aside = styled.aside`
   overflow: hidden;
   border-radius: 50%;
   border: 0.5px solid #dbdbdb;
+  box-sizing:border-box;
 `;
 const Img = styled.img`
   position: absolute;
@@ -136,6 +137,7 @@ const Img = styled.img`
   height: auto;
   background-size: contain;
   transform: translate(-50%, -50%);
+  object-fit: cover;
 `;
 const Article = styled.article`
   float: right;

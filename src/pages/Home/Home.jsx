@@ -127,7 +127,6 @@ const Aside = styled.aside`
   overflow: hidden;
   border-radius: 50%;
   border: 0.5px solid #dbdbdb;
-  box-sizing: border-box;
 `;
 const Img = styled.img`
   position: absolute;

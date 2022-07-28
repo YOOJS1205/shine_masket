@@ -24,9 +24,9 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
   console.log(history.location.data);
 
   // 사용자가 설정한 이름, 계정 ID, 소개 변수에 담기
-  const [userName, setUserName] = useState('');
-  const [userAccount, setUserAccount] = useState('');
-  const [userIntro, setUserIntro] = useState('');
+  const [userName, setUserName] = useState(UserName ? UserName : '');
+  const [userAccount, setUserAccount] = useState(UserAccount ? UserAccount : '');
+  const [userIntro, setUserIntro] = useState(UserIntro ? UserIntro : '');
   const [nameLength, setNameLength] = useState(true);
   const [isId, setIsId] = useState(true);
   const [isEmpty, setIsEmpty] = useState(false);

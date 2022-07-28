@@ -68,8 +68,7 @@ export default function MoreButton({ size, postId, commentAccount, postAccount }
           modal={modal}
           onClick={handlecloseModal}
           text={
-            location.pathname === `/profile/${UserAccount}` ||
-            location.pathname === `/post/${postId}`
+            location.pathname === `/profile/${UserAccount}` || UserAccount === postAccount
               ? ['수정', '삭제']
               : ['신고하기']
           }

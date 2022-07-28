@@ -67,6 +67,8 @@ const Container = styled.section`
   align-items: center;
   border-bottom: 1px solid #dbdbdb;
   padding: 8px 20px;
+  background-color: var(--color-deep-bg);
+  color: #fff;
 `;
 
 const PreviousBtn = styled.button`
@@ -90,7 +92,7 @@ const MenuText = styled.h1`
 `;
 
 const HomeText = styled.h1`
-  padding-left: 5px;
+  padding: 5px;
   font-size: 18px;
   font-weight: 500;
   line-height: 22px;
@@ -119,7 +121,7 @@ const SearchModal = styled.fieldset`
     border: none;
     border-radius: 32px;
     width: 100%;
-    padding: 8px 16px;
+    padding: 4px 16px;
     box-sizing: border-box;
     font: 14px/14px 'Spoqa Han Sans Neo';
     color: #c4c4c4;

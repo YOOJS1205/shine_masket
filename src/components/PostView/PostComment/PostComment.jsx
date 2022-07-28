@@ -23,8 +23,8 @@ export default function PostComment() {
           'Content-type': 'application/json',
         },
       });
-      console.log(res);
-      const commentList = res.data.comments;
+      console.log(res.data);
+      const commentList = res.data.comments.reverse();
       dispatch({
         type: 'GET_COMMENT',
         commentList,

@@ -127,6 +127,7 @@ const Aside = styled.aside`
   overflow: hidden;
   border-radius: 50%;
   border: 0.5px solid #dbdbdb;
+  box-sizing: border-box;
 `;
 const Img = styled.img`
   position: absolute;
@@ -184,8 +185,6 @@ const ContImg = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-  border: 0.5px solid #dbdbdb;
-  box-sizing: border-box;
 `;
 
 const ReactionBtn = styled.ul`

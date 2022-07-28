@@ -7,7 +7,7 @@ import MoreIcon from '../../assets/icon/icon-more-vertical.png';
 import MoreIconSmall from '../../assets/icon/s-icon-more-vertical.png';
 import Modal from '../../components/Modal/Modal';
 
-export default function MoreButton({ size, postId, commentAccount }) {
+export default function MoreButton({ size, postId, commentAccount, postAccount }) {
   const location = useLocation();
   const [modal, setModal] = useState(false);
   const [ref, setRef] = useState('');
@@ -46,27 +46,23 @@ export default function MoreButton({ size, postId, commentAccount }) {
           modal={modal}
           onClick={handlecloseModal}
           text={
-            location.pathname === '/chat-list' || location.pathname === `/profile/${UserAccount}`
+            location.pathname === '/chat-list' || location.pathname.includes('/profile')
               ? ['설정 및 개인정보', '로그아웃']
+              : location.pathname.includes('/post') && UserAccount === commentAccount
+              ? ['삭제']
+              : location.pathname.includes('/post') && commentAccount === undefined
+              ? ['설정 및 개인정보', '로그아웃']
+              : location.pathname.includes('/post') && UserAccount !== commentAccount
+              ? ['신고하기']
               : ['채팅방 나가기']
           }
         />
       ) : null}
-      {modal && size === 'large' ? (
-        <Modal
-          postId={postId}
-          getRef={getRef}
-          modal={modal}
-          onClick={handlecloseModal}
-          text={
-            location.pathname === `/post/${postId}` || UserAccount === commentAccount
-              ? ['삭제']
-              : ['신고하기']
-          }
-        />
-      ) : null}
+
       {modal && size === 'small' ? (
         <Modal
+          UserAccount={UserAccount}
+          postAccount={postAccount}
           postId={postId}
           getRef={getRef}
           modal={modal}

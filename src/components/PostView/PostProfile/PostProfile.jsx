@@ -10,11 +10,10 @@ export default function PostProfile({ postId, userImage, userName, userAccount }
         <ProfileName>{userName}</ProfileName>
         <ProfileId>@ {userAccount}</ProfileId>
       </TextContainer>
-      <MoreButton postId={postId} size="small" />
+      <MoreButton postId={postId} postAccount={userAccount} size="small" />
     </Profile>
   );
 }
-
 const Profile = styled.div`
   display: flex;
   font-weight: 400;

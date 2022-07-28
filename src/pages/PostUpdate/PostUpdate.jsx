@@ -19,17 +19,19 @@ export default function PostUpdate() {
   const [updateImage, setUpdateImage] = useState([]);
   const textRef = useRef(null);
 
+  let newImgArr = updateImage;
+
   const onChange = (e) => {
     setUpdateText(e.target.value);
   };
 
   useEffect(() => {
-    if (updateText || updateImage.length > 0) {
+    if (updateText || newImgArr.length > 0) {
       setIsEmpty(false);
     } else {
       setIsEmpty(true);
     }
-  }, [updateText, updateImage]);
+  }, [updateText, newImgArr]);
 
   useEffect(() => {
     getPost(postId);
@@ -71,15 +73,17 @@ export default function PostUpdate() {
   // 이미지 업로드
   const uploadFileImage = async (e) => {
     let files = e.target.files;
+    newImgArr = updateImage.filter((element) => element !== '');
+
     for (let i = 0; i < files.length; i++) {
       let formData = new FormData();
       formData.append('image', files[i]);
       const res = await axios.post('https://mandarin.api.weniv.co.kr/image/uploadfile', formData);
-      updateImage.push(`https://mandarin.api.weniv.co.kr/${res.data.filename}`);
+      newImgArr.push(`https://mandarin.api.weniv.co.kr/${res.data.filename}`);
       console.log(res.data);
     }
 
-    let imageURLlist = [...updateImage];
+    let imageURLlist = [...newImgArr];
 
     if (imageURLlist.length > 3) {
       imageURLlist.push(files[0]);
@@ -100,7 +104,7 @@ export default function PostUpdate() {
   const onClickUpload = async (e) => {
     e.preventDefault();
     try {
-      const sendFileName = updateImage.join();
+      const sendFileName = newImgArr.join();
       const token = localStorage.getItem('accessToken');
       const res = await axios.put(
         `https://mandarin.api.weniv.co.kr/post/${postId}`,
@@ -177,7 +181,7 @@ export default function PostUpdate() {
       </TextContainer>
       <ImgContainer
         style={
-          updateImage < 1 || postImages < 1
+          newImgArr < 1 && postImages < 1
             ? {
                 display: 'none',
               }
@@ -186,11 +190,11 @@ export default function PostUpdate() {
               }
         }
       >
-        {updateImage.map((image, id) => (
+        {newImgArr.map((image, id) => (
           <ImgItem
             key={id}
             style={
-              updateImage.length === 1
+              newImgArr.length === 1
                 ? {
                     minWidth: '304px',
                     minHeight: '228px',

@@ -136,7 +136,7 @@
 
 ### 👦 류재준
 
-- 피드, 검색 페이지, 하단 탭 메뉴, 좋아요, 모달 컴포넌트
+- 피드, 검색 페이지, 하단 탭 메뉴, 좋아요, 모달 컴포넌트, 디자인
 
 ### 👧 오한솔
 
@@ -160,13 +160,24 @@
 
 ## 7. UI
 
-<div>
-<img width="251" height="450" alt="splash" src="https://user-images.githubusercontent.com/89122773/180934943-37b80e0f-8f0d-474b-ba9e-966bc4b775fb.png">
-<img width="251" height="450" alt="welcome" src="https://user-images.githubusercontent.com/89122773/180935031-a8851140-1849-43c2-8e3c-f2111dc7afa1.png">
+<img width="251" height="450" alt="image" src="https://user-images.githubusercontent.com/89122773/181754846-5e3a3062-0678-485f-b1df-1e6d72848d93.png">
+<img width="251" height="450" alt="image" src="https://user-images.githubusercontent.com/89122773/181754685-38f43bbb-7ed2-4c24-b54d-c1d20c94c86c.png">
 <img width="251" height="450" alt="login" src="https://user-images.githubusercontent.com/89122773/180935128-1a72c040-7b78-4532-bacf-27f179e57f5d.png">
-<img width="251" height="450" alt="home" src="https://user-images.githubusercontent.com/89122773/180935764-deb09958-c44c-4a4f-bcc5-b79946bee447.png">
-<img width="251" height="450" alt="chatroom" src="https://user-images.githubusercontent.com/89122773/180935887-2c11808d-5734-4727-9ec0-c30b9bd643b2.png">
+<img width="251" height="450" alt="image" src="https://user-images.githubusercontent.com/89122773/181755002-1f37a61c-8df8-49bb-ae36-34836452fd03.png">
+<img width="250" height="450" alt="image" src="https://user-images.githubusercontent.com/89122773/181755378-26db4d6a-d76d-4925-a4ba-f5cc617d8289.png">
 <img width="251" height="450" alt="myprofile" src="https://user-images.githubusercontent.com/89122773/180935975-29c2bfb4-2768-404a-934a-e25cef4495f5.png">
-<img width="251" height="450" alt="followers" src="https://user-images.githubusercontent.com/89122773/180936081-c431fbb3-8810-4d33-ae04-43b06b38b35e.png">
-<img width="251" height="450" alt="modifyprofile" src="https://user-images.githubusercontent.com/89122773/180936220-fbfe0dc8-91c5-4abe-aa36-45970499651e.png">
-<img width="251" height="450" alt="upload" src="https://user-images.githubusercontent.com/89122773/180936321-c83d5e87-b767-42a4-888d-3667818e349d.png">
+<img width="251" height="450" alt="image" src="https://user-images.githubusercontent.com/89122773/181755522-e9bf7901-d3b7-4e6d-81e0-8d240ff79fa6.png">
+<img width="251" height="450" alt="image" src="https://user-images.githubusercontent.com/89122773/181755863-18fe82dd-73f7-416a-8821-1360d3f542d0.png">
+<img width="251" height="450" alt="image" src="https://user-images.githubusercontent.com/89122773/181755732-9ef254e7-2dd3-406e-96f7-d0df575935c2.png">
+<br><br>
+
+## 8. 기능
+
+- ### <a href="https://github.com/YOOJS1205/shine_masket/wiki/%ED%8E%98%EC%9D%B4%EC%A7%80-%EA%B8%B0%EB%8A%A5-%EC%84%A4%EB%AA%85">페이지 기능 설명</a>
+
+<img width="251" height="450" src="https://user-images.githubusercontent.com/89122773/181161999-4a05fbe2-333d-4cf9-b9d6-ad3f4653062c.gif" />
+<img width="251" height="450" src="https://user-images.githubusercontent.com/89122773/181740767-8e768e86-4908-45b7-a354-bd988f13dd49.gif" />
+<img width="250" height="450" src="https://user-images.githubusercontent.com/89122773/181741841-bfc4124d-fdb5-44e1-80ad-07bd45f6c3db.gif" />
+<img width="250" height="450" src="https://user-images.githubusercontent.com/89122773/181753681-bfec954f-6326-465e-9e15-c6b6f91b6315.gif" />
+
+## 9. 개발 이슈

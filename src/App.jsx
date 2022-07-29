@@ -38,7 +38,7 @@ function App() {
             Authorization: `Bearer ${accessToken}`,
           },
         });
-        setIsTokenValid(true);
+        res.data.isValid && setIsTokenValid(true);
       } catch (error) {
         console.log(error);
       }

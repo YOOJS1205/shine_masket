@@ -1,13 +1,13 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+
+import Modal from '../../components/Modal/Modal';
 import MoreIcon from '../../assets/icon/icon-more-vertical.png';
 import MoreIconSmall from '../../assets/icon/s-icon-more-vertical.png';
 import MoreIcon_w from '../../assets/icon/icon-more-vertical-w.png';
 import MoreIconSmall_w from '../../assets/icon/s-icon-more-vertical-w.png';
-import Modal from '../../components/Modal/Modal';
 
 export default function MoreButton({ size, postId, commentAccount, postAccount }) {
   const location = useLocation();
@@ -21,7 +21,6 @@ export default function MoreButton({ size, postId, commentAccount, postAccount }
 
   const handlecloseModal = (e) => {
     if (e.target !== ref.current && e.target !== ref.current.childNodes[1]) {
-      console.log(e.target, ref.current.childNodes[1]);
       setModal(false);
     }
   };

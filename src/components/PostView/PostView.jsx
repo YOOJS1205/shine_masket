@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
+import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import axios from 'axios';
 import styled from 'styled-components';
+
 import PostProfile from './PostProfile/PostProfile';
 import HeartIcon from '../../assets/icon/icon-heart.png';
 import CommentIcon from '../../assets/icon/icon-message-circle.png';
@@ -42,7 +43,6 @@ export default function PostView() {
           'Content-type': 'application/json',
         },
       });
-      console.log(res.data);
 
       userName = res.data.post.author.username;
       userAccount = res.data.post.author.accountname;
@@ -82,7 +82,9 @@ export default function PostView() {
         userImage={userImage}
       />
       <PostContainer>
-        <PostText>{content}</PostText>
+        {content.split('\n').map((i, key) => {
+          return <PostText key={key}>{i}</PostText>;
+        })}
         <ImageContainer
           style={
             postImages < 1
@@ -146,10 +148,9 @@ const PostContainer = styled.div`
 `;
 
 const PostText = styled.p`
-  margin-bottom: 16px;
   font-size: 14px;
   font-weight: 400;
-  line-height: 18px;
+  line-height: 16px;
 `;
 
 const ImageContainer = styled.div`

@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
+import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
 import styled from 'styled-components';
+
 import PostProfile from '../PostView/PostProfile/PostProfile';
 import HeartIcon from '../../assets/icon/icon-heart.png';
 import CommentIcon from '../../assets/icon/icon-message-circle.png';
@@ -17,12 +18,10 @@ export default function PostCard() {
   }));
 
   useEffect(() => {
-    console.log(postList);
     getPost();
   }, []);
 
   const getPost = async () => {
-    // 프로필 가져오기
     try {
       const accessToken = localStorage.getItem('accessToken');
       const res = await axios.get(`https://mandarin.api.weniv.co.kr/profile/${UserAccount}`, {
@@ -48,7 +47,6 @@ export default function PostCard() {
       console.log(error);
     }
 
-    // 상품 가져오기
     try {
       const accessToken = localStorage.getItem('accessToken');
       const res = await axios.get(`https://mandarin.api.weniv.co.kr/product/${UserAccount}`, {
@@ -83,8 +81,9 @@ export default function PostCard() {
               userImage={post.author.image}
             />
             <PostContainer>
-              <PostText>{post.content}</PostText>
-
+              {post.content.split('\n').map((i, key) => {
+                return <PostText key={key}>{i}</PostText>;
+              })}
               <ImageContainer
                 style={
                   post.image < 1
@@ -162,10 +161,9 @@ const PostContainer = styled.div`
 `;
 
 const PostText = styled.p`
-  margin-bottom: 16px;
   font-size: 14px;
   font-weight: 400;
-  line-height: 18px;
+  line-height: 16px;
 `;
 
 const ImageContainer = styled.div`

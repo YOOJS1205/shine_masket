@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import TopMenuBar from '../../components/TopMenuBar/TopMenuBar';
 import PostTextBar from '../../components/PostTextBar/PostTextBar';
 import BasicProfileImg from '../../assets/images/basic-profile-img.png';
@@ -56,7 +57,7 @@ const ChatWrap = styled.div`
   right: 0px;
   bottom: 0px;
   z-index: -10;
-`
+`;
 
 const FriendChatBox = styled.div`
   display: flex;

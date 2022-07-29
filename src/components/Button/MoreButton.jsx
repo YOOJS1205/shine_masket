@@ -5,6 +5,8 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import MoreIcon from '../../assets/icon/icon-more-vertical.png';
 import MoreIconSmall from '../../assets/icon/s-icon-more-vertical.png';
+import MoreIcon_w from '../../assets/icon/icon-more-vertical-w.png';
+import MoreIconSmall_w from '../../assets/icon/s-icon-more-vertical-w.png';
 import Modal from '../../components/Modal/Modal';
 
 export default function MoreButton({ size, postId, commentAccount, postAccount }) {
@@ -37,6 +39,10 @@ export default function MoreButton({ size, postId, commentAccount, postAccount }
           <Img src={MoreIcon} />
         ) : size === 'small' ? (
           <Img src={MoreIconSmall} />
+        ) : size === 'large_w' ? (
+          <Img src={MoreIcon_w} />
+        ) : size === 'small_w' ? (
+          <Img src={MoreIconSmall_w} />
         ) : null}
       </ButtonComponent>
       {modal && size === 'large' ? (

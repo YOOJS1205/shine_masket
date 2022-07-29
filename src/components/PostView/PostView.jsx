@@ -166,6 +166,7 @@ const ImageContainer = styled.div`
 `;
 
 const Img = styled.li`
+  margin-top: 16px;
   border: 0.5px solid #dbdbdb;
   border-radius: 10px;
   background-position: center;

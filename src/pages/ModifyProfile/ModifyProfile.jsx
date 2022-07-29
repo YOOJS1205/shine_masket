@@ -49,7 +49,6 @@ export default function ModifyProfile() {
           },
         }
       );
-      console.log(res);
       dispatch({
         type: 'MODIFY_PROFILE',
         UserImage: res.data.user.image,

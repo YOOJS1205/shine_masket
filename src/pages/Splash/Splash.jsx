@@ -7,7 +7,11 @@ export default function Splash() {
   const history = useHistory();
   useEffect(() => {
     setTimeout(() => {
-      history.push('/welcome');
+      if (localStorage.getItem('accessToken')) {
+        history.push('/home-empty');
+      } else {
+        history.push('/welcome');
+      }
     }, 2000);
   }, []);
 

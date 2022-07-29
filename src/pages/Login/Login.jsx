@@ -47,7 +47,6 @@ export default function Login() {
       });
 
       if (!res.data.message) {
-        console.log(res);
         const UserId = res.data.user.email;
         const UserName = res.data.user.username;
         const UserAccount = res.data.user.accountname;

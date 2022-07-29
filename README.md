@@ -160,6 +160,7 @@
 
 ## 7. UI
 
+<div>
 <img width="251" height="450" alt="image" src="https://user-images.githubusercontent.com/89122773/181754846-5e3a3062-0678-485f-b1df-1e6d72848d93.png">
 <img width="251" height="450" alt="image" src="https://user-images.githubusercontent.com/89122773/181754685-38f43bbb-7ed2-4c24-b54d-c1d20c94c86c.png">
 <img width="251" height="450" alt="login" src="https://user-images.githubusercontent.com/89122773/180935128-1a72c040-7b78-4532-bacf-27f179e57f5d.png">
@@ -169,15 +170,18 @@
 <img width="251" height="450" alt="image" src="https://user-images.githubusercontent.com/89122773/181755522-e9bf7901-d3b7-4e6d-81e0-8d240ff79fa6.png">
 <img width="251" height="450" alt="image" src="https://user-images.githubusercontent.com/89122773/181755863-18fe82dd-73f7-416a-8821-1360d3f542d0.png">
 <img width="251" height="450" alt="image" src="https://user-images.githubusercontent.com/89122773/181755732-9ef254e7-2dd3-406e-96f7-d0df575935c2.png">
+</div>
 <br><br>
 
 ## 8. 기능
 
 - ### <a href="https://github.com/YOOJS1205/shine_masket/wiki/%ED%8E%98%EC%9D%B4%EC%A7%80-%EA%B8%B0%EB%8A%A5-%EC%84%A4%EB%AA%85">페이지 기능 설명</a>
 
+<div>
 <img width="251" height="450" src="https://user-images.githubusercontent.com/89122773/181161999-4a05fbe2-333d-4cf9-b9d6-ad3f4653062c.gif" />
 <img width="251" height="450" src="https://user-images.githubusercontent.com/89122773/181740767-8e768e86-4908-45b7-a354-bd988f13dd49.gif" />
 <img width="250" height="450" src="https://user-images.githubusercontent.com/89122773/181741841-bfc4124d-fdb5-44e1-80ad-07bd45f6c3db.gif" />
 <img width="250" height="450" src="https://user-images.githubusercontent.com/89122773/181753681-bfec954f-6326-465e-9e15-c6b6f91b6315.gif" />
+</div>
 
 ## 9. 개발 이슈

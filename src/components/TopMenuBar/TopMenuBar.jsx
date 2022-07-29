@@ -50,8 +50,8 @@ export default function TopMenuBar({
       {uploadButton ? (
         <Button buttonText="업로드" size="medium-small" isEmpty={isEmpty} onClick={onClick} />
       ) : null}
-      {moreButton ? <MoreButton size="large" /> : null}
-      {moreButtonSmall ? <MoreButton size="small" /> : null}
+      {moreButton ? <MoreButton size="large_w" /> : null}
+      {moreButtonSmall ? <MoreButton size="small_w" /> : null}
       {searchBtn ? (
         <SearchButton>
           <Link to="/search" />

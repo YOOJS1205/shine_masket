@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+
 import styled from 'styled-components';
 import Profile from '../../components/Profile/Profile';
 import TopMenuBar from '../../components/TopMenuBar/TopMenuBar';
@@ -9,16 +11,20 @@ import ChatButtonImg from '../../assets/icon/icon-message-circle.svg';
 import ShareButtonImg from '../../assets/icon/icon-share.png';
 
 export default function YourProfile() {
+  const { OtherUserProfileInfo } = useSelector((state) => state.OtherUserInfoReducer);
+  console.log(OtherUserProfileInfo);
+
   return (
     <>
-      <TopMenuBar />
+      <TopMenuBar moreButton={true} />
       <ProfileContainer>
         <Profile
-          followersCount="3333"
-          followingsCount="33"
-          userName="옆집 감귤 농장"
-          userId="another"
-          userIntroduction="다른 사용자 프로필 화면입니다."
+          followersCount={OtherUserProfileInfo.followerCount}
+          followingsCount={OtherUserProfileInfo.followingCount}
+          userImage={OtherUserProfileInfo.image}
+          userName={OtherUserProfileInfo.username}
+          userId={OtherUserProfileInfo.accountname}
+          userIntroduction={OtherUserProfileInfo.intro}
         >
           <YourProfileButton />
         </Profile>

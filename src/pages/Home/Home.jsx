@@ -2,12 +2,21 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import TabMenu from '../../components/TabMenu/TabMenu';
 import MoreButton from '../../components/Button/MoreButton';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import IconHeart from '../../assets/icon/icon-heart.png';
 import IconMessage from '../../assets/icon/icon-message-circle.png';
 
 export default function Home({ postList }) {
+  const dispatch = useDispatch();
   const history = useHistory();
+  // console.log('하하!!!');
+  // const goToProfile = () => {
+  //   console.log('ㅁㅁㅁ');
+  //   const OtherUserInfo = res.data;
+  //     dispatch({ type: 'FOLLWER', OtherUserInfo });
+  // };
 
   return (
     <>
@@ -17,9 +26,26 @@ export default function Home({ postList }) {
           // setImgArr(post.image.split(','));
           <MainWrap key={post.createdAt}>
             <Aside>
-              <Link to={'/profile/' + post.author.accountname}>
-                <Img src={post.author.image} />
-              </Link>
+              {/* <Link to={'/profile/' + post.author.accountname}> */}
+              <Img
+                src={post.author.image}
+                onClick={() => {
+                  console.log(post.author);
+                  const OtherUserProfileInfo = post.author;
+                  dispatch({ type: 'PROFILE', OtherUserProfileInfo });
+                  history.push({
+                    pathname: `/your-profile/${post.author.accountname}`,
+                    state: { state: post.author },
+                  });
+                }}
+                // onClick={() =>
+                //   history.push({
+                //     pathname: `/profile/${post.author.accountname}`,
+                //     state: { state: post.author },
+                //   })
+                // }
+              />
+              {/* </Link> */}
             </Aside>
             <Article>
               <h2>{post.author.username}</h2>

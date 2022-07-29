@@ -170,6 +170,7 @@ const ImageContainer = styled.div`
   position: relative;
   display: flex;
   gap: 8px;
+  margin-top: 16px;
   &::-webkit-scrollbar {
     display: none;
   }

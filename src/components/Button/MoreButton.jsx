@@ -51,14 +51,26 @@ export default function MoreButton({ size, postId, commentAccount, postAccount }
           modal={modal}
           onClick={handlecloseModal}
           text={
-            location.pathname === '/chat-list' || location.pathname.includes('/profile')
-              ? ['설정 및 개인정보', '로그아웃']
-              : location.pathname.includes('/post') && UserAccount === commentAccount
+            location.pathname.includes('/post') && UserAccount === commentAccount
               ? ['삭제']
-              : location.pathname.includes('/post') && commentAccount === undefined
-              ? ['설정 및 개인정보', '로그아웃']
               : location.pathname.includes('/post') && UserAccount !== commentAccount
               ? ['신고하기']
+              : null
+          }
+        />
+      ) : null}
+
+      {modal && size === 'large_w' ? (
+        <Modal
+          postId={postId}
+          getRef={getRef}
+          modal={modal}
+          onClick={handlecloseModal}
+          text={
+            location.pathname === '/chat-list' || location.pathname.includes('/profile')
+              ? ['설정 및 개인정보', '로그아웃']
+              : location.pathname.includes('/post') && commentAccount === undefined
+              ? ['설정 및 개인정보', '로그아웃']
               : ['채팅방 나가기']
           }
         />

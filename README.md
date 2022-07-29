@@ -25,6 +25,8 @@
   => 제공된 API 사용
 - 버전, 이슈 관리 및 협업<br>
   => Git, Github, Github Issues, Github Wiki
+- 디자인<br>
+  => Figma
 
 ### 3.1.1 Why Git Flow?
 

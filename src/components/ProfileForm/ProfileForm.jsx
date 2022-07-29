@@ -8,7 +8,7 @@ import UserInfoInput from './UserInfoInput';
 import Button from '../Button/Button';
 import InputTitle from './InputTitle';
 
-export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
+export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo, exist }) {
   const dispatch = useDispatch();
   const location = useLocation();
   const history = useHistory();
@@ -47,7 +47,7 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
       getEmptyInfo(isEmpty);
       getUserInfo(userName, userAccount, userIntro);
     }
-  }, [isEmpty, userIntro]);
+  }, [isEmpty, userName, userAccount, userIntro]);
 
   // 사용자 이름 2~10자 이내 검사
   useEffect(() => {
@@ -156,7 +156,7 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
         defaultValue={location.pathname === `/profile/${UserAccount}/modify` ? UserAccount : null}
       />
       {isId ? null : <WarningText>* 영문, 숫자, 특수문자(.) , (_)만 사용 가능합니다.</WarningText>}
-      {isExist ? <WarningText>* 이미 사용중인 계정입니다.</WarningText> : null}
+      {isExist || exist ? <WarningText>* 이미 사용중인 계정입니다.</WarningText> : null}
       <InputTitle TitleText="소개" />
       <UserInfoInput
         onChange={onHandleUserIntro}

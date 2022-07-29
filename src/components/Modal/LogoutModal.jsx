@@ -75,6 +75,7 @@ const LogoutText = styled.p`
   font-size: 16px;
   line-height: 20px;
   padding: 22px 56px;
+  color: #000;
 `;
 
 const FuncButton = styled.button`

@@ -63,7 +63,6 @@ export default function Login() {
           UserName,
           UserId,
           UserImage,
-          loginToken,
           UserAccount,
           UserIntro,
           User_Id,

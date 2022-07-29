@@ -74,7 +74,9 @@ function App() {
                 <Route path="/search" exact component={Search} />
                 <Route path="/home" exact component={Home} />
               </>
-            ) : null}
+            ) : (
+              <Route component={NotFound} />
+            )}
             <Route component={NotFound} />
           </Switch>
         </AnimatePresence>

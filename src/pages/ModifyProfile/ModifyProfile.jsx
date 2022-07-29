@@ -14,6 +14,7 @@ export default function ModifyProfile() {
   const [userName, setUserName] = useState('');
   const [userAccount, setUserAccount] = useState('');
   const [userIntro, setUserIntro] = useState('');
+  const [exist, setExist] = useState(false);
 
   // 자식 컴포넌트에서 전달받은 isEmpty를 useState로 관리
   const getEmptyInfo = (isEmpty) => {
@@ -58,7 +59,11 @@ export default function ModifyProfile() {
       });
       history.push(`/profile/${userAccount}`);
     } catch (error) {
-      console.log(error);
+      if (error.response.data.message === '이미 사용중인 계정 ID입니다.') {
+        setExist(true);
+      } else {
+        setExist(false);
+      }
     }
   };
 
@@ -66,7 +71,12 @@ export default function ModifyProfile() {
     <Conatiner>
       <h1 className="ir">프로필 수정</h1>
       <TopMenuBar saveButton={true} isEmpty={isEmpty} onClick={onClickSaveButton} />
-      <ProfileForm isButton={false} getEmptyInfo={getEmptyInfo} getUserInfo={getUserInfo} />
+      <ProfileForm
+        isButton={false}
+        getEmptyInfo={getEmptyInfo}
+        getUserInfo={getUserInfo}
+        exist={exist}
+      />
     </Conatiner>
   );
 }

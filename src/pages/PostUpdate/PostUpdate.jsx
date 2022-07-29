@@ -1,23 +1,24 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import axios from 'axios';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 import styled from 'styled-components';
+
 import TopMenuBar from '../../components/TopMenuBar/TopMenuBar';
 import ImageUploadIcon from '../../assets/icon/icon-image.png';
 import RemoveIcon from '../../assets/icon/icon-delete.png';
 
 export default function PostUpdate() {
-  const { postImages } = useSelector((state) => state.PostInfoReducer);
-  const { postId } = useParams();
-  const { UserImage } = useSelector((state) => state.UserInfoReducer);
-
   const dispatch = useDispatch();
   const history = useHistory();
   const [isEmpty, setIsEmpty] = useState(true);
   const [updateText, setUpdateText] = useState('');
   const [updateImage, setUpdateImage] = useState([]);
   const textRef = useRef(null);
+
+  const { postImages } = useSelector((state) => state.PostInfoReducer);
+  const { postId } = useParams();
+  const { UserImage } = useSelector((state) => state.UserInfoReducer);
 
   let newImgArr = updateImage;
 
@@ -37,7 +38,10 @@ export default function PostUpdate() {
     getPost(postId);
   }, [postId]);
 
-  // textarea 높이 조절
+  useEffect(() => {
+    handleResizeHeight();
+  });
+
   const handleResizeHeight = useCallback(() => {
     if (textRef === null || textRef.current === null) {
       return;
@@ -46,7 +50,6 @@ export default function PostUpdate() {
     textRef.current.style.height = `${textRef.current.scrollHeight}px`;
   }, []);
 
-  // 수정 게시물 가지고 오기
   const getPost = async () => {
     try {
       const token = localStorage.getItem('accessToken');
@@ -70,7 +73,6 @@ export default function PostUpdate() {
     }
   };
 
-  // 이미지 업로드
   const uploadFileImage = async (e) => {
     let files = e.target.files;
     newImgArr = updateImage.filter((element) => element !== '');
@@ -80,11 +82,9 @@ export default function PostUpdate() {
       formData.append('image', files[i]);
       const res = await axios.post('https://mandarin.api.weniv.co.kr/image/uploadfile', formData);
       newImgArr.push(`https://mandarin.api.weniv.co.kr/${res.data.filename}`);
-      console.log(res.data);
     }
 
     let imageURLlist = [...newImgArr];
-
     if (imageURLlist.length > 3) {
       imageURLlist.push(files[0]);
       imageURLlist = imageURLlist.slice(0, 3);
@@ -94,13 +94,11 @@ export default function PostUpdate() {
     setUpdateImage(imageURLlist);
   };
 
-  // 이미지 삭제
   const deleteFileImage = (id) => {
     setUpdateImage(updateImage.filter((_, index) => index !== id));
     URL.revokeObjectURL(updateImage);
   };
 
-  // 업로드 버튼 동작
   const onClickUpload = async (e) => {
     e.preventDefault();
     try {
@@ -121,7 +119,6 @@ export default function PostUpdate() {
           },
         }
       );
-      console.log(res.data);
 
       const userName = res.data.post.author.username;
       const userAccount = res.data.post.author.accountname;

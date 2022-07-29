@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
+import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 import styled from 'styled-components';
+
 import MoreButton from '../../Button/MoreButton';
 
 export default function PostComment() {
@@ -23,7 +24,6 @@ export default function PostComment() {
           'Content-type': 'application/json',
         },
       });
-      console.log(res.data);
       const commentList = res.data.comments.reverse();
       dispatch({
         type: 'GET_COMMENT',
@@ -51,12 +51,10 @@ export default function PostComment() {
 
     for (const value of times) {
       const betweenTime = Math.floor(diff / value.milliSeconds);
-
       if (betweenTime > 0) {
         return `${betweenTime}${value.time} 전`;
       }
     }
-
     return '방금 전';
   }
 

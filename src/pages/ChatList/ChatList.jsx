@@ -1,6 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
 import TopMenuBar from '../../components/TopMenuBar/TopMenuBar';
 import TabMenu from '../../components/TabMenu/TabMenu';
 import BasicProfileImg from '../../assets/images/basic-profile-img.png';

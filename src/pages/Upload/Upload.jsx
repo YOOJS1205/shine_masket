@@ -29,7 +29,6 @@ export default function Upload() {
     }
   }, [uploadText, fileImage]);
 
-  // textarea 크기 조절
   const handleResizeHeight = useCallback(() => {
     if (textRef === null || textRef.current === null) {
       return;
@@ -38,7 +37,6 @@ export default function Upload() {
     textRef.current.style.height = `${textRef.current.scrollHeight}px`;
   }, []);
 
-  // 파일 업로드
   const uploadFileImage = async (e) => {
     let files = e.target.files;
 
@@ -47,7 +45,6 @@ export default function Upload() {
       formData.append('image', files[i]);
       const res = await axios.post('https://mandarin.api.weniv.co.kr/image/uploadfile', formData);
       fileImage.push(`https://mandarin.api.weniv.co.kr/${res.data.filename}`);
-      console.log(res.data);
     }
 
     let imageURLlist = [...fileImage];
@@ -61,7 +58,6 @@ export default function Upload() {
     setFileImage(imageURLlist);
   };
 
-  // 파일 삭제
   const deleteFileImage = (id) => {
     setFileImage(fileImage.filter((_, index) => index !== id));
     URL.revokeObjectURL(fileImage);
@@ -87,7 +83,6 @@ export default function Upload() {
           },
         }
       );
-      console.log(res.data);
 
       const userName = res.data.post.author.username;
       const userAccount = res.data.post.author.accountname;

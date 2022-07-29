@@ -21,8 +21,6 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
     UserIntro: state.UserInfoReducer.UserIntro,
   }));
 
-  console.log(history.location.data);
-
   // 사용자가 설정한 이름, 계정 ID, 소개 변수에 담기
   const [userName, setUserName] = useState(UserName ? UserName : '');
   const [userAccount, setUserAccount] = useState(UserAccount ? UserAccount : '');
@@ -107,8 +105,6 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo }) {
           image: imgSrc,
         },
       });
-
-      console.log(res);
 
       if (res.data.message === '회원가입 성공') {
         const UserName = res.data.user.username;

@@ -1,10 +1,11 @@
-import React from 'react';
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import LogoutModal from './LogoutModal';
 
-export default function Modal({ onClick, getRef, text, postId }) {
+import LogoutModal from './LogoutModal';
+import DeleteModal from './DeleteModal';
+
+export default function Modal({ onClick, getRef, text, postId, UserAccount, postAccount }) {
   const location = useLocation();
   const NotModal = useRef();
   const Modal = useRef();
@@ -21,17 +22,34 @@ export default function Modal({ onClick, getRef, text, postId }) {
       <ChatModal ref={NotModal} onClick={onClick}>
         <ChatModal_Ul ref={Modal}>
           <li>
-            <Link to={location.pathname === '/chat-list' ? '#/' : `/post/${postId}/update`}>
+            <Link
+              to={
+                location.pathname === '/chat-room'
+                  ? '/chat-list'
+                  : location.pathname === `/profile/${UserAccount}` ||
+                    (location.pathname.includes('/post') &&
+                      UserAccount !== undefined &&
+                      UserAccount === postAccount)
+                  ? `/post/${postId}/update`
+                  : '#/'
+              }
+            >
               {text[0]}
             </Link>
           </li>
           <li onClick={onClickLogoutBtn}>{text[1]}</li>
         </ChatModal_Ul>
         {logout ? (
-          location.pathname === '/chat-list' ? (
-            <LogoutModal buttonText="로그아웃" text="로그아웃 하시겠어요?" />
+          location.pathname === '/chat-list' ||
+          (location.pathname.includes('/post') &&
+            UserAccount === undefined &&
+            postAccount === undefined) ||
+          (location.pathname.includes('/profile') &&
+            UserAccount === undefined &&
+            postAccount === undefined) ? (
+            <LogoutModal buttonText="로그아웃" text="로그아웃하시겠어요?" />
           ) : (
-            <LogoutModal buttonText="삭제" text="게시글을 삭제할까요?" postId={postId} />
+            <DeleteModal buttonText="삭제" text="게시글을 삭제할까요?" postId={postId} />
           )
         ) : null}
       </ChatModal>

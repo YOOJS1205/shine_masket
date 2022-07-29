@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 
 import IconHome from '../../assets/icon/icon-home.svg';
-import IconHomeHover from '../../assets/icon/icon-home-fill.svg';
+import IconHomeHover from '../../assets/icon/icon-home-fill.png';
 import IconChat from '../../assets/icon/icon-message-circle.png';
-import IconChatHover from '../../assets/icon/icon-message-circle.svg';
+import IconChatHover from '../../assets/icon/icon-message-circle-fill.png';
 import IconUpload from '../../assets/icon/icon-edit.png';
 import IconUploadHover from '../../assets/icon/icon-edit.svg';
 import IconMyprofile from '../../assets/icon/icon-user.png';
-import IconMyprofileHover from '../../assets/icon/icon-user.svg';
+import IconMyprofileHover from '../../assets/icon/icon-user-fill.png';
 
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -28,8 +28,7 @@ const Footer = styled.ul`
     padding: 15px 0 10px;
     cursor: pointer;
     &:hover > p {
-      /* color: var(--color-enabled); */
-      color: black;
+      color: var(--color-deep-bg);
     }
   }
 

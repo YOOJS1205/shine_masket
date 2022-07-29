@@ -40,5 +40,5 @@ const SaleProductCost = styled.strong`
   font-weight: 700;
   font-size: 12px;
   line-height: 15px;
-  color: var(--color-enabled-dark);
+  color: var(--color-deep-bg);
 `;

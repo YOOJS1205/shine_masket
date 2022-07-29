@@ -5,17 +5,17 @@ import MoreButton from '../../components/Button/MoreButton';
 import { Link, useHistory } from 'react-router-dom';
 import IconHeart from '../../assets/icon/icon-heart.png';
 import IconMessage from '../../assets/icon/icon-message-circle.png';
-// import { useState } from 'react';
 
 export default function Home({ postList }) {
   const history = useHistory();
+
   return (
     <>
       <FeedWrap>
         <h1 className="ir">메인화면 피드페이지입니다</h1>
         {postList.map((post) => (
           // setImgArr(post.image.split(','));
-          <MainWrap key={post.author._id}>
+          <MainWrap key={post.createdAt}>
             <Aside>
               <Link to={'/profile/' + post.author.accountname}>
                 <Img src={post.author.image} />
@@ -36,7 +36,7 @@ export default function Home({ postList }) {
                       }
                 }
               >
-                {post.image.split(',') &&
+                {post.image &&
                   post.image.split(',').map((image) => {
                     const postImage = post.image.split(',');
                     return (
@@ -127,7 +127,7 @@ const Aside = styled.aside`
   overflow: hidden;
   border-radius: 50%;
   border: 0.5px solid #dbdbdb;
-  box-sizing:border-box;
+  box-sizing: border-box;
 `;
 const Img = styled.img`
   position: absolute;

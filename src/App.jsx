@@ -54,6 +54,7 @@ function App() {
             <Route path="/login" exact component={Login} />
             <Route path="/join" exact component={Join} />
             <Route path="/join/profile" exact component={ProfileSetting} />
+            <Route path="/home-empty" exact component={HomeEmpty} />
             {isTokenValid ? (
               <>
                 <Route path="/post/:postId" exact component={Post} />
@@ -70,7 +71,6 @@ function App() {
                 <Route path="/profile/:accountname/modify" exact component={ModifyProfile} />
                 <Route path="/follower" exact component={Follower} />
                 <Route path="/following" exact component={Following} />
-                <Route path="/home-empty" exact component={HomeEmpty} />
                 <Route path="/search" exact component={Search} />
                 <Route path="/home" exact component={Home} />
               </>

@@ -1,5 +1,6 @@
 const initialState = {
   OtherUserInfo: [],
+  OtherUserProfileInfo: [],
 };
 
 const OtherUserInfoReducer = (state = initialState, action) => {
@@ -13,6 +14,11 @@ const OtherUserInfoReducer = (state = initialState, action) => {
       return {
         ...state,
         OtherUserInfo: action.OtherUserInfo,
+      };
+    case 'PROFILE':
+      return {
+        ...state,
+        OtherUserProfileInfo: action.OtherUserProfileInfo,
       };
     default:
       return state;

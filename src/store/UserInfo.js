@@ -2,7 +2,6 @@ const initialState = {
   UserId: '',
   User_Id: '',
   registerPassword: '',
-  loginToken: '',
   UserName: '',
   UserAccount: '',
   UserIntro: '',
@@ -24,7 +23,6 @@ const UserInfoReducer = (state = initialState, action) => {
         UserAccount: action.UserAccount,
         UserImage: action.UserImage,
         UserIntro: action.UserIntro,
-        loginToken: action.loginToken,
       };
     case 'CLICK':
       return {

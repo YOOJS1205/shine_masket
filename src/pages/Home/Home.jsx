@@ -18,14 +18,11 @@ export default function Home({ postList }) {
         {postList.map((post) => (
           <MainWrap key={post.createdAt}>
             <h1 className="ir">개별 포스트 입니다</h1>
-
-
             <ProfileWrap>
               <h1 className="ir">프로필 이미지</h1>
               <Aside
                 src={post.author.image}
                 onClick={() => {
-                  console.log(post.author);
                   const OtherUserProfileInfo = post.author;
                   dispatch({ type: 'PROFILE', OtherUserProfileInfo });
                   history.push({
@@ -36,19 +33,19 @@ export default function Home({ postList }) {
               />
               <UserName
                 onClick={() => {
-                  console.log(post.author);
                   const OtherUserProfileInfo = post.author;
                   dispatch({ type: 'PROFILE', OtherUserProfileInfo });
                   history.push({
                     pathname: `/your-profile/${post.author.accountname}`,
                     state: { state: post.author },
                   });
-                }}>
+                }}
+              >
+                <h1 className="ir">유저 아이디 및 닉네임입니다.</h1>
                 <h2>{post.author.username}</h2>
                 <h3>@ {post.author.accountname}</h3>
               </UserName>
             </ProfileWrap>
-
             <Article>
               <article>{post.content}</article>
               <Content
@@ -106,8 +103,6 @@ export default function Home({ postList }) {
               </time>
               <MoreButton size={'small'} />
             </Article>
-
-            
           </MainWrap>
         ))}
       </FeedWrap>
@@ -116,14 +111,12 @@ export default function Home({ postList }) {
     </>
   );
 }
-
 const FeedWrap = styled.main`
   max-width: 720px;
   margin: 0px auto;
   margin-bottom: 20px;
   padding: 20px;
 `;
-
 const MainWrap = styled.section`
   width: 100%;
   position: relative;
@@ -145,11 +138,10 @@ const MainWrap = styled.section`
     display: none;
   }
 `;
-
 const ProfileWrap = styled.section`
   display: flex;
-`
-const UserName = styled.p`
+`;
+const UserName = styled.article`
   padding-top: 5px;
   margin-left: 1rem;
   cursor: pointer;
@@ -162,10 +154,6 @@ const UserName = styled.p`
     color: #767676;
   }
 `;
-
-
-
-
 const Aside = styled.img`
   width: 40px;
   height: 40px;
@@ -229,7 +217,7 @@ const ReactionBtn = styled.ul`
       margin-right: 10px;
     }
     &:nth-child(3) {
-      cursor: pointer
+      cursor: pointer;
     }
     img {
       width: 100%;

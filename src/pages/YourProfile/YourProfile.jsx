@@ -12,8 +12,6 @@ import ShareButtonImg from '../../assets/icon/icon-share.png';
 
 export default function YourProfile() {
   const { OtherUserProfileInfo } = useSelector((state) => state.OtherUserInfoReducer);
-  console.log(OtherUserProfileInfo);
-
   return (
     <>
       <TopMenuBar moreButton={true} />

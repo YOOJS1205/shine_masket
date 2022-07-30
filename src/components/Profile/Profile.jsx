@@ -96,7 +96,7 @@ const UserInfo = styled.article`
 `;
 
 // 1
-const FollowArea = styled.div`
+const FollowArea = styled.section`
   margin-bottom: 16px;
   padding: 0 55px;
   display: flex;
@@ -134,7 +134,7 @@ const MyProfileImg = styled.img`
 `;
 
 // 2
-const UserArea = styled.div`
+const UserArea = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;

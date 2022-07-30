@@ -99,6 +99,8 @@ const ProfileImgContainer = styled.div`
   border-radius: 50%;
   margin: 0 auto;
   position: relative;
+
+  border: 0.5px solid #dbdbdb;
 `;
 
 const ProfileImg = styled.img`

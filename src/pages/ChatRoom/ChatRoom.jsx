@@ -9,7 +9,7 @@ import SendImg from '../../assets/images/chat-exapmle.png';
 export default function ChatRoom() {
   return (
     <>
-      <TopMenuBar menuText="애월읍 샤인머스캣 농장" moreButton="true" />
+      <TopMenuBar menuText="빛나는 샤인마스켓" moreButton="true" />
       <ChatSection>
         <ChatWrap>
           <h2 className="ir">채팅창</h2>
@@ -27,7 +27,7 @@ export default function ChatRoom() {
             <TimeTxt>12:41</TimeTxt>
           </FriendChatBox>
           <MyChatBox>
-            <ChatTxt>네 말씀하세요.</ChatTxt>
+            <ChatTxt>싱싱하게 잘 나왔어요</ChatTxt>
             <TimeTxt>12:50</TimeTxt>
           </MyChatBox>
           <MyChatBox>

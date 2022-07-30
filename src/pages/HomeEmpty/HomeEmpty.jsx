@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import Loading from '../../components/Loading/Loading';
 import TopMenuBar from '../../components/TopMenuBar/TopMenuBar';
 import TabMenu from '../../components/TabMenu/TabMenu';
 import Button from '../../components/Button/Button';
@@ -9,11 +10,7 @@ import Home from '../Home/Home';
 import { Link } from 'react-router-dom';
 export default function Test() {
   const [postList, setPostList] = useState([]);
-
-  // const goSearch = () => {
-  //   window.location.href('/')
-  // }
-  // console.log(goSearch);
+  const [isRendered, setIsRendered] = useState(false);
 
   useEffect(() => {
     (async function getPost() {
@@ -26,33 +23,41 @@ export default function Test() {
           },
         });
         setPostList(res.data.posts);
+        setIsRendered(true);
       } catch (error) {
         console.log(error);
       }
     })();
   }, []);
+
   return (
     <>
-      <TopMenuBar
-        homeText="샤인마스켓 피드"
-        searchBtn="true"
-        preDisplay="none"
-        modalDisplay="none"
-      />
-      {postList.length > 0 ? (
-        <Home postList={postList} />
+      {isRendered ? (
+        <>
+          <TopMenuBar
+            homeText="샤인마스켓 피드"
+            searchBtn="true"
+            preDisplay="none"
+            modalDisplay="none"
+          />
+          {postList.length > 0 ? (
+            <Home postList={postList} />
+          ) : (
+            <Main>
+              <MainWrap>
+                <Img src={MainImg} />
+                <p>유저를 검색해 팔로우 해보세요!</p>
+                <Link to="/search">
+                  <Button size="medium" buttonText="검색하기" isActive={false} />
+                </Link>
+              </MainWrap>
+            </Main>
+          )}
+          <TabMenu />
+        </>
       ) : (
-        <Main>
-          <MainWrap>
-            <Img src={MainImg} />
-            <p>유저를 검색해 팔로우 해보세요!</p>
-            <Link to="/search">
-              <Button size="medium" buttonText="검색하기" isActive={false} />
-            </Link>
-          </MainWrap>
-        </Main>
+        <Loading />
       )}
-      <TabMenu />
     </>
   );
 }

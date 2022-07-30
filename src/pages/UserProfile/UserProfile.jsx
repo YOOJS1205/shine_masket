@@ -9,10 +9,12 @@ import TabMenu from '../../components/TabMenu/TabMenu';
 import Button from '../../components/Button/Button';
 import PostCard from '../../components/PostCard/PostCard';
 import SaleProduct from '../../components/SaleProduct/SaleProduct';
+import Loading from '../../components/Loading/Loading';
 
 export default function UserProfile() {
   const dispatch = useDispatch();
   const [productList, setProductList] = useState([]);
+  const [isRendered, setIsRendered] = useState(false);
 
   const { UserName, UserAccount, UserIntro, UserImage, UserFollowerCount, UserFollowingCount } =
     useSelector((state) => state.UserInfoReducer);
@@ -51,27 +53,35 @@ export default function UserProfile() {
       } catch (error) {
         console.log(error);
       }
+
+      setIsRendered(true);
     })();
   }, []);
 
   return (
     <>
-      <TopMenuBar moreButton={true} />
-      <ProfileContainer>
-        <Profile
-          followersCount={UserFollowerCount}
-          followingsCount={UserFollowingCount}
-          userImage={UserImage}
-          userName={UserName}
-          userId={UserAccount}
-          userIntroduction={UserIntro}
-        >
-          <MyProfileButton />
-        </Profile>
-        {productList.length !== 0 ? <SaleProduct productList={productList} /> : null}
-        <PostCard />
-      </ProfileContainer>
-      <TabMenu />
+      {isRendered ? (
+        <>
+          <TopMenuBar moreButton={true} />
+          <ProfileContainer>
+            <Profile
+              followersCount={UserFollowerCount}
+              followingsCount={UserFollowingCount}
+              userImage={UserImage}
+              userName={UserName}
+              userId={UserAccount}
+              userIntroduction={UserIntro}
+            >
+              <MyProfileButton />
+            </Profile>
+            {productList.length !== 0 ? <SaleProduct productList={productList} /> : null}
+            <PostCard />
+          </ProfileContainer>
+          <TabMenu />
+        </>
+      ) : (
+        <Loading />
+      )}
     </>
   );
 }

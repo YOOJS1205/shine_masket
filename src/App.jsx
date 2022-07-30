@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import './styles/app.css';
@@ -27,23 +26,6 @@ import NotFound from './pages/NotFound/NotFound';
 import Home from './pages/Home/Home';
 
 function App() {
-  const [isTokenValid, setIsTokenValid] = useState(false);
-
-  useEffect(() => {
-    (async function checkTokenAvailable() {
-      try {
-        const accessToken = localStorage.getItem('accessToken');
-        const res = await axios.get('https://mandarin.api.weniv.co.kr/user/checktoken', {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
-        res.data.isValid && setIsTokenValid(true);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
   return (
     <BrowserRouter>
       <Switch>
@@ -55,28 +37,22 @@ function App() {
             <Route path="/join" exact component={Join} />
             <Route path="/join/profile" exact component={ProfileSetting} />
             <Route path="/home-empty" exact component={HomeEmpty} />
-            {isTokenValid ? (
-              <>
-                <Route path="/post/:postId" exact component={Post} />
-                <Route path="/post/:postId/update" component={PostUpdate} exact />
-                <Route path="/upload" exact component={Upload} />
-                <Route path="/chat-list" exact component={ChatList} />
-                <Route path="/chat-room" exact component={ChatRoom} />
-                <Route path="/profile/:accountname" exact component={UserProfile} />
-                <Route path="/profile" exact component={UserProfile} />
-                <Route path="/profile/:accountname/follower" exact component={FollowListPage} />
-                <Route path="/profile/:accountname/following" exact component={FollowListPage} />
-                <Route path="/:accountname/add-product" exact component={AddProduct} />
-                <Route path="/your-profile/:accountname" exact component={YourProfile} />
-                <Route path="/profile/:accountname/modify" exact component={ModifyProfile} />
-                <Route path="/follower" exact component={Follower} />
-                <Route path="/following" exact component={Following} />
-                <Route path="/search" exact component={Search} />
-                <Route path="/home" exact component={Home} />
-              </>
-            ) : (
-              <Route component={NotFound} />
-            )}
+            <Route path="/post/:postId" exact component={Post} />
+            <Route path="/post/:postId/update" component={PostUpdate} exact />
+            <Route path="/upload" exact component={Upload} />
+            <Route path="/chat-list" exact component={ChatList} />
+            <Route path="/chat-room" exact component={ChatRoom} />
+            <Route path="/profile/:accountname" exact component={UserProfile} />
+            <Route path="/profile" exact component={UserProfile} />
+            <Route path="/profile/:accountname/follower" exact component={FollowListPage} />
+            <Route path="/profile/:accountname/following" exact component={FollowListPage} />
+            <Route path="/:accountname/add-product" exact component={AddProduct} />
+            <Route path="/your-profile" exact component={YourProfile} />
+            <Route path="/profile/:accountname/modify" exact component={ModifyProfile} />
+            <Route path="/follower" exact component={Follower} />
+            <Route path="/following" exact component={Following} />
+            <Route path="/search" exact component={Search} />
+            <Route path="/home" exact component={Home} />
             <Route component={NotFound} />
           </Switch>
         </AnimatePresence>

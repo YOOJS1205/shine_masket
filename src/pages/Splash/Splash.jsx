@@ -1,13 +1,31 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import FullLogo from '../../assets/images/full-logo.png';
 
 export default function Splash() {
   const history = useHistory();
+
+  const [isTokenValid, setIsTokenValid] = useState(false);
+
   useEffect(() => {
+    (async function checkTokenAvailable() {
+      try {
+        const accessToken = localStorage.getItem('accessToken');
+        const res = await axios.get('https://mandarin.api.weniv.co.kr/user/checktoken', {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+        res.data.isValid && setIsTokenValid(true);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+
     setTimeout(() => {
-      if (localStorage.getItem('accessToken')) {
+      if (localStorage.getItem('accessToken') && isTokenValid) {
         history.push('/home-empty');
       } else {
         history.push('/welcome');

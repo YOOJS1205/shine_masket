@@ -1,9 +1,5 @@
 const initialState = {
   productList: [],
-  // productImg: '',
-  // productName: 0,
-  // productCost: '',
-  // productLink: '',
 };
 
 const ProductInfoReducer = (state = initialState, action) => {

@@ -49,8 +49,6 @@ export default function Profile(props) {
         }
       );
 
-      console.log('goToFollowingList');
-      console.log(res);
       const OtherUserInfo = res.data;
       dispatch({ type: 'FOLLWING', OtherUserInfo });
 

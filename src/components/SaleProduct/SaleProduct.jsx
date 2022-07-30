@@ -26,7 +26,6 @@ export default function SaleProduct(props) {
 }
 
 const SaleProductContainer = styled.article`
-  /* -ms-overflow-style: none; */
   margin-bottom: 6px;
   display: flex;
   flex-direction: column;

@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export default function Button({ buttonText, isEmpty, onClick, size, className, isActive }) {
   return (

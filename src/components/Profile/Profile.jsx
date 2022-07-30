@@ -111,6 +111,8 @@ const FollowersCount = styled.strong`
   font-size: 18px;
   line-height: 23px;
   text-align: center;
+
+  cursor: pointer;
   color: ${(props) => props.color || '#000'};
 `;
 

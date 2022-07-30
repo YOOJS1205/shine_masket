@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
@@ -6,6 +6,7 @@ import FullLogo from '../../assets/images/full-logo.png';
 
 export default function Splash() {
   const history = useHistory();
+  const mount = useRef();
 
   const [isTokenValid, setIsTokenValid] = useState(false);
 
@@ -18,20 +19,27 @@ export default function Splash() {
             Authorization: `Bearer ${accessToken}`,
           },
         });
-        res.data.isValid && setIsTokenValid(true);
+        (await res.data.isValid) && setIsTokenValid((state) => !state);
       } catch (error) {
         console.log(error);
+        setTimeout(() => {
+          history.push('/welcome');
+        }, 2000);
       }
     })();
-
-    setTimeout(() => {
-      if (localStorage.getItem('accessToken') && isTokenValid) {
-        history.push('/home-empty');
-      } else {
-        history.push('/welcome');
-      }
-    }, 2000);
   }, []);
+
+  useEffect(() => {
+    if (!mount.current) {
+      mount.current = true;
+    } else {
+      setTimeout(() => {
+        if (localStorage.getItem('accessToken') && isTokenValid) {
+          history.push('/home-empty');
+        }
+      }, 2000);
+    }
+  }, [isTokenValid]);
 
   return (
     <BackGround>

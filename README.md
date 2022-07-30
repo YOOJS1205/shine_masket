@@ -177,11 +177,33 @@
 
 - ### <a href="https://github.com/YOOJS1205/shine_masket/wiki/%ED%8E%98%EC%9D%B4%EC%A7%80-%EA%B8%B0%EB%8A%A5-%EC%84%A4%EB%AA%85">페이지 기능 설명</a>
 
-<div>
-<img width="251" height="450" src="https://user-images.githubusercontent.com/89122773/181161999-4a05fbe2-333d-4cf9-b9d6-ad3f4653062c.gif" />
-<img width="251" height="450" src="https://user-images.githubusercontent.com/89122773/181740767-8e768e86-4908-45b7-a354-bd988f13dd49.gif" />
-<img width="250" height="450" src="https://user-images.githubusercontent.com/89122773/181741841-bfc4124d-fdb5-44e1-80ad-07bd45f6c3db.gif" />
-<img width="250" height="450" src="https://user-images.githubusercontent.com/89122773/181753681-bfec954f-6326-465e-9e15-c6b6f91b6315.gif" />
-</div>
+|                                                                    로그인                                                                    |                                                                            회원가입                                                                            |                                                                 프로필 설정                                                                  |
+| :------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------: |
+| <img width="251" height="450" src="https://user-images.githubusercontent.com/89122773/181161999-4a05fbe2-333d-4cf9-b9d6-ad3f4653062c.gif" /> |          <img width="251" height="450" src="https://user-images.githubusercontent.com/89122773/181740767-8e768e86-4908-45b7-a354-bd988f13dd49.gif" />          | <img width="250" height="450" src="https://user-images.githubusercontent.com/89122773/181741841-bfc4124d-fdb5-44e1-80ad-07bd45f6c3db.gif" /> |
+|                                                                 프로필 수정                                                                  |                                                                              피드                                                                              |                                                                     검색                                                                     |
+| <img width="250" height="450" src="https://user-images.githubusercontent.com/89122773/181753681-bfec954f-6326-465e-9e15-c6b6f91b6315.gif" /> |          <img width="250" height="450" src="https://user-images.githubusercontent.com/42901380/181916339-9446f3c6-7940-44f2-a591-1a25a8c2f42b.gif" />          | <img width="250" height="450" src="https://user-images.githubusercontent.com/42901380/181916486-62bc51b6-f02d-40e9-b556-b95cda350bb6.gif" /> |
+|                                                                 하단 탭 메뉴                                                                 |                                                                              모달                                                                              |                                                                 게시글 작성                                                                  |
+| <img width="250" height="450" src="https://user-images.githubusercontent.com/42901380/181916568-1868a9d9-3fc8-4a61-96ab-df80dfc2cf6f.gif" /> |          <img width="250" height="450" src="https://user-images.githubusercontent.com/42901380/181917776-44b38235-ad9e-45a3-a318-019a4ce4266a.gif" />          | <img width="250" height="450" src="https://user-images.githubusercontent.com/66389585/181809406-993bb852-fc56-4c3b-bf7e-f071a31ccdb0.gif" /> |
+|                                                              게시글 상세 페이지                                                              |                                                                       게시글 수정, 삭제                                                                        |                                                                     채팅                                                                     |
+| <img width="250" height="450" src="https://user-images.githubusercontent.com/66389585/181808975-955d072d-f557-4ed2-af72-059f3b0410da.gif" /> | <img width="250" height="450" src="https://user-images.githubusercontent.com/66389585/181814581-a0bfbe56-336e-40a0-bd2d-b55d172cc19e.gif" alt="수정 및 삭제"/> | <img width="250" height="450" src="https://user-images.githubusercontent.com/66389585/181809803-441c20c6-bbca-4544-946e-d855b8d3fb75.gif" /> |
+|                                                                사용자 프로필                                                                 |                                                                         팔로잉, 팔로워                                                                         |                                                                  상품 등록                                                                   |
+| <img width="250" height="450" src="https://user-images.githubusercontent.com/97442475/181914482-71dce162-14e8-483e-a712-9dc3ed875020.gif" /> |          <img width="250" height="450" src="https://user-images.githubusercontent.com/97442475/181914573-5ad84571-b50e-4392-ae30-260e7a2145e3.gif" />          | <img width="250" height="450" src="https://user-images.githubusercontent.com/97442475/181914674-99a80872-df55-4b0c-84f2-98bad4a0d574.gif" /> |
 
 ## 9. 개발 이슈
+
+### 9.1 트러블 슈팅
+
+### 🔗 https://github.com/YOOJS1205/shine_masket/wiki/%ED%8A%B8%EB%9F%AC%EB%B8%94-%EC%8A%88%ED%8C%85-(Trouble-Shooting)
+
+### 9.2 아쉬운점, 앞으로의 방향성
+
+- **어떤 데이터를 Redux를 사용하여 전역으로 상태 관리할 것인가**에 대한 공부가 부족하여 유저 정보 이외에도 여러 데이터를 불필요하게 관리했던 점이 아쉬웠습니다.<br>
+  => 공부를 더 진행하여 상황에 맞게 Redux를 활용하는 코드로 리팩토링할 예정입니다.
+
+- 하나의 폼 컴포넌트에서 로그인, 회원가입 로직을 모두 처리해서 **props 관리에 어려움**을 느꼈지만, 그냥 개발을 진행한 점이 아쉬웠습니다.
+
+- 같은 기능을 하는 로직을 분리해서 재사용성을 증가시키지 못한 점이 아쉬웠습니다.<br>
+  => 추후에 리팩토링할 예정입니다.
+
+- 좋지 않은 사용자 경험을 제공하는 점이 아쉬웠습니다. 리액트의 이해도가 부족하여 로딩중 컴포넌트를 개발이라는 임시방편을 사용했습니다.<br>
+  => useMemo, useCallback, 메모이제이션 등 여러가지 렌더링 최적화 방안을 공부하고 리팩토링할 예정입니다.

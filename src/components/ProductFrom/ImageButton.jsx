@@ -77,9 +77,8 @@ const HiddenInput = styled.input`
 const ProductImgContainer = styled.div`
   margin: 0 auto;
   position: relative;
-  width: 322px;
   height: 204px;
-
+  max-width: 500px;
   border-radius: 10px;
   border: 0.5px solid #dbdbdb;
   background-color: #f2f2f2;

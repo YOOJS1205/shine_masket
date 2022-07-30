@@ -49,8 +49,6 @@ export default function Profile(props) {
         }
       );
 
-      console.log('goToFollowingList');
-      console.log(res);
       const OtherUserInfo = res.data;
       dispatch({ type: 'FOLLWING', OtherUserInfo });
 
@@ -98,7 +96,7 @@ const UserInfo = styled.article`
 `;
 
 // 1
-const FollowArea = styled.div`
+const FollowArea = styled.section`
   margin-bottom: 16px;
   padding: 0 55px;
   display: flex;
@@ -113,6 +111,8 @@ const FollowersCount = styled.strong`
   font-size: 18px;
   line-height: 23px;
   text-align: center;
+
+  cursor: pointer;
   color: ${(props) => props.color || '#000'};
 `;
 
@@ -134,7 +134,7 @@ const MyProfileImg = styled.img`
 `;
 
 // 2
-const UserArea = styled.div`
+const UserArea = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;

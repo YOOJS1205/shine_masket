@@ -1,6 +1,5 @@
 import React from 'react';
 import FollowList from '../../components/FollowList/FollowList';
-import styled from 'styled-components';
 import TabMenu from '../../components/TabMenu/TabMenu';
 import TopMenuBar from '../../components/TopMenuBar/TopMenuBar';
 

@@ -109,7 +109,6 @@ export default function ProductForm() {
         }
       );
 
-      console.log(res);
       history.push(`/profile/${UserAccount}`);
     } catch (error) {
       console.log(error);

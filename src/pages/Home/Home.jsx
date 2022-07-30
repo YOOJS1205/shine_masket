@@ -2,28 +2,54 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import TabMenu from '../../components/TabMenu/TabMenu';
 import MoreButton from '../../components/Button/MoreButton';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import IconHeart from '../../assets/icon/icon-heart.png';
 import IconMessage from '../../assets/icon/icon-message-circle.png';
 
 export default function Home({ postList }) {
+  const dispatch = useDispatch();
   const history = useHistory();
-
   return (
     <>
       <FeedWrap>
         <h1 className="ir">메인화면 피드페이지입니다</h1>
         {postList.map((post) => (
-          // setImgArr(post.image.split(','));
           <MainWrap key={post.createdAt}>
-            <Aside>
-              <Link to={'/profile/' + post.author.accountname}>
-                <Img src={post.author.image} />
-              </Link>
-            </Aside>
+            <h1 className="ir">개별 포스트 입니다</h1>
+
+
+            <ProfileWrap>
+              <h1 className="ir">프로필 이미지</h1>
+              <Aside
+                src={post.author.image}
+                onClick={() => {
+                  console.log(post.author);
+                  const OtherUserProfileInfo = post.author;
+                  dispatch({ type: 'PROFILE', OtherUserProfileInfo });
+                  history.push({
+                    pathname: `/your-profile/${post.author.accountname}`,
+                    state: { state: post.author },
+                  });
+                }}
+              />
+              <UserName
+                onClick={() => {
+                  console.log(post.author);
+                  const OtherUserProfileInfo = post.author;
+                  dispatch({ type: 'PROFILE', OtherUserProfileInfo });
+                  history.push({
+                    pathname: `/your-profile/${post.author.accountname}`,
+                    state: { state: post.author },
+                  });
+                }}>
+                <h2>{post.author.username}</h2>
+                <h3>@ {post.author.accountname}</h3>
+              </UserName>
+            </ProfileWrap>
+
             <Article>
-              <h2>{post.author.username}</h2>
-              <h3>@ {post.author.accountname}</h3>
               <article>{post.content}</article>
               <Content
                 style={
@@ -45,12 +71,12 @@ export default function Home({ postList }) {
                           style={
                             postImage.length > 1
                               ? {
-                                  minWidth: '168px',
-                                  minHeight: '126px',
+                                  width: '100%',
+                                  paddingTop: '100%',
                                   backgroundImage: `url(${image})`,
                                 }
                               : {
-                                  minWidth: '300px',
+                                  width: '100%',
                                   paddingTop: '100%',
                                   backgroundImage: `url(${image})`,
                                 }
@@ -80,6 +106,8 @@ export default function Home({ postList }) {
               </time>
               <MoreButton size={'small'} />
             </Article>
+
+            
           </MainWrap>
         ))}
       </FeedWrap>
@@ -96,10 +124,13 @@ const FeedWrap = styled.main`
   padding: 20px;
 `;
 
-const MainWrap = styled.div`
+const MainWrap = styled.section`
   width: 100%;
   position: relative;
   margin-bottom: 40px;
+  font-family: 'Spoqa Han Sans Neo';
+  font-size: 14px;
+  word-break: keep-all;
   &::before {
     display: block;
     content: '';
@@ -110,52 +141,48 @@ const MainWrap = styled.div`
     right: 0px;
     background: #ddd;
   }
-  &::after {
-    clear: both;
-    content: '';
-    display: block;
-  }
   &:nth-of-type(1)::before {
     display: none;
   }
 `;
-const Aside = styled.aside`
-  float: left;
-  width: 10%;
-  padding-top: 10%;
-  position: relative;
-  overflow: hidden;
-  border-radius: 50%;
-  border: 0.5px solid #dbdbdb;
-  box-sizing: border-box;
-`;
-const Img = styled.img`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  height: auto;
-  background-size: contain;
-  transform: translate(-50%, -50%);
-  object-fit: cover;
-`;
-const Article = styled.article`
-  float: right;
+
+const ProfileWrap = styled.section`
   display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-left: 5%;
-  width: 85%;
-  font-family: 'Spoqa Han Sans Neo';
-  font-size: 14px;
-  word-break: keep-all;
+`
+const UserName = styled.p`
+  padding-top: 5px;
+  margin-left: 1rem;
+  cursor: pointer;
+  > h2 {
+    font-size: 16px;
+    font-weight: bold;
+  }
   > h3 {
-    margin-top: -14px;
     font-size: 12px;
     color: #767676;
   }
-  > article {
-  }
+`;
+
+
+
+
+const Aside = styled.img`
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 0.5px solid #dbdbdb;
+  box-sizing: border-box;
+  cursor: pointer;
+`;
+
+const Article = styled.article`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0 3.5rem;
+  width: 85%;
+
   > a {
     > img {
       width: 100%;
@@ -177,12 +204,16 @@ const Content = styled.ul`
   border-radius: 20px;
   display: flex;
   justify-content: space-evenly;
+  gap: 5%;
   > li {
     border-radius: 20px;
     overflow: hidden;
+    width: 100%;
   }
 `;
 const ContImg = styled.div`
+  width: 100%;
+  padding-top: 100%;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -196,6 +227,9 @@ const ReactionBtn = styled.ul`
     width: 15px;
     &:nth-child(2) {
       margin-right: 10px;
+    }
+    &:nth-child(3) {
+      cursor: pointer
     }
     img {
       width: 100%;

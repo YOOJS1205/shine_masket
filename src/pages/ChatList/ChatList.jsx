@@ -14,15 +14,15 @@ export default function ChatList() {
         <h1 className="ir">채팅 목록</h1>
         <ChatLink to="/chat-room">
           <TextContainer>
-            <ChatName>애월읍 샤인머스캣 농장</ChatName>
-            <ChatTxt>이번에 정정 언제하맨마씸?</ChatTxt>
+            <ChatName>빛나는 샤인마스켓</ChatName>
+            <ChatTxt>싱싱하게 잘 나왔어요</ChatTxt>
             <ChatDate>2022.07.27</ChatDate>
           </TextContainer>
         </ChatLink>
 
         <ChatLink to="#/">
           <TextContainer>
-            <ChatName>제주샤인머스캣마을</ChatName>
+            <ChatName>청량리 거봉</ChatName>
             <ChatTxt>깊은 어둠의 존재감, 롤스로이스 뉴 블랙 배지...</ChatTxt>
             <ChatDate>2022.07.27</ChatDate>
           </TextContainer>
@@ -30,7 +30,7 @@ export default function ChatList() {
 
         <ChatLink to="#/">
           <TextContainer>
-            <ChatName>누구네 농장 친환경 샤인머스캣</ChatName>
+            <ChatName>수성구 블랙다이아몬드</ChatName>
             <ChatTxt>내 차는 내가 평가한다. 오픈 이벤트에 참여 하...</ChatTxt>
             <ChatDate>2022.07.25</ChatDate>
           </TextContainer>
@@ -78,7 +78,7 @@ const ChatLink = styled(Link)`
   }
 `;
 
-const TextContainer = styled.div`
+const TextContainer = styled.article`
   display: inline-block;
   margin-left: 12px;
   width: 100%;

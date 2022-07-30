@@ -37,6 +37,7 @@ export default function TopMenuBar({
         <PrevioudBtnImg src={LeftArrow} alt="이전 페이지로 돌아가는 버튼 이미지" />
       </PreviousBtn>
       <SearchModal display={searchDisplay}>
+        <h1 className="ir">계정검색버튼이 있는 검색창입니다.</h1>
         <label htmlFor="search_tit" className="ir">
           검색창입니다
         </label>

@@ -78,7 +78,7 @@ const ChatLink = styled(Link)`
   }
 `;
 
-const TextContainer = styled.div`
+const TextContainer = styled.article`
   display: inline-block;
   margin-left: 12px;
   width: 100%;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useLayoutEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
@@ -29,16 +29,24 @@ export default function Splash() {
     })();
   }, []);
 
-  useEffect(() => {
-    if (!mount.current) {
-      mount.current = true;
-    } else {
-      setTimeout(() => {
-        if (localStorage.getItem('accessToken') && isTokenValid) {
-          history.push('/home-empty');
-        }
-      }, 2000);
-    }
+  // useEffect(() => {
+  //   if (!mount.current) {
+  //     mount.current = true;
+  //   } else {
+  //     setTimeout(() => {
+  //       if (localStorage.getItem('accessToken') && isTokenValid) {
+  //         history.push('/home-empty');
+  //       }
+  //     }, 2000);
+  //   }
+  // }, [isTokenValid]);
+
+  useLayoutEffect(() => {
+    setTimeout(() => {
+      if (localStorage.getItem('accessToken') && isTokenValid) {
+        history.push('/home-empty');
+      }
+    }, 2000);
   }, [isTokenValid]);
 
   return (

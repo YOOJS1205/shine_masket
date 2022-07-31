@@ -70,7 +70,7 @@ export default function Login() {
 
         localStorage.setItem('accessToken', loginToken);
         localStorage.setItem('refreshToken', refreshToken);
-        history.push('/home-empty');
+        history.push('/home');
       }
       if (res.data.message === '이메일 또는 비밀번호가 일치하지 않습니다.') {
         setIsWrong(true);

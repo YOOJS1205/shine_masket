@@ -26,7 +26,7 @@
 - 버전, 이슈 관리 및 협업<br>
   => Git, Github, Github Issues, Github Wiki
 - 디자인<br>
-  => Figma
+  => [Figma](https://www.figma.com/file/9cy8vPNewbgmxB2gPOmo8j/%EC%83%A4%EC%9D%B8%EB%A7%88%EC%8A%A4%EC%BC%93?node-id=39%3A1814)
 
 ### 3.1.1 Why Git Flow?
 

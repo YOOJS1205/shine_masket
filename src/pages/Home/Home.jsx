@@ -6,7 +6,7 @@ import TopMenuBar from '../../components/TopMenuBar/TopMenuBar';
 import TabMenu from '../../components/TabMenu/TabMenu';
 import Button from '../../components/Button/Button';
 import MainImg from '../../assets/images/symbol-logo-gray.png';
-import HomeFeed from '../HomeFeed/HomeFeed';
+import HomeFeed from './HomeFeed';
 import { Link } from 'react-router-dom';
 export default function Test() {
   const [postList, setPostList] = useState([]);

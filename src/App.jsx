@@ -20,7 +20,7 @@ import Follower from './pages/Follower/Follower.jsx';
 import Following from './pages/Following/Following.jsx';
 import FollowListPage from './pages/FollowListPage/FollowListPage.jsx';
 import AddProduct from './pages/AddProduct/AddProduct.jsx';
-import HomeFeed from './pages/HomeFeed/HomeFeed';
+import HomeFeed from './pages/Home/HomeFeed';
 import Search from './pages/Search/Search';
 import NotFound from './pages/NotFound/NotFound';
 import Home from './pages/Home/Home';

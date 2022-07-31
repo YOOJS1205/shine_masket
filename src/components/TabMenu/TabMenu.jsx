@@ -6,7 +6,7 @@ import IconHomeHover from '../../assets/icon/icon-home-fill.png';
 import IconChat from '../../assets/icon/icon-message-circle.png';
 import IconChatHover from '../../assets/icon/icon-message-circle-fill.png';
 import IconUpload from '../../assets/icon/icon-edit.png';
-import IconUploadHover from '../../assets/icon/icon-edit.svg';
+import IconUploadHover from '../../assets/icon/icon-edit-fill.png';
 import IconMyprofile from '../../assets/icon/icon-user.png';
 import IconMyprofileHover from '../../assets/icon/icon-user-fill.png';
 

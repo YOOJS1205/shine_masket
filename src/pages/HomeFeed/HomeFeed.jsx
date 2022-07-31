@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import TabMenu from '../../components/TabMenu/TabMenu';
 import MoreButton from '../../components/Button/MoreButton';
-import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import IconHeart from '../../assets/icon/icon-heart.png';

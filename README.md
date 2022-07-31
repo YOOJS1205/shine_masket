@@ -10,9 +10,9 @@
 ## 2. 팀 구성
 
 | 유준상                                            | 류재준                                          | 오한솔                                         | 장소연                                          |
-| ------------------------------------------------- | ----------------------------------------------- | ---------------------------------------------- | ----------------------------------------------- |
+| :-------------------------------------------------: | :-----------------------------------------------: | :----------------------------------------------: | :-----------------------------------------------: |
+|<img width="150" src="https://user-images.githubusercontent.com/89122773/182028863-2a1aca3b-abe1-401f-bc4e-df2ac2f28146.png" />|<img width="150" src="https://user-images.githubusercontent.com/89122773/182027739-90c155f4-fa68-4cb4-8c7b-fd13e952eaef.png" />|<img width="150" src="https://user-images.githubusercontent.com/89122773/182027799-2ae1df40-fbfe-4772-9ae9-307efaafc6b1.png" />|<img width="150" src="https://user-images.githubusercontent.com/89122773/182027848-1f4d2d3e-77d8-4d2a-8764-9bc7a0db69dc.png" />|
 | <a href='https://github.com/yoojs1205'>Github</a> | <a href='https://github.com/ryungom'>Github</a> | <a href='https://github.com/hhnssl'>Github</a> | <a href='https://github.com/plutoin'>Github</a> |
-
 <br>
 
 ## 3. 개발 환경 및 배포 URL
@@ -49,6 +49,33 @@
 1. 유저 정보를 전역에서 관리해야할 필요성을 느껴서 사용하였다.
 2. 전역 상태 관리 라이브러리 중 가장 점유율이 높아서 사용하기로 하였다.
 3. Redux-persist는 새로고침 및 브라우저 종료 시 스토어의 상태가 초기화되는 문제점을 해결하기 위해서 사용하였다.
+
+```javascript
+// src/store/index.js
+
+import { combineReducers } from 'redux';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import UserInfoReducer from './UserInfo';
+import PostInfoReducer from './PostInfo';
+import OtherUserInfoReducer from './OtherUserInfo';
+import ProductInfoReducer from './ProductInfo';
+
+const persistConfig = {
+  key: 'UserInfo',
+  storage,
+  whitelist: ['UserInfoReducer', 'PostInfoReducer', 'OtherUserInfoReducer', 'ProductInfoReducer'],
+};
+
+const rootReducer = combineReducers({
+  UserInfoReducer,
+  PostInfoReducer,
+  OtherUserInfoReducer,
+  ProductInfoReducer,
+});
+
+export default persistReducer(persistConfig, rootReducer);
+```
 
 ### 3.2 배포 URL
 
@@ -127,6 +154,10 @@
 ```
 
 <br>
+
+* Flow Chart<br>
+![image](https://user-images.githubusercontent.com/89122773/182028697-b580da54-c5c5-44f2-803e-7c4dfb7559a5.png)
+
 
 ## 5. 역할 분담
 

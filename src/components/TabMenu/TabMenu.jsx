@@ -53,9 +53,15 @@ const GoHome = styled.li`
   &:hover > a {
     background-image: url(${IconHomeHover});
   }
+  &.on > a {
+    background-image: url(${IconHomeHover});
+  }
 `;
 const GoChat = styled.li`
   &:hover > a {
+    background-image: url(${IconChatHover});
+  }
+  &.on > a {
     background-image: url(${IconChatHover});
   }
 `;
@@ -63,9 +69,15 @@ const GoUpload = styled.li`
   &:hover > a {
     background-image: url(${IconUploadHover});
   }
+  &.on > a {
+    background-image: url(${IconUploadHover});
+  }
 `;
 const GoMyprofile = styled.li`
   &:hover > a {
+    background-image: url(${IconMyprofileHover});
+  }
+  &.on > a {
     background-image: url(${IconMyprofileHover});
   }
 `;
@@ -111,9 +123,29 @@ export default function TabMenu() {
     history.push('/home');
   };
 
+  const navs = document.querySelectorAll('.gnb>li');
+  // console.log(navs);
+  const clickHandler = (e) => {
+    if (!e.target.classList.contains('on')) {
+      navs[1].classList.remove('on')
+    }
+
+    for (let i=0; i<navs.length; i++) {
+      navs[i].classList.remove('on')
+    }
+    e.target.classList.add('on');
+  }
+
+  const init = () => {
+    for (let i=0; i<navs.length; i++) {
+      navs[i].addEventListener("click",clickHandler);
+    }
+  }
+  init();
+
   return (
-    <Footer>
-      <GoHome onClick={home}>
+    <Footer className="gnb">
+      <GoHome onClick={home} /*className="on"*/ >
         <GoHomeIcon />
         <p>홈</p>
       </GoHome>

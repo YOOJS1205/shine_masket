@@ -35,7 +35,7 @@ export default function Splash() {
   //   } else {
   //     setTimeout(() => {
   //       if (localStorage.getItem('accessToken') && isTokenValid) {
-  //         history.push('/home-empty');
+  //         history.push('/home');
   //       }
   //     }, 2000);
   //   }
@@ -44,7 +44,7 @@ export default function Splash() {
   useLayoutEffect(() => {
     setTimeout(() => {
       if (localStorage.getItem('accessToken') && isTokenValid) {
-        history.push('/home-empty');
+        history.push('/home');
       }
     }, 2000);
   }, [isTokenValid]);

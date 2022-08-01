@@ -6,7 +6,7 @@ import IconHomeHover from '../../assets/icon/icon-home-fill.png';
 import IconChat from '../../assets/icon/icon-message-circle.png';
 import IconChatHover from '../../assets/icon/icon-message-circle-fill.png';
 import IconUpload from '../../assets/icon/icon-edit.png';
-import IconUploadHover from '../../assets/icon/icon-edit.svg';
+import IconUploadHover from '../../assets/icon/icon-edit-fill.png';
 import IconMyprofile from '../../assets/icon/icon-user.png';
 import IconMyprofileHover from '../../assets/icon/icon-user-fill.png';
 
@@ -53,9 +53,15 @@ const GoHome = styled.li`
   &:hover > a {
     background-image: url(${IconHomeHover});
   }
+  &.on > a {
+    background-image: url(${IconHomeHover});
+  }
 `;
 const GoChat = styled.li`
   &:hover > a {
+    background-image: url(${IconChatHover});
+  }
+  &.on > a {
     background-image: url(${IconChatHover});
   }
 `;
@@ -63,9 +69,15 @@ const GoUpload = styled.li`
   &:hover > a {
     background-image: url(${IconUploadHover});
   }
+  &.on > a {
+    background-image: url(${IconUploadHover});
+  }
 `;
 const GoMyprofile = styled.li`
   &:hover > a {
+    background-image: url(${IconMyprofileHover});
+  }
+  &.on > a {
     background-image: url(${IconMyprofileHover});
   }
 `;
@@ -108,12 +120,32 @@ export default function TabMenu() {
   };
 
   const home = () => {
-    history.push('/home-empty');
+    history.push('/home');
   };
 
+  const navs = document.querySelectorAll('.gnb>li');
+  // console.log(navs);
+  const clickHandler = (e) => {
+    if (!e.target.classList.contains('on')) {
+      navs[1].classList.remove('on')
+    }
+
+    for (let i=0; i<navs.length; i++) {
+      navs[i].classList.remove('on')
+    }
+    e.target.classList.add('on');
+  }
+
+  const init = () => {
+    for (let i=0; i<navs.length; i++) {
+      navs[i].addEventListener("click",clickHandler);
+    }
+  }
+  init();
+
   return (
-    <Footer>
-      <GoHome onClick={home}>
+    <Footer className="gnb">
+      <GoHome onClick={home} /*className="on"*/ >
         <GoHomeIcon />
         <p>홈</p>
       </GoHome>

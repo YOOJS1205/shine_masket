@@ -92,6 +92,7 @@ export default persistReducer(persistConfig, rootReducer);
 ```
 ├─public
 │      index.html
+|      favicon.ico
 │
 └─src
     │  App.jsx

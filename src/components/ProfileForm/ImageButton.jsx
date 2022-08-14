@@ -107,5 +107,6 @@ const UploadImgButton = styled.button`
 
 const UploadImg = styled.img`
   width: 28px;
+  height: 28px;
   margin-top: 3px;
 `;

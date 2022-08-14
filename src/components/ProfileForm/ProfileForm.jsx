@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, memo } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { shallowEqual } from 'react-redux/es/exports';
@@ -10,7 +10,7 @@ import UserInfoInput from './UserInfoInput';
 import Button from '../Button/Button';
 import InputTitle from './InputTitle';
 
-export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo, exist }) {
+export default memo(function ProfileForm({ isButton, getEmptyInfo, getUserInfo, exist }) {
   const dispatch = useDispatch();
   const location = useLocation();
   const history = useHistory();
@@ -167,7 +167,7 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo, exist
       ) : null}
     </FormContainer>
   );
-}
+});
 
 const FormContainer = styled.form`
   padding: 0 34px;

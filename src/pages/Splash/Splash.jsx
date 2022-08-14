@@ -6,7 +6,6 @@ import FullLogo from '../../assets/images/full-logo.png';
 
 export default function Splash() {
   const history = useHistory();
-  const mount = useRef();
 
   const [isTokenValid, setIsTokenValid] = useState(false);
 
@@ -28,18 +27,6 @@ export default function Splash() {
       }
     })();
   }, []);
-
-  // useEffect(() => {
-  //   if (!mount.current) {
-  //     mount.current = true;
-  //   } else {
-  //     setTimeout(() => {
-  //       if (localStorage.getItem('accessToken') && isTokenValid) {
-  //         history.push('/home');
-  //       }
-  //     }, 2000);
-  //   }
-  // }, [isTokenValid]);
 
   useLayoutEffect(() => {
     setTimeout(() => {

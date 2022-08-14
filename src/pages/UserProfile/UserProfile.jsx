@@ -112,9 +112,7 @@ const MyProfileButton = () => {
 const ProfileContainer = styled.section`
   margin: 0 auto;
   width: 100%;
-
   background-color: #f2f2f2;
-
   &::after {
     position: relative;
     display: block;

@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 
-export default function Title({ title }) {
+export default memo(function Title({ title }) {
   return <Subject>{title}</Subject>;
-}
+});
 
 const Subject = styled.h1`
   font-weight: 600;

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { useLocation } from 'react-router-dom';
+import useInput from '../../hooks/useInput';
 import styled from 'styled-components';
 import Button from '../Button/Button';
 
-export default function Form({
+export default memo(function Form({
   buttonText,
   getUserInfo,
   getJoinInfo,
@@ -19,8 +20,8 @@ export default function Form({
 
   // 고객이 폼에 입력하는 ID, PW 데이터 변수화
   // 고객이 폼에 모두 값을 입력했는지에 대한 불리언 값 변수화
-  const [id, setId] = useState('');
-  const [password, setPassword] = useState('');
+  const [id, onHandleUserId] = useInput('');
+  const [password, onHandleUserPassword] = useInput('');
   const [isEmpty, setIsEmpty] = useState(true);
 
   // URL 경로에 따라서 부모의 PROPS 함수를 다르게 받음
@@ -34,15 +35,6 @@ export default function Form({
       setIsEmpty(true);
     }
   }, [id, password]);
-
-  // ID, PW 동적으로 업데이트
-  const onHandleUserId = (e) => {
-    setId(e.target.value);
-  };
-
-  const onHandleUserPassword = (e) => {
-    setPassword(e.target.value);
-  };
 
   return (
     <Container>
@@ -70,7 +62,7 @@ export default function Form({
       <Button buttonText={buttonText} isEmpty={isEmpty} onClick={onClick} size="large"></Button>
     </Container>
   );
-}
+});
 
 const Container = styled.form`
   margin-top: 60px;

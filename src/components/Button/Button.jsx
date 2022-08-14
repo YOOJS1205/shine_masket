@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 
-export default function Button({ buttonText, isEmpty, onClick, size, className, isActive }) {
+export default memo(function Button({ buttonText, isEmpty, onClick, size, className, isActive }) {
   return (
     <ButtonComponent
       isEmpty={isEmpty}
@@ -14,7 +14,7 @@ export default function Button({ buttonText, isEmpty, onClick, size, className, 
       {buttonText}
     </ButtonComponent>
   );
-}
+});
 
 const ButtonComponent = styled.button`
   ${(props) => {

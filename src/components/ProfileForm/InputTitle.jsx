@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 
-export default function InputTitle({ TitleText }) {
+export default memo(function InputTitle({ TitleText }) {
   return <Title>{TitleText}</Title>;
-}
+});
 
 const Title = styled.label`
   font-weight: 500;

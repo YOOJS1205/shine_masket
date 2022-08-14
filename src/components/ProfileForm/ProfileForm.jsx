@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import { shallowEqual } from 'react-redux/es/exports';
 import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
+import { customAuthAxios } from '../../api/customAuthAxios';
+import useInput from '../../hooks/useInput';
 import ImageButton from './ImageButton';
 import UserInfoInput from './UserInfoInput';
 import Button from '../Button/Button';
@@ -15,16 +17,19 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo, exist
 
   const photoInput = useRef();
   // 전역 데이터로 담긴 가입 ID, PW 가져오기
-  const { UserAccount, UserName, UserIntro } = useSelector((state) => ({
-    UserAccount: state.UserInfoReducer.UserAccount,
-    UserName: state.UserInfoReducer.UserName,
-    UserIntro: state.UserInfoReducer.UserIntro,
-  }));
+  const { UserAccount, UserName, UserIntro } = useSelector(
+    (state) => ({
+      UserAccount: state.UserInfoReducer.UserAccount,
+      UserName: state.UserInfoReducer.UserName,
+      UserIntro: state.UserInfoReducer.UserIntro,
+    }),
+    shallowEqual
+  );
 
   // 사용자가 설정한 이름, 계정 ID, 소개 변수에 담기
-  const [userName, setUserName] = useState(UserName ? UserName : '');
-  const [userAccount, setUserAccount] = useState(UserAccount ? UserAccount : '');
-  const [userIntro, setUserIntro] = useState(UserIntro ? UserIntro : '');
+  const [userName, onHandleUserName] = useInput(UserName ? UserName : '');
+  const [userAccount, onHandleUserAccount] = useInput(UserAccount ? UserAccount : '');
+  const [userIntro, onHandleUserIntro] = useInput(UserIntro ? UserIntro : '');
   const [nameLength, setNameLength] = useState(true);
   const [isId, setIsId] = useState(true);
   const [isEmpty, setIsEmpty] = useState(false);
@@ -69,22 +74,9 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo, exist
   }, [userAccount]);
 
   // 자식 컴포넌트에서 이미지 src 받아오기
-  const getImageSrc = (imgSrc) => {
+  const getImageSrc = useCallback((imgSrc) => {
     setImgSrc(imgSrc);
-  };
-
-  // 사용자가 입력하는 데이터 동적으로 변수에 저장
-  const onHandleUserName = (e) => {
-    setUserName(e.target.value);
-  };
-
-  const onHandleUserAccount = (e) => {
-    setUserAccount(e.target.value);
-  };
-
-  const onHandleUserIntro = (e) => {
-    setUserIntro(e.target.value);
-  };
+  }, []);
 
   // 시작 버튼
   // 기능 1. 회원가입 API 통신 (서버에 유저 정보 보내기)
@@ -95,7 +87,7 @@ export default function ProfileForm({ isButton, getEmptyInfo, getUserInfo, exist
     const formData = new FormData();
     formData.append('uploadImage', imgSrc);
     try {
-      const res = await axios.post('https://mandarin.api.weniv.co.kr/user', {
+      const res = await customAuthAxios.post('/', {
         user: {
           username: userName,
           email: history.location.data.UserId,

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 
-export default function UserInfoInput({ placeholder, onChange, isLast, defaultValue }) {
+export default memo(function UserInfoInput({ placeholder, onChange, isLast, defaultValue }) {
   return (
     <Input
       placeholder={placeholder}
@@ -10,7 +10,7 @@ export default function UserInfoInput({ placeholder, onChange, isLast, defaultVa
       defaultValue={defaultValue}
     />
   );
-}
+});
 
 const Input = styled.input`
   display: block;

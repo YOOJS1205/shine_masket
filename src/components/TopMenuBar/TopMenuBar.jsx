@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../Button/Button';
@@ -7,7 +7,7 @@ import Search from '../../assets/icon/icon-search.png';
 import MoreButton from '../Button/MoreButton';
 import { useSelector } from 'react-redux';
 
-export default function TopMenuBar({
+export default memo(function TopMenuBar({
   saveButton,
   uploadButton,
   moreButton,
@@ -60,7 +60,7 @@ export default function TopMenuBar({
       ) : null}
     </Container>
   );
-}
+});
 
 const Container = styled.section`
   display: flex;
@@ -80,6 +80,8 @@ const PreviousBtn = styled.button`
 `;
 
 const PrevioudBtnImg = styled.img`
+  width: 22px;
+  height: 22px;
   vertical-align: -4px;
   padding: 5px 0;
 `;

@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux/es/exports';
-import axios from 'axios';
+import { customAuthAxios } from '../../api/customAuthAxios';
 import Form from '../../components/Form/Form';
 import Title from '../../components/Title/Title';
 
 export default function Join() {
   const history = useHistory();
-  const dispatch = useDispatch();
 
   const [joinId, setJoinId] = useState('');
   const [joinPassword, setJoinPassword] = useState('');
@@ -22,15 +20,15 @@ export default function Join() {
   }, [joinId]);
 
   // Form(자식 컴포넌트)에서 id, password 값 props로 받아오기
-  const getJoinInfo = (id, password) => {
+  const getJoinInfo = useCallback((id, password) => {
     useEffect(() => {
       setJoinId(id);
       setJoinPassword(password);
     }, [id, password]);
-  };
+  });
 
   // focus 잃으면 이메일, 비밀번호 유효성 검사 진행
-  const checkIsAvailable = () => {
+  const checkIsAvailable = useCallback(() => {
     const email = joinId;
     const password = joinPassword;
     const regExp =
@@ -46,15 +44,15 @@ export default function Join() {
     } else {
       setPasswordAvailable(false);
     }
-  };
+  });
 
   // 다음 클릭 버튼
   // 기능 1. 이메일 검증 API 통신 (서버에 가입 이메일 정보 보내기)
   // 기능 2. 가입된 이메일 주소면? => 다시, 사용 가능하면 Redux에 ID, PW 데이터 담고 프로필 설정 페이지로 이동
-  const onClickJoin = async (e) => {
+  const onClickJoin = useCallback(async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('https://mandarin.api.weniv.co.kr/user/emailvalid', {
+      const res = await customAuthAxios.post('/emailvalid', {
         user: {
           email: joinId,
         },
@@ -81,7 +79,7 @@ export default function Join() {
         setEmailAvailable(false);
       }
     }
-  };
+  });
 
   return (
     <Container>

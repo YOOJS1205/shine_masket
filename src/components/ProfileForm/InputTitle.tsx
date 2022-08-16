@@ -1,7 +1,11 @@
 import React, { memo } from 'react';
 import styled from 'styled-components';
 
-export default memo(function InputTitle({ TitleText }) {
+interface IProps {
+  TitleText: string;
+}
+
+export default memo(function InputTitle({ TitleText }: IProps) {
   return <Title>{TitleText}</Title>;
 });
 

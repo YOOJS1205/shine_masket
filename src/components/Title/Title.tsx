@@ -1,7 +1,11 @@
 import React, { memo } from 'react';
 import styled from 'styled-components';
 
-export default memo(function Title({ title }) {
+interface IProps {
+  title: string;
+}
+
+export default memo(function Title({ title }: IProps) {
   return <Subject>{title}</Subject>;
 });
 

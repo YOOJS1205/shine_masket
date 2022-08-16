@@ -17,6 +17,7 @@ const UserInfoReducer = (state = initialState, action) => {
     case 'LOGIN':
       return {
         ...state,
+        UserId: action.UserId,
         User_Id: action.User_Id,
         UserName: action.UserName,
         UserAccount: action.UserAccount,

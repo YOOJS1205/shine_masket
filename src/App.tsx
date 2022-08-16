@@ -1,8 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import './styles/app.css';
-import './styles/reset.css';
+import { GlobalStyles } from './styles/globalStyle';
 import Splash from './pages/Splash/Splash';
 import Welcome from './pages/Welcome/Welcome';
 import Login from './pages/Login/Login';
@@ -28,9 +27,10 @@ import Home from './pages/Home/Home';
 function App() {
   return (
     <BrowserRouter>
+      <GlobalStyles />
       <Switch>
         <AnimatePresence>
-          <Switch location={location} key={location.pathname}>
+          <Switch key={location.pathname}>
             <Route path="/" exact component={Splash} />
             <Route path="/welcome" exact component={Welcome} />
             <Route path="/login" exact component={Login} />

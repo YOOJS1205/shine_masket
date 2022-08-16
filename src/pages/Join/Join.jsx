@@ -25,7 +25,7 @@ export default function Join() {
       setJoinId(id);
       setJoinPassword(password);
     }, [id, password]);
-  });
+  }, []);
 
   // focus 잃으면 이메일, 비밀번호 유효성 검사 진행
   const checkIsAvailable = useCallback(() => {
@@ -44,7 +44,7 @@ export default function Join() {
     } else {
       setPasswordAvailable(false);
     }
-  });
+  }, []);
 
   // 다음 클릭 버튼
   // 기능 1. 이메일 검증 API 통신 (서버에 가입 이메일 정보 보내기)
@@ -79,7 +79,7 @@ export default function Join() {
         setEmailAvailable(false);
       }
     }
-  });
+  }, []);
 
   return (
     <Container>

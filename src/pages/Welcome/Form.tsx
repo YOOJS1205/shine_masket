@@ -5,6 +5,10 @@ import GoogleLogo from '../../assets/images/google.png';
 import KakaoLogo from '../../assets/images/message-circle.png';
 import FacebookLogo from '../../assets/images/facebook.png';
 
+interface IButton {
+  borderColor: string;
+}
+
 export default function Form() {
   return (
     <Container>
@@ -43,7 +47,7 @@ const Container = styled.section`
   padding: 50px 30px 100px;
 `;
 
-const LoginButton = styled.button`
+const LoginButton = styled.button<IButton>`
   display: block;
   border-radius: 20px;
   padding: 13px 17px;

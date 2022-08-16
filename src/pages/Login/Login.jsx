@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { customAuthAxios } from '../../api/customAuthAxios';
 import { useDispatch } from 'react-redux';
@@ -18,18 +18,18 @@ export default function Login() {
   const [isEmail, setIsEmail] = useState(false);
 
   // Form(자식 컴포넌트)로부터 id, password 받아오는 함수
-  const getUserInfo = useCallback((id, password) => {
+  const getUserInfo = (id, password) => {
     useEffect(() => {
       setLoginId(id);
       setLoginPassword(password);
     }, [id, password]);
-  }, []);
+  };
 
   // 로그인 버튼 클릭
   // 기능 1. 클릭 시 이메일 유효성 검사
   // 기능 2. 로그인 API 통신 (ID, PW 서버에 보내기)
   // 기능 3. 비밀번호 일치하지 않으면 경고 문구 출력
-  const onClickLogin = useCallback(async (e) => {
+  const onClickLogin = async (e) => {
     e.preventDefault();
     const regExp =
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
@@ -39,7 +39,7 @@ export default function Login() {
       setIsEmail(false);
     }
     try {
-      const res = await customAuthAxios.post('/login', {
+      const res = await customAuthAxios.post('/login/', {
         user: {
           email: loginId,
           password: loginPassword,
@@ -47,6 +47,7 @@ export default function Login() {
       });
 
       if (!res.data.message) {
+        const UserId = res.data.user.email;
         const UserName = res.data.user.username;
         const UserAccount = res.data.user.accountname;
         const UserIntro = res.data.user.intro;
@@ -57,11 +58,10 @@ export default function Login() {
         const loginToken = res.data.user.token;
         const refreshToken = res.data.user.refreshToken;
         const User_Id = res.data.user._id;
-        const User = res.data.user;
-        console.log(User);
         dispatch({
           type: 'LOGIN',
           UserName,
+          UserId,
           UserImage,
           UserAccount,
           UserIntro,
@@ -80,7 +80,7 @@ export default function Login() {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  };
 
   return (
     <Container>

@@ -13,7 +13,7 @@ export default function Splash() {
     (async function checkTokenAvailable() {
       try {
         const accessToken = localStorage.getItem('accessToken');
-        const res = await axios.get('https://mandarin.api.weniv.co.kr/user/checktoken', {
+        const res = await axios.get('https://api.mandarin.weniv.co.kr/user/checktoken', {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },

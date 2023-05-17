@@ -53,7 +53,7 @@ export default function PostUpdate() {
   const getPost = async () => {
     try {
       const token = localStorage.getItem('accessToken');
-      const res = await axios.get(`https://mandarin.api.weniv.co.kr/post/${postId}`, {
+      const res = await axios.get(`https://api.mandarin.weniv.co.kr/post/${postId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-type': 'application/json',
@@ -80,8 +80,8 @@ export default function PostUpdate() {
     for (let i = 0; i < files.length; i++) {
       let formData = new FormData();
       formData.append('image', files[i]);
-      const res = await axios.post('https://mandarin.api.weniv.co.kr/image/uploadfile', formData);
-      newImgArr.push(`https://mandarin.api.weniv.co.kr/${res.data.filename}`);
+      const res = await axios.post('https://api.mandarin.weniv.co.kr/image/uploadfile', formData);
+      newImgArr.push(`https://api.mandarin.weniv.co.kr/${res.data.filename}`);
     }
 
     let imageURLlist = [...newImgArr];
@@ -105,7 +105,7 @@ export default function PostUpdate() {
       const sendFileName = newImgArr.join();
       const token = localStorage.getItem('accessToken');
       const res = await axios.put(
-        `https://mandarin.api.weniv.co.kr/post/${postId}`,
+        `https://api.mandarin.weniv.co.kr/post/${postId}`,
         {
           post: {
             content: updateText,

@@ -23,9 +23,9 @@ export default function ImageButton({ getImageSrc }) {
         let formData = new FormData();
         formData.append('image', fileBlob);
 
-        const res = await axios.post('https://mandarin.api.weniv.co.kr/image/uploadfile', formData);
+        const res = await axios.post('https://api.mandarin.weniv.co.kr/image/uploadfile', formData);
         console.log(res.data.filename);
-        setFileName(`https://mandarin.api.weniv.co.kr/${res.data.filename}`);
+        setFileName(`https://api.mandarin.weniv.co.kr/${res.data.filename}`);
 
         setImgSrc(e.target.result);
 

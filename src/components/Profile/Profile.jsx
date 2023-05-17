@@ -17,7 +17,7 @@ export default function Profile(props) {
       const accessToken = localStorage.getItem('accessToken');
 
       const res = await axios.get(
-        `https://mandarin.api.weniv.co.kr/profile/${UserAccount}/follower`,
+        `https://api.mandarin.weniv.co.kr/profile/${UserAccount}/follower`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -40,7 +40,7 @@ export default function Profile(props) {
       const accessToken = localStorage.getItem('accessToken');
 
       const res = await axios.get(
-        `https://mandarin.api.weniv.co.kr/profile/${UserAccount}/following`,
+        `https://api.mandarin.weniv.co.kr/profile/${UserAccount}/following`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,

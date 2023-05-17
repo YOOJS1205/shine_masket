@@ -92,7 +92,7 @@ export default function ProductForm() {
       const accessToken = localStorage.getItem('accessToken');
 
       const res = await axios.post(
-        'https://mandarin.api.weniv.co.kr/product',
+        'https://api.mandarin.weniv.co.kr/product',
         {
           product: {
             itemName: productName,

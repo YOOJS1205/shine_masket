@@ -23,7 +23,7 @@ export default function UserProfile() {
     (async function getProductAndPost() {
       try {
         const accessToken = localStorage.getItem('accessToken');
-        const res = await axios.get(`https://mandarin.api.weniv.co.kr/product/${UserAccount}`, {
+        const res = await axios.get(`https://api.mandarin.weniv.co.kr/product/${UserAccount}`, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
             'Content-type': 'application/json',
@@ -39,7 +39,7 @@ export default function UserProfile() {
       try {
         const accessToken = localStorage.getItem('accessToken');
         const res = await axios.get(
-          `https://mandarin.api.weniv.co.kr/post/${UserAccount}/userpost`,
+          `https://api.mandarin.weniv.co.kr/post/${UserAccount}/userpost`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,

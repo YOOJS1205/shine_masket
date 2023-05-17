@@ -37,7 +37,7 @@ export default function PostView() {
   ) => {
     try {
       const token = localStorage.getItem('accessToken');
-      const res = await axios.get(`https://mandarin.api.weniv.co.kr/post/${postId}`, {
+      const res = await axios.get(`https://api.mandarin.weniv.co.kr/post/${postId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-type': 'application/json',

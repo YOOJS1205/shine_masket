@@ -5,7 +5,7 @@ const initialState = {
   UserName: '',
   UserAccount: '',
   UserIntro: '',
-  UserImage: 'https://mandarin.api.weniv.co.kr/Ellipse.png',
+  UserImage: 'https://api.mandarin.weniv.co.kr/Ellipse.png',
   UserFollowing: [],
   UserFollower: [],
   UserFollowerCount: 0,

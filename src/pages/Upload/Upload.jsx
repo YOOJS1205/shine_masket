@@ -43,8 +43,8 @@ export default function Upload() {
     for (let i = 0; i < files.length; i++) {
       let formData = new FormData();
       formData.append('image', files[i]);
-      const res = await axios.post('https://mandarin.api.weniv.co.kr/image/uploadfile', formData);
-      fileImage.push(`https://mandarin.api.weniv.co.kr/${res.data.filename}`);
+      const res = await axios.post('https://api.mandarin.weniv.co.kr/image/uploadfile', formData);
+      fileImage.push(`https://api.mandarin.weniv.co.kr/${res.data.filename}`);
     }
 
     let imageURLlist = [...fileImage];
@@ -69,7 +69,7 @@ export default function Upload() {
       const sendFileName = fileImage.join();
       const token = localStorage.getItem('accessToken');
       const res = await axios.post(
-        'https://mandarin.api.weniv.co.kr/post',
+        'https://api.mandarin.weniv.co.kr/post',
         {
           post: {
             content: uploadText,

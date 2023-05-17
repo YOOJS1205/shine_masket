@@ -18,7 +18,7 @@ export default function PostComment() {
   const getComment = async () => {
     try {
       const token = localStorage.getItem('accessToken');
-      const res = await axios.get(`https://mandarin.api.weniv.co.kr/post/${postId}/comments`, {
+      const res = await axios.get(`https://api.mandarin.weniv.co.kr/post/${postId}/comments`, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-type': 'application/json',

@@ -16,7 +16,7 @@ export default function Test() {
     (async function getPost() {
       try {
         const accessToken = localStorage.getItem('accessToken');
-        const res = await axios.get(`https://mandarin.api.weniv.co.kr/post/feed`, {
+        const res = await axios.get(`https://api.mandarin.weniv.co.kr/post/feed`, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
             'Content-type': 'application/json',

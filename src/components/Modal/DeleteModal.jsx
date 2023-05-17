@@ -13,7 +13,7 @@ export default function DeleteModal({ text, buttonText, postId }) {
     e.preventDefault();
     try {
       const token = localStorage.getItem('accessToken');
-      const res = await axios.delete(`https://mandarin.api.weniv.co.kr/post/${postId}`, {
+      const res = await axios.delete(`https://api.mandarin.weniv.co.kr/post/${postId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-type': 'application/json',

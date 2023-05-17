@@ -53,7 +53,7 @@ export default function Login() {
         const UserIntro = res.data.user.intro;
         const UserImage =
           res.data.user.image === 'http://146.56.183.55:5050/Ellipse.png'
-            ? 'https://mandarin.api.weniv.co.kr/Ellipse.png'
+            ? 'https://api.mandarin.weniv.co.kr/Ellipse.png'
             : res.data.user.image;
         const loginToken = res.data.user.token;
         const refreshToken = res.data.user.refreshToken;

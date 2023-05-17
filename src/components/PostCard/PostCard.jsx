@@ -24,7 +24,7 @@ export default function PostCard() {
   const getPost = async () => {
     try {
       const accessToken = localStorage.getItem('accessToken');
-      const res = await axios.get(`https://mandarin.api.weniv.co.kr/profile/${UserAccount}`, {
+      const res = await axios.get(`https://api.mandarin.weniv.co.kr/profile/${UserAccount}`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
           'Content-type': 'application/json',
@@ -49,7 +49,7 @@ export default function PostCard() {
 
     try {
       const accessToken = localStorage.getItem('accessToken');
-      const res = await axios.get(`https://mandarin.api.weniv.co.kr/product/${UserAccount}`, {
+      const res = await axios.get(`https://api.mandarin.weniv.co.kr/product/${UserAccount}`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
           'Content-type': 'application/json',
